@@ -44,16 +44,12 @@ class View_mini_case_controller extends CI_Controller
             foreach ($fetch_mini_case as $row) {
                 $sub_array = array();
                 $buttons = '';
-<<<<<<< HEAD
                 $buttons .= '<button type="button" title="View Case" name="view" id="' . $row->id . '" class="btn btn-primary btn-sm view_quick_case"><i class="fa fa-eye" ></i></button>';
 
                 $buttons .= '<button type="button" title="RV Remarks" name="view" id="' . $row->id . '" class="btn btn-warning btn-sm edit_rv"><i class="fa fa-pencil" ></i></button>';
 
                 $buttons .= '<button type="button" title="BV Remarks" name="view" id="' . $row->id . '" class="btn btn-success btn-sm edit_bv"><i class="fa fa-pencil" ></i></button>';
 
-=======
-                $buttons .= '<button type="button" title="View BV Case" name="view" id="' . $row->id . '" class="btn btn-primary btn-sm view_quick_case"><i class="fa fa-eye" ></i></button>';
->>>>>>> 549962410fa0e1bf47c3cb8a0f362ed2baa2bd0e
                 // $sub_array[] = $i;
                 $sub_array[] = $row->id;
                 $sub_array[] = $row->bank;
@@ -341,7 +337,7 @@ class View_mini_case_controller extends CI_Controller
                     'rv_remarks' => $this->input->post('rv_remarks')
                 );
                 $this->load->model('View_mini_case_model');
-                $insert_user = $this->View_mini_case_model->update_rv_remarks($pass_id,$array);
+                $insert_user = $this->View_mini_case_model->update_rv_remarks($pass_id, $array);
                 if ($insert_user) {
                     $response = array(
                         'success' => true,
@@ -365,5 +361,4 @@ class View_mini_case_controller extends CI_Controller
             $this->load->view('login_page', array('error' => $error));
         }
     }
-
 }
