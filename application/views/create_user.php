@@ -581,7 +581,7 @@
             <div class="col-md-4 col-sm-6">
                 <div class="row">
                     <div id="dvTitle" class="veri">
-                        <h3><b>Verification System (1.0.0)</b></h3>
+                        <h3><b>Verification System fdfddfddff(1.0.0)</b></h3>
                     </div>
                 </div>
             </div>
