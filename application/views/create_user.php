@@ -275,7 +275,7 @@
                 });
             });
 
-            
+
             // end update form data 
             $(document).on('click', '.edit_password', function() {
                 var user_id = $(this).attr("id");
@@ -296,8 +296,8 @@
             });
 
 
-              // update the form data if we change any
-              $('#update_mobile_form').submit(function(e) {
+            // update the form data if we change any
+            $('#update_mobile_form').submit(function(e) {
                 // alert("click on update button");
                 e.preventDefault();
                 var me = $(this);
@@ -581,7 +581,7 @@
             <div class="col-md-4 col-sm-6">
                 <div class="row">
                     <div id="dvTitle" class="veri">
-                        <h3><b>Verification System fdfddfddff(1.0.0)</b></h3>
+                        <h3><b>Verification System susheel(1.0.0)</b></h3>
                     </div>
                 </div>
             </div>
@@ -617,9 +617,10 @@
 
             <style>
                 #fetch_user_data .action-button {
-  margin-right: 10px; 
-  margin-left: 10px;/* Adjust the value as per your desired spacing */
-}
+                    margin-right: 10px;
+                    margin-left: 10px;
+                    /* Adjust the value as per your desired spacing */
+                }
             </style>
             <table id="fetch_user_data" class="table table-bordered table-striped">
                 <thead>
@@ -775,39 +776,39 @@
     </div> -->
 
     <div class="modal fade" id="user_password_edit" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Update Password</h5>
-      </div>
-      <?php echo form_open("Create_user_controller/update_user_password_validation", array("id" => "update_password_form", "class" => "form-horizontal")) ?>
-      <div class="modal-body">
-      <input type="hidden" class="form-control" id="u_pass_id" name="p_id">
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label for="password" class="h5">Password</label>
-                        <input type="text" class="form-control" id="u_password" placeholder="Enter Password" name="password">
-                    </div>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Password</h5>
                 </div>
+                <?php echo form_open("Create_user_controller/update_user_password_validation", array("id" => "update_password_form", "class" => "form-horizontal")) ?>
+                <div class="modal-body">
+                    <input type="hidden" class="form-control" id="u_pass_id" name="p_id">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="password" class="h5">Password</label>
+                            <input type="text" class="form-control" id="u_password" placeholder="Enter Password" name="password">
+                        </div>
+                    </div>
 
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label for="cnf_password" class="h5">Confirm Password</label>
-                        <input type="text" class="form-control" id="u_cnf_password" placeholder="Enter Confirm Password" name="cnf_password">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="cnf_password" class="h5">Confirm Password</label>
+                            <input type="text" class="form-control" id="u_cnf_password" placeholder="Enter Confirm Password" name="cnf_password">
+                        </div>
                     </div>
                 </div>
-      </div>
-      <div class="modal-footer">
-      <input type="submit" name="update_password" id="update_pass_data" class="btn btn-primary" value="Edit">
-      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-     </div>
+                <div class="modal-footer">
+                    <input type="submit" name="update_password" id="update_pass_data" class="btn btn-primary" value="Edit">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <?php echo form_close(); ?>
+        </div>
     </div>
-    <?php echo form_close(); ?>
-  </div>
-</div>
 
 
- <!-- <div id="user_mobile_edit" class="modal fade" role="dialog">
+    <!-- <div id="user_mobile_edit" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
