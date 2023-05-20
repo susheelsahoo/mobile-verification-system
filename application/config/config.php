@@ -118,7 +118,7 @@ $config['enable_hooks'] = false;
  */
 $config['subclass_prefix'] = 'MY_';
 
-$config['protocol'] = 'smtp'; 
+$config['protocol'] = 'smtp';
 $config['smtp_host'] = 'smtp.gmail.com'; // Set the SMTP host address
 $config['smtp_port'] = '587'; // Set the SMTP port
 $config['smtp_user'] = 'yogitasharma1606@gmail.com'; // Set the SMTP username
