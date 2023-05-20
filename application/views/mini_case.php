@@ -261,7 +261,6 @@
                         // me[0].reset();
                         if (response.success == true) {
                             alert("Quick Case Generated Successfully!");
-                            location.reload();
                             $('.form-group').removeClass('has-error')
                                 .removeClass('has-success');
                             $('.text-danger').remove();
@@ -417,10 +416,10 @@
                 <label for="fi_type">Fi type<span class="text-danger"> *</span></label>
             </div>
             <div class="col-75">
-                <input type="checkbox" class="fi_type_rv" name="fi_type[]" value="RV">
-                <label for="fi_type"> RV</label>
                 <input type="checkbox" class="fi_type_bv" name="fi_type[]" value="BV">
                 <label for="fi_type"> BV</label>
+                <input type="checkbox" class="fi_type_rv" name="fi_type[]" value="RV">
+                <label for="fi_type"> RV</label>
             </div>
         </div>
 
@@ -434,13 +433,13 @@
         </div>
         <div class="row">
             <div class="col-25">
-                <label for="name">Applicant Name<span class="text-danger"> *</span></label>
+                <label for="applicant_name">Applicant Name<span class="text-danger"> *</span></label>
             </div>
             <div class="col-75">
-                <input class="form-control" type="text" id="name" name="name" placeholder="Enter your Applicant Name">
+                <input class="form-control" type="text" id="applicant_name" name="applicant_name" placeholder="Enter your Applicant Name">
             </div>
         </div>
-       
+
         <div class="row">
             <div class="col-25">
                 <label for="amount">Amount<span class="text-danger"> *</span></label>
@@ -449,8 +448,11 @@
                 <input class="form-control" type="number" id="amount" name="amount" placeholder="Enter Amount">
             </div>
         </div>
+
+
+
         <span id="business_section" class="hide">
-        <div class="row">
+            <div class="row">
                 <div class="col-25">
                     <label for="business_name">Business Name</label>
                 </div>
@@ -458,7 +460,7 @@
                     <input class="form-control" type="text" id="business_name" name="name[]" placeholder="Enter Business name">
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-25">
                     <label for="business_add">Business Add.</label>
@@ -467,7 +469,7 @@
                     <input class="form-control" type="text" id="business_add" name="address[]" placeholder="Enter Business Address">
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-25">
                     <label for="city">Business City</label>
@@ -485,6 +487,7 @@
                 </div>
             </div>
         </span>
+
         <span id="residence_section" class="hide">
             <div class="row">
                 <div class="col-25">
@@ -494,7 +497,6 @@
                     <input class="form-control" type="text" id="residence_address" name="address[]" placeholder="Enter Residence Address">
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-25">
                     <label for="city">Residence City</label>
@@ -513,7 +515,6 @@
             </div>
         </span>
 
-
         <div class="row">
             <div class="col-25">
                 <label for="vehicle">Vehicle<span class="text-danger"> *</span></label>
@@ -523,10 +524,6 @@
             </div>
         </div>
 
-     
-
-
-        
 
         <div class="row">
             <div class="col-25">
@@ -569,9 +566,6 @@
             </div>
         </div>
 
-       
-
-       
         <br>
 
         <div class="row">
