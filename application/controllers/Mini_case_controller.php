@@ -68,6 +68,7 @@ class Mini_case_controller extends CI_Controller
 			if ($this->form_validation->run()) {
 				$fi_type = $this->input->post('fi_type');
 				foreach ($fi_type as $key => $val) {
+
 					$varification = [];
 					$address 	= array_values(array_filter($this->input->post('address')));
 					$name 		= array_values(array_filter($this->input->post('name')));
@@ -80,7 +81,7 @@ class Mini_case_controller extends CI_Controller
 
 					$varification['product'] 		= $this->input->post('product');
 					$varification['reference_no'] 	= $this->input->post('reference_no');
-					$varification['name'] 		= $name[$key];
+					$varification['name'] 			= $this->input->post('applicant_name');
 					$varification['amount'] 			= $this->input->post('amount');
 					$varification['vehicle'] 			= $this->input->post('vehicle');
 					$varification['fi_type'] = $val;
