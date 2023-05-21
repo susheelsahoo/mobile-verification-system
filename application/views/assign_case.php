@@ -916,7 +916,7 @@
                             <td><?= $rows->customer_name; ?></td>
                             <td><?= $rows->business_address; ?></td>
                             <td><?= $rows->fi_to_be_conducted; ?></td>
-                            <td><?= $rows->updated_at; ?></td>
+                            <td><?= readableDateIST($rows->updated_at); ?></td>
                             <td><?= $rows->status; ?></td>
                             <td>
 
