@@ -1,190 +1,209 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Assign_case_controller extends CI_Controller {
+class Assign_case_controller extends CI_Controller
+{
 
-	function __construct(){
-		parent::__construct();
+    function __construct()
+    {
+        parent::__construct();
         error_reporting(0);
-		$this->load->helper('url');
-		$this->load->helper('form');
-		$this->load->model('Assign_case_model');
-	}
+        $this->load->helper('url');
+        $this->load->helper('form');
+        $this->load->model('Assign_case_model');
+    }
 
-	public function index(){
-		//load session library
-		$this->load->library('session');
-		//restrict users to go back to login if session has been set
-		if($this->session->userdata('user')){
-			redirect('home');
-		}
-		else{
-			$this->load->view('login_page');
-		}
-	}
+    public function index()
+    {
+        //load session library
+        $this->load->library('session');
+        //restrict users to go back to login if session has been set
+        if ($this->session->userdata('user')) {
+            redirect('home');
+        } else {
+            $this->load->view('login_page');
+        }
+    }
 
-	// public function assign_case_function($data){
+    // public function assign_case_function($data){
     // // echo $data;
-	// 	$this->load->library('session');
-	// 	//restrict users to go to home if not logged in
-	// 	if($this->session->userdata('user')){
-	// 		$this->load->view('assign_case');
-	// 	}
-	// 	else{
-	// 		redirect('/');
-	// 	}
+    // 	$this->load->library('session');
+    // 	//restrict users to go to home if not logged in
+    // 	if($this->session->userdata('user')){
+    // 		$this->load->view('assign_case');
+    // 	}
+    // 	else{
+    // 		redirect('/');
+    // 	}
     // }
 
-    public function assign_case_function($data){
+    public function assign_case_function($data)
+    {
         // echo $data;
-        
-            $this->load->library('session');
-            // unset($_SESSION['data_new1']);
-            //$_SESSION['data_new1']=$data;
-            if($this->session->userdata('user')){
-                $this->load->model("Assign_case_model");
-                $fetch_data['allAgent'] = $this->Assign_case_model->filter_assignee($data);
-                $fetch_data['data'] = $data;
-                // echo json_encode($fetch_data);
-                //var_dump($fetch_data);die();
-                
-                $this->load->view('assign_case', $fetch_data);
-            }
-            else{
-                redirect('/');
-            }
-        }
-        
-        
-    public function filterDatewise(){
-       
-        $from=$_POST['from'];
-        $to=$_POST['to'];
-        $code=$_POST['code'];
-        //echo $code;die();
-        $tbdy='';
-        $fetch_data= $this->Assign_case_model->filter_Createdate($from,$to,$code);
-        $numrows=$fetch_data->num_rows();
-        //echo $numrows;die("iii");
-        if($numrows>0){
-        ?>
-        <?php foreach ($fetch_data->result() as $key => $rows) :
-                    ?>
-                        <tr>
-                            <tr><td><input type="checkbox" id="assign" value='<?= $rows->uid; ?>' name="assign"></td>
-                            <td><?= $rows->uid; ?></td>
-                            <td><?= $rows->application_id; ?></td>
-                            <td><?= $rows->customer_name; ?></td>
-                            <td><?= $rows->business_address; ?></td>
-                            <td><?= $rows->fi_to_be_conducted; ?></td>
-                            <td><?= $rows->updated_at; ?></td>
-                            <td><?= $rows->status; ?></td>
-                            <td>
-                                <button type="button" name="view" id="<?= $rows->uid; ?>" title="View case" class="btn btn-success btn-sm view_assigned_case"><i class="fa fa-eye"></i></button>
-                                <!-- <button type="button" name="view" id="<?= $rows->uid; ?>" title="View App end data" class="btn btn-info btn-sm view_app_end_assigned_case"><i class="fa fa-book"></i></button> -->
-                                <button type="button" name="edit" id="<?= $rows->uid; ?>" title="Edit case" class="btn btn-info btn-sm edit_assigned_case"><i class="fa fa-pencil"></i></button>
-                                <button type="button" name="reassign" id="<?= $rows->uid; ?>" title="Assign case" class="btn btn-primary btn-sm reassigned_case"><i class="fa fa-users"></i></button>
-                                <button type="button" name="view" id="<?= $rows->uid; ?>" title="RV View data" class="btn btn-warning btn-sm fi_type_view_data"><i class="fa fa-users"></i></button>
-                                <button type="button" name="view" id="<?= $rows->uid; ?>" title="BV View Data" class="btn btn-info btn-sm bv_view_details"><i class="fa fa-users"></i></button>
-                                <button type="button" name="rv_edit" id="<?= $rows->uid; ?>" title="RV Edit" class="btn btn-info btn-sm rv_edit_details"><i class="fa fa-edit"></i></button>
-                                <button type="button" name="bv_edit" id="<?= $rows->uid; ?>" title="BV Edit" class="btn btn-warning btn-sm bv_edit_details"><i class="fa fa-pencil"></i></button>
-                          
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                    <tr></tr>
-        <?php } else { ?>
-            
-            <tr><td colspan="5">No Records Found</td></tr>
-             <tr></tr>
-         
-       <?php } 
-    }
-    
-    
-    public function filterfitype(){
-        $val=$_POST['val'];
-        $code=$_POST['code'];
-        
-        $tbdy='';
-        $fetch_data= $this->Assign_case_model->filter_fitype($val,$code);
-        $numrows=$fetch_data->num_rows();
-        if($numrows>0){
-        ?>
-        <?php foreach ($fetch_data->result() as $key => $rows) :
-                    ?>
-                        <tr>
-                            <tr><td><input type="checkbox" id="assign" value='<?= $rows->uid; ?>' name="assign"></td>
-                            <td><?= $rows->uid; ?></td>
-                            <td><?= $rows->application_id; ?></td>
-                            <td><?= $rows->customer_name; ?></td>
-                            <td><?= $rows->business_address; ?></td>
-                            <td><?= $rows->fi_to_be_conducted; ?></td>
-                            <td><?= $rows->updated_at; ?></td>
-                            <td><?= $rows->status; ?></td>
-                            <td>
-                                <button type="button" name="view" id="<?= $rows->uid; ?>" title="View case" class="btn btn-success btn-sm view_assigned_case"><i class="fa fa-eye"></i></button>
-                                <!-- <button type="button" name="view" id="<?= $rows->uid; ?>" title="View App end data" class="btn btn-info btn-sm view_app_end_assigned_case"><i class="fa fa-book"></i></button> -->
-                                <button type="button" name="edit" id="<?= $rows->uid; ?>" title="Edit case" class="btn btn-info btn-sm edit_assigned_case"><i class="fa fa-pencil"></i></button>
-                                <button type="button" name="reassign" id="<?= $rows->uid; ?>" title="Assign case" class="btn btn-primary btn-sm reassigned_case"><i class="fa fa-users"></i></button>
-                                <button type="button" name="view" id="<?= $rows->uid; ?>" title="RV View data" class="btn btn-warning btn-sm fi_type_view_data"><i class="fa fa-users"></i></button>
-                                <button type="button" name="view" id="<?= $rows->uid; ?>" title="BV View Data" class="btn btn-info btn-sm bv_view_details"><i class="fa fa-users"></i></button>
-                                <button type="button" name="rv_edit" id="<?= $rows->uid; ?>" title="RV Edit" class="btn btn-info btn-sm rv_edit_details"><i class="fa fa-edit"></i></button>
-                                <button type="button" name="bv_edit" id="<?= $rows->uid; ?>" title="BV Edit" class="btn btn-warning btn-sm bv_edit_details"><i class="fa fa-pencil"></i></button>
-                          
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                    <tr></tr>
-        <?php } else {?>
-            <tr><td colspan="5">No Records Found</td></tr>
-             <tr></tr>
-        <?php } 
-    }
-    
 
-    public function filterStatus(){
-        $val=$_POST['val'];
-        $code=$_POST['code'];
-        
-        $tbdy='';
-        $fetch_data= $this->Assign_case_model->filter_status($val,$code);
-        $numrows=$fetch_data->num_rows();
-        if($numrows>0){
-        ?>
-        <?php foreach ($fetch_data->result() as $key => $rows) :
-                    ?>
-                        <tr>
-                            <tr><td><input type="checkbox" id="assign" value='<?= $rows->uid; ?>' name="assign"></td>
-                            <td><?= $rows->uid; ?></td>
-                            <td><?= $rows->application_id; ?></td>
-                            <td><?= $rows->customer_name; ?></td>
-                            <td><?= $rows->business_address; ?></td>
-                            <td><?= $rows->fi_to_be_conducted; ?></td>
-                            <td><?= $rows->updated_at; ?></td>
-                            <td><?= $rows->status; ?></td>
-                            <td>
-                                <button type="button" name="view" id="<?= $rows->uid; ?>" title="View case" class="btn btn-success btn-sm view_assigned_case"><i class="fa fa-eye"></i></button>
-                                <!-- <button type="button" name="view" id="<?= $rows->uid; ?>" title="View App end data" class="btn btn-info btn-sm view_app_end_assigned_case"><i class="fa fa-book"></i></button> -->
-                                <button type="button" name="edit" id="<?= $rows->uid; ?>" title="Edit case" class="btn btn-info btn-sm edit_assigned_case"><i class="fa fa-pencil"></i></button>
-                                <button type="button" name="reassign" id="<?= $rows->uid; ?>" title="Assign case" class="btn btn-primary btn-sm reassigned_case"><i class="fa fa-users"></i></button>
-                                <button type="button" name="view" id="<?= $rows->uid; ?>" title="RV View data" class="btn btn-warning btn-sm fi_type_view_data"><i class="fa fa-users"></i></button>
-                                <button type="button" name="view" id="<?= $rows->uid; ?>" title="BV View Data" class="btn btn-info btn-sm bv_view_details"><i class="fa fa-users"></i></button>
-                                <button type="button" name="rv_edit" id="<?= $rows->uid; ?>" title="RV Edit" class="btn btn-info btn-sm rv_edit_details"><i class="fa fa-edit"></i></button>
-                                <button type="button" name="bv_edit" id="<?= $rows->uid; ?>" title="BV Edit" class="btn btn-warning btn-sm bv_edit_details"><i class="fa fa-pencil"></i></button>
-                          
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                    <tr></tr>
-        <?php } else {?>
-            <tr><td colspan="5">No Records Found</td></tr>
-             <tr></tr>
-        <?php } 
+        $this->load->library('session');
+        // unset($_SESSION['data_new1']);
+        //$_SESSION['data_new1']=$data;
+        if ($this->session->userdata('user')) {
+            $this->load->model("Assign_case_model");
+            $fetch_data['allAgent'] = $this->Assign_case_model->filter_assignee($data);
+            $fetch_data['data'] = $data;
+            // echo json_encode($fetch_data);
+            //var_dump($fetch_data);die();
+
+            $this->load->view('assign_case', $fetch_data);
+        } else {
+            redirect('/');
+        }
     }
-    
-	
-	function fetch_all_assign_data() {
+
+
+    public function filterDatewise()
+    {
+
+        $from = $_POST['from'];
+        $to = $_POST['to'];
+        $code = $_POST['code'];
+        //echo $code;die();
+        $tbdy = '';
+        $fetch_data = $this->Assign_case_model->filter_Createdate($from, $to, $code);
+        $numrows = $fetch_data->num_rows();
+        //echo $numrows;die("iii");
+        if ($numrows > 0) {
+?>
+            <?php foreach ($fetch_data->result() as $key => $rows) :
+            ?>
+                <tr>
+                <tr>
+                    <td><input type="checkbox" id="assign" value='<?= $rows->uid; ?>' name="assign"></td>
+                    <td><?= $rows->uid; ?></td>
+                    <td><?= $rows->application_id; ?></td>
+                    <td><?= $rows->customer_name; ?></td>
+                    <td><?= $rows->business_address; ?></td>
+                    <td><?= $rows->fi_to_be_conducted; ?></td>
+                    <td><?= $rows->updated_at; ?></td>
+                    <td><?= $rows->status; ?></td>
+                    <td>
+                        <?php
+                        $ViewDatabtn = '<button type="button" name="view" id="<?= $rows->uid; ?>" title="RV View data" class="btn btn-warning btn-sm fi_type_view_data"><i class="fa fa-users"></i></button>';
+                        if ($rows->fi_to_be_conducted == 'BV') {
+                            $ViewDatabtn =  ' <button type="button" name="view" id="<?= $rows->uid; ?>" title="BV View Data" class="btn btn-info btn-sm bv_view_details"><i class="fa fa-users"></i></button>';
+                        }
+                        ?>
+                        <button type="button" name="view" id="<?= $rows->uid; ?>" title="View case" class="btn btn-success btn-sm view_assigned_case"><i class="fa fa-eye"></i></button>
+                        <!-- <button type="button" name="view" id="<?= $rows->uid; ?>" title="View App end data" class="btn btn-info btn-sm view_app_end_assigned_case"><i class="fa fa-book"></i></button> -->
+                        <button type="button" name="edit" id="<?= $rows->uid; ?>" title="Edit case" class="btn btn-info btn-sm edit_assigned_case"><i class="fa fa-pencil"></i></button>
+                        <button type="button" name="reassign" id="<?= $rows->uid; ?>" title="Assign case" class="btn btn-primary btn-sm reassigned_case"><i class="fa fa-users"></i></button>
+                        <button type="button" name="rv_edit" id="<?= $rows->uid; ?>" title="RV Edit" class="btn btn-info btn-sm rv_edit_details"><i class="fa fa-edit"></i></button>
+                        <button type="button" name="bv_edit" id="<?= $rows->uid; ?>" title="BV Edit" class="btn btn-warning btn-sm bv_edit_details"><i class="fa fa-pencil"></i></button>
+
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            <tr></tr>
+        <?php } else { ?>
+
+            <tr>
+                <td colspan="5">No Records Found</td>
+            </tr>
+            <tr></tr>
+
+        <?php }
+    }
+
+
+    public function filterfitype()
+    {
+        $val = $_POST['val'];
+        $code = $_POST['code'];
+
+        $tbdy = '';
+        $fetch_data = $this->Assign_case_model->filter_fitype($val, $code);
+        $numrows = $fetch_data->num_rows();
+        if ($numrows > 0) {
+        ?>
+            <?php foreach ($fetch_data->result() as $key => $rows) :
+            ?>
+                <tr>
+                <tr>
+                    <td><input type="checkbox" id="assign" value='<?= $rows->uid; ?>' name="assign"></td>
+                    <td><?= $rows->uid; ?></td>
+                    <td><?= $rows->application_id; ?></td>
+                    <td><?= $rows->customer_name; ?></td>
+                    <td><?= $rows->business_address; ?></td>
+                    <td><?= $rows->fi_to_be_conducted; ?></td>
+                    <td><?= $rows->updated_at; ?></td>
+                    <td><?= $rows->status; ?></td>
+                    <td>
+                        <button type="button" name="view" id="<?= $rows->uid; ?>" title="View case" class="btn btn-success btn-sm view_assigned_case"><i class="fa fa-eye"></i></button>
+                        <!-- <button type="button" name="view" id="<?= $rows->uid; ?>" title="View App end data" class="btn btn-info btn-sm view_app_end_assigned_case"><i class="fa fa-book"></i></button> -->
+                        <button type="button" name="edit" id="<?= $rows->uid; ?>" title="Edit case" class="btn btn-info btn-sm edit_assigned_case"><i class="fa fa-pencil"></i></button>
+                        <button type="button" name="reassign" id="<?= $rows->uid; ?>" title="Assign case" class="btn btn-primary btn-sm reassigned_case"><i class="fa fa-users"></i></button>
+                        <button type="button" name="view" id="<?= $rows->uid; ?>" title="RV View data" class="btn btn-warning btn-sm fi_type_view_data"><i class="fa fa-users"></i></button>
+                        <button type="button" name="view" id="<?= $rows->uid; ?>" title="BV View Data" class="btn btn-info btn-sm bv_view_details"><i class="fa fa-users"></i></button>
+                        <button type="button" name="rv_edit" id="<?= $rows->uid; ?>" title="RV Edit" class="btn btn-info btn-sm rv_edit_details"><i class="fa fa-edit"></i></button>
+                        <button type="button" name="bv_edit" id="<?= $rows->uid; ?>" title="BV Edit" class="btn btn-warning btn-sm bv_edit_details"><i class="fa fa-pencil"></i></button>
+
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            <tr></tr>
+        <?php } else { ?>
+            <tr>
+                <td colspan="5">No Records Found</td>
+            </tr>
+            <tr></tr>
+        <?php }
+    }
+
+
+    public function filterStatus()
+    {
+        $val = $_POST['val'];
+        $code = $_POST['code'];
+
+        $tbdy = '';
+        $fetch_data = $this->Assign_case_model->filter_status($val, $code);
+        $numrows = $fetch_data->num_rows();
+        if ($numrows > 0) {
+        ?>
+            <?php foreach ($fetch_data->result() as $key => $rows) :
+            ?>
+                <tr>
+                <tr>
+                    <td><input type="checkbox" id="assign" value='<?= $rows->uid; ?>' name="assign"></td>
+                    <td><?= $rows->uid; ?></td>
+                    <td><?= $rows->application_id; ?></td>
+                    <td><?= $rows->customer_name; ?></td>
+                    <td><?= $rows->business_address; ?></td>
+                    <td><?= $rows->fi_to_be_conducted; ?></td>
+                    <td><?= $rows->updated_at; ?></td>
+                    <td><?= $rows->status; ?></td>
+                    <td>
+                        <button type="button" name="view" id="<?= $rows->uid; ?>" title="View case" class="btn btn-success btn-sm view_assigned_case"><i class="fa fa-eye"></i></button>
+                        <!-- <button type="button" name="view" id="<?= $rows->uid; ?>" title="View App end data" class="btn btn-info btn-sm view_app_end_assigned_case"><i class="fa fa-book"></i></button> -->
+                        <button type="button" name="edit" id="<?= $rows->uid; ?>" title="Edit case" class="btn btn-info btn-sm edit_assigned_case"><i class="fa fa-pencil"></i></button>
+                        <button type="button" name="reassign" id="<?= $rows->uid; ?>" title="Assign case" class="btn btn-primary btn-sm reassigned_case"><i class="fa fa-users"></i></button>
+                        <button type="button" name="view" id="<?= $rows->uid; ?>" title="RV View data" class="btn btn-warning btn-sm fi_type_view_data"><i class="fa fa-users"></i></button>
+                        <button type="button" name="view" id="<?= $rows->uid; ?>" title="BV View Data" class="btn btn-info btn-sm bv_view_details"><i class="fa fa-users"></i></button>
+                        <button type="button" name="rv_edit" id="<?= $rows->uid; ?>" title="RV Edit" class="btn btn-info btn-sm rv_edit_details"><i class="fa fa-edit"></i></button>
+                        <button type="button" name="bv_edit" id="<?= $rows->uid; ?>" title="BV Edit" class="btn btn-warning btn-sm bv_edit_details"><i class="fa fa-pencil"></i></button>
+
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            <tr></tr>
+        <?php } else { ?>
+            <tr>
+                <td colspan="5">No Records Found</td>
+            </tr>
+            <tr></tr>
+<?php }
+    }
+
+
+    function fetch_all_assign_data()
+    {
         try {
             $this->load->model("Assign_case_model");
             $fetch_case = $this->Assign_case_model->make_datatables_assign();
@@ -216,9 +235,10 @@ class Assign_case_controller extends CI_Controller {
             $error['message'] = $ex->getMessage();
             $this->load->view('login_page', array('error' => $error));
         }
-    } 
+    }
 
-    function fetch_single_assignee() {
+    function fetch_single_assignee()
+    {
         try {
             $output = array();
             $this->load->model("Assign_case_model");
@@ -262,7 +282,6 @@ class Assign_case_controller extends CI_Controller {
 
                 $output['created_at'] = $row->created_at;
                 $output['updated_at'] = $row->updated_at;
-                
             }
             echo json_encode($output);
         } catch (Exception $ex) {
@@ -272,7 +291,8 @@ class Assign_case_controller extends CI_Controller {
         }
     }
 
-    function fetch_single_rv_data() {
+    function fetch_single_rv_data()
+    {
         try {
             $output = array();
             $this->load->model("Assign_case_model");
@@ -333,72 +353,70 @@ class Assign_case_controller extends CI_Controller {
                 $temp_rv_image9 = $row->rv_image9;
 
 
-                
+
                 if ($row->rv_image1 != '') {
                     $replace_space_rv = str_replace(' ', '+', $temp_rv_image1);
                     $output['rv_image1'] = $replace_space_rv;
-                    } else {
-                        $output['rv_image1'] = '<input type="hidden" name="hidden_user_image" value="" />';
-                    }
+                } else {
+                    $output['rv_image1'] = '<input type="hidden" name="hidden_user_image" value="" />';
+                }
 
-                    if ($row->rv_image2 != '') {
-                        $replace_space2_rv = str_replace(' ', '+', $temp_rv_image2);
-                        $output['rv_image2'] = $replace_space2_rv;
-                           } else {
-                                   $output['rv_image2'] = '<input type="hidden" name="hidden_user_image" value="" />';
-                        }
+                if ($row->rv_image2 != '') {
+                    $replace_space2_rv = str_replace(' ', '+', $temp_rv_image2);
+                    $output['rv_image2'] = $replace_space2_rv;
+                } else {
+                    $output['rv_image2'] = '<input type="hidden" name="hidden_user_image" value="" />';
+                }
 
 
-    if ($row->rv_image3 != '') {
-        $replace_space3_rv = str_replace(' ', '+', $temp_rv_image3);
-        $output['rv_image3'] = $replace_space3_rv;
-                        } else {
-                            $output['rv_image3'] = '<input type="hidden" name="hidden_user_image" value="" />';
-                        }
+                if ($row->rv_image3 != '') {
+                    $replace_space3_rv = str_replace(' ', '+', $temp_rv_image3);
+                    $output['rv_image3'] = $replace_space3_rv;
+                } else {
+                    $output['rv_image3'] = '<input type="hidden" name="hidden_user_image" value="" />';
+                }
 
-                        if ($row->rv_image4 != '') {
-                            $replace_space4_rv = str_replace(' ', '+', $temp_rv_image4);
-                            $output['rv_image4'] = $replace_space4_rv;
-                                            } else {
-                                                $output['rv_image4'] = '<input type="hidden" name="hidden_user_image" value="" />';
-                                            }
+                if ($row->rv_image4 != '') {
+                    $replace_space4_rv = str_replace(' ', '+', $temp_rv_image4);
+                    $output['rv_image4'] = $replace_space4_rv;
+                } else {
+                    $output['rv_image4'] = '<input type="hidden" name="hidden_user_image" value="" />';
+                }
 
-                                            if ($row->rv_image5 != '') {
-                                                $replace_space5_rv = str_replace(' ', '+', $temp_rv_image5);
-                                                $output['rv_image5'] = $replace_space5_rv;
-                                                                } else {
-                                                                    $output['rv_image5'] = '<input type="hidden" name="hidden_user_image" value="" />';
-                                                                }
+                if ($row->rv_image5 != '') {
+                    $replace_space5_rv = str_replace(' ', '+', $temp_rv_image5);
+                    $output['rv_image5'] = $replace_space5_rv;
+                } else {
+                    $output['rv_image5'] = '<input type="hidden" name="hidden_user_image" value="" />';
+                }
 
-                                                                if ($row->rv_image6!= '') {
-                                                                    $replace_space6_rv = str_replace(' ', '+', $temp_rv_image6);
-                                                                    $output['rv_image6'] = $replace_space6_rv;
-                                                                                    } else {
-                                                                                        $output['rv_image6'] = '<input type="hidden" name="hidden_user_image" value="" />';
-                                                                                    }
+                if ($row->rv_image6 != '') {
+                    $replace_space6_rv = str_replace(' ', '+', $temp_rv_image6);
+                    $output['rv_image6'] = $replace_space6_rv;
+                } else {
+                    $output['rv_image6'] = '<input type="hidden" name="hidden_user_image" value="" />';
+                }
 
-                                                                                    if ($row->rv_image7!= '') {
-                                                                                        $replace_space7_rv = str_replace(' ', '+', $temp_rv_image7);
-                                                                                        $output['rv_image7'] = $replace_space7_rv;
-                                                                                                        } else {
-                                                                                                            $output['rv_image7'] = '<input type="hidden" name="hidden_user_image" value="" />';
-                                                                                                        }
+                if ($row->rv_image7 != '') {
+                    $replace_space7_rv = str_replace(' ', '+', $temp_rv_image7);
+                    $output['rv_image7'] = $replace_space7_rv;
+                } else {
+                    $output['rv_image7'] = '<input type="hidden" name="hidden_user_image" value="" />';
+                }
 
-                                                                                                        if ($row->rv_image8!= '') {
-                                                                                                            $replace_space8_rv = str_replace(' ', '+', $temp_rv_image8);
-                                                                                                            $output['rv_image8'] = $replace_space8_rv;
-                                                                                                                            } else {
-                                                                                                                                $output['rv_image8'] = '<input type="hidden" name="hidden_user_image" value="" />';
-                                                                                                                            }
+                if ($row->rv_image8 != '') {
+                    $replace_space8_rv = str_replace(' ', '+', $temp_rv_image8);
+                    $output['rv_image8'] = $replace_space8_rv;
+                } else {
+                    $output['rv_image8'] = '<input type="hidden" name="hidden_user_image" value="" />';
+                }
 
-                                                                                                                            if ($row->rv_image9!= '') {
-                                                                                                                                $replace_space9_rv = str_replace(' ', '+', $temp_rv_image9);
-                                                                                                                                $output['rv_image9'] = $replace_space9_rv;
-                                                                                                                                                } else {
-                                                                                                                                                    $output['rv_image9'] = '<input type="hidden" name="hidden_user_image" value="" />';
-                                                                                                                                                }
-               
-                
+                if ($row->rv_image9 != '') {
+                    $replace_space9_rv = str_replace(' ', '+', $temp_rv_image9);
+                    $output['rv_image9'] = $replace_space9_rv;
+                } else {
+                    $output['rv_image9'] = '<input type="hidden" name="hidden_user_image" value="" />';
+                }
             }
             echo json_encode($output);
         } catch (Exception $ex) {
@@ -410,7 +428,8 @@ class Assign_case_controller extends CI_Controller {
 
 
 
-    function fetch_single_bv_data() {
+    function fetch_single_bv_data()
+    {
         try {
             $output = array();
             $this->load->model("Assign_case_model");
@@ -478,72 +497,70 @@ class Assign_case_controller extends CI_Controller {
                 $temp_bv_image9 = $row->bv_image9;
 
 
-                
+
                 if ($row->bv_image1 != '') {
                     $replace_space = str_replace(' ', '+', $temp_bv_image1);
                     $output['bv_image1'] = $replace_space;
-                    } else {
-                        $output['bv_image1'] = '<input type="hidden" name="hidden_user_image" value="" />';
-                    }
+                } else {
+                    $output['bv_image1'] = '<input type="hidden" name="hidden_user_image" value="" />';
+                }
 
-                    if ($row->bv_image2 != '') {
-                        $replace_space2 = str_replace(' ', '+', $temp_bv_image2);
-                        $output['bv_image2'] = $replace_space2;
-                           } else {
-                                   $output['bv_image2'] = '<input type="hidden" name="hidden_user_image" value="" />';
-                        }
+                if ($row->bv_image2 != '') {
+                    $replace_space2 = str_replace(' ', '+', $temp_bv_image2);
+                    $output['bv_image2'] = $replace_space2;
+                } else {
+                    $output['bv_image2'] = '<input type="hidden" name="hidden_user_image" value="" />';
+                }
 
 
-    if ($row->bv_image3 != '') {
-        $replace_space3 = str_replace(' ', '+', $temp_bv_image3);
-        $output['bv_image3'] = $replace_space3;
-                        } else {
-                            $output['bv_image3'] = '<input type="hidden" name="hidden_user_image" value="" />';
-                        }
+                if ($row->bv_image3 != '') {
+                    $replace_space3 = str_replace(' ', '+', $temp_bv_image3);
+                    $output['bv_image3'] = $replace_space3;
+                } else {
+                    $output['bv_image3'] = '<input type="hidden" name="hidden_user_image" value="" />';
+                }
 
-                        if ($row->bv_image4 != '') {
-                            $replace_space4 = str_replace(' ', '+', $temp_bv_image4);
-                            $output['bv_image4'] = $replace_space4;
-                                            } else {
-                                                $output['bv_image4'] = '<input type="hidden" name="hidden_user_image" value="" />';
-                                            }
+                if ($row->bv_image4 != '') {
+                    $replace_space4 = str_replace(' ', '+', $temp_bv_image4);
+                    $output['bv_image4'] = $replace_space4;
+                } else {
+                    $output['bv_image4'] = '<input type="hidden" name="hidden_user_image" value="" />';
+                }
 
-                                            if ($row->bv_image5 != '') {
-                                                $replace_space5 = str_replace(' ', '+', $temp_bv_image5);
-                                                $output['bv_image5'] = $replace_space5;
-                                                                } else {
-                                                                    $output['bv_image5'] = '<input type="hidden" name="hidden_user_image" value="" />';
-                                                                }
+                if ($row->bv_image5 != '') {
+                    $replace_space5 = str_replace(' ', '+', $temp_bv_image5);
+                    $output['bv_image5'] = $replace_space5;
+                } else {
+                    $output['bv_image5'] = '<input type="hidden" name="hidden_user_image" value="" />';
+                }
 
-                                                                if ($row->bv_image6!= '') {
-                                                                    $replace_space6 = str_replace(' ', '+', $temp_bv_image6);
-                                                                    $output['bv_image6'] = $replace_space6;
-                                                                                    } else {
-                                                                                        $output['bv_image6'] = '<input type="hidden" name="hidden_user_image" value="" />';
-                                                                                    }
+                if ($row->bv_image6 != '') {
+                    $replace_space6 = str_replace(' ', '+', $temp_bv_image6);
+                    $output['bv_image6'] = $replace_space6;
+                } else {
+                    $output['bv_image6'] = '<input type="hidden" name="hidden_user_image" value="" />';
+                }
 
-                                                                                    if ($row->bv_image7!= '') {
-                                                                                        $replace_space7 = str_replace(' ', '+', $temp_bv_image7);
-                                                                                        $output['bv_image7'] = $replace_space7;
-                                                                                                        } else {
-                                                                                                            $output['bv_image7'] = '<input type="hidden" name="hidden_user_image" value="" />';
-                                                                                                        }
+                if ($row->bv_image7 != '') {
+                    $replace_space7 = str_replace(' ', '+', $temp_bv_image7);
+                    $output['bv_image7'] = $replace_space7;
+                } else {
+                    $output['bv_image7'] = '<input type="hidden" name="hidden_user_image" value="" />';
+                }
 
-                                                                                                        if ($row->bv_image8!= '') {
-                                                                                                            $replace_space8 = str_replace(' ', '+', $temp_bv_image8);
-                                                                                                            $output['bv_image8'] = $replace_space8;
-                                                                                                                            } else {
-                                                                                                                                $output['bv_image8'] = '<input type="hidden" name="hidden_user_image" value="" />';
-                                                                                                                            }
+                if ($row->bv_image8 != '') {
+                    $replace_space8 = str_replace(' ', '+', $temp_bv_image8);
+                    $output['bv_image8'] = $replace_space8;
+                } else {
+                    $output['bv_image8'] = '<input type="hidden" name="hidden_user_image" value="" />';
+                }
 
-                                                                                                                            if ($row->bv_image9!= '') {
-                                                                                                                                $replace_space9 = str_replace(' ', '+', $temp_bv_image9);
-                                                                                                                                $output['bv_image9'] = $replace_space9;
-                                                                                                                                                } else {
-                                                                                                                                                    $output['bv_image9'] = '<input type="hidden" name="hidden_user_image" value="" />';
-                                                                                                                                                }
-               
-                
+                if ($row->bv_image9 != '') {
+                    $replace_space9 = str_replace(' ', '+', $temp_bv_image9);
+                    $output['bv_image9'] = $replace_space9;
+                } else {
+                    $output['bv_image9'] = '<input type="hidden" name="hidden_user_image" value="" />';
+                }
             }
             echo json_encode($output);
         } catch (Exception $ex) {
@@ -555,14 +572,15 @@ class Assign_case_controller extends CI_Controller {
 
 
 
-    function fetch_single_assignee_from_app_end() {
+    function fetch_single_assignee_from_app_end()
+    {
         try {
             $output = array();
             $this->load->model("Assign_case_model");
             $data = $this->Assign_case_model->fetch_single_assignee($_POST["user_id"]);
             foreach ($data as $row) {
 
-                
+
 
                 $output['fi_status'] = $row->fi_status;
                 $output['make_model'] = $row->make_model;
@@ -583,9 +601,6 @@ class Assign_case_controller extends CI_Controller {
                 $output['exterior_premises'] = $row->exterior_premises;
                 $output['interior_premises'] = $row->interior_premises;
                 $output['cross_verified_info'] = $row->cross_verified_info;
-                
-                
-                
             }
             echo json_encode($output);
         } catch (Exception $ex) {
@@ -595,7 +610,8 @@ class Assign_case_controller extends CI_Controller {
         }
     }
 
-    function fetch_single_case() {
+    function fetch_single_case()
+    {
         try {
             $output = array();
             $this->load->model("Assign_case_model");
@@ -607,7 +623,7 @@ class Assign_case_controller extends CI_Controller {
                 $output['fi_to_be_conducted'] = $row->fi_to_be_conducted;
                 $output['product_name'] = $row->product_name;
                 $output['business_address'] = $row->business_address;
-                
+
                 $output['fi_intiation_comments'] = $row->fi_intiation_comments;
                 $output['asset_make'] = $row->asset_make;
                 $output['asset_model'] = $row->asset_model;
@@ -627,7 +643,8 @@ class Assign_case_controller extends CI_Controller {
     }
 
 
-    function fetch_single_rv_case() {
+    function fetch_single_rv_case()
+    {
         try {
             $output = array();
             $this->load->model("Assign_case_model");
@@ -670,7 +687,8 @@ class Assign_case_controller extends CI_Controller {
     }
 
 
-    function fetch_single_bv_case() {
+    function fetch_single_bv_case()
+    {
         try {
             $output = array();
             $this->load->model("Assign_case_model");
@@ -698,7 +716,6 @@ class Assign_case_controller extends CI_Controller {
                 $output['bv_verified_name'] = $row->bv_verified_name;
                 $output['bv_dt_of_cpv'] = $row->bv_dt_of_cpv;
                 $output['bv_remarks'] = $row->bv_remarks;
-                
             }
             echo json_encode($output);
         } catch (Exception $ex) {
@@ -709,7 +726,8 @@ class Assign_case_controller extends CI_Controller {
     }
 
 
-    function fetch_single_reassign_case() {
+    function fetch_single_reassign_case()
+    {
         try {
             $output = array();
             $this->load->model("Assign_case_model");
@@ -729,7 +747,7 @@ class Assign_case_controller extends CI_Controller {
     }
 
 
-    
+
 
     private function generateOTP()
     {
@@ -749,16 +767,16 @@ class Assign_case_controller extends CI_Controller {
         // echo $otp;die;
         $responseArray['otp'] = $otp;
         $responseArray['email'] = $email;
-       
+
         $this->sendOTPEmail($email, $otp);
         $responseArray['msg'] = "Message";
         $responseArray['success'] = 1;
         echo json_encode($responseArray);
-die();
+        die();
         // echo 'OTP has been sent to your email address.';
     }
 
-    private function sendOTPEmail($email,$otp)
+    private function sendOTPEmail($email, $otp)
     {
         $this->load->library('email');
         $this->email->from('yogitasharma1606@gmail.com', 'Yogita Sharma');
@@ -772,55 +790,55 @@ die();
         }
     }
 
-    
 
-    public function reassign_case_validation() {
-        
-            $enteredOtp = $this->input->post('otp');
-            $response = [];
-            $storedOtp = $this->input->post('store_otp');
-            // echo $enteredOtp;
-            // echo $storedOtp;die;
-            if ($enteredOtp == $storedOtp) {
 
-                $reassign_id = $_POST["r_id"];
-                $reassign_multi_id = $_POST["multi_id"];
-                $assignfrom = $_POST["assignfrom"];
-               
-                $array = array(
-                    'code' => $this->input->post('code'),
-                    'reassign_remarks' => $this->input->post('reassign_remarks'),
+    public function reassign_case_validation()
+    {
+
+        $enteredOtp = $this->input->post('otp');
+        $response = [];
+        $storedOtp = $this->input->post('store_otp');
+        // echo $enteredOtp;
+        // echo $storedOtp;die;
+        if ($enteredOtp == $storedOtp) {
+
+            $reassign_id = $_POST["r_id"];
+            $reassign_multi_id = $_POST["multi_id"];
+            $assignfrom = $_POST["assignfrom"];
+
+            $array = array(
+                'code' => $this->input->post('code'),
+                'reassign_remarks' => $this->input->post('reassign_remarks'),
+            );
+
+            $this->load->model('Assign_case_model');
+            // $this->Assign_case_model->editData();
+            $insert_id = $this->Assign_case_model->update_assignee($reassign_id, $assignfrom, $reassign_multi_id, $array);
+            if ($insert_id) {
+                $response = array(
+                    'success' => 1,
+                    'msg' => "Assignee updated successfully"
                 );
-
-                $this->load->model('Assign_case_model');
-                // $this->Assign_case_model->editData();
-                $insert_id = $this->Assign_case_model->update_assignee($reassign_id,$assignfrom,$reassign_multi_id, $array);
-                if ($insert_id) {
-                    $response = array(
-                        'success' => 1,
-                        'msg' => "Assignee updated successfully"
-                    );
-                } else {
-                    $response = array(
-                        'success' => 0,
-                        'msg' => "Error while saving data !!!!"
-                    );
-                }
             } else {
-                 $response = array(
-                        'success' => 0,
-                        'msg' => "please enter valid OTP !!!!"
-                    );
+                $response = array(
+                    'success' => 0,
+                    'msg' => "Error while saving data !!!!"
+                );
             }
-            echo json_encode($response);
-            die;
-       
+        } else {
+            $response = array(
+                'success' => 0,
+                'msg' => "please enter valid OTP !!!!"
+            );
+        }
+        echo json_encode($response);
+        die;
     }
 
 
     // public function reassign_case_validation() {
     //     try {
-            
+
     //         $this->load->library('form_validation');
     //         $this->form_validation->set_rules('code', 'code', 'required');
     //         $this->form_validation->set_rules('reassign_remarks', 'reassign_remarks', '');
@@ -861,7 +879,8 @@ die();
     //     }
     // }
 
-    public function update_case_validation() {
+    public function update_case_validation()
+    {
         try {
             $this->load->library('form_validation');
             $this->form_validation->set_rules('customer_name', 'customer_name', 'required');
@@ -877,7 +896,7 @@ die();
             $this->form_validation->set_rules('vehicle', 'vehicle', '');
             $this->form_validation->set_rules('co_applicant', 'co_applicant', '');
             $this->form_validation->set_rules('guarantee_name', 'guarantee_name', '');
-            
+
 
 
             $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
@@ -885,7 +904,7 @@ die();
 
                 $case_id = $_POST["c_id"];
                 $array = array(
-                
+
                     'customer_name' => $this->input->post('customer_name'),
                     'fi_to_be_conducted' => $this->input->post('fi_to_be_conducted'),
                     'product_name' => $this->input->post('product_name'),
@@ -894,13 +913,13 @@ die();
                     'fi_intiation_comments' => $this->input->post('fi_intiation_comments'),
                     'asset_make' => $this->input->post('asset_make'),
                     'asset_model' => $this->input->post('asset_model'),
-                   
+
                     'remarks' => $this->input->post('remarks'),
                     'amount' => $this->input->post('amount'),
                     'vehicle' => $this->input->post('vehicle'),
                     'co_applicant' => $this->input->post('co_applicant'),
                     'guarantee_name' => $this->input->post('guarantee_name'),
-                    
+
                 );
 
                 $this->load->model('Assign_case_model');
@@ -930,7 +949,8 @@ die();
         }
     }
 
-    public function update_rv_validation() {
+    public function update_rv_validation()
+    {
         try {
             $this->load->library('form_validation');
             $this->form_validation->set_rules('bank_name', 'bank_name', 'required');
@@ -967,7 +987,7 @@ die();
 
                 $rv_cse_id = $_POST["rv_id"];
                 $array = array(
-                
+
                     'bank_name' => $this->input->post('bank_name'),
                     'product_name' => $this->input->post('product_name'),
 
@@ -996,8 +1016,8 @@ die();
                     'rv_neighbour_check1' => $this->input->post('rv_neighbour_check1'),
                     'rv_neighbour_check2' => $this->input->post('rv_neighbour_check2'),
                     'rv_cpv_done_by' => $this->input->post('rv_cpv_done_by'),
-                    'rv_remarks' => $this->input->post('rv_remarks'),  
-                    
+                    'rv_remarks' => $this->input->post('rv_remarks'),
+
                 );
 
                 $this->load->model('Assign_case_model');
@@ -1029,7 +1049,8 @@ die();
 
 
 
-    public function update_bv_validation() {
+    public function update_bv_validation()
+    {
         try {
             $this->load->library('form_validation');
             $this->form_validation->set_rules('bv_corporate_office', 'bv_corporate_office', 'required');
@@ -1053,14 +1074,14 @@ die();
             // $this->form_validation->set_rules('bv_verified_name', 'bv_verified_name', 'required');
             // $this->form_validation->set_rules('bv_dt_of_cpv', 'bv_dt_of_cpv', 'required');
             // $this->form_validation->set_rules('bv_remarks', 'bv_remarks', 'required');
-           
+
 
             $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
             if ($this->form_validation->run()) {
 
                 $bv_cse_id = $_POST["bv_id"];
                 $array = array(
-                
+
                     'bv_corporate_office' => $this->input->post('bv_corporate_office'),
                     'bv_person_designation' => $this->input->post('bv_person_designation'),
                     'bv_address_confirmed' => $this->input->post('bv_address_confirmed'),
@@ -1083,8 +1104,8 @@ die();
                     // 'bv_dt_of_cpv' => $this->input->post('bv_dt_of_cpv'),
                     // 'bv_remarks' => $this->input->post('bv_remarks'),
 
-                    
-                    
+
+
                 );
 
                 $this->load->model('Assign_case_model');
