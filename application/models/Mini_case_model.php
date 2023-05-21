@@ -20,7 +20,9 @@ class Mini_case_model extends CI_Model
 	public function getBank()
 	{
 		try {
+			$status = 'active';
 			$this->db->select('id,bank_name');
+            $this->db->where('status', $status);
 			$this->db->order_by("id", "ASC");
 			$query = $this->db->get('add_bank');
 			return $query->result_array();
@@ -32,7 +34,9 @@ class Mini_case_model extends CI_Model
 	public function getProduct()
 	{
 		try {
+			$status = 'active';
 			$this->db->select('id,product');
+			$this->db->where('status', $status);
 			$this->db->order_by("id", "ASC");
 			$query = $this->db->get('add_product');
 			return $query->result_array();

@@ -118,4 +118,28 @@ class View_mini_case_model extends CI_Model
             throw $ex;
         }
     }
+
+    function update_rv_remarks($pass_id, $data)
+	{
+		try {
+			$this->db->where("id", $pass_id);
+			// print_r($data);die;
+			$return_data = $this->db->update("mini_case", $data);
+			return $return_data;
+		} catch (Exception $ex) {
+			throw $ex;
+		}
+	}
+
+    function fetch_rv_remarks($user_id)
+	{
+		try {
+			$this->db->where("id", $user_id);
+			$query = $this->db->get('mini_case');
+			return $query->result();
+		} catch (Exception $ex) {
+			throw $ex;
+		}
+	}
+
 }

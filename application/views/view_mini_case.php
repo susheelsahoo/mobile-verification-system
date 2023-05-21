@@ -140,6 +140,108 @@
             });
 
 
+                // update the form data if we change any
+                $('#update_rv_remarks').submit(function(e) {
+                // alert("click on update button");
+                e.preventDefault();
+                var me = $(this);
+                var user_id = $(this).attr("id");
+
+                // perform ajax
+                $.ajax({
+                    url: me.attr('action'),
+                    type: 'POST',
+                    data: me.serialize(),
+                    // data:new FormData(this),  
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.success == true) {
+                            alert("Remarks Updated Successfully!");
+                            location.reload();
+                            $('#user_rv_remarks_edit').modal('hide');
+                            Swal.fire("Good job!", "You clicked the button!", "success");
+                            // swal.fire({
+                            //     title: "updated",
+                            //     text: response.message,
+                            //     icon: 'success',
+                            //     type: "success",
+                            //     timer: 3000
+                            // });
+                            console.log(response);
+                            alert("Remarks Updated Successfully!");
+                            $('.form-group').removeClass('has-error')
+                                .removeClass('has-success');
+                            $('.text-danger').remove();
+                            // $('#fetch_user_data').DataTable().ajax.reload();
+                            // reset the form
+                            me[0].reset();
+
+                        } else if (response.error == true) {
+                            $('#user_rv_remarks_edit').modal('hide');
+                            Swal.fire("Good job!", "You clicked the button!", "error");
+                            // swal.fire({
+                            //     title: "Try Again ! ",
+                            //     text: response.message,
+                            //     icon: 'error',
+                            //     type: "error",
+                            //     timer: 3000
+                            // });
+                            $('#user_rv_remarks_edit').modal('hide');
+                            //console.log(response);
+                            $('.form-group').removeClass('has-error')
+                                .removeClass('has-success');
+                            $('.text-danger').remove();
+                            // $('#teacher_add_model').modal('hide');
+                            // $('#fetch_user_data').DataTable().ajax.reload();
+                            // reset the form
+                            me[0].reset();
+                        } else {
+                            $.each(response.messages, function(key, value) {
+                                var element = $('#u_' + key);
+
+                                element.closest('div.form-group')
+                                    .removeClass('has-error')
+                                    .addClass(value.length > 0 ? 'has-error' : 'has-success')
+                                    .find('.text-danger')
+                                    .remove();
+                                element.after(value);
+                            });
+                        }
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        //                            swal.fire("Error deleting!", "Please try again later !!!", "error");
+                        $('#user_rv_remarks_edit').modal('hide');
+                        swal.fire({
+                            title: "Error saving...",
+                            text: "Please try again later !!!",
+                            icon: 'error',
+                            type: "error",
+                            timer: 3000
+                        });
+                    }
+                });
+            });
+
+               // end update form data 
+               $(document).on('click', '.edit_rv', function() {
+                var user_id = $(this).attr("id");
+                $.ajax({
+                    url: "<?php echo base_url(); ?>View_mini_case_controller/fetch_rv_remarks",
+                    method: "POST",
+                    data: {
+                        user_id: user_id
+                    },
+                    dataType: "json",
+                    success: function(data) {
+                        $('#user_rv_remarks_edit').modal('show');
+                        $('#u_rv_remarks').val(data.rv_remarks);
+                        $('#u_rv_id').val(user_id);
+                        $('#update_rv_remarkss').val("edit");
+                    }
+                });
+            });
+
+
             $(document).on('click', '.view_rv_case', function() {
                 var user_id = $(this).attr("id");
                 $.ajax({
@@ -424,7 +526,7 @@
                     <tr class="">
                         <th width="6%">ID</th>
                         <th width="10%">Bank Name</th>
-                        <th width="10%">ApplicantName</th>
+                        <th width="10%">Applicant Name</th>
                         <th width="10%">FI Type</th>
                         <th width="10%">Agent</th>
                         <th width="10%">Ref no.</th>
@@ -718,5 +820,32 @@
                     <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="user_rv_remarks_edit" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update RV Remarks</h5>
+                </div>
+                <?php echo form_open("View_mini_case_controller/update_rv_remarks_validation", array("id" => "update_rv_remarks", "class" => "form-horizontal")) ?>
+                <div class="modal-body">
+                    <input type="hidden" class="form-control" id="u_rv_id" name="rv_id">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="rv_remarks" class="h5">RV Remarks</label>
+                            <textarea type="text" class="form-control" id="u_rv_remarks" placeholder="Enter Rv Remarks" name="rv_remarks"></textarea>
+                        </div>
+                    </div>
+
+            
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" name="update_rv_remarkss" id="update_rvr_data" class="btn btn-primary" value="Edit">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <?php echo form_close(); ?>
         </div>
     </div>

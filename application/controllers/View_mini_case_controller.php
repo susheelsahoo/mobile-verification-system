@@ -44,7 +44,11 @@ class View_mini_case_controller extends CI_Controller
             foreach ($fetch_mini_case as $row) {
                 $sub_array = array();
                 $buttons = '';
-                $buttons .= '<button type="button" title="View BV Case" name="view" id="' . $row->id . '" class="btn btn-primary btn-sm view_quick_case"><i class="fa fa-eye" ></i></button>';
+                $buttons .= '<button type="button" title="View Case" name="view" id="' . $row->id . '" class="btn btn-primary btn-sm view_quick_case"><i class="fa fa-eye" ></i></button>';
+
+                $buttons .= '<button type="button" title="RV Remarks" name="view" id="' . $row->id . '" class="btn btn-warning btn-sm edit_rv"><i class="fa fa-pencil" ></i></button>';
+
+                $buttons .= '<button type="button" title="BV Remarks" name="view" id="' . $row->id . '" class="btn btn-success btn-sm edit_bv"><i class="fa fa-pencil" ></i></button>';
 
                 // $sub_array[] = $i;
                 $sub_array[] = $row->id;
@@ -72,6 +76,25 @@ class View_mini_case_controller extends CI_Controller
             $error['error'] = true;
             $error['message'] = $ex->getMessage();
             $this->load->view('login_page', array('error' => $error));
+        }
+    }
+
+
+    function fetch_rv_remarks()
+    {
+        try {
+            $output = array();
+            $this->load->model("View_mini_case_model");
+            $data = $this->View_mini_case_model->fetch_rv_remarks($_POST["user_id"]);
+            foreach ($data as $row) {
+                // $output['id'] = $row->id;
+                $output['rv_remarks'] = $row->rv_remarks;
+            }
+            echo json_encode($output);
+        } catch (Exception $ex) {
+            $error['error'] = TRUE;
+            $error['message'] = $ex->getMessage();
+            $this->load->view('login', array('error' => $error));
         }
     }
 
@@ -303,4 +326,42 @@ class View_mini_case_controller extends CI_Controller
         $this->View_mini_case_model->insert_remark($array, $this->input->post('pk'));
         print_r($array);
     }
+
+    public function update_rv_remarks_validation()
+    {
+        try {
+            $this->load->library('form_validation');
+            $this->form_validation->set_rules('rv_remarks', 'rv_remarks', '');
+            $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+            if ($this->form_validation->run()) {
+                $pass_id = $_POST["rv_id"];
+                $array = array(
+                    'rv_remarks' => $this->input->post('rv_remarks')
+                );
+                $this->load->model('View_mini_case_model');
+                $insert_user = $this->View_mini_case_model->update_rv_remarks($pass_id,$array);
+                if ($insert_user) {
+                    $response = array(
+                        'success' => true,
+                        'message' => "RV Remarks updated successfully!"
+                    );
+                } else {
+                    $response = array(
+                        'error' => true,
+                        'message' => "error in data!"
+                    );
+                }
+            } else {
+                foreach ($_POST as $key => $value) {
+                    $response['message'][$key] = form_error($key);
+                }
+            }
+            echo json_encode($response);
+        } catch (Exception $ex) {
+            $error['error'] = TRUE;
+            $error['message'] = $ex->getMessage();
+            $this->load->view('login_page', array('error' => $error));
+        }
+    }
+
 }
