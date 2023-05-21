@@ -73,12 +73,12 @@ class Case_form extends CI_Controller
 
 
 			if ($this->form_validation->run()) {
-
+// print_r($this->input->post());die;
 				$fi_to_be_conducted = $this->input->post('fi_to_be_conducted');
 				foreach ($fi_to_be_conducted as $key => $val) {
 					$varification = [];
-					$address 	= array_values(array_filter($this->input->post('business_address')));
-					$name 		= array_values(array_filter($this->input->post('business_name')));
+					$address 	= array_values(array_filter($this->input->post('address')));
+					$name 		= array_values(array_filter($this->input->post('name')));
 					$city 		= array_values(array_filter($this->input->post('city')));
 					$pincode 	= array_values(array_filter($this->input->post('pincode')));
 					$varification['code'] = $this->input->post('agent_1');
