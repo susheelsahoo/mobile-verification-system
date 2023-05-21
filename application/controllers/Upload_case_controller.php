@@ -28,8 +28,8 @@ class Upload_case_controller extends CI_Controller
 				$bank 			= $this->input->post('bank');
 				$count_Rows = 0;
 				$data['created_at'] = date('Y-m-d H:i:s');
-				print_r($data);
-				die;
+				// print_r($data);
+				// die;
 				if ($upload_type == 'create_case') {
 					foreach ($sheet as $key => $row) {
 
