@@ -85,10 +85,12 @@ class Assign_case_controller extends CI_Controller
                     <td><?= $rows->status; ?></td>
                     <td>
                         <?php
-                        $ViewDatabtn = '<button type="button" name="view" id="<?= $rows->uid; ?>" title="RV View data" class="btn btn-warning btn-sm fi_type_view_data"><i class="fa fa-users"></i></button>';
-                        if ($rows->fi_to_be_conducted == 'BV') {
-                            $ViewDatabtn =  ' <button type="button" name="view" id="<?= $rows->uid; ?>" title="BV View Data" class="btn btn-info btn-sm bv_view_details"><i class="fa fa-users"></i></button>';
-                        }
+
+                        if ($rows->fi_to_be_conducted == 'BV') { ?>
+                            <button type="button" name="view" id="<?= $rows->uid; ?>" title="BV View Data" class="btn btn-info btn-sm bv_view_details"><i class="fa fa-users"></i></button>
+                        <?php } else { ?>
+                            <button type="button" name="view" id="<?= $rows->uid; ?>" title="RV View data" class="btn btn-warning btn-sm fi_type_view_data"><i class="fa fa-users"></i></button>
+                        <?php  } ?>
                         ?>
                         <button type="button" name="view" id="<?= $rows->uid; ?>" title="View case" class="btn btn-success btn-sm view_assigned_case"><i class="fa fa-eye"></i></button>
                         <!-- <button type="button" name="view" id="<?= $rows->uid; ?>" title="View App end data" class="btn btn-info btn-sm view_app_end_assigned_case"><i class="fa fa-book"></i></button> -->
