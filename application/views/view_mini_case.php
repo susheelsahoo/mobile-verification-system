@@ -60,18 +60,18 @@
                     [10, 25, 50, -1],
                     [10, 25, 50, "All"]
                 ],
-                createdRow: function(row, data, rowIndex) {
-                    $.each($('td', row), function(colIndex) {
+                // createdRow: function(row, data, rowIndex) {
+                //     $.each($('td', row), function(colIndex) {
 
-                        if (colIndex == 8) {
-                            $(this).attr('data-name', 'remarks');
-                            $(this).attr('class', 'remarks');
-                            $(this).attr('data-type', 'text');
-                            $(this).attr('data-pk', data[0]);
-                        }
+                //         if (colIndex == 7) {
+                //             $(this).attr('data-name', 'remarks');
+                //             $(this).attr('class', 'remarks');
+                //             $(this).attr('data-type', 'text');
+                //             $(this).attr('data-pk', data[0]);
+                //         }
 
-                    });
-                }
+                //     });
+                // }
             });
 
 
@@ -81,20 +81,20 @@
                 jQuery('#fetch_mini_case_data').DataTable().ajax.reload();
             });
 
-            $('#fetch_mini_case_data').editable({
-                mode: 'inline',
-                container: 'body',
-                selector: 'td.remarks',
-                url: '<?php echo base_url() . 'View_mini_case_controller/get_remark'; ?>',
-                title: 'Remarks',
-                type: 'POST',
-                validate: function(value) {
-                    //			if($.trim(value) == '')
-                    //			{
-                    //				return 'This field is required';
-                    //			}
-                }
-            });
+            // $('#fetch_mini_case_data').editable({
+            //     mode: 'inline',
+            //     container: 'body',
+            //     selector: 'td.remarks',
+            //     url: '<?php echo base_url() . 'View_mini_case_controller/get_remark'; ?>',
+            //     title: 'Remarks',
+            //     type: 'POST',
+            //     validate: function(value) {
+            //         //			if($.trim(value) == '')
+            //         //			{
+            //         //				return 'This field is required';
+            //         //			}
+            //     }
+            // });
 
             $(document).on('click', '.view_quick_case', function() {
                 var user_id = $(this).attr("id");
@@ -530,7 +530,7 @@
                         <th width="10%">FI Type</th>
                         <th width="10%">Agent</th>
                         <th width="10%">Ref no.</th>
-                        <th width="10%">Name</th>
+                        <!-- <th width="10%">Name</th> -->
                         <th width="10%">Address</th>
                         <th width="10%">Status</th>
                         <th width="10%">Action</th>
