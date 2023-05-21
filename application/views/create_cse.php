@@ -10,8 +10,8 @@
   <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 </head>
-<body>
 
+<body>
   <style>
     body {
       padding-top: 20px;
@@ -218,6 +218,10 @@
     <a href="<?php echo base_url(); ?>Admin_dashboard_controller/admin_dashboard" class="btn btn-info">Admin</a>
   </div>
   <br>
+  <?php
+  include('components/flash.php');
+  ?>
+
   <figure data-title="CASES" style="color:#0e88c5;">
     <figcaption>
 
@@ -241,8 +245,8 @@
 
       <div class="card">
         <div class="title">
-        <a href="<?php echo base_url(); ?>Upload_case_controller/upload_case_form">
-          <h3><b>Upload Case</b></h3>
+          <a href="<?php echo base_url(); ?>Upload_case_controller/upload_case_form">
+            <h3><b>Upload Case</b></h3>
         </div>
         <div class="content">
           <div class="social">
@@ -296,8 +300,8 @@
 
       <div class="card">
         <div class="title">
-        <a href="<?php echo base_url(); ?>Mini_case_controller/mini_case_form">
-          <h3><b>Quick Case</b></h3>
+          <a href="<?php echo base_url(); ?>Mini_case_controller/mini_case_form">
+            <h3><b>Quick Case</b></h3>
         </div>
         <div class="content">
           <div class="social">

@@ -25,14 +25,16 @@ class Upload_case_controller extends CI_Controller
 				$spreadsheet = $reader->load($inputFileName);
 				$sheet 			= $spreadsheet->getSheet(0)->toArray();
 				$upload_type 	= $this->input->post('upload_type');
-				$bank 			= $this->input->post('first_name');
+				$bank 			= $this->input->post('bank');
 				$count_Rows = 0;
 
 				if ($upload_type == 'create_case') {
 					foreach ($sheet as $key => $row) {
+
 						if ($key == 0) {
 							continue;
 						}
+
 						$fi_to_be_conducted 	= $row['2'];
 						$fi_to_be_conducted_array = explode(",", $fi_to_be_conducted);
 
@@ -142,14 +144,14 @@ class Upload_case_controller extends CI_Controller
 					}
 				}
 
-				// echo 'alert("Uploaded successfully!");';
-				$this->session->set_flashdata('success', 'Excel Data Imported Successfully');
-				redirect(base_url("/Create_cse/create_c"));
+
+				$response = array('type' => 'success', 'massege' => 'Excel Data Imported Successfully');
+				$this->session->set_flashdata('res_data', $response);
 			} else {
-				echo 'alert(" errorFile is not uploaded");';
-				// $this->session->set_flashdata('error','File is not uploaded');
-				// redirect(base_url());
+				$response = array('type' => 'error', 'massege' => 'File is not uploaded');
+				$this->session->set_flashdata('res_data', $response);
 			}
+			redirect(base_url("/Create_cse/create_c"));
 		} else {
 			$this->load->view('login_page');
 		}
