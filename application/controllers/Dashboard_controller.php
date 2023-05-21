@@ -62,11 +62,12 @@ class Dashboard_controller extends CI_Controller
             $data = array();
 
             foreach ($fetch_case as $row) {
+                $count=$this->Dashboard_model->countCase($row->employee_unique_id);
                 $sub_array = array();
                 
                 $sub_array[] = '<a href="' .  base_url() . 'index.php/Assign_case_controller/assign_case_function/' . $row->employee_unique_id . '">' . $row->first_name . '</a>';
                 // $sub_array[] = $row->first_name;
-                $sub_array[] = $row->total;
+                $sub_array[] = $count;//$row->total;
                 $sub_array[] = $row->inprogress;
                 $sub_array[] = $row->out_of_tat;
                 $sub_array[] = $row->positive_resolved;

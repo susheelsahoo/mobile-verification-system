@@ -156,5 +156,17 @@ public function countAllTotal()
 	}
 }
 
+// count records per user wise and show in dashbaord
+public function countCase($employee_unique_id)
+{
+	try {
+                $this->db->where("code", $employee_unique_id);
+		$this->db->from('upload_file');
+		return $this->db->count_all_results();
+	} catch (Exception $ex) {
+		throw $ex;
+	}
+}
+
 	
 }

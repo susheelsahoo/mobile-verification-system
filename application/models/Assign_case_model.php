@@ -97,7 +97,57 @@ class Assign_case_model extends CI_Model
         }
 	}
 
+        function filter_Createdate($from,$to,$code){
+	try {
+             $from=$from.' 00:00:01';
+             $to=$to.' 23:59:59';
+            // echo $from.'--'.$to.'--'.$data;die();
+            $this->db->where("uf.code",$code);
+            $this->db->where('uf.updated_at >=', $from);
+            $this->db->where('uf.updated_at <=', $to);
+            $this->db->select("uf.id as uid,a.employee_unique_id AS agent_code,uf.id,uf.code, uf.application_id,uf.customer_name,uf.business_address,uf.fi_to_be_conducted,uf.updated_at,uf.status");
+            $this->db->join('login a', 'a.employee_unique_id = uf.code', 'left');
+            
+            $this->db->from('upload_file uf');
+            $query = $this->db->get();
+			// print_r($query->result());die;
+            return $query;
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+	}
+        
+    function filter_fitype($val,$code){
+	try {
+           $this->db->where("uf.code",$code);
+            $this->db->where('uf.fi_to_be_conducted =', $val);
+            $this->db->select("uf.id as uid,a.employee_unique_id AS agent_code,uf.id,uf.code, uf.application_id,uf.customer_name,uf.business_address,uf.fi_to_be_conducted,uf.updated_at,uf.status");
+            $this->db->join('login a', 'a.employee_unique_id = uf.code', 'left');
+            
+            $this->db->from('upload_file uf');
+            $query = $this->db->get();
+			// print_r($query->result());die;
+            return $query;
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+	}
 
+	function filter_status($val,$status){
+		try {
+			   $this->db->where("uf.code",$code);
+				$this->db->where('uf.status =', $val);
+				$this->db->select("uf.id as uid,a.employee_unique_id AS agent_code,uf.id,uf.code, uf.application_id,uf.customer_name,uf.business_address,uf.fi_to_be_conducted,uf.updated_at,uf.status");
+				$this->db->join('login a', 'a.employee_unique_id = uf.code', 'left');
+				
+				$this->db->from('upload_file uf');
+				$query = $this->db->get();
+				// print_r($query->result());die;
+				return $query;
+			} catch (Exception $ex) {
+				throw $ex;
+			}
+		}
 	// function filter_assignee($data){
 	// 	try {
     //         $this->db->where("uf.code",$data);
@@ -160,13 +210,32 @@ class Assign_case_model extends CI_Model
 		}
 	}
 
-	function update_assignee($reassign_id, $data)
+	function update_assignee($reassign_id,$assignfrom, $reassign_multi_id,$data)
 	{
 		try {
+                    
+                    if(!empty($reassign_multi_id)){
+                        foreach ($reassign_multi_id as $val){
+                            //echo ($val.'--'.$assignfrom);die();
+                           // print_r($data);die();
+                            $this->db->where("id", $val);
+                            $this->db->update("upload_file", $data);
+                            $transfer_date=date('Y-m-d H:i:s');
+                            
+                            $history=$this->db->query("INSERT into case_transfer_history (assign_from,assign_to,application_id,transfer_date)values"
+                                    . "('$assignfrom','$data[code]','$val',\"$transfer_date\")");
+                        }
+                        return '1';
+                    }
+                    if(!empty($reassign_id)){
+                        $transfer_date=date('Y-m-d H:i:s');
 			$this->db->where("id", $reassign_id);
 			//        print_r($data);die;
 			$return_data = $this->db->update("upload_file", $data);
+                        $history=$this->db->query("INSERT into case_transfer_history (assign_from,assign_to,application_id,transfer_date)values"
+                                    . "('$assignfrom','$data[code]','$reassign_id',\"$transfer_date\")");
 			return $return_data;
+                    }
 		} catch (Exception $ex) {
 			throw $ex;
 		}

@@ -37,17 +37,152 @@ class Assign_case_controller extends CI_Controller {
 
     public function assign_case_function($data){
         // echo $data;
+        
             $this->load->library('session');
+            // unset($_SESSION['data_new1']);
+            //$_SESSION['data_new1']=$data;
             if($this->session->userdata('user')){
                 $this->load->model("Assign_case_model");
                 $fetch_data['allAgent'] = $this->Assign_case_model->filter_assignee($data);
+                $fetch_data['data'] = $data;
                 // echo json_encode($fetch_data);
+                //var_dump($fetch_data);die();
+                
                 $this->load->view('assign_case', $fetch_data);
             }
             else{
                 redirect('/');
             }
         }
+        
+        
+    public function filterDatewise(){
+       
+        $from=$_POST['from'];
+        $to=$_POST['to'];
+        $code=$_POST['code'];
+        //echo $code;die();
+        $tbdy='';
+        $fetch_data= $this->Assign_case_model->filter_Createdate($from,$to,$code);
+        $numrows=$fetch_data->num_rows();
+        //echo $numrows;die("iii");
+        if($numrows>0){
+        ?>
+        <?php foreach ($fetch_data->result() as $key => $rows) :
+                    ?>
+                        <tr>
+                            <tr><td><input type="checkbox" id="assign" value='<?= $rows->uid; ?>' name="assign"></td>
+                            <td><?= $rows->uid; ?></td>
+                            <td><?= $rows->application_id; ?></td>
+                            <td><?= $rows->customer_name; ?></td>
+                            <td><?= $rows->business_address; ?></td>
+                            <td><?= $rows->fi_to_be_conducted; ?></td>
+                            <td><?= $rows->updated_at; ?></td>
+                            <td><?= $rows->status; ?></td>
+                            <td>
+                                <button type="button" name="view" id="<?= $rows->uid; ?>" title="View case" class="btn btn-success btn-sm view_assigned_case"><i class="fa fa-eye"></i></button>
+                                <!-- <button type="button" name="view" id="<?= $rows->uid; ?>" title="View App end data" class="btn btn-info btn-sm view_app_end_assigned_case"><i class="fa fa-book"></i></button> -->
+                                <button type="button" name="edit" id="<?= $rows->uid; ?>" title="Edit case" class="btn btn-info btn-sm edit_assigned_case"><i class="fa fa-pencil"></i></button>
+                                <button type="button" name="reassign" id="<?= $rows->uid; ?>" title="Assign case" class="btn btn-primary btn-sm reassigned_case"><i class="fa fa-users"></i></button>
+                                <button type="button" name="view" id="<?= $rows->uid; ?>" title="RV View data" class="btn btn-warning btn-sm fi_type_view_data"><i class="fa fa-users"></i></button>
+                                <button type="button" name="view" id="<?= $rows->uid; ?>" title="BV View Data" class="btn btn-info btn-sm bv_view_details"><i class="fa fa-users"></i></button>
+                                <button type="button" name="rv_edit" id="<?= $rows->uid; ?>" title="RV Edit" class="btn btn-info btn-sm rv_edit_details"><i class="fa fa-edit"></i></button>
+                                <button type="button" name="bv_edit" id="<?= $rows->uid; ?>" title="BV Edit" class="btn btn-warning btn-sm bv_edit_details"><i class="fa fa-pencil"></i></button>
+                          
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    <tr></tr>
+        <?php } else { ?>
+            
+            <tr><td colspan="5">No Records Found</td></tr>
+             <tr></tr>
+         
+       <?php } 
+    }
+    
+    
+    public function filterfitype(){
+        $val=$_POST['val'];
+        $code=$_POST['code'];
+        
+        $tbdy='';
+        $fetch_data= $this->Assign_case_model->filter_fitype($val,$code);
+        $numrows=$fetch_data->num_rows();
+        if($numrows>0){
+        ?>
+        <?php foreach ($fetch_data->result() as $key => $rows) :
+                    ?>
+                        <tr>
+                            <tr><td><input type="checkbox" id="assign" value='<?= $rows->uid; ?>' name="assign"></td>
+                            <td><?= $rows->uid; ?></td>
+                            <td><?= $rows->application_id; ?></td>
+                            <td><?= $rows->customer_name; ?></td>
+                            <td><?= $rows->business_address; ?></td>
+                            <td><?= $rows->fi_to_be_conducted; ?></td>
+                            <td><?= $rows->updated_at; ?></td>
+                            <td><?= $rows->status; ?></td>
+                            <td>
+                                <button type="button" name="view" id="<?= $rows->uid; ?>" title="View case" class="btn btn-success btn-sm view_assigned_case"><i class="fa fa-eye"></i></button>
+                                <!-- <button type="button" name="view" id="<?= $rows->uid; ?>" title="View App end data" class="btn btn-info btn-sm view_app_end_assigned_case"><i class="fa fa-book"></i></button> -->
+                                <button type="button" name="edit" id="<?= $rows->uid; ?>" title="Edit case" class="btn btn-info btn-sm edit_assigned_case"><i class="fa fa-pencil"></i></button>
+                                <button type="button" name="reassign" id="<?= $rows->uid; ?>" title="Assign case" class="btn btn-primary btn-sm reassigned_case"><i class="fa fa-users"></i></button>
+                                <button type="button" name="view" id="<?= $rows->uid; ?>" title="RV View data" class="btn btn-warning btn-sm fi_type_view_data"><i class="fa fa-users"></i></button>
+                                <button type="button" name="view" id="<?= $rows->uid; ?>" title="BV View Data" class="btn btn-info btn-sm bv_view_details"><i class="fa fa-users"></i></button>
+                                <button type="button" name="rv_edit" id="<?= $rows->uid; ?>" title="RV Edit" class="btn btn-info btn-sm rv_edit_details"><i class="fa fa-edit"></i></button>
+                                <button type="button" name="bv_edit" id="<?= $rows->uid; ?>" title="BV Edit" class="btn btn-warning btn-sm bv_edit_details"><i class="fa fa-pencil"></i></button>
+                          
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    <tr></tr>
+        <?php } else {?>
+            <tr><td colspan="5">No Records Found</td></tr>
+             <tr></tr>
+        <?php } 
+    }
+    
+
+    public function filterStatus(){
+        $val=$_POST['val'];
+        $code=$_POST['code'];
+        
+        $tbdy='';
+        $fetch_data= $this->Assign_case_model->filter_status($val,$code);
+        $numrows=$fetch_data->num_rows();
+        if($numrows>0){
+        ?>
+        <?php foreach ($fetch_data->result() as $key => $rows) :
+                    ?>
+                        <tr>
+                            <tr><td><input type="checkbox" id="assign" value='<?= $rows->uid; ?>' name="assign"></td>
+                            <td><?= $rows->uid; ?></td>
+                            <td><?= $rows->application_id; ?></td>
+                            <td><?= $rows->customer_name; ?></td>
+                            <td><?= $rows->business_address; ?></td>
+                            <td><?= $rows->fi_to_be_conducted; ?></td>
+                            <td><?= $rows->updated_at; ?></td>
+                            <td><?= $rows->status; ?></td>
+                            <td>
+                                <button type="button" name="view" id="<?= $rows->uid; ?>" title="View case" class="btn btn-success btn-sm view_assigned_case"><i class="fa fa-eye"></i></button>
+                                <!-- <button type="button" name="view" id="<?= $rows->uid; ?>" title="View App end data" class="btn btn-info btn-sm view_app_end_assigned_case"><i class="fa fa-book"></i></button> -->
+                                <button type="button" name="edit" id="<?= $rows->uid; ?>" title="Edit case" class="btn btn-info btn-sm edit_assigned_case"><i class="fa fa-pencil"></i></button>
+                                <button type="button" name="reassign" id="<?= $rows->uid; ?>" title="Assign case" class="btn btn-primary btn-sm reassigned_case"><i class="fa fa-users"></i></button>
+                                <button type="button" name="view" id="<?= $rows->uid; ?>" title="RV View data" class="btn btn-warning btn-sm fi_type_view_data"><i class="fa fa-users"></i></button>
+                                <button type="button" name="view" id="<?= $rows->uid; ?>" title="BV View Data" class="btn btn-info btn-sm bv_view_details"><i class="fa fa-users"></i></button>
+                                <button type="button" name="rv_edit" id="<?= $rows->uid; ?>" title="RV Edit" class="btn btn-info btn-sm rv_edit_details"><i class="fa fa-edit"></i></button>
+                                <button type="button" name="bv_edit" id="<?= $rows->uid; ?>" title="BV Edit" class="btn btn-warning btn-sm bv_edit_details"><i class="fa fa-pencil"></i></button>
+                          
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    <tr></tr>
+        <?php } else {?>
+            <tr><td colspan="5">No Records Found</td></tr>
+             <tr></tr>
+        <?php } 
+    }
+    
 	
 	function fetch_all_assign_data() {
         try {
@@ -274,6 +409,7 @@ class Assign_case_controller extends CI_Controller {
     }
 
 
+
     function fetch_single_bv_data() {
         try {
             $output = array();
@@ -416,6 +552,7 @@ class Assign_case_controller extends CI_Controller {
             $this->load->view('login', array('error' => $error));
         }
     }
+
 
 
     function fetch_single_assignee_from_app_end() {
@@ -598,6 +735,7 @@ class Assign_case_controller extends CI_Controller {
     {
         // Generate a random OTP using your preferred method
         $otp = str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
+        // $otp ='1234';
         return $otp;
     }
 
@@ -610,7 +748,7 @@ class Assign_case_controller extends CI_Controller {
         $otp = $this->generateOTP();
         // echo $otp;die;
         $responseArray['otp'] = $otp;
-$responseArray['email'] = $email;
+        $responseArray['email'] = $email;
        
         $this->sendOTPEmail($email, $otp);
         $responseArray['msg'] = "Message";
@@ -646,6 +784,9 @@ die();
             if ($enteredOtp == $storedOtp) {
 
                 $reassign_id = $_POST["r_id"];
+                $reassign_multi_id = $_POST["multi_id"];
+                $assignfrom = $_POST["assignfrom"];
+               
                 $array = array(
                     'code' => $this->input->post('code'),
                     'reassign_remarks' => $this->input->post('reassign_remarks'),
@@ -653,7 +794,7 @@ die();
 
                 $this->load->model('Assign_case_model');
                 // $this->Assign_case_model->editData();
-                $insert_id = $this->Assign_case_model->update_assignee($reassign_id, $array);
+                $insert_id = $this->Assign_case_model->update_assignee($reassign_id,$assignfrom,$reassign_multi_id, $array);
                 if ($insert_id) {
                     $response = array(
                         'success' => 1,
@@ -885,6 +1026,7 @@ die();
             $this->load->view('login', array('error' => $error));
         }
     }
+
 
 
     public function update_bv_validation() {

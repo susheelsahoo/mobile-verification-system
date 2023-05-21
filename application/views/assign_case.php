@@ -117,7 +117,7 @@
                 // end update form data 
 
 
-            $(document).on('click', '.view_assigned_case', function() {
+                $(document).on('click', '.view_assigned_case', function() {
                 var user_id = $(this).attr("id");
                 $.ajax({
                     url: "<?php echo base_url(); ?>Assign_case_controller/fetch_single_assignee",
@@ -168,14 +168,22 @@
             });
             
             
+            
 
             $(document).on('click', '#update_assignee_data', function() {
+            
+            var multiid=[]; 
+            $("input:checkbox[name=assign]:checked").each(function(){
+                    multiid.push($(this).val());
+                });
+               // alert(multiid);
+            var assignfrom = $("#assignfrom").val();
             var u_reassign_id = $("#u_reassign_id").val();
             var code = $('#u_code').val();
             var remarks = $("#u_reassign_remarks").val();
-          var otp = $("#otp").val();
-          var store_otp = $("#store_otp").val();
-           var email = $("#email").val();
+            var otp = $("#otp").val();
+            var store_otp = $("#store_otp").val();
+             var email = $("#email").val();
 
 
                 $.ajax({
@@ -183,7 +191,9 @@
                     method: "POST",
                     data: {
                         r_id: u_reassign_id,
+                        multi_id: multiid,
                         code: code,
+                        assignfrom: assignfrom,
                         reassign_remarks: remarks,
                         otp: otp,
                         store_otp: store_otp,
@@ -195,6 +205,7 @@
                     success: function(data) {
                        if(data.success == 1){
                         $("#otp_check").show();
+                        $("#success_msg").show();
                        $("#success_msg").html(data.msg);
                        }else{
                         $("#error_msg").html(data.msg);
@@ -291,7 +302,9 @@ $("#email").val(data.email);
                     }
                 });
             });
-   $(document).on('click', '.bv_view_details', function() {
+
+
+            $(document).on('click', '.bv_view_details', function() {
                 var user_id = $(this).attr("id");
                 $.ajax({
                     url: "<?php echo base_url(); ?>Assign_case_controller/fetch_single_bv_data",
@@ -402,7 +415,7 @@ $("#email").val(data.email);
             // });
 
              // update the form data if we change any
-         $('#update_form_case').submit(function (e) {
+             $('#update_form_case').submit(function (e) {
 //                alert("click on update button");
                     e.preventDefault();
                     var me = $(this);
@@ -516,6 +529,7 @@ $("#email").val(data.email);
                 });
                 // end of update data fetch
 
+             
                 $('#update_rv').submit(function (e) {
 //                alert("click on update button");
                     e.preventDefault();
@@ -868,15 +882,37 @@ $("#email").val(data.email);
             border-color: #0e88c5
         }
     </style>
-
+<?php 
+//echo $data;die('dsfsd');
+?>
     
-    <div class="mybtn-right">
+    <div class=" mybtn-right">
+       
+        
         <a href="<?php echo base_url(); ?>home" class="btn btn-info" class="btn btn-info">Dashboard</a>
         <a href="<?php echo base_url(); ?>Create_cse/create_c" class="btn btn-info">Case</a>
         <a href="<?php echo base_url(); ?>Report_controller/report_page_open" class="btn btn-info">Report</a>
         <a href="<?php echo base_url(); ?>Admin_dashboard_controller/admin_dashboard" class="btn btn-info">Admin</a>
     </div>
     <br>
+
+    <label >From</label>
+        <input type="text" name="from" id="from" required value="<?php echo date("Y-m-d"); ?>" >
+        <label >To</label>
+        <input type="text"  name="to" id="to" required value="<?php echo date("Y-m-d"); ?>" >
+        <button class="btn btn-warning " name="sub_btn" id="sub_btn" > GET </button>
+        <label >Select FI Type</label> 
+        <select id="fitype" name="fitype" onchange="getFitype(this.value)">FI Type
+                        <option id="RV">RV</option>
+                        <option id="BV">BV</option></select>
+
+        <label >Select Status</label> 
+        <select id="casestatus" name="casestatus" onchange="getCasestatus(this.value)">Status
+                        <option id="inactive">inactive</option>
+                        <option id="Resolved">Resolved</option></select>
+
+       <button id="assigncasebutton" style="display:none;" type="button" name="reassign" id="<?= $rows->uid; ?>" title="Assign case" class="btn btn-warning btn-md reassigned_case">Assign case</button>
+      
 
     <!-- <div class="mybtn-left">
         <button type="button" name="view" class="btn btn-info reassign_case">Assign Case</button>
@@ -888,22 +924,26 @@ $("#email").val(data.email);
             <table id="fetch_assign_data" class="table table-bordered table-striped" cellspacing="0" style="width:100%">
                 <thead>
                     <tr class="">
-                        <!-- <th width="2%"></th> -->
+                        <th width="2%"></th> 
                         <th width="6%">ID</th>
                         <th width="10%">App ID</th>
                         <th width="10%">Name</th>
                         <th width="10%">Address</th>
                         <th width="10%">FI Type</th>
+                        <!-- <th width="10%"><select id="fitype" name="fitype" onchange="getFitype(this.value)">FI Type
+                        <option id="RV">RV</option>
+                        <option id="BV">BV</option></select>
+                        </th> -->
                         <th width="10%">Created Date</th>
                         <th width="9%">Status</th>
                         <!-- <th width="9%">Agent</th> -->
                         <th width="10%">Action</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <?php foreach ($allAgent as $key => $rows) :
+                <tbody id="tbdy">
+                    <?php $i=1;foreach ($allAgent as $key => $rows) :
                     ?>
-                        <tr>
+                    <tr><td><input type="checkbox" onclick="showassignbutton(<?php echo $i?>)" id="assign<?php echo $i?>" value='<?= $rows->uid; ?>' name="assign"></td>
                             <td><?= $rows->uid; ?></td>
                             <td><?= $rows->application_id; ?></td>
                             <td><?= $rows->customer_name; ?></td>
@@ -923,7 +963,7 @@ $("#email").val(data.email);
                           
                             </td>
                         </tr>
-                    <?php endforeach; ?>
+                    <?php $i++;endforeach; ?>
                     <tr></tr>
                 </tbody>
             </table>
@@ -958,6 +998,8 @@ $("#email").val(data.email);
                                                                     <input type="text" class="form-control" hidden id="u_reassign_id" name="r_id">
                                                                       <input type="hidden" class="form-control" hidden id="store_otp" name="store_otp">
                                                                <input type="hidden" class="form-control" hidden id="email" name="email">
+                                                               
+                                                               <input type="hidden" class="form-control" hidden id="assignfrom" name="assignfrom" value="<?php echo $data?>">
 
                          
                                                                     <div class="form-row">
@@ -969,17 +1011,7 @@ $("#email").val(data.email);
                                                                         </div>
                                                                     </div>
 
-                                                                    <div class="form-row">
-                                                                    <div class="form-group col-md-12">
-                                                                            <label for="rv_fi_status" class="h6">FI Type<span class=""> *</span></label>
-                                                                            <select class="form-control" id="u_rv_fi_status" name="rv_fi_status">
-                                                                                <option value="" selected>-- SELECT FI STATUS --</option>
-                                                                                <option value="PositiveV">PositiveV</option>
-                                                                               <option value="Negative">Negative</option>
-                                                                           </select>
-                                                                        </div>
-                                                                    </div>
-                                                                 <br>
+                                                                    <br>
                                                                     <div class="form-row">
                                                                         <div class="form-group col-md-12">
                                                                             <label for="reassign_remarks" class="h6">Remarks</label>
@@ -995,10 +1027,7 @@ $("#email").val(data.email);
                                                                         </div>
                                                                     </div>
 
-                                                                    
-
-                                                 <button type="button" id="generate_otp" class="btn btn-warning">Generate OTP<button>
-                                                 <style>
+                                                            <style>
                                                                             #success_msg{
                                                                             display:none;
                                                                             }
@@ -1007,7 +1036,10 @@ $("#email").val(data.email);
                                                                             display:none;
                                                                             }
 
-                                                                        </style>
+                                                                        </style>        
+                                                                    
+                                                 <button type="button" id="generate_otp" class="btn btn-warning">Generate OTP<button>
+                                                 
                                                  <div class="alert alert-success" id="success_msg"></div>
                                                  <div class="alert alert-danger" id="error_msg"></div>
 
@@ -1018,7 +1050,7 @@ $("#email").val(data.email);
                                                                             display:none;
                                                                             }
                                                                         </style>
-                                                                        <button type="button" name="update_assignee" id="update_assignee_data" class="btn btn-primary">Verify OTP and Update Data</button>
+                                                                        <button type="button" name="update_assignee" id="update_assignee_data" class="btn btn-primary">Verify OTP and Reassign Case</button>
 
                                                                         <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>  
                                                                     </div>
@@ -1035,7 +1067,7 @@ $("#email").val(data.email);
 
 
 
-  <div id="fi_type_view_modal" class="modal fade " aria-hidden="true"
+ <div id="fi_type_view_modal" class="modal fade " aria-hidden="true"
      data-mdb-backdrop="true"
      data-mdb-keyboard="true">
 		<div class="modal-dialog modal-fullscreen">
@@ -1450,6 +1482,7 @@ $("#email").val(data.email);
 			<!--add model end-->
 		</div>
 	</div>
+
 
 
 
@@ -1890,6 +1923,7 @@ $("#email").val(data.email);
 			<!--add model end-->
 		</div>
 	</div>
+             
                                                 
 
 
@@ -2181,11 +2215,9 @@ $("#email").val(data.email);
         </div>
     </div> <!--view assign case model end-->
 
-    
-
 
     <div id="rv_edit_model" class="modal fade" aria-hidden="true" data-mdb-backdrop="true"
-     data-mdb-keyboard="true">  
+           data-mdb-keyboard="true">  
                                                     <div class="modal-dialog modal-fullscreen" >  
                                                         <!--<form method="post" id="user_form">-->  
                                                         <div class="modal-content">  
@@ -2409,11 +2441,10 @@ $("#email").val(data.email);
                                                             </div>   <!-- card body end  -->
                                                         </div> <!-- card end  --> 
                                                     </div>
-                                                </div> 
+                 </div> 
 
 
-
-                                                <div id="bv_edit_model" class="modal fade" aria-hidden="true" data-mdb-backdrop="true"
+                 <div id="bv_edit_model" class="modal fade" aria-hidden="true" data-mdb-backdrop="true"
      data-mdb-keyboard="true">  
                                                     <div class="modal-dialog modal-fullscreen" >  
                                                         <!--<form method="post" id="user_form">-->  
@@ -2635,7 +2666,7 @@ $("#email").val(data.email);
 
 
    
-                                  <div id="case_edit_model" class="modal fade ">  
+                                                <div id="case_edit_model" class="modal fade ">  
                                                     <div class="modal-dialog" >  
                                                         <!--<form method="post" id="user_form">-->  
                                                         <div class="modal-content" style="width:800px;">  
@@ -2775,6 +2806,114 @@ $("#email").val(data.email);
                                                         </div> <!-- card end  --> 
                                                     </div>
                                                 </div> 
+                                                                    
+
+
+    
+  
+  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script>
+  $(document).ready(function() {
+$( "#from" ).datepicker({
+  dateFormat: "yy-mm-dd",
+
+});
+
+$( "#to" ).datepicker({
+  dateFormat: "yy-mm-dd",
+
+});
+});
+  </script>
+  
+<script type="text/javascript">
+
+$(document).ready(function() {
+ $('#sub_btn').click(function(event){
+  event.preventDefault();
+ 
+  var from = $('#from').val();
+  var to = $('#to').val();
+  var code='<?php echo $data; ?>';
+  //alert(code);
+ 
+  var datastring = "from="+from+"&to="+to+"&code="+code;
+$.ajax({
+   type:"POST",
+   url: "<?= base_url() ?>Assign_case_controller/filterDatewise",
+  // dataType:"json",
+   data: datastring,
+  // contentType: "application/json; charset=utf-8",
+   success: function(data){
+       //alert(data);
+       $('#tbdy').html(data);
+      
+   },
+   error: function(){
+    // alert("Error");
+   }
+  });
+
+});
+
+});
+
+
+function getFitype(val){
+var code='<?php echo $data; ?>';
+var datastring = "val="+val+"&code="+code;
+$.ajax({
+   type:"POST",
+   url: "<?= base_url() ?>Assign_case_controller/filterfitype",
+  // dataType:"json",
+   data: datastring,
+  // contentType: "application/json; charset=utf-8",
+   success: function(data){
+       //alert(data);
+       $('#tbdy').html(data);
+      
+   },
+   error: function(){
+    // alert("Error");
+   }
+  });
+}
+
+function getCasestatus(val){
+var code='<?php echo $data; ?>';
+var datastring = "val="+val+"&code="+code;
+$.ajax({
+   type:"POST",
+   url: "<?= base_url() ?>Assign_case_controller/filterStatus",
+  // dataType:"json",
+   data: datastring,
+  // contentType: "application/json; charset=utf-8",
+   success: function(data){
+       //alert(data);
+       $('#tbdy').html(data);
+      
+   },
+   error: function(){
+    // alert("Error");
+   }
+  });
+}
+</script> 
+
+
+ <script>
+      function showassignbutton(val){
+if($("#assign"+val).is(':checked')) {
+    $("#assigncasebutton").show();
+        
+        }
+    }
+ </script>
 
 </body>
 
