@@ -25,7 +25,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
  */
 
 // $config['base_url'] = 'https://verification.bodvid.com';
+<<<<<<< HEAD
 $config['base_url'] = 'http://localhost/bank-docs-verification/';
+=======
+$config['base_url'] = 'http://localhost/bank-docs-verification';
+>>>>>>> 6511d4d22c0873e1fb079416fecbb7622225b0e5
 
 /*
 |--------------------------------------------------------------------------
