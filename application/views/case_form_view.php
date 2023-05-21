@@ -417,10 +417,11 @@
                 <label for="fi_to_be_conducted">Fi type<span class="text-danger"> *</span></label>
             </div>
             <div class="col-75">
-                <input type="checkbox" class="fi_to_be_conducted_rv" name="fi_to_be_conducted[]" value="RV">
-                <label for="fi_to_be_conducted"> RV</label>
                 <input type="checkbox" class="fi_to_be_conducted_bv" name="fi_to_be_conducted[]" value="BV">
                 <label for="fi_to_be_conducted"> BV</label>
+                <input type="checkbox" class="fi_to_be_conducted_rv" name="fi_to_be_conducted[]" value="RV">
+                <label for="fi_to_be_conducted"> RV</label>
+
             </div>
         </div>
 
