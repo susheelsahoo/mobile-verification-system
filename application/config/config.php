@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+date_default_timezone_set('Asia/Kolkata');
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +26,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  */
 
 // $config['base_url'] = 'https://verification.bodvid.com';
-$config['base_url'] = 'http://localhost/bank-docs-verification';
+$config['base_url'] = 'https://verification.realbitscoders.com/';
 
 /*
 |--------------------------------------------------------------------------
@@ -118,16 +119,6 @@ $config['enable_hooks'] = false;
  */
 $config['subclass_prefix'] = 'MY_';
 
-$config['protocol'] = 'smtp';
-$config['smtp_host'] = 'smtp.gmail.com'; // Set the SMTP host address
-$config['smtp_port'] = '587'; // Set the SMTP port
-$config['smtp_user'] = 'yogitasharma1606@gmail.com'; // Set the SMTP username
-$config['smtp_pass'] = 'Yogita420@@@'; // Set the SMTP password
-$config['mailtype'] = 'html'; // Set the email message format ('html' or 'text')
-$config['charset'] = 'utf-8'; // Set the character set used in email
-$config['newline'] = "\r\n"; // Set the newline character sequence
-
-
 /*
 |--------------------------------------------------------------------------
 | Composer auto-loading
@@ -170,11 +161,7 @@ $config['composer_autoload'] = 'vendor/autoload.php';
 | DO NOT CHANGE THIS UNLESS YOU FULLY UNDERSTAND THE REPERCUSSIONS!!
 |
  */
-// $config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-=';
-$config['permitted_uri_chars'] = 'a-z 0-9~%.:\_\=+%\&';
-
-
-
+$config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-';
 
 /*
 |--------------------------------------------------------------------------
@@ -199,7 +186,6 @@ $config['permitted_uri_chars'] = 'a-z 0-9~%.:\_\=+%\&';
 |
  */
 $config['enable_query_strings'] = false;
-// $config['enable_query_strings'] = TRUE;
 $config['controller_trigger'] = 'c';
 $config['function_trigger'] = 'm';
 $config['directory_trigger'] = 'd';
