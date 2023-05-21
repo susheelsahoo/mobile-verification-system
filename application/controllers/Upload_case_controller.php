@@ -147,7 +147,11 @@ class Upload_case_controller extends CI_Controller
 					}
 				}
 
+<<<<<<< HEAD
 				// echo 'alert("Uploaded successfully!");';
+=======
+
+>>>>>>> 029fb82709ec72e590a2ced241917b6a4a95df2a
 				$response = array('type' => 'success', 'massege' => 'Excel Data Imported Successfully');
 				$this->session->set_flashdata('res_data', $response);
 			} else {
