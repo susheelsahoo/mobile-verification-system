@@ -41,13 +41,13 @@ class Upload_case_controller extends CI_Controller
 						if (count($fi_to_be_conducted_array) != 0) {
 							foreach ($fi_to_be_conducted_array as $fi_type) {
 								$fi_type = trim($fi_type);
-								if ($fi_type == 'BV') {
+								if ($fi_type == 'RV') {
 									$agent_code 	= $row['25'];
 									$address 		= $row['4'];
 									$name 			= NULL;
 									$city 			= $row['5'];
 									$pincode 		= $row['6'];
-								} elseif ($fi_type == 'RV') {
+								} elseif ($fi_type == 'BV') {
 									$agent_code 	= $row['24'];
 									$address 		= $row['7'];
 									$name 			= $row['8'];
@@ -97,13 +97,13 @@ class Upload_case_controller extends CI_Controller
 						if (count($fi_to_be_conducted_array) != 0) {
 							foreach ($fi_to_be_conducted_array as $fi_type) {
 								$fi_type = trim($fi_type);
-								if ($fi_type == 'BV') {
+								if ($fi_type == 'RV') {
 									$agent_code 	= $row['25'];
 									$address 		= $row['4'];
 									$name 			= NULL;
 									$city 			= $row['5'];
 									$pincode 		= $row['6'];
-								} elseif ($fi_type == 'RV') {
+								} elseif ($fi_type == 'BV') {
 									$agent_code 	= $row['24'];
 									$address 		= $row['7'];
 									$name 			= $row['8'];
@@ -116,28 +116,31 @@ class Upload_case_controller extends CI_Controller
 								$data = array(
 									'reference_no' 			=> $row['0'],
 									'bank'					=> $bank,
-									'customer_name' 		=> $row['1'],
+									'name' 					=> $row['1'],
 									'fi_type' 				=> $fi_type,
 									'product' 				=> $row['3'],
 									'address' 				=> $address,
 									'business_name' 		=> $name,
 									'business_add' 			=> $city,
 									'residence_add'			=> $pincode,
-									'permanent_address' 	=> $row['11'],
+									// 'permanent_address' 	=> $row['11'],
 									'fi_date' 				=> $row['12'],
 									'fi_time' 				=> $row['13'],
 									'fi_flag' 				=> $row['14'],
 									'dob' 					=> $row['15'],
-									'designation' 			=> $row['16'],
-									'loan_amount' 			=> $row['17'],
-									'fi_intiation_comments' => $row['18'],
-									'asset_make' 			=> $row['19'],
-									'asset_model' 			=> $row['20'],
-									'station' 				=> $row['21'],
+									// 'designation' 			=> $row['16'],
+									'amount' 			=> $row['17'],
+									// 'fi_intiation_comments' => $row['18'],
+									// 'asset_make' 			=> $row['19'],
+									// 'asset_model' 			=> $row['20'],
+									// 'station' 				=> $row['21'],
 									'tat' 					=> $row['22'],
 									'remarks' 				=> $row['23'],
-									'agent_code' 					=> $agent_code,
+									'code' 					=> $agent_code,
 								);
+								// echo "<pre>";
+								// print_r($data);
+								// die;
 								$this->db->insert('mini_case', $data);;
 							}
 						}
