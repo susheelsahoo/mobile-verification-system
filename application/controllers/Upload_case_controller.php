@@ -27,7 +27,9 @@ class Upload_case_controller extends CI_Controller
 				$upload_type 	= $this->input->post('upload_type');
 				$bank 			= $this->input->post('bank');
 				$count_Rows = 0;
-
+				$data['created_at'] = date('Y-m-d H:i:s');
+				// print_r($data);
+				// die;
 				if ($upload_type == 'create_case') {
 					foreach ($sheet as $key => $row) {
 
@@ -82,6 +84,9 @@ class Upload_case_controller extends CI_Controller
 									'remarks' 				=> $row['23'],
 									'code' 					=> $agent_code,
 								);
+								// echo "<pre>";
+								// print_r($data);
+								// die;
 								$this->db->insert('upload_file', $data);;
 							}
 						}
