@@ -44,6 +44,7 @@ class View_mini_case_controller extends CI_Controller
             foreach ($fetch_mini_case as $row) {
                 $sub_array = array();
                 $buttons = '';
+                
                 $buttons .= '<button type="button" title="View Case" name="view" id="' . $row->id . '" class="btn btn-primary btn-sm view_quick_case"><i class="fa fa-eye" ></i></button>';
 
                 $buttons .= '<button type="button" title="RV Remarks" name="view" id="' . $row->id . '" class="btn btn-warning btn-sm edit_rv"><i class="fa fa-pencil" ></i></button>';
@@ -53,13 +54,14 @@ class View_mini_case_controller extends CI_Controller
                 // $sub_array[] = $i;
                 $sub_array[] = $row->id;
                 $sub_array[] = $row->bank;
+                $sub_array[] = $row->name;
                 $sub_array[] = $row->fi_type;
                 $sub_array[] = $row->code;
                 $sub_array[] = $row->reference_no;
-                $sub_array[] = $row->business_name;
+                // $sub_array[] = $row->business_name;
                 $sub_array[] = $row->business_add;
-                // $sub_array[] = $row->residence_add;
-                $sub_array[] = $row->remarks;
+                $sub_array[] = $row->status;
+                // $sub_array[] = $row->remarks;
                 // $i++;
                 $sub_array[] = $buttons;
                 $data[] = $sub_array;

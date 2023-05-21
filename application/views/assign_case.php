@@ -291,8 +291,7 @@ $("#email").val(data.email);
                     }
                 });
             });
-
-            $(document).on('click', '.bv_view_details', function() {
+   $(document).on('click', '.bv_view_details', function() {
                 var user_id = $(this).attr("id");
                 $.ajax({
                     url: "<?php echo base_url(); ?>Assign_case_controller/fetch_single_bv_data",
@@ -403,7 +402,7 @@ $("#email").val(data.email);
             // });
 
              // update the form data if we change any
-             $('#update_form_case').submit(function (e) {
+         $('#update_form_case').submit(function (e) {
 //                alert("click on update button");
                     e.preventDefault();
                     var me = $(this);
