@@ -25,14 +25,16 @@ class Upload_case_controller extends CI_Controller
 				$spreadsheet = $reader->load($inputFileName);
 				$sheet 			= $spreadsheet->getSheet(0)->toArray();
 				$upload_type 	= $this->input->post('upload_type');
-				$bank 			= $this->input->post('first_name');
+				$bank 			= $this->input->post('bank');
 				$count_Rows = 0;
 
 				if ($upload_type == 'create_case') {
 					foreach ($sheet as $key => $row) {
+
 						if ($key == 0) {
 							continue;
 						}
+
 						$fi_to_be_conducted 	= $row['2'];
 						$fi_to_be_conducted_array = explode(",", $fi_to_be_conducted);
 
@@ -86,9 +88,11 @@ class Upload_case_controller extends CI_Controller
 					}
 				} else {
 					foreach ($sheet as $key => $row) {
+
 						if ($key == 0) {
 							continue;
 						}
+
 						$fi_to_be_conducted 	= $row['2'];
 						$fi_to_be_conducted_array = explode(",", $fi_to_be_conducted);
 
@@ -112,44 +116,45 @@ class Upload_case_controller extends CI_Controller
 								}
 								$data = [];
 								$data = array(
-									'reference_no' 			=> $row['0'],
-									'bank'					=> $bank,
-									'customer_name' 		=> $row['1'],
-									'fi_type' 				=> $fi_type,
-									'product' 				=> $row['3'],
-									'address' 				=> $address,
-									'business_name' 		=> $name,
-									'business_add' 			=> $city,
-									'residence_add'			=> $pincode,
-									'permanent_address' 	=> $row['11'],
-									'fi_date' 				=> $row['12'],
-									'fi_time' 				=> $row['13'],
-									'fi_flag' 				=> $row['14'],
-									'dob' 					=> $row['15'],
-									'designation' 			=> $row['16'],
-									'loan_amount' 			=> $row['17'],
-									'fi_intiation_comments' => $row['18'],
-									'asset_make' 			=> $row['19'],
-									'asset_model' 			=> $row['20'],
-									'station' 				=> $row['21'],
-									'tat' 					=> $row['22'],
-									'remarks' 				=> $row['23'],
-									'agent_code' 					=> $agent_code,
+									'reference_no' 		=> $row['0'],
+									'bank'				=> $bank,
+									'name' 				=> $row['1'],
+									'fi_type' 			=> $fi_type,
+									'product' 			=> $row['3'],
+									'address' 			=> $address,
+									'business_name' 	=> $name,
+									'city' 				=> $city,
+									'pin_code' 			=> $pincode,
+									// 'permanent_address' 	=> $row['11'],
+									// 'fi_date' 		=> $row['12'],
+									// 'fi_time' 		=> $row['13'],
+									// 'fi_flag' 		=> $row['14'],
+									// 'dob' 			=> $row['15'],
+									// 'designation' 	=> $row['16'],
+									'amount' 			=> $row['17'],
+									// 'fi_intiation_comments' 	=> $row['18'],
+									// 'asset_make' 			=> $row['19'],
+									// 'asset_model' 			=> $row['20'],
+									'station' 					=> $row['21'],
+									'tat' 						=> $row['22'],
+									'remarks' 					=> $row['23'],
+									'code' 						=> $agent_code,
 								);
-								$this->db->insert('mini_case', $data);;
+
+								$this->db->insert('mini_case', $data);
 							}
 						}
 					}
 				}
 
 				// echo 'alert("Uploaded successfully!");';
-				$this->session->set_flashdata('success', 'Excel Data Imported Successfully');
-				redirect(base_url("/Create_cse/create_c"));
+				$response = array('type' => 'success', 'massege' => 'Excel Data Imported Successfully');
+				$this->session->set_flashdata('res_data', $response);
 			} else {
-				echo 'alert(" errorFile is not uploaded");';
-				// $this->session->set_flashdata('error','File is not uploaded');
-				// redirect(base_url());
+				$response = array('type' => 'error', 'massege' => 'File is not uploaded');
+				$this->session->set_flashdata('res_data', $response);
 			}
+			redirect(base_url("/Create_cse/create_c"));
 		} else {
 			$this->load->view('login_page');
 		}
