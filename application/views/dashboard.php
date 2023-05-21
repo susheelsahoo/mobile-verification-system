@@ -32,7 +32,7 @@
          
             columnDefs: [{
                     "defaultContent": "-",
-                    "targets": [1, 7],
+                    "targets": [1, 5],
                     "orderable": false
                     
                 }],
@@ -162,8 +162,8 @@
                         <th width="10%">Out of TAT</th>
                         <th width="10%">Positive resolved</th>
                         <th width="10%">Negative resolved</th>
-                        <th width="10%">Postive Verified</th>
-                        <th width="10%">Negative Verified</th>
+                        <!--<th width="10%">Postive Verified</th>-->
+                        <!--<th width="10%">Negative Verified</th>-->
                     </tr>
                 </thead>
                 <tbody></tbody>

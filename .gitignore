@@ -19,5 +19,5 @@ application/logs/*
 /vendor/
 application/config/config.php
 application/config/database.php
-assets/uploads/imports/*
-*.bak
+assets/uploads/*
+.bak

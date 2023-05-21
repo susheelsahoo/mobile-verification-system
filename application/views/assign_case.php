@@ -919,14 +919,20 @@
                             <td><?= $rows->updated_at; ?></td>
                             <td><?= $rows->status; ?></td>
                             <td>
+
                                 <button type="button" name="view" id="<?= $rows->uid; ?>" title="View case" class="btn btn-success btn-sm view_assigned_case"><i class="fa fa-eye"></i></button>
-                                <!-- <button type="button" name="view" id="<?= $rows->uid; ?>" title="View App end data" class="btn btn-info btn-sm view_app_end_assigned_case"><i class="fa fa-book"></i></button> -->
                                 <button type="button" name="edit" id="<?= $rows->uid; ?>" title="Edit case" class="btn btn-info btn-sm edit_assigned_case"><i class="fa fa-pencil"></i></button>
                                 <button type="button" name="reassign" id="<?= $rows->uid; ?>" title="Assign case" class="btn btn-primary btn-sm reassigned_case"><i class="fa fa-users"></i></button>
-                                <button type="button" name="view" id="<?= $rows->uid; ?>" title="RV View data" class="btn btn-warning btn-sm fi_type_view_data"><i class="fa fa-users"></i></button>
-                                <button type="button" name="view" id="<?= $rows->uid; ?>" title="BV View Data" class="btn btn-info btn-sm bv_view_details"><i class="fa fa-users"></i></button>
-                                <button type="button" name="rv_edit" id="<?= $rows->uid; ?>" title="RV Edit" class="btn btn-info btn-sm rv_edit_details"><i class="fa fa-edit"></i></button>
-                                <button type="button" name="bv_edit" id="<?= $rows->uid; ?>" title="BV Edit" class="btn btn-warning btn-sm bv_edit_details"><i class="fa fa-pencil"></i></button>
+                                <?php
+
+                                if ($rows->fi_to_be_conducted == 'BV') { ?>
+                                    <button type="button" name="view" id="<?= $rows->uid; ?>" title="BV View Data" class="btn btn-info btn-sm bv_view_details"><i class="fa fa-users"></i></button>
+                                    <button type="button" name="bv_edit" id="<?= $rows->uid; ?>" title="BV Edit" class="btn btn-warning btn-sm bv_edit_details"><i class="fa fa-pencil"></i></button>
+                                <?php } else { ?>
+                                    <button type="button" name="view" id="<?= $rows->uid; ?>" title="RV View data" class="btn btn-warning btn-sm fi_type_view_data"><i class="fa fa-users"></i></button>
+                                    <button type="button" name="rv_edit" id="<?= $rows->uid; ?>" title="RV Edit" class="btn btn-info btn-sm rv_edit_details"><i class="fa fa-edit"></i></button>
+                                <?php  } ?>
+
 
                             </td>
                         </tr>
