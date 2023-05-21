@@ -345,7 +345,7 @@
                         $user = $this->session->userdata('user');
                         extract($user);
                         ?>
-                        <h3><?php echo $username; ?> <b><a id="lblLogOut" href="<?php echo base_url(); ?>user/logout">LogOuttttt</a></b></h3>
+                        <h3><?php echo $username; ?> <b><a id="lblLogOut" href="<?php echo base_url(); ?>user/logout">LogOut</a></b></h3>
                     </div>
                 </div>
             </div>
