@@ -143,7 +143,7 @@ class View_mini_case_controller extends CI_Controller
 
                 if (!empty($row->bv_image1)) {
                     $replace_space = str_replace(' ', '+', $temp_image);
-                    $output['bv_image1'] = ' <img class="bv_image1" src="' . $replace_space . '" height="150" width="150">';
+                    $output['bv_image1'] = '<img class="bv_image1" src="' . $replace_space . '" height="150" width="150">';
                 } else {
                     $output['bv_image1'] = '<input type="hidden" name="hidden_user_image" value="" />';
                 }
@@ -254,64 +254,62 @@ class View_mini_case_controller extends CI_Controller
 
                 if (!empty($row->rv_image1)) {
                     $replace_space = str_replace(' ', '+', $temp_image);
-                    $output['rv_image1'] = $replace_space;
+                    $output['rv_image1'] = '<img class="bv_image1" src="' . $replace_space . '" height="150" width="150">';
                 } else {
                     $output['rv_image1'] = '<input type="hidden" name="hidden_user_image" value="" />';
                 }
 
                 if (!empty($row->rv_image2)) {
                     $replace_space2 = str_replace(' ', '+', $temp_image2);
-                    $output['rv_image2'] = $replace_space2;
+                    $output['rv_image2'] = '<img class="bv_image1" src="' . $replace_space2 . '" height="150" width="150">';
                 } else {
                     $output['rv_image2'] = '<input type="hidden" name="hidden_user_image" value="" />';
                 }
-
-
                 if (!empty($row->rv_image3)) {
                     $replace_space3 = str_replace(' ', '+', $temp_image3);
-                    $output['rv_image3'] = $replace_space3;
+                    $output['rv_image3'] = '<img class="bv_image1" src="' . $replace_space3 . '" height="150" width="150">';
                 } else {
                     $output['rv_image3'] = '<input type="hidden" name="hidden_user_image" value="" />';
                 }
 
                 if (!empty($row->rv_image4)) {
                     $replace_space4 = str_replace(' ', '+', $temp_image4);
-                    $output['rv_image4'] = $replace_space4;
+                    $output['rv_image4'] = '<img class="bv_image1" src="' . $replace_space4 . '" height="150" width="150">';
                 } else {
                     $output['rv_image4'] = '<input type="hidden" name="hidden_user_image" value="" />';
                 }
 
                 if (!empty($row->rv_image5)) {
                     $replace_space5 = str_replace(' ', '+', $temp_image5);
-                    $output['rv_image5'] = $replace_space5;
+                    $output['rv_image5'] = '<img class="bv_image1" src="' . $replace_space5 . '" height="150" width="150">';
                 } else {
                     $output['rv_image5'] = '<input type="hidden" name="hidden_user_image" value="" />';
                 }
 
                 if (!empty($row->rv_image6)) {
                     $replace_space6 = str_replace(' ', '+', $temp_image6);
-                    $output['rv_image6'] = $replace_space6;
+                    $output['rv_image6'] = '<img class="bv_image1" src="' . $replace_space6 . '" height="150" width="150">';
                 } else {
                     $output['rv_image6'] = '<input type="hidden" name="hidden_user_image" value="" />';
                 }
 
                 if (!empty($row->rv_image7)) {
                     $replace_space7 = str_replace(' ', '+', $temp_image7);
-                    $output['rv_image7'] = $replace_space7;
+                    $output['rv_image7'] = '<img class="bv_image1" src="' . $replace_space7 . '" height="150" width="150">';
                 } else {
                     $output['rv_image7'] = '<input type="hidden" name="hidden_user_image" value="" />';
                 }
 
                 if (!empty($row->rv_image8)) {
                     $replace_space8 = str_replace(' ', '+', $temp_image8);
-                    $output['rv_image8'] = $replace_space8;
+                    $output['rv_image8'] = '<img class="bv_image1" src="' . $replace_space8 . '" height="150" width="150">';
                 } else {
                     $output['rv_image8'] = '<input type="hidden" name="hidden_user_image" value="" />';
                 }
 
                 if (!empty($row->rv_image9)) {
                     $replace_space9 = str_replace(' ', '+', $temp_image9);
-                    $output['rv_image9'] = $replace_space9;
+                    $output['rv_image9'] = '<img class="bv_image1" src="' . $replace_space9 . '" height="150" width="150">';
                 } else {
                     $output['rv_image9'] = '<input type="hidden" name="hidden_user_image" value="" />';
                 }
