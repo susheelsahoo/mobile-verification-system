@@ -307,6 +307,7 @@
                         $('.s_business_add').html("<b>Business Address:</b> " + data.business_add);
                         // $('.s_residence_add').html("<b>Residence Address:</b> " + data.residence_add);
                         $('.s_mobile').html("<b>Mobile:</b> " + data.mobile);
+<<<<<<< HEAD
                         $('.rv_lat').html("<b>Latitude:</b> " + data.rv_lat);
                         $('.rv_long').html("<b>Longittude:</b> " + data.rv_long);
                         $('.rv_pincode').html("<b>Pincode:</b> " + data.rv_pincode);
@@ -321,6 +322,22 @@
                         $('.mini_case_img').append(data.rv_image7);
                         $('.mini_case_img').append(data.rv_image8);
                         $('.mini_case_img').append(data.rv_image9);
+=======
+                        $('.bv_lat').html("<b>Latitude:</b> " + data.bv_lat);
+                        $('.bv_long').html("<b>Longitude:</b> " + data.bv_long);
+                        $('.bv_pincode').html("<b>Pincode:</b> " + data.bv_pincode);
+                        $('.bv_location_add').html("<b>location:</b> " + data.bv_location_add);
+                        $('.bv_remarks').html("<b>Remarks:</b> " + data.bv_remarks);
+                        $('.bv_image1').attr("src", data.bv_image1);
+                        $('.bv_image2').attr("src", data.bv_image2);
+                        $('.bv_image3').attr("src", data.bv_image3);
+                        $('.bv_image4').attr("src", data.bv_image4);
+                        $('.bv_image5').attr("src", data.bv_image5);
+                        $('.bv_image6').attr("src", data.bv_image6);
+                        $('.bv_image7').attr("src", data.bv_image7);
+                        $('.bv_image8').attr("src", data.bv_image8);
+                        $('.bv_image9').attr("src", data.bv_image9);
+>>>>>>> d9656e25813ed2dfb84b9b43d926ac0cd1a4fbff
                         // $('.t_teacher_id').text(user_id);
                         // $('.uploaded_image').attr("src", data.photos);
 
@@ -330,8 +347,52 @@
         });
 
 
-                // update the form data if we change any
-                $('#update_rv_remarks').submit(function(e) {
+            //  $(document).on('click', '.view_rv_case', function() {
+            //         var user_id = $(this).attr("id");
+            //         $.ajax({
+            //             url: "<?php echo base_url(); ?>View_mini_case_controller/fetch_single_rv_mini_case",
+            //             method: "POST",
+            //             data: {
+            //                 user_id: user_id
+            //             },
+            //             dataType: "json",
+            //             success: function(data) {
+            //                 $('#mini_case_rv_view_model').modal('show');
+            //                 $('.s_bank').html("<b>Bank:</b> " + data.bank);
+            //                 $('.s_product').html("<b>Product:</b> " + data.product);
+            //                 $('.s_fi_conducted').html("<b>Fi to be Conducted:</b> " + data.fi_type);
+            //                 $('.s_reference_no').html("<b>Reference no.:</b> " + data.reference_no);
+            //                 $('.s_name').html("<b>Name:</b> " + data.name);
+            //                 $('.s_agent_code').html("<b>Agent code:</b> " + data.code);
+            //                 $('.s_address').html("<b>Address:</b> " + data.address);
+            //                 $('.s_business_name').html("<b>Business Name:</b> " + data.business_name);
+            //                 $('.s_business_add').html("<b>Business Address:</b> " + data.business_add);
+            //                 // $('.s_residence_add').html("<b>Residence Address:</b> " + data.residence_add);
+            //                 $('.s_mobile').html("<b>Mobile:</b> " + data.mobile);
+            //                 $('.rv_lat').html("<b>Latitude:</b> " + data.rv_lat);
+            //                 $('.rv_long').html("<b>Longitude:</b> " + data.rv_long);
+            //                 $('.rv_pincode').html("<b>Pincode:</b> " + data.rv_pincode);
+            //                 $('.rv_location_add').html("<b>location:</b> " + data.rv_location_add);
+            //                  $('.rv_city').html("<b>City:</b> " + data.city);
+            //                 $('.rv_remarks').html("<b>Remarks:</b> " + data.rv_remarks);
+            //                 $('.rv_image1').attr("src", data.rv_image1);
+            //                 $('.rv_image2').attr("src", data.rv_image2);
+            //                 $('.rv_image3').attr("src", data.rv_image3);
+            //                 $('.rv_image4').attr("src", data.rv_image4);
+            //                 $('.rv_image5').attr("src", data.rv_image5);
+            //                 $('.rv_image6').attr("src", data.rv_image6);
+            //                 $('.rv_image7').attr("src", data.rv_image7);
+            //                 $('.rv_image8').attr("src", data.rv_image8);
+            //                 $('.rv_image9').attr("src", data.rv_image9);
+            //                 // $('.t_teacher_id').text(user_id);
+            //                 // $('.uploaded_image').attr("src", data.photos);
+
+            //             }
+            //         });
+            //     });
+
+            // update the form data if we change any
+            $('#update_rv_remarks').submit(function(e) {
                 // alert("click on update button");
                 e.preventDefault();
                 var me = $(this);
@@ -412,6 +473,7 @@
                 });
             });
 
+<<<<<<< HEAD
             //   // end update form data 
             //   $(document).on('click', '.edit_rv', function() {
             //     var user_id = $(this).attr("id");
@@ -430,6 +492,44 @@
             //         }
             //     });
             // });
+=======
+            // end update form data 
+            $(document).on('click', '.edit_rv', function() {
+                var user_id = $(this).attr("id");
+                $.ajax({
+                    url: "<?php echo base_url(); ?>View_mini_case_controller/fetch_rv_remarks",
+                    method: "POST",
+                    data: {
+                        user_id: user_id
+                    },
+                    dataType: "json",
+                    success: function(data) {
+                        $('#user_rv_remarks_edit').modal('show');
+                        $('#u_rv_remarks').val(data.rv_remarks);
+                        $('#u_rv_id').val(user_id);
+                        $('#update_rv_remarks').val("edit");
+                    }
+                });
+            });
+
+            $(document).on('click', '.edit_bv', function() {
+                var user_id = $(this).attr("id");
+                $.ajax({
+                    url: "<?php echo base_url(); ?>View_mini_case_controller/fetch_rv_remarks",
+                    method: "POST",
+                    data: {
+                        user_id: user_id
+                    },
+                    dataType: "json",
+                    success: function(data) {
+                        $('#user_bv_remarks_edit').modal('show');
+                        $('#u_rv_remarks').val(data.rv_remarks);
+                        $('#u_rv_id').val(user_id);
+                        $('#update_rv_remarks').val("edit");
+                    }
+                });
+            });
+>>>>>>> d9656e25813ed2dfb84b9b43d926ac0cd1a4fbff
 
 
             $(document).on('click', '.view_rv_case', function() {
@@ -473,6 +573,135 @@
 
                     }
                 });
+            });
+        });
+
+
+        // update the form data if we change any
+        $('#update_rv_remarks').submit(function(e) {
+            // alert("click on update button");
+            e.preventDefault();
+            var me = $(this);
+            var user_id = $(this).attr("id");
+
+            // perform ajax
+            $.ajax({
+                url: me.attr('action'),
+                type: 'POST',
+                data: me.serialize(),
+                // data:new FormData(this),  
+                dataType: 'json',
+                success: function(response) {
+                    if (response.success == true) {
+                        alert("Remarks Updated Successfully!");
+                        location.reload();
+                        $('#user_rv_remarks_edit').modal('hide');
+                        Swal.fire("Good job!", "You clicked the button!", "success");
+                        // swal.fire({
+                        //     title: "updated",
+                        //     text: response.message,
+                        //     icon: 'success',
+                        //     type: "success",
+                        //     timer: 3000
+                        // });
+                        console.log(response);
+                        alert("Remarks Updated Successfully!");
+                        $('.form-group').removeClass('has-error')
+                            .removeClass('has-success');
+                        $('.text-danger').remove();
+                        // $('#fetch_user_data').DataTable().ajax.reload();
+                        // reset the form
+                        me[0].reset();
+
+                    } else if (response.error == true) {
+                        $('#user_rv_remarks_edit').modal('hide');
+                        Swal.fire("Good job!", "You clicked the button!", "error");
+                        // swal.fire({
+                        //     title: "Try Again ! ",
+                        //     text: response.message,
+                        //     icon: 'error',
+                        //     type: "error",
+                        //     timer: 3000
+                        // });
+                        $('#user_rv_remarks_edit').modal('hide');
+                        //console.log(response);
+                        $('.form-group').removeClass('has-error')
+                            .removeClass('has-success');
+                        $('.text-danger').remove();
+                        // $('#teacher_add_model').modal('hide');
+                        // $('#fetch_user_data').DataTable().ajax.reload();
+                        // reset the form
+                        me[0].reset();
+                    } else {
+                        $.each(response.messages, function(key, value) {
+                            var element = $('#u_' + key);
+
+                            element.closest('div.form-group')
+                                .removeClass('has-error')
+                                .addClass(value.length > 0 ? 'has-error' : 'has-success')
+                                .find('.text-danger')
+                                .remove();
+                            element.after(value);
+                        });
+                    }
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    //                            swal.fire("Error deleting!", "Please try again later !!!", "error");
+                    $('#user_rv_remarks_edit').modal('hide');
+                    swal.fire({
+                        title: "Error saving...",
+                        text: "Please try again later !!!",
+                        icon: 'error',
+                        type: "error",
+                        timer: 3000
+                    });
+                }
+            });
+        });
+
+
+
+
+        $(document).on('click', '.view_rv_case', function() {
+            var user_id = $(this).attr("id");
+            $.ajax({
+                url: "<?php echo base_url(); ?>View_mini_case_controller/fetch_single_rv_mini_case",
+                method: "POST",
+                data: {
+                    user_id: user_id
+                },
+                dataType: "json",
+                success: function(data) {
+                    $('#mini_case_rv_view_model').modal('show');
+                    $('.s_bank').html("<b>Bank:</b> " + data.bank);
+                    $('.s_product').html("<b>Product:</b> " + data.product);
+                    $('.s_fi_conducted').html("<b>Fi to be Conducted:</b> " + data.fi_type);
+                    $('.s_reference_no').html("<b>Reference no.:</b> " + data.reference_no);
+                    $('.s_name').html("<b>Name:</b> " + data.name);
+                    $('.s_agent_code').html("<b>Agent code:</b> " + data.code);
+                    $('.s_address').html("<b>Address:</b> " + data.address);
+                    $('.s_business_name').html("<b>Business Name:</b> " + data.business_name);
+                    $('.s_business_add').html("<b>Business Address:</b> " + data.business_add);
+                    // $('.s_residence_add').html("<b>Residence Address:</b> " + data.residence_add);
+                    $('.s_mobile').html("<b>Mobile:</b> " + data.mobile);
+                    $('.rv_lat').html("<b>Latitude:</b> " + data.rv_lat);
+                    $('.rv_long').html("<b>Longittude:</b> " + data.rv_long);
+                    $('.rv_pincode').html("<b>Pincode:</b> " + data.rv_pincode);
+                    $('.rv_location_add').html("<b>location:</b> " + data.rv_location_add);
+                    $('.rv_remarks').html("<b>Remarks:</b> " + data.rv_remarks);
+                    $('.mini_case_img').append(data.rv_image1);
+                    $('.mini_case_img').append(data.rv_image2);
+                    $('.mini_case_img').append(data.rv_image3);
+                    $('.mini_case_img').append(data.rv_image4);
+                    $('.mini_case_img').append(data.rv_image5);
+                    $('.mini_case_img').append(data.rv_image6);
+                    $('.mini_case_img').append(data.rv_image7);
+                    $('.mini_case_img').append(data.rv_image8);
+                    $('.mini_case_img').append(data.rv_image9);
+                    // $('.t_teacher_id').text(user_id);
+                    // $('.uploaded_image').attr("src", data.photos);
+
+                }
             });
         });
     </script>
@@ -734,6 +963,7 @@
 
 
 
+<<<<<<< HEAD
     <!--<div class="modal fade" id="mini_case_view_model" tabindex="-1" role="dialog" aria-hidden="true">-->
     <!--    <div class="modal-dialog" role="document">-->
     <!--        <div class="modal-content">-->
@@ -866,6 +1096,140 @@
     <!--        </div>-->
     <!--    </div>-->
     <!--</div>-->
+=======
+    <div class="modal fade" id="mini_case_view_model" tabindex="-1" role="dialog" aria-hidden="tru
+        <div class=" modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">View Quick case</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="row pt-6 ">
+                            <div class="col-sm-6">
+                                <h4 class="s_bank">
+                                </h4>
+                            </div>
+                            <div class="col-sm-6">
+                                <h4 class="s_product">
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="row pt-6 ">
+                            <div class="col-sm-6">
+                                <h4 class="s_fi_conducted">
+                                </h4>
+                            </div>
+                            <div class="col-sm-6">
+                                <h4 class="s_reference_no">
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="row pt-6 ">
+                            <div class="col-sm-6">
+                                <h4 class="s_name">
+                                </h4>
+                            </div>
+                            <div class="col-sm-6">
+                                <h4 class="s_agent_code">
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="row pt-6 ">
+                            <div class="col-sm-6">
+                                <h4 class="s_address">
+                                </h4>
+                            </div>
+                            <div class="col-sm-6">
+                                <h4 class="s_business_name">
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="row pt-6 ">
+                            <div class="col-sm-6">
+                                <h4 class="bv_lat">
+                                </h4>
+                            </div>
+                            <div class="col-sm-6">
+                                <h4 class="bv_long">
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="row pt-6 ">
+                            <div class="col-sm-6">
+                                <h4 class="bv_pincode">
+                                </h4>
+                            </div>
+                            <div class="col-sm-6">
+                                <h4 class="bv_location_add">
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="row pt-6 ">
+                            <div class="col-sm-6">
+                                <h4 class="bv_remarks">
+                                </h4>
+                            </div>
+                            <div class="col-sm-6">
+                                <h4 class="s_residence_add">
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="mini_case_img">
+
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+    </div>
+>>>>>>> d9656e25813ed2dfb84b9b43d926ac0cd1a4fbff
 
 
 
@@ -979,10 +1343,17 @@
                                     <h4 class="rv_remarks">
                                     </h4>
                                 </div>
+<<<<<<< HEAD
                                  <div class="col-sm-6">
                                                     <h4 class="rv_city">
                                                     </h4>
                                                 </div> 
+=======
+                                <div class="col-sm-6">
+                                    <h4 class="rv_city">
+                                    </h4>
+                                </div>
+>>>>>>> d9656e25813ed2dfb84b9b43d926ac0cd1a4fbff
                             </div>
                         </div>
                     </div>
@@ -1024,10 +1395,44 @@
                             <textarea type="text" class="form-control" id="u_rv_remarks" placeholder="Enter Rv Remarks" name="rv_remarks"></textarea>
                         </div>
                     </div>
+<<<<<<< HEAD
             
                 </div>
                 <div class="modal-footer">
                     <input type="submit" name="update_rv_remarks" id="update_rvr_data" class="btn btn-primary" value="Edit">
+=======
+
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" name="update_rv_remarks" id="update_rvr_data" class="btn btn-primary" value="Edit">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <?php echo form_close(); ?>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="user_bv_remarks_edit" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update BV Remarks</h5>
+                </div>
+                <?php echo form_open("View_mini_case_controller/update_bv_remarks_validation", array("id" => "update_rv_remarks", "class" => "form-horizontal")) ?>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <input type="hidden" class="form-control" id="u_rv_id" name="rv_id">
+
+                        <div class="form-group col-md-12">
+                            <label for="rv_remarks" class="h5">BV Remarks</label>
+                            <textarea type="text" class="form-control" id="u_rv_remarks" placeholder="Enter Rv Remarks" name="rv_remarks"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" name="update_rv_remarks" id="update_rvr_data" class="btn btn-primary" value="Edit">
+>>>>>>> d9656e25813ed2dfb84b9b43d926ac0cd1a4fbff
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
