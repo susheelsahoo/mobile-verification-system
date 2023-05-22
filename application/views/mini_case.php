@@ -261,6 +261,7 @@
                         // me[0].reset();
                         if (response.success == true) {
                             alert("Quick Case Generated Successfully!");
+                            location.reload();
                             $('.form-group').removeClass('has-error')
                                 .removeClass('has-success');
                             $('.text-danger').remove();

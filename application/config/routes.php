@@ -68,7 +68,12 @@ $route['insertCasesDetails'] = 'API/Api/insertCasesDetails';
 
 $route['insertrvMainCases'] = 'API/Api/insertrvMainCases';
 $route['insertBvMainCases'] = 'API/Api/insertBvMainCases';
-
+$route['miniCaseBankType'] = 'API/Api/miniCaseBankType';
 $route['mainBankCaseType'] = 'API/Api/mainBankCaseType';
 
-// $route['edit-data'] = 'Assign_case_controller/editData';
+// insert quick case api
+$route['insertrvQuickCases'] = 'API/Api/insertrvQuickCases';
+$route['insertBvQuickCases'] = 'API/Api/insertBvQuickCases';
+
+
+

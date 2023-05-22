@@ -241,7 +241,7 @@
 
       <div class="card">
         <div class="title">
-        <!-- <a href="<?php echo base_url(); ?>Upload_case_controller/upload_case_form"> -->
+        <a href="<?php echo base_url(); ?>Reassign_report_controller/reassign_page">
           <h3><b>Reassign Case</b></h3>
         </div>
         <div class="content">
