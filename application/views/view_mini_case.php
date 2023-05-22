@@ -186,22 +186,22 @@
             });
 
             $(document).on('click', '.edit_bv', function() {
-            var user_id = $(this).attr("id");
-            $.ajax({
-                url: "<?php echo base_url(); ?>View_mini_case_controller/fetch_remarks",
-                method: "POST",
-                data: {
-                    user_id: user_id
-                },
-                dataType: "json",
-                success: function(data) {
-                    console.log(data)
-                    $('#user_bv_remarks_edit').modal('show');
-                    $('.minicase_remarks').val(data.remarks);
-                    $('.minicase_id').val(user_id);                   
-                }
+                var user_id = $(this).attr("id");
+                $.ajax({
+                    url: "<?php echo base_url(); ?>View_mini_case_controller/fetch_remarks",
+                    method: "POST",
+                    data: {
+                        user_id: user_id
+                    },
+                    dataType: "json",
+                    success: function(data) {
+                        console.log(data)
+                        $('#user_bv_remarks_edit').modal('show');
+                        $('.minicase_remarks').val(data.remarks);
+                        $('.minicase_id').val(user_id);
+                    }
+                });
             });
-        });
 
             $(document).on('click', '.edit_rv', function() {
                 var user_id = $(this).attr("id");
@@ -220,18 +220,12 @@
                 });
             });
             // update the form data if we change any
-           
+
             // end update form data 
-           
+
 
 
         });
-
-
-
-      
-
-      
     </script>
 </head>
 
@@ -470,8 +464,8 @@
         <div class="table-responsive text-dark ">
             <br>
             <?php
-  include('components/flash.php');
-  ?>
+            include('components/flash.php');
+            ?>
 
             <table id="fetch_mini_case_data" class="table table-bordered table-striped">
                 <thead>
@@ -621,7 +615,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                   
+
                 </div>
             </div>
         </div>
@@ -784,7 +778,7 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
                 <?php echo form_close(); ?>
-            </div>            
+            </div>
         </div>
     </div>
 
@@ -812,6 +806,6 @@
                 </div>
                 <?php echo form_close(); ?>
             </div>
-            
+
         </div>
     </div>
