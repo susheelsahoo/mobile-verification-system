@@ -7,6 +7,11 @@ if ($this->session->flashdata('res_data')) {
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <?php echo $res_data['massege']; ?>
     </div>
+<script>
+// $("#myElem").show();
+    setTimeout(function() { $(".alert-dismissible").hide(); }, 5000);
+
+</script>
 
 <?php
 }
