@@ -184,94 +184,29 @@
                     }
                 });
             });
-            // update the form data if we change any
-            $('#update_rv_remarks_form').submit(function(e) {
-                // alert("click on update button");
-                e.preventDefault();
-                var me = $(this);
-                var user_id = $(this).attr("id");
 
-                // perform ajax
-                $.ajax({
-                    url: me.attr('action'),
-                    type: 'POST',
-                    data: me.serialize(),
-                    // data:new FormData(this),  
-                    dataType: 'json',
-                    success: function(response) {
-                        if (response.success == true) {
-                            alert("Remarks Updated Successfully!");
-                            location.reload();
-                            $('#user_rv_remarks_edit').modal('hide');
-                            Swal.fire("Good job!", "You clicked the button!", "success");
-                            // swal.fire({
-                            //     title: "updated",
-                            //     text: response.message,
-                            //     icon: 'success',
-                            //     type: "success",
-                            //     timer: 3000
-                            // });
-                            console.log(response);
-                            alert("Remarks Updated Successfully!");
-                            $('.form-group').removeClass('has-error')
-                                .removeClass('has-success');
-                            $('.text-danger').remove();
-                            // $('#fetch_user_data').DataTable().ajax.reload();
-                            // reset the form
-                            me[0].reset();
-
-                        } else if (response.error == true) {
-                            $('#user_rv_remarks_edit').modal('hide');
-                            Swal.fire("Good job!", "You clicked the button!", "error");
-                            // swal.fire({
-                            //     title: "Try Again ! ",
-                            //     text: response.message,
-                            //     icon: 'error',
-                            //     type: "error",
-                            //     timer: 3000
-                            // });
-                            $('#user_rv_remarks_edit').modal('hide');
-                            //console.log(response);
-                            $('.form-group').removeClass('has-error')
-                                .removeClass('has-success');
-                            $('.text-danger').remove();
-                            // $('#teacher_add_model').modal('hide');
-                            // $('#fetch_user_data').DataTable().ajax.reload();
-                            // reset the form
-                            me[0].reset();
-                        } else {
-                            $.each(response.messages, function(key, value) {
-                                var element = $('#u_' + key);
-
-                                element.closest('div.form-group')
-                                    .removeClass('has-error')
-                                    .addClass(value.length > 0 ? 'has-error' : 'has-success')
-                                    .find('.text-danger')
-                                    .remove();
-                                element.after(value);
-                            });
-                        }
-                    },
-                    error: function(xhr, ajaxOptions, thrownError) {
-                        //                            swal.fire("Error deleting!", "Please try again later !!!", "error");
-                        $('#user_rv_remarks_edit').modal('hide');
-                        swal.fire({
-                            title: "Error saving...",
-                            text: "Please try again later !!!",
-                            icon: 'error',
-                            type: "error",
-                            timer: 3000
-                        });
-                    }
-                });
+            $(document).on('click', '.edit_bv', function() {
+            var user_id = $(this).attr("id");
+            $.ajax({
+                url: "<?php echo base_url(); ?>View_mini_case_controller/fetch_remarks",
+                method: "POST",
+                data: {
+                    user_id: user_id
+                },
+                dataType: "json",
+                success: function(data) {
+                    console.log(data)
+                    $('#user_bv_remarks_edit').modal('show');
+                    $('.minicase_remarks').val(data.remarks);
+                    $('.minicase_id').val(user_id);                   
+                }
             });
+        });
 
-            // end update form data 
-            
             $(document).on('click', '.edit_rv', function() {
                 var user_id = $(this).attr("id");
                 $.ajax({
-                    url: "<?php echo base_url(); ?>View_mini_case_controller/fetch_rv_remarks",
+                    url: "<?php echo base_url(); ?>View_mini_case_controller/fetch_remarks",
                     method: "POST",
                     data: {
                         user_id: user_id
@@ -279,320 +214,24 @@
                     dataType: "json",
                     success: function(data) {
                         $('#user_rv_remarks_edit').modal('show');
-                        $('#u_rv_remarks').val(data.rv_remarks);
-                        $('#u_rv_id').val(user_id);
-                        $('#update_rv_remarks').val("edit");
+                        $('.minicase_remarks').val(data.remarks);
+                        $('.minicase_id').val(user_id);
                     }
                 });
             });
-
-    // update the form data if we change any
-            $('#update_bv_remarks_form').submit(function(e) {
-                // alert("click on update button");
-                e.preventDefault();
-                var me = $(this);
-                var user_id = $(this).attr("id");
-
-                // perform ajax
-                $.ajax({
-                    url: me.attr('action'),
-                    type: 'POST',
-                    data: me.serialize(),
-                    // data:new FormData(this),  
-                    dataType: 'json',
-                    success: function(response) {
-                        if (response.success == true) {
-                            alert("Remarks Updated Successfully!");
-                            location.reload();
-                            $('#user_bv_remarks_edit').modal('hide');
-                            Swal.fire("Good job!", "You clicked the button!", "success");
-                            // swal.fire({
-                            //     title: "updated",
-                            //     text: response.message,
-                            //     icon: 'success',
-                            //     type: "success",
-                            //     timer: 3000
-                            // });
-                            console.log(response);
-                            alert("Remarks Updated Successfully!");
-                            $('.form-group').removeClass('has-error')
-                                .removeClass('has-success');
-                            $('.text-danger').remove();
-                            // $('#fetch_user_data').DataTable().ajax.reload();
-                            // reset the form
-                            me[0].reset();
-
-                        } else if (response.error == true) {
-                            $('#user_bv_remarks_edit').modal('hide');
-                            Swal.fire("Good job!", "You clicked the button!", "error");
-                            // swal.fire({
-                            //     title: "Try Again ! ",
-                            //     text: response.message,
-                            //     icon: 'error',
-                            //     type: "error",
-                            //     timer: 3000
-                            // });
-                            $('#user_bv_remarks_edit').modal('hide');
-                            //console.log(response);
-                            $('.form-group').removeClass('has-error')
-                                .removeClass('has-success');
-                            $('.text-danger').remove();
-                            // $('#teacher_add_model').modal('hide');
-                            // $('#fetch_user_data').DataTable().ajax.reload();
-                            // reset the form
-                            me[0].reset();
-                        } else {
-                            $.each(response.messages, function(key, value) {
-                                var element = $('#u_' + key);
-
-                                element.closest('div.form-group')
-                                    .removeClass('has-error')
-                                    .addClass(value.length > 0 ? 'has-error' : 'has-success')
-                                    .find('.text-danger')
-                                    .remove();
-                                element.after(value);
-                            });
-                        }
-                    },
-                    error: function(xhr, ajaxOptions, thrownError) {
-                        //                            swal.fire("Error deleting!", "Please try again later !!!", "error");
-                        $('#user_bv_remarks_edit').modal('hide');
-                        swal.fire({
-                            title: "Error saving...",
-                            text: "Please try again later !!!",
-                            icon: 'error',
-                            type: "error",
-                            timer: 3000
-                        });
-                    }
-                });
-            });
-
+            // update the form data if we change any
+           
             // end update form data 
-            $(document).on('click', '.edit_bv', function() {
-                var user_id = $(this).attr("id");
-                $.ajax({
-                    url: "<?php echo base_url(); ?>View_mini_case_controller/fetch_bv_remarks",
-                    method: "POST",
-                    data: {
-                        user_id: user_id
-                    },
-                    dataType: "json",
-                    success: function(data) {
-                        $('#user_bv_remarks_edit').modal('show');
-                        $('#u_bv_remarks').val(data.rv_remarks);
-                        $('#u_bv_id').val(user_id);
-                        $('#update_bv_remarks').val("edit");
-                    }
-                });
-            });
-
+           
 
 
         });
 
 
 
-        // // update the form data if we change any
-        // $('#update_rv_remarks').submit(function(e) {
-        //     // alert("click on update button");
-        //     e.preventDefault();
-        //     var me = $(this);
-        //     var user_id = $(this).attr("id");
+      
 
-        //     // perform ajax
-        //     $.ajax({
-        //         url: me.attr('action'),
-        //         type: 'POST',
-        //         data: me.serialize(),
-        //         // data:new FormData(this),  
-        //         dataType: 'json',
-        //         success: function(response) {
-        //             if (response.success == true) {
-        //                 alert("Remarks Updated Successfully!");
-        //                 location.reload();
-        //                 $('#user_rv_remarks_edit').modal('hide');
-        //                 Swal.fire("Good job!", "You clicked the button!", "success");
-        //                 // swal.fire({
-        //                 //     title: "updated",
-        //                 //     text: response.message,
-        //                 //     icon: 'success',
-        //                 //     type: "success",
-        //                 //     timer: 3000
-        //                 // });
-        //                 console.log(response);
-        //                 alert("Remarks Updated Successfully!");
-        //                 $('.form-group').removeClass('has-error')
-        //                     .removeClass('has-success');
-        //                 $('.text-danger').remove();
-        //                 // $('#fetch_user_data').DataTable().ajax.reload();
-        //                 // reset the form
-        //                 me[0].reset();
-
-        //             } else if (response.error == true) {
-        //                 $('#user_rv_remarks_edit').modal('hide');
-        //                 Swal.fire("Good job!", "You clicked the button!", "error");
-        //                 // swal.fire({
-        //                 //     title: "Try Again ! ",
-        //                 //     text: response.message,
-        //                 //     icon: 'error',
-        //                 //     type: "error",
-        //                 //     timer: 3000
-        //                 // });
-        //                 $('#user_rv_remarks_edit').modal('hide');
-        //                 //console.log(response);
-        //                 $('.form-group').removeClass('has-error')
-        //                     .removeClass('has-success');
-        //                 $('.text-danger').remove();
-        //                 // $('#teacher_add_model').modal('hide');
-        //                 // $('#fetch_user_data').DataTable().ajax.reload();
-        //                 // reset the form
-        //                 me[0].reset();
-        //             } else {
-        //                 $.each(response.messages, function(key, value) {
-        //                     var element = $('#u_' + key);
-
-        //                     element.closest('div.form-group')
-        //                         .removeClass('has-error')
-        //                         .addClass(value.length > 0 ? 'has-error' : 'has-success')
-        //                         .find('.text-danger')
-        //                         .remove();
-        //                     element.after(value);
-        //                 });
-        //             }
-        //         },
-        //         error: function(xhr, ajaxOptions, thrownError) {
-        //             //                            swal.fire("Error deleting!", "Please try again later !!!", "error");
-        //             $('#user_rv_remarks_edit').modal('hide');
-        //             swal.fire({
-        //                 title: "Error saving...",
-        //                 text: "Please try again later !!!",
-        //                 icon: 'error',
-        //                 type: "error",
-        //                 timer: 3000
-        //             });
-        //         }
-        //     });
-        // });
-
-        // end update form data 
-    //   $(document).on('click', '.edit_rv', function() {
-        //     var user_id = $(this).attr("id");
-        //     $.ajax({
-        //         url: "<?php echo base_url(); ?>View_mini_case_controller/fetch_rv_remarks",
-        //         method: "POST",
-        //         data: {
-        //             user_id: user_id
-        //         },
-        //         dataType: "json",
-        //         success: function(data) {
-        //             $('#user_rv_remarks_edit').modal('show');
-        //             $('#u_rv_remarks').val(data.rv_remarks);
-        //             $('#u_rv_id').val(user_id);
-        //             $('#update_rv_remarks').val("edit");
-        //         }
-        //     });
-        // });
-
-        $(document).on('click', '.edit_bv', function() {
-            var user_id = $(this).attr("id");
-            $.ajax({
-                url: "<?php echo base_url(); ?>View_mini_case_controller/fetch_rv_remarks",
-                method: "POST",
-                data: {
-                    user_id: user_id
-                },
-                dataType: "json",
-                success: function(data) {
-                    $('#user_bv_remarks_edit').modal('show');
-                    $('#u_rv_remarks').val(data.rv_remarks);
-                    $('#u_rv_id').val(user_id);
-                    $('#update_rv_remarks').val("edit");
-                }
-            });
-        });
-
-        // update the form data if we change any
-        $('#update_rv_remarks').submit(function(e) {
-            // alert("click on update button");
-            e.preventDefault();
-            var me = $(this);
-            var user_id = $(this).attr("id");
-
-            // perform ajax
-            $.ajax({
-                url: me.attr('action'),
-                type: 'POST',
-                data: me.serialize(),
-                // data:new FormData(this),  
-                dataType: 'json',
-                success: function(response) {
-                    if (response.success == true) {
-                        alert("Remarks Updated Successfully!");
-                        location.reload();
-                        $('#user_rv_remarks_edit').modal('hide');
-                        Swal.fire("Good job!", "You clicked the button!", "success");
-                        // swal.fire({
-                        //     title: "updated",
-                        //     text: response.message,
-                        //     icon: 'success',
-                        //     type: "success",
-                        //     timer: 3000
-                        // });
-                        console.log(response);
-                        alert("Remarks Updated Successfully!");
-                        $('.form-group').removeClass('has-error')
-                            .removeClass('has-success');
-                        $('.text-danger').remove();
-                        // $('#fetch_user_data').DataTable().ajax.reload();
-                        // reset the form
-                        me[0].reset();
-
-                    } else if (response.error == true) {
-                        $('#user_rv_remarks_edit').modal('hide');
-                        Swal.fire("Good job!", "You clicked the button!", "error");
-                        // swal.fire({
-                        //     title: "Try Again ! ",
-                        //     text: response.message,
-                        //     icon: 'error',
-                        //     type: "error",
-                        //     timer: 3000
-                        // });
-                        $('#user_rv_remarks_edit').modal('hide');
-                        //console.log(response);
-                        $('.form-group').removeClass('has-error')
-                            .removeClass('has-success');
-                        $('.text-danger').remove();
-                        // $('#teacher_add_model').modal('hide');
-                        // $('#fetch_user_data').DataTable().ajax.reload();
-                        // reset the form
-                        me[0].reset();
-                    } else {
-                        $.each(response.messages, function(key, value) {
-                            var element = $('#u_' + key);
-
-                            element.closest('div.form-group')
-                                .removeClass('has-error')
-                                .addClass(value.length > 0 ? 'has-error' : 'has-success')
-                                .find('.text-danger')
-                                .remove();
-                            element.after(value);
-                        });
-                    }
-                },
-                error: function(xhr, ajaxOptions, thrownError) {
-                    //                            swal.fire("Error deleting!", "Please try again later !!!", "error");
-                    $('#user_rv_remarks_edit').modal('hide');
-                    swal.fire({
-                        title: "Error saving...",
-                        text: "Please try again later !!!",
-                        icon: 'error',
-                        type: "error",
-                        timer: 3000
-                    });
-                }
-            });
-        });
+      
     </script>
 </head>
 
@@ -806,6 +445,7 @@
     </div>
     <br>
     <div class="container">
+
         <div class="row">
             <div class="input-daterange">
                 <div class="col-md-3">
@@ -829,6 +469,10 @@
     <div class="tab-pane container active text-dark" id="home">
         <div class="table-responsive text-dark ">
             <br>
+            <?php
+  include('components/flash.php');
+  ?>
+
             <table id="fetch_mini_case_data" class="table table-bordered table-striped">
                 <thead>
                     <tr class="">
@@ -1125,23 +769,22 @@
                 <div class="modal-header">
                     <h5 class="modal-title">Update RV Remarks</h5>
                 </div>
-                <?php echo form_open("View_mini_case_controller/update_rv_remarks_validation", array("id" => "update_rv_remarks_form", "class" => "form-horizontal")) ?>
+                <?php echo form_open("View_mini_case_controller/update_remarks_validation", array("id" => "update_bv_remarks", "class" => "form-horizontal")) ?>
                 <div class="modal-body">
-                    <input type="hidden" class="form-control" id="u_rv_id" name="rv_id">
                     <div class="form-row">
+                        <input type="hidden" class="form-control minicase_id" name="minicase_id">
                         <div class="form-group col-md-12">
-                            <label for="rv_remarks" class="h5">RV Remarks</label>
-                            <textarea type="text" class="form-control" id="u_rv_remarks" placeholder="Enter Rv Remarks" name="rv_remarks"></textarea>
+                            <label for="bv_remarks" class="h5">BV Remarks</label>
+                            <textarea type="text" class="form-control minicase_remarks" placeholder="Enter rv Remarks" name="remarks"></textarea>
                         </div>
                     </div>
-
                 </div>
                 <div class="modal-footer">
-                    <input type="submit" name="update_rv_remarks" id="update_rvr_data" class="btn btn-primary" value="Edit">
+                    <input type="submit" name="update_bv_remarks" class="btn btn-primary" value="Update">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
-            </div>
-            <?php echo form_close(); ?>
+                <?php echo form_close(); ?>
+            </div>            
         </div>
     </div>
 
@@ -1152,22 +795,23 @@
                 <div class="modal-header">
                     <h5 class="modal-title">Update BV Remarks</h5>
                 </div>
-                <?php echo form_open("View_mini_case_controller/update_bv_remarks_validation", array("id" => "update_bv_remarks", "class" => "form-horizontal")) ?>
+                <?php echo form_open("View_mini_case_controller/update_remarks_validation", array("id" => "update_bv_remarks", "class" => "form-horizontal")) ?>
                 <div class="modal-body">
                     <div class="form-row">
-                        <input type="hidden" class="form-control" id="u_bv_id" name="bv_id">
+                        <input type="hidden" class="form-control minicase_id" name="minicase_id">
 
                         <div class="form-group col-md-12">
                             <label for="bv_remarks" class="h5">BV Remarks</label>
-                            <textarea type="text" class="form-control" id="u_bv_remarks" placeholder="Enter bv Remarks" name="bv_remarks"></textarea>
+                            <textarea type="text" class="form-control minicase_remarks" placeholder="Enter bv Remarks" name="remarks"></textarea>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input type="submit" name="update_bv_remarks" id="update_bvr_data" class="btn btn-primary" value="Edit">
+                    <input type="submit" name="update_bv_remarks" class="btn btn-primary" value="Update">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
+                <?php echo form_close(); ?>
             </div>
-            <?php echo form_close(); ?>
+            
         </div>
     </div>

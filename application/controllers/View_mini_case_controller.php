@@ -83,7 +83,7 @@ class View_mini_case_controller extends CI_Controller
     }
 
 
-    function fetch_rv_remarks()
+    function fetch_remarks()
     {
         try {
             $output = array();
@@ -91,7 +91,7 @@ class View_mini_case_controller extends CI_Controller
             $data = $this->View_mini_case_model->fetch_rv_remarks($_POST["user_id"]);
             foreach ($data as $row) {
                 // $output['id'] = $row->id;
-                $output['rv_remarks'] = $row->rv_remarks;
+                $output['remarks'] = $row->remarks;
             }
             echo json_encode($output);
         } catch (Exception $ex) {
@@ -390,41 +390,40 @@ class View_mini_case_controller extends CI_Controller
         }
     }
     
-       public function update_bv_remarks_validation()
+       public function update_remarks_validation()
     {
         try {
             $this->load->library('form_validation');
-            $this->form_validation->set_rules('bv_remarks', 'bv_remarks', '');
-            $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+            $this->form_validation->set_rules('remarks', 'remarks', 'required');
+        
             if ($this->form_validation->run()) {
-                $bv_id = $_POST["bv_id"];
+                // print_r($this->input->post());die;
+                $minicase_id = $_POST["minicase_id"];
                 $array = array(
-                    'bv_remarks' => $this->input->post('bv_remarks')
+                    'remarks' => $this->input->post('remarks')
                 );
                 $this->load->model('View_mini_case_model');
-                $insert_user = $this->View_mini_case_model->update_bv_remarks($bv_id, $array);
+                // echo "<prE>";
+                // print_r($minicase_id);
+                // print_r($array);
+                // die;
+                $insert_user = $this->View_mini_case_model->update_bv_remarks($minicase_id, $array);
                 if ($insert_user) {
-                    $response = array(
-                        'success' => true,
-                        'message' => "BV Remarks updated successfully!"
-                    );
+                   
+                    $response = array('type' => 'success', 'massege' => 'Remarks updated successfully!');
                 } else {
-                    $response = array(
-                        'error' => true,
-                        'message' => "error in data!"
-                    );
+                   
+                    $response = array('type' => 'danger', 'massege' => 'Somthing went wrong please contact to administrator');
                 }
             } else {
-                foreach ($_POST as $key => $value) {
-                    $response['message'][$key] = form_error($key);
-                }
+                $response = array('type' => 'danger', 'massege' => 'validation error error...');				
             }
-            echo json_encode($response);
+           
         } catch (Exception $ex) {
-            $error['error'] = TRUE;
-            $error['message'] = $ex->getMessage();
-            $this->load->view('login_page', array('error' => $error));
+            $response = array('type' => 'danger', 'massege' => 'try error...');           
         }
+        $this->session->set_flashdata('res_data', $response);
+        redirect(base_url("/View_mini_case_controller/view_mini_case_open"));
     }
     
     
