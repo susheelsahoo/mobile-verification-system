@@ -9,7 +9,9 @@
   <title>Banking System</title>
   <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 </head>
+
 <body>
 
   <style>
@@ -217,8 +219,8 @@
     <figcaption>
       <div class="card">
         <div class="title">
-        <a href="<?php echo base_url(); ?>Create_user_controller/create_user">
-          <h3><b>Manage Users</b></h3>
+          <a href="<?php echo base_url(); ?>Create_user_controller/create_user">
+            <h3><b>Manage Users</b></h3>
         </div>
         <div class="content">
           <div class="social">
@@ -235,8 +237,8 @@
 
       <div class="card">
         <div class="title">
-        <a href="<?php echo base_url(); ?>Add_bank_controller/add_bank">
-          <h3><b>Add Bank</b></h3>
+          <a href="<?php echo base_url(); ?>Add_bank_controller/add_bank">
+            <h3><b>Add Bank</b></h3>
         </div>
         <div class="content">
           <div class="social">
@@ -253,8 +255,8 @@
 
       <div class="card">
         <div class="title">
-        <a href="<?php echo base_url(); ?>Add_product_controller/add_product">
-          <h3><b>Add Product</b></h3>
+          <a href="<?php echo base_url(); ?>Add_product_controller/add_product">
+            <h3><b>Add Product</b></h3>
         </div>
         <div class="content">
           <div class="social">

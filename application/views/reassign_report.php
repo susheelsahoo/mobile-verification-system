@@ -17,7 +17,6 @@
     <script type="text/javascript">
         BASE_URL = "<?php echo base_url(); ?>"
     </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
@@ -57,32 +56,32 @@
             });
 
             $('#sub_btn').click(function(event) {
-                                                    event.preventDefault();
+                event.preventDefault();
 
-                                                    var from = $('#from').val();
-                                                    var to = $('#to').val();
-                                                    var code = '<?php echo $data; ?>';
-                                                    //alert(code);
+                var from = $('#from').val();
+                var to = $('#to').val();
+                var code = '<?php echo $data; ?>';
+                //alert(code);
 
-                                                    var datastring = "from=" + from + "&to=" + to + "&code=" + code;
-                                                    $.ajax({
-                                                        type: "POST",
-                                                        url: "<?= base_url() ?>Assign_case_controller/filterDatewise",
-                                                        // dataType:"json",
-                                                        data: datastring,
-                                                        // contentType: "application/json; charset=utf-8",
-                                                        success: function(data) {
-                                                            //alert(data);
-                                                            $('#tbdy').html(data);
+                var datastring = "from=" + from + "&to=" + to + "&code=" + code;
+                $.ajax({
+                    type: "POST",
+                    url: "<?= base_url() ?>Assign_case_controller/filterDatewise",
+                    // dataType:"json",
+                    data: datastring,
+                    // contentType: "application/json; charset=utf-8",
+                    success: function(data) {
+                        //alert(data);
+                        $('#tbdy').html(data);
 
-                                                        },
-                                                        error: function() {
-                                                            // alert("Error");
-                                                        }
-                                                    });
+                    },
+                    error: function() {
+                        // alert("Error");
+                    }
+                });
 
-                                                });
-            
+            });
+
 
         });
     </script>
@@ -303,8 +302,8 @@
     <label>To</label>
     <input type="text" name="to" id="to" required value="<?php echo date("Y-m-d"); ?>">
     <button class="btn btn-warning " name="sub_btn" id="sub_btn"> GET </button>
-   
-       
+
+
     <br>
     <div class="tab-pane container active text-dark" id="home">
         <div class="table-responsive text-dark ">
@@ -328,14 +327,3 @@
             </table>
         </div>
     </div>
-
-
-
-
-
-    
-
-
-  
-
-   

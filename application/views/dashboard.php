@@ -15,29 +15,31 @@
     <script type="text/javascript">
         BASE_URL = "<?php echo base_url(); ?>"
     </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function() {
 
             var dataTable = $('#fetch_agent_data').DataTable({
-            "processing": true,
-            "serverSide": true,
-            "order": [],
-            "ajax": {
-                url: "<?php echo base_url() . 'Dashboard_controller/fetch_all_agent'; ?>",
-                type: "POST",
-            },
-         
-            columnDefs: [{
+                "processing": true,
+                "serverSide": true,
+                "order": [],
+                "ajax": {
+                    url: "<?php echo base_url() . 'Dashboard_controller/fetch_all_agent'; ?>",
+                    type: "POST",
+                },
+
+                columnDefs: [{
                     "defaultContent": "-",
                     "targets": [1, 5],
                     "orderable": false
-                    
+
                 }],
-                     "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "All"]],
-        });
+                "lengthMenu": [
+                    [15, 25, 50, -1],
+                    [15, 25, 50, "All"]
+                ],
+            });
 
 
         });
@@ -139,15 +141,15 @@
     </div>
     <br>
 
-    
+
 
     <?php
     //                         
-       if (isset($data) & !empty($data)) { //check $data is set or not if not set return false and skip action else return true and perform action.
-         $data1 = $data['countTotal']; //here we set the $data value in $active_menu  ($data <-- data comes from controller 
-         $countTotal = $data1['countTotal']; //here we set the $data value in $active_menu  ($data <-- data comes from controller 
-           }
-      ?>
+    if (isset($data) & !empty($data)) { //check $data is set or not if not set return false and skip action else return true and perform action.
+        $data1 = $data['countTotal']; //here we set the $data value in $active_menu  ($data <-- data comes from controller 
+        $countTotal = $data1['countTotal']; //here we set the $data value in $active_menu  ($data <-- data comes from controller 
+    }
+    ?>
 
     <div class="tab-pane container active text-dark" id="home">
         <div class="table-responsive text-dark ">

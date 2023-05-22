@@ -9,6 +9,7 @@
   <title>Banking System</title>
   <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 </head>
 
 
@@ -152,11 +153,11 @@
       clear: both;
     }
 
-    .veri{
+    .veri {
       text-align: center;
     }
 
-    .logout{
+    .logout {
       text-align: right;
     }
 
@@ -167,19 +168,19 @@
     }
 
     .btn-info {
-    /* color: #0e88c5; */
-    background-color: #0e88c5;
-    border-color: #0e88c5
-}
+      /* color: #0e88c5; */
+      background-color: #0e88c5;
+      border-color: #0e88c5
+    }
   </style>
 
   <div class="container">
     <div class="page-header-inner">
-      
+
       <div class="col-md-4 col-sm-6">
         <div class="row">
           <div id="dvTitle" class="product_name">
-          <!-- <img src="/images/mobileforce.jpg" alt="logo" width="500" height="600"> -->
+            <!-- <img src="/images/mobileforce.jpg" alt="logo" width="500" height="600"> -->
             <h3><b>Bodvid Private Limited</b></h3>
           </div>
         </div>
@@ -196,13 +197,13 @@
 
       <div class="col-md-4 col-sm-6">
         <div class="row">
-        <div id="dvTitle" class="logout">
-          <?php
-          $user = $this->session->userdata('user');
-          extract($user);
-          ?>
-          <h3><?php echo $username; ?> <b><a id="lblLogOut" href="<?php echo base_url(); ?>user/logout">LogOut</a></b></h3>
-        </div>
+          <div id="dvTitle" class="logout">
+            <?php
+            $user = $this->session->userdata('user');
+            extract($user);
+            ?>
+            <h3><?php echo $username; ?> <b><a id="lblLogOut" href="<?php echo base_url(); ?>user/logout">LogOut</a></b></h3>
+          </div>
         </div>
       </div>
     </div>
@@ -220,13 +221,15 @@
     <a href="<?php echo base_url(); ?>Report_controller/report_page_open" class="btn btn-info">Report</a>
     <a href="<?php echo base_url(); ?>Admin_dashboard_controller/admin_dashboard" class="btn btn-info">Admin</a>
   </div>
-<br>
+  <br>
   <figure data-title="DASHBOARD" style="color:#0e88c5;">
     <figcaption>
       <div class="card">
         <div class="title">
-        <a href="<?php echo base_url(); ?>Dashboard_controller/dashboard_function"><h3><b>Dashboard</b></h3></a>
-          
+          <a href="<?php echo base_url(); ?>Dashboard_controller/dashboard_function">
+            <h3><b>Dashboard</b></h3>
+          </a>
+
         </div>
         <div class="content">
           <div class="social">
@@ -244,11 +247,11 @@
         <div class="circle"></div>
       </div>
 
-     
+
     </figcaption>
   </figure>
 
-  
+
 
 
 

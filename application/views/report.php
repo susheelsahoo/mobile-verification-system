@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 
@@ -10,7 +9,9 @@
   <title>Banking System</title>
   <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 </head>
+
 <body>
 
   <style>
@@ -223,8 +224,8 @@
     <figcaption>
       <div class="card">
         <div class="title">
-        <a href="<?php echo base_url(); ?>View_mini_case_controller/view_mini_case_open">
-          <h3><b>View Quick Case</b></h3>
+          <a href="<?php echo base_url(); ?>View_mini_case_controller/view_mini_case_open">
+            <h3><b>View Quick Case</b></h3>
         </div>
         <div class="content">
           <div class="social">
@@ -242,8 +243,8 @@
 
       <div class="card">
         <div class="title">
-        <a href="<?php echo base_url(); ?>Reassign_report_controller/reassign_page">
-          <h3><b>Reassign Case</b></h3>
+          <a href="<?php echo base_url(); ?>Reassign_report_controller/reassign_page">
+            <h3><b>Reassign Case</b></h3>
         </div>
         <div class="content">
           <div class="social">
