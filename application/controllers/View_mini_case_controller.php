@@ -52,17 +52,6 @@ class View_mini_case_controller extends CI_Controller
                     $buttons .= '<button type="button" title="RV Remarks" name="view" id="' . $row->id . '" class="btn btn-warning btn-sm edit_rv"><i class="fa fa-pencil" ></i></button>';
                 }
 
-<<<<<<< HEAD
-                $buttons .= '<button type="button" title="View Case" name="view" id="' . $row->id . '" class="btn btn-primary btn-sm view_quick_case"><i class="fa fa-eye" ></i></button>';
-                
-                  $buttons .= '<button type="button" title="View RV Case" name="view" id="' . $row->id . '" class="btn btn-primary btn-sm view_rv_case"><i class="fa fa-eye" ></i></button>';
-               
-
-                $buttons .= '<button type="button" title="RV Remarks" name="view" id="' . $row->id . '" class="btn btn-warning btn-sm edit_rv"><i class="fa fa-pencil" ></i></button>';
-
-                $buttons .= '<button type="button" title="BV Remarks" name="view" id="' . $row->id . '" class="btn btn-success btn-sm edit_bv"><i class="fa fa-pencil" ></i></button>';
-=======
->>>>>>> d9656e25813ed2dfb84b9b43d926ac0cd1a4fbff
 
                 // $sub_array[] = $i;
                 $sub_array[] = $row->id;
@@ -136,11 +125,7 @@ class View_mini_case_controller extends CI_Controller
                 $output['bv_long']          = $row->bv_long;
                 // $output['bv_pincode']       = $row->pin_code;
                 // $output['bv_location_add']  = $row->city;
-<<<<<<< HEAD
-                 $output['bv_pincode']       = $row->bv_pincode;
-=======
                 $output['bv_pincode']       = $row->bv_pincode;
->>>>>>> d9656e25813ed2dfb84b9b43d926ac0cd1a4fbff
                 $output['bv_location_add']  = $row->bv_location_add;
                 $output['bv_remarks']       = $row->bv_remarks;
 
