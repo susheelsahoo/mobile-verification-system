@@ -458,20 +458,22 @@
             </div>
         </div>
         <span id="business_section" class="hide">
-            <div class="row">
-                <div class="col-25">
-                    <label for="business_address">Business Add.</label>
-                </div>
-                <div class="col-75">
-                    <input class="form-control" type="text" id="business_address" name="address[]" placeholder="Enter Business Address">
-                </div>
-            </div>
+           
             <div class="row">
                 <div class="col-25">
                     <label for="business_name">Business Name</label>
                 </div>
                 <div class="col-75">
                     <input class="form-control" type="text" id="business_name" name="name[]" placeholder="Enter Business name">
+                </div>
+            </div>
+            
+             <div class="row">
+                <div class="col-25">
+                    <label for="business_address">Business Add.</label>
+                </div>
+                <div class="col-75">
+                    <input class="form-control" type="text" id="business_address" name="address[]" placeholder="Enter Business Address">
                 </div>
             </div>
             <div class="row">

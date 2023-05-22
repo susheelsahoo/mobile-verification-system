@@ -763,7 +763,7 @@ class Assign_case_controller extends CI_Controller
     public function sendOTP()
     {
         $response = [];
-        $email = 'yogitasharma1606@gmail.com';
+        $email = 'Jainnupur.88@gmail.com';
 
         // Generate and store the OTP
         $otp = $this->generateOTP();
@@ -782,7 +782,7 @@ class Assign_case_controller extends CI_Controller
     private function sendOTPEmail($email, $otp)
     {
         $this->load->library('email');
-        $this->email->from('yogitasharma1606@gmail.com', 'Yogita Sharma');
+        $this->email->from('Jainnupur.88@gmail.com', 'Yogita Sharma');
         $this->email->to($email);
         $this->email->subject('OTP Verification');
         $this->email->message('Please use the following OTP for verification: ' . $otp);
