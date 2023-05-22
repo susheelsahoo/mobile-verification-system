@@ -159,10 +159,10 @@ class Upload_case_controller extends CI_Controller
 				}
 
 				$response = array('type' => 'success', 'massege' => 'Excel Data Imported Successfully');
-				$this->session->set_flashdata('res_data', $response);
+				$this->session->mark_as_flash('res_data', $response);
 			} else {
 				$response = array('type' => 'error', 'massege' => 'File is not uploaded');
-				$this->session->set_flashdata('res_data', $response);
+				$this->session->mark_as_flash('res_data', $response);
 			}
 			redirect(base_url("/Create_cse/create_c"));
 		} else {
