@@ -30,13 +30,14 @@ class Upload_case_controller extends CI_Controller
 				$data['created_at'] = date('Y-m-d H:i:s');
 				// print_r($data);
 				// die;
+				// echo "<pre>";
 				if ($upload_type == 'create_case') {
 					foreach ($sheet as $key => $row) {
-
+						// print_r($row);
 						if ($key == 0) {
 							continue;
 						}
-
+						// die;
 						$fi_to_be_conducted 	= $row['2'];
 						$fi_to_be_conducted_array = explode(",", $fi_to_be_conducted);
 
@@ -44,13 +45,13 @@ class Upload_case_controller extends CI_Controller
 							foreach ($fi_to_be_conducted_array as $fi_type) {
 								$fi_type = trim($fi_type);
 								if ($fi_type == 'RV') {
-									$agent_code 	= $row['25'];
+									$agent_code 	= $row['26'];
 									$address 		= $row['4'];
 									$name 			= NULL;
 									$city 			= $row['5'];
 									$pincode 		= $row['6'];
 								} elseif ($fi_type == 'BV') {
-									$agent_code 	= $row['24'];
+									$agent_code 	= $row['25'];
 									$address 		= $row['7'];
 									$name 			= $row['8'];
 									$city 			= $row['9'];
@@ -80,8 +81,9 @@ class Upload_case_controller extends CI_Controller
 									'asset_make' 			=> $row['19'],
 									'asset_model' 			=> $row['20'],
 									'station' 				=> $row['21'],
-									'tat' 					=> $row['22'],
-									'remarks' 				=> $row['23'],
+									'tat_start' 			=> $row['22'],
+									'tat_end' 				=> $row['23'],
+									'remarks' 				=> $row['24'],
 									'code' 					=> $agent_code,
 								);
 								// echo "<pre>";
@@ -105,13 +107,13 @@ class Upload_case_controller extends CI_Controller
 							foreach ($fi_to_be_conducted_array as $fi_type) {
 								$fi_type = trim($fi_type);
 								if ($fi_type == 'RV') {
-									$agent_code 	= $row['25'];
+									$agent_code 	= $row['26'];
 									$address 		= $row['4'];
 									$name 			= NULL;
 									$city 			= $row['5'];
 									$pincode 		= $row['6'];
 								} elseif ($fi_type == 'BV') {
-									$agent_code 	= $row['24'];
+									$agent_code 	= $row['25'];
 									$address 		= $row['7'];
 									$name 			= $row['8'];
 									$city 			= $row['9'];
@@ -141,8 +143,9 @@ class Upload_case_controller extends CI_Controller
 									// 'asset_make' 			=> $row['19'],
 									// 'asset_model' 			=> $row['20'],
 									// 'station' 				=> $row['21'],
-									'tat' 					=> $row['22'],
-									'remarks' 				=> $row['23'],
+									'tat_start' 			=> $row['22'],
+									'tat_end' 				=> $row['23'],
+									'remarks' 				=> $row['24'],
 									'code' 					=> $agent_code,
 								);
 								// echo "<pre>";
