@@ -83,9 +83,9 @@ class Case_form extends CI_Controller
 					$name 		= array_values(array_filter($this->input->post('name')));
 					$city 		= array_values(array_filter($this->input->post('city')));
 					$pincode 	= array_values(array_filter($this->input->post('pincode')));
-					$varification['code'] = $this->input->post('agent_1');
+					$varification['code'] = $this->input->post('bv_agent');
 					if ($key == 1) {
-						$varification['code'] = $this->input->post('agent_2');
+						$varification['code'] = $this->input->post('rv_agent');
 					}
 
 					$varification['product_name'] 		= $this->input->post('product_name');
