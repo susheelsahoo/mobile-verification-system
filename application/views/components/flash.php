@@ -1,4 +1,5 @@
 <?php
+$res_data = [];
 if ($this->session->flashdata('res_data')) {
     $res_data = $this->session->flashdata('res_data');
 ?>
