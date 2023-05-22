@@ -66,12 +66,12 @@ class Case_form extends CI_Controller
 			$this->form_validation->set_rules('tat_end', 'TAT End', 'required');
 			$this->form_validation->set_rules('remarks', 'Remarks', 'required');
 			$fi_type = $this->input->post('fi_to_be_conducted');
-			if (!empty($fi_type[0]) && (isset($fi_type[1]) && !empty($fi_type[1]))) {
-				$this->form_validation->set_rules('bv_agent', 'BV Agent', 'required');
-				$this->form_validation->set_rules('rv_agent', 'RV Agent', 'required');
-			} else if (isset($fi_type[0]) && !empty($fi_type[0])) {
-				$this->form_validation->set_rules('bv_agent', 'BV Agent', 'required');
-			}
+			// if (!empty($fi_type[0]) && (isset($fi_type[1]) && !empty($fi_type[1]))) {
+			// 	$this->form_validation->set_rules('bv_agent', 'BV Agent', 'required');
+			// 	$this->form_validation->set_rules('rv_agent', 'RV Agent', 'required');
+			// } else if (isset($fi_type[0]) && !empty($fi_type[0])) {
+			// 	$this->form_validation->set_rules('bv_agent', 'BV Agent', 'required');
+			// }
 
 
 			if ($this->form_validation->run()) {

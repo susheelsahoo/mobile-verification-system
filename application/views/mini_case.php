@@ -238,6 +238,7 @@
                     success: function(response) {
 
                         // me[0].reset();
+                        console.log(response);
                         if (response.success == true) {
                             alert("Quick Case Generated Successfully!");
                             location.reload();
@@ -507,6 +508,29 @@
                 <input class="form-control" type="text" name="vehicle" placeholder="Enter Vehicle">
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <label for="mobile">Mobile</label>
+            </div>
+            <div class="col-md-9">
+                <input class="form-control" type="number" id="mobile" name="mobile" placeholder="Enter Mobile Number">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <label for="geo_limit">Geo Limit<span class="text-danger"> *</span></label>
+            </div>
+            <div class="col-md-9">
+                <select class="form-control" id="geo_limit" name="geo_limit">
+                    <option value="" selected>-- SELECT GEO LIMIT --</option>
+                    <option value="LOCAL">LOCAL</option>
+                    <option value="OUTSTATION">OUTSTATION</option>
+                </select>
+            </div>
+        </div>
+        
         <div class="row">
             <div class="col-md-3">
                 <label for="tat">TAT Start<span class="text-danger"> *</span></label>

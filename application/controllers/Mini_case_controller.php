@@ -57,16 +57,19 @@ class Mini_case_controller extends CI_Controller
 			$this->form_validation->set_rules('reference_no', 'reference_no', 'required');
 			$this->form_validation->set_rules('name', 'name', '');
 			$this->form_validation->set_rules('amount', 'amount', 'required');
-			$this->form_validation->set_rules('vehicle', 'vehicle', '');
+			// $this->form_validation->set_rules('vehicle', 'vehicle', '');
+			$this->form_validation->set_rules('mobile', 'mobile', '');
+			$this->form_validation->set_rules('geo_limit', 'geo_limit', 'required');
 			$this->form_validation->set_rules('tat_start', 'tat_start', 'required');
 			$this->form_validation->set_rules('tat_end', 'tat_end', 'required');
 			$fi_type = $this->input->post('fi_type');
-			if (!empty($fi_type[0]) && (isset($fi_type[1]) && !empty($fi_type[1]))) {
-				$this->form_validation->set_rules('bv_agent', 'BV Agent', 'required');
-				$this->form_validation->set_rules('rv_agent', 'RV Agent', 'required');
-			} else if (isset($fi_type[0]) && !empty($fi_type[0])) {
-				$this->form_validation->set_rules('bv_agent', 'BV Agent', 'required');
-			}
+			// print_r($fi_type);die;
+			// if (!empty($fi_type[0]) && (isset($fi_type[1]) && !empty($fi_type[1]))) {
+			// 	$this->form_validation->set_rules('bv_agent', 'BV Agent', 'required');
+			// 	$this->form_validation->set_rules('rv_agent', 'RV Agent', 'required');
+			// } else if (isset($fi_type[0]) && !empty($fi_type[0])) {
+			// 	$this->form_validation->set_rules('bv_agent', 'BV Agent', 'required');
+			// }
 			if ($this->form_validation->run()) {
 				foreach ($fi_type as $key => $val) {
 					$varification = [];
@@ -84,6 +87,8 @@ class Mini_case_controller extends CI_Controller
 					$varification['name'] 			= $this->input->post('applicant_name');
 					$varification['amount'] 		= $this->input->post('amount');
 					$varification['vehicle'] 		= $this->input->post('vehicle');
+					$varification['mobile'] 			= $this->input->post('mobile');
+					$varification['geo_limit'] 			= $this->input->post('geo_limit');
 					$varification['tat_start'] 		= $this->input->post('tat_start');
 					$varification['tat_end'] 		= $this->input->post('tat_end');
 					$varification['fi_type'] 		= $val;
@@ -93,6 +98,7 @@ class Mini_case_controller extends CI_Controller
 					$varification['pin_code'] 		= $pincode[$key];
 					$varification['bank'] 			= $this->input->post('bank');
 					//$varification['status'] 		= '1';
+					// print_r($varification);die;
 
 					$res_id = $this->Mini_case_model->insert_mini_case($varification);
 				}
@@ -115,12 +121,17 @@ class Mini_case_controller extends CI_Controller
 				}
 			}
 
-			echo json_encode($response);
+			// echo json_encode($response);
 		} catch (Exception $ex) {
-			$error['error'] = TRUE;
-			$error['message'] = $ex->getMessage();
-			$this->load->view('login_page', array('error' => $error));
+			// $error['error'] = TRUE;
+			// $error['message'] = $ex->getMessage();
+			$response = array(
+				'error' => true,
+				'message' => $ex->getMessage(),
+			);
+			// echo $error;			// $this->load->view('login_page', array('error' => $error));
 		}
+		echo json_encode($response);
 	}
 
 
