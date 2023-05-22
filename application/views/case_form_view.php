@@ -308,27 +308,23 @@
                     }
                 });
             });
-
-            $('.fi_to_be_conducted_rv').change(function() {
-                if ($('.fi_to_be_conducted_rv:checked').length == 0) {
-                    $('#residence_section').addClass('hide');
-                } else {
-                    $('#residence_section').removeClass('hide');
-                }
-            });
             $('.fi_to_be_conducted_bv').change(function() {
                 if ($('.fi_to_be_conducted_bv:checked').length == 0) {
                     $('#business_section').addClass('hide');
+                    $('#BV_agent').addClass('hide');
                 } else {
                     $('#business_section').removeClass('hide');
+                    $('#BV_agent').removeClass('hide');
                 }
             });
-            $('#single_agent').on('change', function() {
-                is_signle = $("#single_agent").find(":selected").val();
-                if (is_signle == 'no') {
-                    $('#Second_agent').removeClass('hide');
+            $('.fi_to_be_conducted_rv').change(function() {
+                if ($('.fi_to_be_conducted_rv:checked').length == 0) {
+                    $('#residence_section').addClass('hide');
+                    $('#RV_agent').addClass('hide');
                 } else {
-                    $('#Second_agent').addClass('hide');
+                    $('#residence_section').removeClass('hide');
+                    $('#RV_agent').removeClass('hide');
+
                 }
             });
         });
@@ -458,7 +454,7 @@
             </div>
         </div>
         <span id="business_section" class="hide">
-           
+
             <div class="row">
                 <div class="col-25">
                     <label for="business_name">Business Name</label>
@@ -467,8 +463,8 @@
                     <input class="form-control" type="text" id="business_name" name="name[]" placeholder="Enter Business name">
                 </div>
             </div>
-            
-             <div class="row">
+
+            <div class="row">
                 <div class="col-25">
                     <label for="business_address">Business Add.</label>
                 </div>
@@ -550,26 +546,16 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-25">
-                <label for="single_agent">Signle Agent</label>
-            </div>
-            <div class="col-75">
-                <select class="form-control" id="single_agent" name="single_agent">
-                    <!-- <option value="" selected>-- CHOOSE --</option> -->
-                    <option value="yes" selected>YES</option>
-                    <option value="no">NO</option>
-                </select>
-            </div>
-        </div>
 
 
-        <div class="row" id="First_agent">
+
+
+        <div class="row hide" id="BV_agent">
             <div class="col-25">
-                <label for="code">RV Agent</label>
+                <label for="code"> BV Agent</label>
             </div>
             <div class="col-75">
-                <select class="form-control code" name="agent_1">
+                <select class="form-control code" name="agent_2">
                     <option value="" selected>-- SELECT AGENT CODE --</option>
                     <?php foreach ($agent_code as $agent) { ?>
                         <option value="<?= $agent['employee_unique_id']; ?>"><?= $agent['first_name'] . ' - ' . $agent['employee_unique_id']; ?></option>
@@ -577,12 +563,12 @@
                 </select>
             </div>
         </div>
-        <div class="row hide" id="Second_agent">
+        <div class="row hide" id="RV_agent">
             <div class="col-25">
-                <label for="code"> BV Agent</label>
+                <label for="code">RV Agent</label>
             </div>
             <div class="col-75">
-                <select class="form-control code" name="agent_2">
+                <select class="form-control code" name="agent_1">
                     <option value="" selected>-- SELECT AGENT CODE --</option>
                     <?php foreach ($agent_code as $agent) { ?>
                         <option value="<?= $agent['employee_unique_id']; ?>"><?= $agent['first_name'] . ' - ' . $agent['employee_unique_id']; ?></option>
