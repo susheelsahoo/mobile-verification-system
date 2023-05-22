@@ -39,7 +39,8 @@ class Assign_case_controller extends CI_Controller
 
     public function assign_case_function($data)
     {
-        // echo $data;
+        // echo  test_method($data);
+        // die;
 
         $this->load->library('session');
         // unset($_SESSION['data_new1']);

@@ -93,9 +93,11 @@ class Upload_case_controller extends CI_Controller
 					}
 				} else {
 					foreach ($sheet as $key => $row) {
+
 						if ($key == 0) {
 							continue;
 						}
+
 						$fi_to_be_conducted 	= $row['2'];
 						$fi_to_be_conducted_array = explode(",", $fi_to_be_conducted);
 
@@ -151,7 +153,6 @@ class Upload_case_controller extends CI_Controller
 						}
 					}
 				}
-
 
 				$response = array('type' => 'success', 'massege' => 'Excel Data Imported Successfully');
 				$this->session->set_flashdata('res_data', $response);

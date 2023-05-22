@@ -251,6 +251,7 @@
                     dataType: "json",
                     success: function(data) {
                         $('#fi_type_view_modal').modal('show');
+                        
                         $('.s_application_id').html("<b>Application ID:</b> " + data.application_id);
                         $('.s_date').html("<b>Date:</b> " + data.created_at);
                         $('.s_fi_date').html("<b>FI Date:</b> " + data.fi_date);
@@ -915,7 +916,7 @@
                             <td><?= $rows->customer_name; ?></td>
                             <td><?= $rows->business_address; ?></td>
                             <td><?= $rows->fi_to_be_conducted; ?></td>
-                            <td><?= $rows->updated_at; ?></td>
+                            <td><?= readableDateIST($rows->updated_at); ?></td>
                             <td><?= $rows->status; ?></td>
                             <td>
 
