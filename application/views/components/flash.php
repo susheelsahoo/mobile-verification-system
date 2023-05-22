@@ -8,7 +8,6 @@ if ($this->session->flashdata('res_data')) {
         <?php echo $res_data['massege']; ?>
     </div>
     <script>
-        // $("#myElem").show();
         setTimeout(function() {
             $(".alert-dismissible").hide();
         }, 5000);
