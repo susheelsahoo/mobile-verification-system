@@ -105,13 +105,14 @@
                         $('#mini_case_view_model').modal('show');
                         $('.s_bank').html("<b>Bank:</b> " + data.bank);
                         $('.s_product').html("<b>Product:</b> " + data.product);
-                        $('.s_fi_conducted').html("<b>Fi to be Conducted:</b> " + data.fi_type);
+                        $('.s_fi_conducted').html("<b>Fi type:</b> " + data.fi_type);
                         $('.s_reference_no').html("<b>Reference no.:</b> " + data.reference_no);
-                        $('.s_name').html("<b>Name:</b> " + data.name);
+                        $('.s_name').html("<b> Applicant Name:</b> " + data.name);
                         $('.s_agent_code').html("<b>Agent code:</b> " + data.code);
                         $('.s_address').html("<b>Address:</b> " + data.business_add);
                         $('.s_business_name').html("<b>Business Name:</b> " + data.business_name);
                         $('.s_business_add').html("<b>Business Address:</b> " + data.business_add);
+                        $('.s_city').html("<b>City:</b> " + data.city);
                         $('.s_residence_add').html("<b>City:</b> " + data.city);
                         $('.s_mobile').html("<b>Mobile:</b> " + data.mobile);
                         $('.bv_lat').html("<b>Latitude:</b> " + data.bv_lat);
@@ -150,7 +151,7 @@
                         $('.s_bank').html("<b>Bank:</b> " + data.bank);
                         $('.s_product').html("<b>Product:</b> " + data.product);
                         $('.s_fi_conducted').html("<b>Fi to be Conducted:</b> " + data.fi_type);
-                        $('.s_reference_no').html("<b>Reference no.:</b> " + data.reference_no);
+                        $('.s_reference_no').html("<b>Reference no :</b> " + data.reference_no);
                         $('.s_name').html("<b>Name:</b> " + data.name);
                         $('.s_agent_code').html("<b>Agent code:</b> " + data.code);
                         $('.s_address').html("<b>Address:</b> " + data.business_add);
@@ -494,6 +495,18 @@
                     </button>
                 </div>
                 <div class="modal-body">
+
+                <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row pt-6 ">
+                                <div class="col-sm-6">
+                                <h3 class="s_reference_no" style="color:blue;">Reference Number : </h3>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="row pt-6 ">
@@ -517,7 +530,34 @@
                                     </h4>
                                 </div>
                                 <div class="col-sm-6">
-                                    <h4 class="s_reference_no">
+                                    <h4 class="s_name">
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row pt-12 ">
+                                <div class="col-sm-12">
+                                    <h4 class="s_business_name">
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row pt-6 ">
+                                <div class="col-sm-6">
+                                    <h4 class="s_address">
+                                    </h4>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h4 class="bv_pincode">
                                     </h4>
                                 </div>
                             </div>
@@ -528,7 +568,7 @@
                         <div class="col-sm-12">
                             <div class="row pt-6 ">
                                 <div class="col-sm-6">
-                                    <h4 class="s_name">
+                                    <h4 class="s_city">
                                     </h4>
                                 </div>
                                 <div class="col-sm-6">
@@ -541,20 +581,18 @@
 
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="row pt-6 ">
-                                <div class="col-sm-6">
-                                    <h4 class="s_address">
-                                    </h4>
-                                </div>
-                                <div class="col-sm-6">
-                                    <h4 class="s_business_name">
+                            <div class="row pt-12">
+                                <div class="col-sm-12">
+                                    <h4 class="remarks">
                                     </h4>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    <div class="mini_bv_case_img">
 
+                    </div>
 
                     <div class="row">
                         <div class="col-sm-12">
@@ -586,26 +624,11 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="row pt-6 ">
-                                <div class="col-sm-6">
-                                    <h4 class="remarks">
-                                    </h4>
-                                </div>
-                                <div class="col-sm-6">
-                                    <h4 class="s_residence_add">
-                                    </h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                   
 
+                 
 
-
-                    <div class="mini_bv_case_img">
-
-                    </div>
+                    
 
 
                 </div>
@@ -630,6 +653,17 @@
                 </div>
                 <div class="modal-body">
 
+                <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row pt-12">
+                                <div class="col-sm-12">
+                                <h3 class="s_reference_no" style="color:blue;">Reference Number : </h3>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="row pt-6 ">
@@ -653,22 +687,20 @@
                                     </h4>
                                 </div>
                                 <div class="col-sm-6">
-                                    <h4 class="s_reference_no">
+                                    <h4 class="s_name">
                                     </h4>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+
+
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="row pt-6 ">
-                                <div class="col-sm-6">
-                                    <h4 class="s_name">
-                                    </h4>
-                                </div>
-                                <div class="col-sm-6">
-                                    <h4 class="s_agent_code">
+                            <div class="row pt-12">
+                                <div class="col-sm-12">
+                                    <h4 class="s_business_name">
                                     </h4>
                                 </div>
                             </div>
@@ -683,14 +715,40 @@
                                     </h4>
                                 </div>
                                 <div class="col-sm-6">
-                                    <h4 class="s_business_name">
+                                    <h4 class="rv_pincode">
                                     </h4>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row pt-6">
+                                <div class="col-sm-6">
+                                    <h4 class="rv_city">
+                                    </h4>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h4 class="s_agent_code">
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row pt-12 ">
+                                <div class="col-sm-12">
+                                    <h4 class="remarks">
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mini_rv_case_img"></div>
 
                     <div class="row">
                         <div class="col-sm-12">
@@ -721,29 +779,7 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="row pt-6 ">
-                                <div class="col-sm-6">
-                                    <h4 class="remarks">
-                                    </h4>
-                                </div>
-                                <div class="col-sm-6">
-                                    <h4 class="rv_city">
-                                    </h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-
-                    <div class="mini_rv_case_img">
-
-                    </div>
+                 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>

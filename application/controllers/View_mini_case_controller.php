@@ -139,6 +139,7 @@ class View_mini_case_controller extends CI_Controller
                 $output['name']             = $row->name;
                 $output['code']             = $row->code;
                 // $output['address']          = $row->business_add;
+                $output['city']          = $row->city;
                 $output['business_name']    = $row->business_name;
                 $output['business_add']     = $row->business_add;
                 $output['bv_lat']           = $row->bv_lat;
