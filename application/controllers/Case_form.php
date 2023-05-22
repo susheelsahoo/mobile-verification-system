@@ -52,30 +52,32 @@ class Case_form extends CI_Controller
 		try {
 			$this->load->model('Case_form_model');
 			$this->load->library('form_validation');
-			$this->form_validation->set_rules('bank_name', 'bank_name', 'required');
-			$this->form_validation->set_rules('product_name', 'product_name', 'required');
-			$this->form_validation->set_rules('application_id', 'application_id', 'required');
-			$this->form_validation->set_rules('customer_name', 'customer_name', 'required');
+			$this->form_validation->set_rules('bank_name', 'Bank Name', 'required');
+			$this->form_validation->set_rules('product_name', 'Product Name', 'required');
+			$this->form_validation->set_rules('application_id', 'Application ID', 'required');
+			$this->form_validation->set_rules('customer_name', 'Customer Name', 'required');
 			$this->form_validation->set_rules('dob', 'dob', '');
 			$this->form_validation->set_rules('amount', 'amount', 'required');
 			$this->form_validation->set_rules('vehicle', 'vehicle', 'required');
-			$this->form_validation->set_rules('co_applicant', 'co_applicant', 'required');
-			$this->form_validation->set_rules('guarantee_name', 'guarantee_name', 'required');
-			$this->form_validation->set_rules('geo_limit', 'geo_limit', 'required');
-			$this->form_validation->set_rules('tat', 'tat', 'required');
-			$this->form_validation->set_rules('remarks', 'remarks', 'required');
-			if ($this->input->post('single_agent') == 'no') {
-				$this->form_validation->set_rules('agent_1', 'First Agent', 'required');
-				$this->form_validation->set_rules('agent_2', 'Second Agent', 'required');
-			} else {
-				$this->form_validation->set_rules('agent_1', 'First Agent', 'required');
+			$this->form_validation->set_rules('co_applicant', 'Co-Applicant Name', 'required');
+			$this->form_validation->set_rules('guarantee_name', 'Guarantee Name', 'required');
+			$this->form_validation->set_rules('geo_limit', 'Geo Limit', 'required');
+			$this->form_validation->set_rules('tat_start', 'TAT Start', 'required');
+			$this->form_validation->set_rules('tat_end', 'TAT End', 'required');
+			$this->form_validation->set_rules('remarks', 'Remarks', 'required');
+			$fi_type = $this->input->post('fi_to_be_conducted');
+			if (!empty($fi_type[0]) && (isset($fi_type[1]) && !empty($fi_type[1]))) {
+				$this->form_validation->set_rules('bv_agent', 'BV Agent', 'required');
+				$this->form_validation->set_rules('rv_agent', 'RV Agent', 'required');
+			} else if (isset($fi_type[0]) && !empty($fi_type[0])) {
+				$this->form_validation->set_rules('bv_agent', 'BV Agent', 'required');
 			}
 
 
 			if ($this->form_validation->run()) {
-// print_r($this->input->post());die;
-				$fi_to_be_conducted = $this->input->post('fi_to_be_conducted');
-				foreach ($fi_to_be_conducted as $key => $val) {
+				// print_r($this->input->post());
+				// die;
+				foreach ($fi_type as $key => $val) {
 					$varification = [];
 					$address 	= array_values(array_filter($this->input->post('address')));
 					$name 		= array_values(array_filter($this->input->post('name')));
@@ -95,7 +97,8 @@ class Case_form extends CI_Controller
 					$varification['co_applicant'] 		= $this->input->post('co_applicant');
 					$varification['guarantee_name'] 	= $this->input->post('guarantee_name');
 					$varification['geo_limit'] 			= $this->input->post('geo_limit');
-					$varification['tat'] 				= $this->input->post('tat');
+					$varification['tat_start'] 			= $this->input->post('tat_start');
+					$varification['tat_end'] 			= $this->input->post('tat_end');
 					$varification['remarks'] 			= $this->input->post('remarks');
 					$varification['fi_to_be_conducted'] = $val;
 					$varification['business_address'] 	= $address[$key];

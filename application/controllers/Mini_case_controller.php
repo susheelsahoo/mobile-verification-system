@@ -58,39 +58,41 @@ class Mini_case_controller extends CI_Controller
 			$this->form_validation->set_rules('name', 'name', '');
 			$this->form_validation->set_rules('amount', 'amount', 'required');
 			$this->form_validation->set_rules('vehicle', 'vehicle', '');
-			if ($this->input->post('single_agent') == 'no') {
-				$this->form_validation->set_rules('agent_1', 'First Agent', 'required');
-				$this->form_validation->set_rules('agent_2', 'Second Agent', 'required');
-			} else {
-				$this->form_validation->set_rules('agent_1', 'First Agent', 'required');
+			$this->form_validation->set_rules('tat_start', 'tat_start', 'required');
+			$this->form_validation->set_rules('tat_end', 'tat_end', 'required');
+			$fi_type = $this->input->post('fi_type');
+			if (!empty($fi_type[0]) && (isset($fi_type[1]) && !empty($fi_type[1]))) {
+				$this->form_validation->set_rules('bv_agent', 'BV Agent', 'required');
+				$this->form_validation->set_rules('rv_agent', 'RV Agent', 'required');
+			} else if (isset($fi_type[0]) && !empty($fi_type[0])) {
+				$this->form_validation->set_rules('bv_agent', 'BV Agent', 'required');
 			}
-
 			if ($this->form_validation->run()) {
-				$fi_type = $this->input->post('fi_type');
 				foreach ($fi_type as $key => $val) {
-
 					$varification = [];
 					$address 	= array_values(array_filter($this->input->post('address')));
 					$name 		= array_values(array_filter($this->input->post('name')));
 					$city 		= array_values(array_filter($this->input->post('city')));
 					$pincode 	= array_values(array_filter($this->input->post('pin_code')));
-					$varification['code'] = $this->input->post('agent_1');
+					$varification['code'] = $this->input->post('bv_agent');
 					if ($key == 1) {
-						$varification['code'] = $this->input->post('agent_2');
+						$varification['code'] = $this->input->post('rv_agent');
 					}
 
 					$varification['product'] 		= $this->input->post('product');
 					$varification['reference_no'] 	= $this->input->post('reference_no');
 					$varification['name'] 			= $this->input->post('applicant_name');
-					$varification['amount'] 			= $this->input->post('amount');
-					$varification['vehicle'] 			= $this->input->post('vehicle');
-					$varification['fi_type'] = $val;
+					$varification['amount'] 		= $this->input->post('amount');
+					$varification['vehicle'] 		= $this->input->post('vehicle');
+					$varification['tat_start'] 		= $this->input->post('tat_start');
+					$varification['tat_end'] 		= $this->input->post('tat_end');
+					$varification['fi_type'] 		= $val;
 					$varification['business_add'] 	= $address[$key];
-					$varification['business_name'] 		= $name[$key];
-					$varification['city'] 				= $city[$key];
-					$varification['pin_code'] 			= $pincode[$key];
+					$varification['business_name'] 	= $name[$key];
+					$varification['city'] 			= $city[$key];
+					$varification['pin_code'] 		= $pincode[$key];
 					$varification['bank'] 			= $this->input->post('bank');
-					//$varification['status'] 			= '1';
+					//$varification['status'] 		= '1';
 
 					$res_id = $this->Mini_case_model->insert_mini_case($varification);
 				}

@@ -82,17 +82,6 @@
             padding: 20px;
         }
 
-        .col-25 {
-            float: left;
-            width: 25%;
-            margin-top: 6px;
-        }
-
-        .col-75 {
-            float: left;
-            width: 75%;
-            margin-top: 6px;
-        }
 
         /* Clear floats after the columns */
         .row:after {
@@ -108,15 +97,6 @@
         }
 
         /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
-        @media screen and (max-width: 600px) {
-
-            .col-25,
-            .col-75,
-            input[type=submit] {
-                width: 100%;
-                margin-top: 0;
-            }
-        }
     </style>
 
     <style>
@@ -312,15 +292,19 @@
             $('.fi_type_rv').change(function() {
                 if ($('.fi_type_rv:checked').length == 0) {
                     $('#residence_section').addClass('hide');
+                    $('#RV_agent').addClass('hide');
                 } else {
                     $('#residence_section').removeClass('hide');
+                    $('#RV_agent').removeClass('hide');
                 }
             });
             $('.fi_type_bv').change(function() {
                 if ($('.fi_type_bv:checked').length == 0) {
                     $('#business_section').addClass('hide');
+                    $('#BV_agent').addClass('hide');
                 } else {
                     $('#business_section').removeClass('hide');
+                    $('#BV_agent').removeClass('hide');
                 }
             });
             $('#single_agent').on('change', function() {
@@ -382,12 +366,12 @@
         </header>
         <?php echo form_open('Mini_case_controller/create_Quick_case_form_submit', array("id" => "form_Quick_bank", "class" => "form-horizontal")); ?>
         <div class="row">
-            <div class="col-25">
+            <div class="col-md-3">
                 <label for="bank">
                     Bank<span class="text-danger"> *</span>
                 </label>
             </div>
-            <div class="col-75">
+            <div class="col-md-9">
                 <select class="form-control" id="bank" name="bank">
                     <option value="" selected>-- SELECT BANK --</option>
                     <?php foreach ($bank_names as $bank) { ?>
@@ -399,10 +383,10 @@
         </div>
 
         <div class="row">
-            <div class="col-25">
+            <div class="col-md-3">
                 <label for="product">Product<span class="text-danger"> *</span></label>
             </div>
-            <div class="col-75">
+            <div class="col-md-9">
                 <select class="form-control" id="product" name="product">
                     <option value="" selected>-- SELECT PRODUCT --</option>
                     <?php foreach ($product_data as $product) { ?>
@@ -413,10 +397,10 @@
         </div>
 
         <div class="row">
-            <div class="col-25">
+            <div class="col-md-3">
                 <label for="fi_type">Fi type<span class="text-danger"> *</span></label>
             </div>
-            <div class="col-75">
+            <div class="col-md-9">
                 <input type="checkbox" class="fi_type_bv" name="fi_type[]" value="BV">
                 <label for="fi_type"> BV</label>
                 <input type="checkbox" class="fi_type_rv" name="fi_type[]" value="RV">
@@ -425,27 +409,27 @@
         </div>
 
         <div class="row">
-            <div class="col-25">
+            <div class="col-md-3">
                 <label for="reference_no">Reference No.<span class="text-danger"> *</span></label>
             </div>
-            <div class="col-75">
+            <div class="col-md-9">
                 <input class="form-control" type="text" id="reference_no" name="reference_no" placeholder="Enter your Reference Number">
             </div>
         </div>
         <div class="row">
-            <div class="col-25">
+            <div class="col-md-3">
                 <label for="applicant_name">Applicant Name<span class="text-danger"> *</span></label>
             </div>
-            <div class="col-75">
+            <div class="col-md-9">
                 <input class="form-control" type="text" id="applicant_name" name="applicant_name" placeholder="Enter your Applicant Name">
             </div>
         </div>
 
         <div class="row">
-            <div class="col-25">
+            <div class="col-md-3">
                 <label for="amount">Amount<span class="text-danger"> *</span></label>
             </div>
-            <div class="col-75">
+            <div class="col-md-9">
                 <input class="form-control" type="number" id="amount" name="amount" placeholder="Enter Amount">
             </div>
         </div>
@@ -454,36 +438,36 @@
 
         <span id="business_section" class="hide">
             <div class="row">
-                <div class="col-25">
+                <div class="col-md-3">
                     <label for="business_name">Business Name</label>
                 </div>
-                <div class="col-75">
+                <div class="col-md-9">
                     <input class="form-control" type="text" id="business_name" name="name[]" placeholder="Enter Business name">
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-25">
+                <div class="col-md-3">
                     <label for="business_add">Business Add.</label>
                 </div>
-                <div class="col-75">
+                <div class="col-md-9">
                     <input class="form-control" type="text" id="business_add" name="address[]" placeholder="Enter Business Address">
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-25">
+                <div class="col-md-3">
                     <label for="city">Business City</label>
                 </div>
-                <div class="col-75">
+                <div class="col-md-9">
                     <input class="form-control" type="text" id="business_city" name="city[]" placeholder="Enter Business City">
                 </div>
             </div>
             <div class="row">
-                <div class="col-25">
+                <div class="col-md-3">
                     <label for="pin_code">Business Pincode</label>
                 </div>
-                <div class="col-75">
+                <div class="col-md-9">
                     <input class="form-control" type="number" id="business_pincode" name="pin_code[]" placeholder="Enter Business pincode">
                 </div>
             </div>
@@ -491,61 +475,60 @@
 
         <span id="residence_section" class="hide">
             <div class="row">
-                <div class="col-25">
+                <div class="col-md-3">
                     <label for="residence_address">Residence Add.</label>
                 </div>
-                <div class="col-75">
+                <div class="col-md-9">
                     <input class="form-control" type="text" id="residence_address" name="address[]" placeholder="Enter Residence Address">
                 </div>
             </div>
             <div class="row">
-                <div class="col-25">
+                <div class="col-md-3">
                     <label for="city">Residence City</label>
                 </div>
-                <div class="col-75">
+                <div class="col-md-9">
                     <input class="form-control" type="text" id="residence_city" name="city[]" placeholder="Enter Residence City">
                 </div>
             </div>
             <div class="row">
-                <div class="col-25">
+                <div class="col-md-3">
                     <label for="pin_code">Pincode</label>
                 </div>
-                <div class="col-75">
+                <div class="col-md-9">
                     <input class="form-control" type="number" id="residence_pincode" name="pin_code[]" placeholder="Enter Residence pincode">
                 </div>
             </div>
         </span>
 
         <div class="row">
-            <div class="col-25">
+            <div class="col-md-3">
                 <label for="vehicle">Vehicle<span class="text-danger"> *</span></label>
             </div>
-            <div class="col-75">
+            <div class="col-md-9">
                 <input class="form-control" type="text" id="vehicle" name="vehicle" placeholder="Enter Vehicle">
             </div>
         </div>
-
-
         <div class="row">
-            <div class="col-25">
-                <label for="single_agent">Signle Agent</label>
+            <div class="col-md-3">
+                <label for="tat">TAT Start<span class="text-danger"> *</span></label>
             </div>
-            <div class="col-75">
-                <select class="form-control" id="single_agent" name="single_agent">
-                    <!-- <option value="" selected>-- CHOOSE --</option> -->
-                    <option value="yes" selected>YES</option>
-                    <option value="no">NO</option>
-                </select>
+            <div class="col-md-3">
+                <input type="datetime-local" name="tat_start" class="form-control">
+            </div>
+            <div class="col-md-2">
+                <label for="tat">TAT End<span class="text-danger"> *</span></label>
+            </div>
+            <div class="col-md-4">
+                <input type="datetime-local" name="tat_end" class="form-control">
             </div>
         </div>
 
-
-        <div class="row" id="First_agent">
-            <div class="col-25">
-                <label for="code">RV Agent</label>
+        <div class="row hide" id="BV_agent">
+            <div class="col-md-3">
+                <label for="code"> BV Agent <span class="text-danger"> *</span></label>
             </div>
-            <div class="col-75">
-                <select class="form-control code" name="agent_1">
+            <div class="col-md-9">
+                <select class="form-control code" id="bv_agent" name="bv_agent">
                     <option value="" selected>-- SELECT AGENT CODE --</option>
                     <?php foreach ($agent_code as $agent) { ?>
                         <option value="<?= $agent['employee_unique_id']; ?>"><?= $agent['first_name'] . ' - ' . $agent['employee_unique_id']; ?></option>
@@ -553,12 +536,12 @@
                 </select>
             </div>
         </div>
-        <div class="row hide" id="Second_agent">
-            <div class="col-25">
-                <label for="code"> BV Agent</label>
+        <div class="row hide" id="RV_agent">
+            <div class="col-md-3">
+                <label for="code">RV Agent <span class="text-danger"> *</span></label>
             </div>
-            <div class="col-75">
-                <select class="form-control code" name="agent_2">
+            <div class="col-md-9">
+                <select class="form-control code" id="rv_agent" name="rv_agent">
                     <option value="" selected>-- SELECT AGENT CODE --</option>
                     <?php foreach ($agent_code as $agent) { ?>
                         <option value="<?= $agent['employee_unique_id']; ?>"><?= $agent['first_name'] . ' - ' . $agent['employee_unique_id']; ?></option>
@@ -566,6 +549,7 @@
                 </select>
             </div>
         </div>
+
 
         <br>
 
