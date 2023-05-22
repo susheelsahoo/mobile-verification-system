@@ -55,6 +55,33 @@
                     [10, 25, 50, "All"]
                 ],
             });
+
+            $('#sub_btn').click(function(event) {
+                                                    event.preventDefault();
+
+                                                    var from = $('#from').val();
+                                                    var to = $('#to').val();
+                                                    var code = '<?php echo $data; ?>';
+                                                    //alert(code);
+
+                                                    var datastring = "from=" + from + "&to=" + to + "&code=" + code;
+                                                    $.ajax({
+                                                        type: "POST",
+                                                        url: "<?= base_url() ?>Assign_case_controller/filterDatewise",
+                                                        // dataType:"json",
+                                                        data: datastring,
+                                                        // contentType: "application/json; charset=utf-8",
+                                                        success: function(data) {
+                                                            //alert(data);
+                                                            $('#tbdy').html(data);
+
+                                                        },
+                                                        error: function() {
+                                                            // alert("Error");
+                                                        }
+                                                    });
+
+                                                });
             
 
         });
@@ -270,6 +297,12 @@
         <a href="<?php echo base_url(); ?>Admin_dashboard_controller/admin_dashboard" class="btn btn-info">Admin</a>
     </div>
     <br>
+
+    <label>From</label>
+    <input type="text" name="from" id="from" required value="<?php echo date("Y-m-d"); ?>">
+    <label>To</label>
+    <input type="text" name="to" id="to" required value="<?php echo date("Y-m-d"); ?>">
+    <button class="btn btn-warning " name="sub_btn" id="sub_btn"> GET </button>
    
        
     <br>
@@ -281,6 +314,7 @@
                     <tr class="">
                         <th width="6%">ID</th>
                         <th width="10%">Application ID</th>
+                        <!-- <th width="10%">ID name</th> -->
                         <th width="10%">Bank</th>
                         <th width="10%">FI Type</th>
                         <th width="10%">From</th>
@@ -290,7 +324,7 @@
                         <th width="10%">Remark</th>
                     </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody id="tbdy"></tbody>
             </table>
         </div>
     </div>
