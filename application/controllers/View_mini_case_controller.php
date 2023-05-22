@@ -101,8 +101,8 @@ class View_mini_case_controller extends CI_Controller
             // $this->load->view('login', array('error' => $error));
         }
     }
-    
-      function fetch_bv_remarks()
+
+    function fetch_bv_remarks()
     {
         try {
             $output = array();
@@ -389,8 +389,8 @@ class View_mini_case_controller extends CI_Controller
             $this->load->view('login_page', array('error' => $error));
         }
     }
-    
-       public function update_bv_remarks_validation()
+
+    public function update_bv_remarks_validation()
     {
         try {
             $this->load->library('form_validation');
@@ -402,6 +402,9 @@ class View_mini_case_controller extends CI_Controller
                     'bv_remarks' => $this->input->post('bv_remarks')
                 );
                 $this->load->model('View_mini_case_model');
+                print_r($bv_id);
+                print_r($array);
+                die;
                 $insert_user = $this->View_mini_case_model->update_bv_remarks($bv_id, $array);
                 if ($insert_user) {
                     $response = array(
@@ -426,8 +429,8 @@ class View_mini_case_controller extends CI_Controller
             $this->load->view('login_page', array('error' => $error));
         }
     }
-    
-    
+
+
     //   public function update_rv_remarks_validation()
     // {
     //     try {
