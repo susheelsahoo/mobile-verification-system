@@ -14,7 +14,9 @@ if ($this->session->flashdata('res_data')) {
 
 
 <script>
+    debugger
     setTimeout(function() {
         $(".alert-dismissible").hide();
     }, 5000);
+    debugger
 </script>
