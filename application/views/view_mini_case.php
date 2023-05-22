@@ -402,6 +402,8 @@
                 },
                 dataType: "json",
                 success: function(data) {
+                    debugger
+
                     $('#user_bv_remarks_edit').modal('show');
                     $('#u_rv_remarks').val(data.rv_remarks);
                     $('#u_rv_id').val(user_id);
@@ -875,7 +877,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                   
+
                 </div>
             </div>
         </div>
@@ -1044,28 +1046,28 @@
     </div>
 
 
-    <!--<div class="modal fade" id="user_bv_remarks_edit" tabindex="-1" role="dialog" aria-hidden="true">-->
-    <!--    <div class="modal-dialog" role="document">-->
-    <!--        <div class="modal-content">-->
-    <!--            <div class="modal-header">-->
-    <!--                <h5 class="modal-title">Update BV Remarks</h5>-->
-    <!--            </div>-->
-    <!--            <?php echo form_open("View_mini_case_controller/update_bv_remarks_validation", array("id" => "update_rv_remarks", "class" => "form-horizontal")) ?>-->
-    <!--            <div class="modal-body">-->
-    <!--                <div class="form-row">-->
-    <!--                    <input type="hidden" class="form-control" id="u_rv_id" name="rv_id">-->
+    <div class="modal fade" id="user_bv_remarks_edit" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update BV Remarks</h5>
+                </div>
+                <?php echo form_open("View_mini_case_controller/update_bv_remarks_validation", array("id" => "update_rv_remarks", "class" => "form-horizontal")) ?>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <input type="hidden" class="form-control" id="u_rv_id" name="rv_id">
 
-    <!--                    <div class="form-group col-md-12">-->
-    <!--                        <label for="rv_remarks" class="h5">BV Remarks</label>-->
-    <!--                        <textarea type="text" class="form-control" id="u_rv_remarks" placeholder="Enter Rv Remarks" name="rv_remarks"></textarea>-->
-    <!--                    </div>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--            <div class="modal-footer">-->
-    <!--                <input type="submit" name="update_rv_remarks" id="update_rvr_data" class="btn btn-primary" value="Edit">-->
-    <!--                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--        <?php echo form_close(); ?>-->
-    <!--    </div>-->
-    <!--</div>-->
+                        <div class="form-group col-md-12">
+                            <label for="rv_remarks" class="h5">BV Remarks</label>
+                            <textarea type="text" class="form-control" id="u_rv_remarks" placeholder="Enter Rv Remarks" name="rv_remarks"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" name="update_rv_remarks" id="update_rvr_data" class="btn btn-primary" value="Edit">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <?php echo form_close(); ?>
+        </div>
+    </div>
