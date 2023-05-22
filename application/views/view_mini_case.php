@@ -123,15 +123,15 @@
                         $('.bv_pincode').html("<b>Pincode:</b> " + data.bv_pincode);
                         $('.bv_location_add').html("<b>location:</b> " + data.bv_location_add);
                         $('.bv_remarks').html("<b>Remarks:</b> " + data.bv_remarks);
-                        $('.mini_case_img').append(data.bv_image1);
-                        $('.mini_case_img').append(data.bv_image2);
-                        $('.mini_case_img').append(data.bv_image3);
-                        $('.mini_case_img').append(data.bv_image4);
-                        $('.mini_case_img').append(data.bv_image5);
-                        $('.mini_case_img').append(data.bv_image6);
-                        $('.mini_case_img').append(data.bv_image7);
-                        $('.mini_case_img').append(data.bv_image8);
-                        $('.mini_case_img').append(data.bv_image9);
+                        $('.mini_bv_case_img').append(data.bv_image1);
+                        $('.mini_bv_case_img').append(data.bv_image2);
+                        $('.mini_bv_case_img').append(data.bv_image3);
+                        $('.mini_bv_case_img').append(data.bv_image4);
+                        $('.mini_bv_case_img').append(data.bv_image5);
+                        $('.mini_bv_case_img').append(data.bv_image6);
+                        $('.mini_bv_case_img').append(data.bv_image7);
+                        $('.mini_bv_case_img').append(data.bv_image8);
+                        $('.mini_bv_case_img').append(data.bv_image9);
                         // $('.t_teacher_id').text(user_id);
                         // $('.uploaded_image').attr("src", data.photos);
 
@@ -166,15 +166,15 @@
                         $('.bv_pincode').html("<b>Pincode:</b> " + data.bv_pincode);
                         $('.bv_location_add').html("<b>location:</b> " + data.bv_location_add);
                         $('.bv_remarks').html("<b>Remarks:</b> " + data.bv_remarks);
-                        $('.mini_case_img').append(data.bv_image1);
-                        $('.mini_case_img').append(data.bv_image2);
-                        $('.mini_case_img').append(data.bv_image3);
-                        $('.mini_case_img').append(data.bv_image4);
-                        $('.mini_case_img').append(data.bv_image5);
-                        $('.mini_case_img').append(data.bv_image6);
-                        $('.mini_case_img').append(data.bv_image7);
-                        $('.mini_case_img').append(data.bv_image8);
-                        $('.mini_case_img').append(data.bv_image9);
+                        $('.mini_rv_case_img').append(data.rv_image1);
+                        $('.mini_rv_case_img').append(data.rv_image2);
+                        $('.mini_rv_case_img').append(data.rv_image3);
+                        $('.mini_rv_case_img').append(data.rv_image4);
+                        $('.mini_rv_case_img').append(data.rv_image5);
+                        $('.mini_rv_case_img').append(data.rv_image6);
+                        $('.mini_rv_case_img').append(data.rv_image7);
+                        $('.mini_rv_case_img').append(data.rv_image8);
+                        $('.mini_rv_case_img').append(data.rv_image9);
                         // $('.t_teacher_id').text(user_id);
                         // $('.uploaded_image').attr("src", data.photos);
 
@@ -868,7 +868,7 @@
 
 
 
-                    <div class="mini_case_img">
+                    <div class="mini_bv_case_img">
 
                     </div>
 
@@ -1006,15 +1006,9 @@
 
 
 
-                    <img class="rv_image1" height="150" width="150">
-                    <img class="rv_image2" height="150" width="150">
-                    <img class="rv_image3" height="150" width="150">
-                    <img class="rv_image4" height="150" width="150">
-                    <img class="rv_image5" height="150" width="150">
-                    <img class="rv_image6" height="150" width="150">
-                    <img class="rv_image7" height="150" width="150">
-                    <img class="rv_image8" height="150" width="150">
-                    <img class="rv_image9" height="150" width="150">
+                    <div class="mini_rv_case_img">
+
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
