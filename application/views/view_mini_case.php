@@ -123,6 +123,7 @@
                         $('.bv_pincode').html("<b>Pincode:</b> " + data.bv_pincode);
                         $('.bv_location_add').html("<b>location:</b> " + data.bv_location_add);
                         $('.bv_remarks').html("<b>Remarks:</b> " + data.bv_remarks);
+                        $(".mini_bv_case_img").html('');
                         $('.mini_bv_case_img').append(data.bv_image1);
                         $('.mini_bv_case_img').append(data.bv_image2);
                         $('.mini_bv_case_img').append(data.bv_image3);
@@ -166,6 +167,7 @@
                         $('.bv_pincode').html("<b>Pincode:</b> " + data.bv_pincode);
                         $('.bv_location_add').html("<b>location:</b> " + data.bv_location_add);
                         $('.bv_remarks').html("<b>Remarks:</b> " + data.bv_remarks);
+                        $(".mini_rv_case_img").html('');
                         $('.mini_rv_case_img').append(data.rv_image1);
                         $('.mini_rv_case_img').append(data.rv_image2);
                         $('.mini_rv_case_img').append(data.rv_image3);
