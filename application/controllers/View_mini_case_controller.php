@@ -44,12 +44,14 @@ class View_mini_case_controller extends CI_Controller
             foreach ($fetch_mini_case as $row) {
                 $sub_array = array();
                 $buttons = '';
+                if ($row->fi_type == 'BV') {
+                    $buttons .= '<button type="button" title="View Case" name="view" id="' . $row->id . '" class="btn btn-primary btn-sm view_quick_case"><i class="fa fa-eye" ></i></button>';
+                    $buttons .= '<button type="button" title="BV Remarks" name="view" id="' . $row->id . '" class="btn btn-success btn-sm edit_bv"><i class="fa fa-pencil" ></i></button>';
+                } else {
+                    $buttons .= '<button type="button" title="View RV Case" name="view" id="' . $row->id . '" class="btn btn-primary btn-sm view_rv_case"><i class="fa fa-eye" ></i></button>';
+                    $buttons .= '<button type="button" title="RV Remarks" name="view" id="' . $row->id . '" class="btn btn-warning btn-sm edit_rv"><i class="fa fa-pencil" ></i></button>';
+                }
 
-                $buttons .= '<button type="button" title="View Case" name="view" id="' . $row->id . '" class="btn btn-primary btn-sm view_quick_case"><i class="fa fa-eye" ></i></button>';
-
-                $buttons .= '<button type="button" title="RV Remarks" name="view" id="' . $row->id . '" class="btn btn-warning btn-sm edit_rv"><i class="fa fa-pencil" ></i></button>';
-
-                $buttons .= '<button type="button" title="BV Remarks" name="view" id="' . $row->id . '" class="btn btn-success btn-sm edit_bv"><i class="fa fa-pencil" ></i></button>';
 
                 // $sub_array[] = $i;
                 $sub_array[] = $row->id;
@@ -95,7 +97,8 @@ class View_mini_case_controller extends CI_Controller
         } catch (Exception $ex) {
             $error['error'] = TRUE;
             $error['message'] = $ex->getMessage();
-            $this->load->view('login', array('error' => $error));
+            echo '$error';
+            // $this->load->view('login', array('error' => $error));
         }
     }
 
@@ -120,8 +123,10 @@ class View_mini_case_controller extends CI_Controller
                 $output['business_add']     = $row->business_add;
                 $output['bv_lat']           = $row->bv_lat;
                 $output['bv_long']          = $row->bv_long;
-                $output['bv_pincode']       = $row->pin_code;
-                $output['bv_location_add']  = $row->city;
+                // $output['bv_pincode']       = $row->pin_code;
+                // $output['bv_location_add']  = $row->city;
+                $output['bv_pincode']       = $row->bv_pincode;
+                $output['bv_location_add']  = $row->bv_location_add;
                 $output['bv_remarks']       = $row->bv_remarks;
 
 
@@ -227,6 +232,7 @@ class View_mini_case_controller extends CI_Controller
                 $output['code'] = $row->code;
                 $output['address'] = $row->address;
                 $output['business_name'] = $row->business_name;
+                $output['city'] = $row->city;
                 $output['business_add'] = $row->business_add;
                 $output['rv_lat'] = $row->rv_lat;
                 $output['rv_long'] = $row->rv_long;
