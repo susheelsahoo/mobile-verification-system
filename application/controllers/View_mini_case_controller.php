@@ -101,6 +101,26 @@ class View_mini_case_controller extends CI_Controller
             // $this->load->view('login', array('error' => $error));
         }
     }
+    
+      function fetch_bv_remarks()
+    {
+        try {
+            $output = array();
+            $this->load->model("View_mini_case_model");
+            $data = $this->View_mini_case_model->fetch_bv_remarks($_POST["user_id"]);
+            foreach ($data as $row) {
+                // $output['id'] = $row->id;
+                $output['bv_remarks'] = $row->bv_remarks;
+            }
+            echo json_encode($output);
+        } catch (Exception $ex) {
+            $error['error'] = TRUE;
+            $error['message'] = $ex->getMessage();
+            echo '$error';
+            // $this->load->view('login', array('error' => $error));
+        }
+    }
+
 
     function fetch_single_mini_case()
     {
@@ -369,4 +389,79 @@ class View_mini_case_controller extends CI_Controller
             $this->load->view('login_page', array('error' => $error));
         }
     }
+    
+       public function update_bv_remarks_validation()
+    {
+        try {
+            $this->load->library('form_validation');
+            $this->form_validation->set_rules('bv_remarks', 'bv_remarks', '');
+            $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+            if ($this->form_validation->run()) {
+                $bv_id = $_POST["bv_id"];
+                $array = array(
+                    'bv_remarks' => $this->input->post('bv_remarks')
+                );
+                $this->load->model('View_mini_case_model');
+                $insert_user = $this->View_mini_case_model->update_bv_remarks($bv_id, $array);
+                if ($insert_user) {
+                    $response = array(
+                        'success' => true,
+                        'message' => "BV Remarks updated successfully!"
+                    );
+                } else {
+                    $response = array(
+                        'error' => true,
+                        'message' => "error in data!"
+                    );
+                }
+            } else {
+                foreach ($_POST as $key => $value) {
+                    $response['message'][$key] = form_error($key);
+                }
+            }
+            echo json_encode($response);
+        } catch (Exception $ex) {
+            $error['error'] = TRUE;
+            $error['message'] = $ex->getMessage();
+            $this->load->view('login_page', array('error' => $error));
+        }
+    }
+    
+    
+    //   public function update_rv_remarks_validation()
+    // {
+    //     try {
+    //         $this->load->library('form_validation');
+    //         $this->form_validation->set_rules('rv_remarks', 'rv_remarks', '');
+    //         $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+    //         if ($this->form_validation->run()) {
+    //             $pass_id = $_POST["rv_id"];
+    //             $array = array(
+    //                 'rv_remarks' => $this->input->post('rv_remarks')
+    //             );
+    //             $this->load->model('View_mini_case_model');
+    //             $insert_user = $this->View_mini_case_model->update_rv_remarks($pass_id, $array);
+    //             if ($insert_user) {
+    //                 $response = array(
+    //                     'success' => true,
+    //                     'message' => "RV Remarks updated successfully!"
+    //                 );
+    //             } else {
+    //                 $response = array(
+    //                     'error' => true,
+    //                     'message' => "error in data!"
+    //                 );
+    //             }
+    //         } else {
+    //             foreach ($_POST as $key => $value) {
+    //                 $response['message'][$key] = form_error($key);
+    //             }
+    //         }
+    //         echo json_encode($response);
+    //     } catch (Exception $ex) {
+    //         $error['error'] = TRUE;
+    //         $error['message'] = $ex->getMessage();
+    //         $this->load->view('login_page', array('error' => $error));
+    //     }
+    // }
 }

@@ -562,6 +562,11 @@ class Api extends CI_Controller
             $rv_cpv_done_by = $this->input->post('rv_cpv_done_by');
             $rv_visit_date = $this->input->post('rv_visit_date');
             $rv_remarks = $this->input->post('rv_remarks');
+              $rv_lat = $this->input->post('rv_lat');
+               $rv_long = $this->input->post('rv_long');
+                $rv_pincode = $this->input->post('rv_pincode');
+                 $rv_location_add = $this->input->post('rv_location_add');
+              
             $rv_image1 = $this->input->post('rv_image1');
             $rv_image2 = $this->input->post('rv_image2');
             $rv_image3 = $this->input->post('rv_image3');
@@ -591,6 +596,10 @@ class Api extends CI_Controller
                     'rv_no_of_earning_members' => $rv_no_of_earning_members,
                     'rv_details_of_earning_member' => $rv_details_of_earning_member,
                     'rv_dependent' => $rv_dependent,
+                     'rv_lat' => $rv_lat,
+                      'rv_long' => $rv_long,
+                       'rv_pincode' => $rv_pincode,
+                        'rv_location_add' => $rv_location_add,
                     'rv_user_office_address' => $rv_user_office_address,
                     'rv_residence_proof' => $rv_residence_proof,
                     'rv_agriculture_land' => $rv_agriculture_land,
@@ -673,6 +682,10 @@ class Api extends CI_Controller
             $bv_verified_name = $this->input->post('bv_verified_name');
             $bv_dt_of_cpv = $this->input->post('bv_dt_of_cpv');
             $bv_remarks = $this->input->post('bv_remarks');
+             $bv_lat = $this->input->post('bv_lat');
+              $bv_long = $this->input->post('bv_long');
+               $bv_pincode = $this->input->post('bv_pincode');
+                $bv_location_add = $this->input->post('bv_location_add');
             $bv_image1 = $this->input->post('bv_image1');
             $bv_image2 = $this->input->post('bv_image2');
             $bv_image3 = $this->input->post('bv_image3');
@@ -696,6 +709,10 @@ class Api extends CI_Controller
                     'bv_business_type' => $bv_business_type,
                     'bv_no_employee' => $bv_no_employee,
                     'bv_stocks' => $bv_stocks,
+                     'bv_lat' => $bv_lat,
+                      'bv_long' => $bv_long,
+                       'bv_pincode' => $bv_pincode,
+                        'bv_location_add' => $bv_location_add,
                     'bv_business_activity' => $bv_business_activity,
                     'bv_stability' => $bv_stability,
                     'bv_ownership' => $bv_ownership,
