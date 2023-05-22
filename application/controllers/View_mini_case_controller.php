@@ -101,8 +101,8 @@ class View_mini_case_controller extends CI_Controller
             // $this->load->view('login', array('error' => $error));
         }
     }
-    
-      function fetch_bv_remarks()
+
+    function fetch_bv_remarks()
     {
         try {
             $output = array();
@@ -147,7 +147,7 @@ class View_mini_case_controller extends CI_Controller
                 // $output['bv_location_add']  = $row->city;
                 $output['bv_pincode']       = $row->bv_pincode;
                 $output['bv_location_add']  = $row->bv_location_add;
-                $output['remarks']       = $row->remarks; 
+                $output['remarks']       = $row->remarks;
                 $output['city']       = $row->city;
 
 
@@ -260,7 +260,7 @@ class View_mini_case_controller extends CI_Controller
                 $output['rv_pincode'] = $row->rv_pincode;
                 $output['rv_location_add'] = $row->rv_location_add;
                 $output['remarks'] = $row->remarks;
-                 $output['city'] = $row->city;
+                $output['city'] = $row->city;
 
 
                 $temp_image = $row->rv_image1;
@@ -391,13 +391,13 @@ class View_mini_case_controller extends CI_Controller
             $this->load->view('login_page', array('error' => $error));
         }
     }
-    
-       public function update_remarks_validation()
+
+    public function update_remarks_validation()
     {
         try {
             $this->load->library('form_validation');
             $this->form_validation->set_rules('remarks', 'remarks', 'required');
-        
+            $response = [];
             if ($this->form_validation->run()) {
                 // print_r($this->input->post());die;
                 $minicase_id = $_POST["minicase_id"];
@@ -411,24 +411,23 @@ class View_mini_case_controller extends CI_Controller
                 // die;
                 $insert_user = $this->View_mini_case_model->update_bv_remarks($minicase_id, $array);
                 if ($insert_user) {
-                   
+
                     $response = array('type' => 'success', 'massege' => 'Remarks updated successfully!');
                 } else {
-                   
+
                     $response = array('type' => 'danger', 'massege' => 'Somthing went wrong please contact to administrator');
                 }
             } else {
-                $response = array('type' => 'danger', 'massege' => 'validation error error...');				
+                $response = array('type' => 'danger', 'massege' => 'validation error error...');
             }
-           
         } catch (Exception $ex) {
-            $response = array('type' => 'danger', 'massege' => 'try error...');           
+            $response = array('type' => 'danger', 'massege' => 'try error...');
         }
         $this->session->set_flashdata('res_data', $response);
         redirect(base_url("/View_mini_case_controller/view_mini_case_open"));
     }
-    
-    
+
+
     //   public function update_rv_remarks_validation()
     // {
     //     try {

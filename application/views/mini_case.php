@@ -502,10 +502,10 @@
 
         <div class="row">
             <div class="col-md-3">
-                <label for="vehicle">Vehicle<span class="text-danger"> *</span></label>
+                <label for="vehicle">Vehicle</label>
             </div>
             <div class="col-md-9">
-                <input class="form-control" type="text" id="vehicle" name="vehicle" placeholder="Enter Vehicle">
+                <input class="form-control" type="text" name="vehicle" placeholder="Enter Vehicle">
             </div>
         </div>
         <div class="row">
