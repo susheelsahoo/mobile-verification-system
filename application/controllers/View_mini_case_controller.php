@@ -138,7 +138,7 @@ class View_mini_case_controller extends CI_Controller
                 $output['reference_no']     = $row->reference_no;
                 $output['name']             = $row->name;
                 $output['code']             = $row->code;
-                $output['address']          = $row->business_add;
+                // $output['address']          = $row->business_add;
                 $output['business_name']    = $row->business_name;
                 $output['business_add']     = $row->business_add;
                 $output['bv_lat']           = $row->bv_lat;
@@ -147,7 +147,8 @@ class View_mini_case_controller extends CI_Controller
                 // $output['bv_location_add']  = $row->city;
                 $output['bv_pincode']       = $row->bv_pincode;
                 $output['bv_location_add']  = $row->bv_location_add;
-                $output['bv_remarks']       = $row->bv_remarks;
+                $output['remarks']       = $row->remarks; 
+                $output['city']       = $row->city;
 
 
                 $temp_image = $row->bv_image1;
@@ -250,7 +251,7 @@ class View_mini_case_controller extends CI_Controller
                 $output['reference_no'] = $row->reference_no;
                 $output['name'] = $row->name;
                 $output['code'] = $row->code;
-                $output['address'] = $row->address;
+                $output['address'] = $row->business_add;
                 $output['business_name'] = $row->business_name;
                 $output['city'] = $row->city;
                 $output['business_add'] = $row->business_add;
@@ -258,7 +259,8 @@ class View_mini_case_controller extends CI_Controller
                 $output['rv_long'] = $row->rv_long;
                 $output['rv_pincode'] = $row->rv_pincode;
                 $output['rv_location_add'] = $row->rv_location_add;
-                $output['rv_remarks'] = $row->rv_remarks;
+                $output['remarks'] = $row->remarks;
+                 $output['city'] = $row->city;
 
 
                 $temp_image = $row->rv_image1;

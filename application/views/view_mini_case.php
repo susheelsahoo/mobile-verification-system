@@ -113,16 +113,16 @@
                         $('.s_reference_no').html("<b>Reference no.:</b> " + data.reference_no);
                         $('.s_name').html("<b>Name:</b> " + data.name);
                         $('.s_agent_code').html("<b>Agent code:</b> " + data.code);
-                        $('.s_address').html("<b>Address:</b> " + data.address);
+                        $('.s_address').html("<b>Address:</b> " + data.business_add);
                         $('.s_business_name').html("<b>Business Name:</b> " + data.business_name);
                         $('.s_business_add').html("<b>Business Address:</b> " + data.business_add);
-                        // $('.s_residence_add').html("<b>Residence Address:</b> " + data.residence_add);
+                        $('.s_residence_add').html("<b>City:</b> " + data.city);
                         $('.s_mobile').html("<b>Mobile:</b> " + data.mobile);
                         $('.bv_lat').html("<b>Latitude:</b> " + data.bv_lat);
                         $('.bv_long').html("<b>Longitude:</b> " + data.bv_long);
                         $('.bv_pincode').html("<b>Pincode:</b> " + data.bv_pincode);
                         $('.bv_location_add').html("<b>location:</b> " + data.bv_location_add);
-                        $('.bv_remarks').html("<b>Remarks:</b> " + data.bv_remarks);
+                        $('.remarks').html("<b>Remarks:</b> " + data.remarks);
                         $(".mini_bv_case_img").html('');
                         $('.mini_bv_case_img').append(data.bv_image1);
                         $('.mini_bv_case_img').append(data.bv_image2);
@@ -157,7 +157,7 @@
                         $('.s_reference_no').html("<b>Reference no.:</b> " + data.reference_no);
                         $('.s_name').html("<b>Name:</b> " + data.name);
                         $('.s_agent_code').html("<b>Agent code:</b> " + data.code);
-                        $('.s_address').html("<b>Address:</b> " + data.address);
+                        $('.s_address').html("<b>Address:</b> " + data.business_add);
                         $('.s_business_name').html("<b>Business Name:</b> " + data.business_name);
                         $('.s_business_add').html("<b>Business Address:</b> " + data.business_add);
                         // $('.s_residence_add').html("<b>Residence Address:</b> " + data.residence_add);
@@ -166,8 +166,8 @@
                         $('.rv_long').html("<b>Longitude:</b> " + data.rv_long);
                         $('.rv_pincode').html("<b>Pincode:</b> " + data.rv_pincode);
                         $('.rv_location_add').html("<b>location:</b> " + data.rv_location_add);
-                        $('.rv_remarks').html("<b>Remarks:</b> " + data.rv_remarks);
-                        $('.rv_city').html("<b>City:</b> " + data.rv_city);
+                        $('.remarks').html("<b>Remarks:</b> " + data.remarks);
+                        $('.rv_city').html("<b>City:</b> " + data.city);
                         $(".mini_rv_case_img").html('');
                         $('.mini_rv_case_img').append(data.rv_image1);
                         $('.mini_rv_case_img').append(data.rv_image2);
@@ -600,7 +600,7 @@
                         <div class="col-sm-12">
                             <div class="row pt-6 ">
                                 <div class="col-sm-6">
-                                    <h4 class="bv_remarks">
+                                    <h4 class="remarks">
                                     </h4>
                                 </div>
                                 <div class="col-sm-6">
@@ -736,7 +736,7 @@
                         <div class="col-sm-12">
                             <div class="row pt-6 ">
                                 <div class="col-sm-6">
-                                    <h4 class="rv_remarks">
+                                    <h4 class="remarks">
                                     </h4>
                                 </div>
                                 <div class="col-sm-6">
