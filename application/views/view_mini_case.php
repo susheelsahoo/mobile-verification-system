@@ -22,14 +22,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/select/1.6.2/js/dataTables.select.min.js"></script>
 
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.js"></script>
-    
-    
     <script>
         $(document).ready(function() {
             var dataTable = $('#fetch_mini_case_data').DataTable({
@@ -53,18 +49,9 @@
 
                 columnDefs: [{
                     "defaultContent": "-",
-"className": 'select-checkbox',
-            // "targets":   0
-                    "targets": [1, 9],
+                    "targets": [1, 10],
                     "orderable": false
                 }],
-
-                select: {
-            style:    'os',
-            selector: 'td:first-child'
-        },
-        order: [[ 1, 'asc' ]],
-
                 "lengthMenu": [
                     [15, 25, 50, -1],
                     [15, 25, 50, "All"]
@@ -126,6 +113,9 @@
                         $('.s_business_name').html("<b>Business Name:</b> " + data.business_name);
                         $('.s_business_add').html("<b>Business Address:</b> " + data.business_add);
                         $('.s_city').html("<b>City:</b> " + data.city);
+                        $('.s_created_at').html("<b>Date:</b> " + data.created_at);
+                        $('.s_tat_start').html("<b>TAT Start:</b> " + data.tat_start);
+                        $('.s_tat_end').html("<b>TAT End:</b> " + data.tat_end);
                         $('.s_residence_add').html("<b>City:</b> " + data.city);
                         $('.s_mobile').html("<b>Mobile:</b> " + data.mobile);
                         $('.bv_lat').html("<b>Latitude:</b> " + data.bv_lat);
@@ -169,7 +159,10 @@
                         $('.s_agent_code').html("<b>Agent code:</b> " + data.code);
                         $('.s_address').html("<b>Address:</b> " + data.business_add);
                         $('.s_business_name').html("<b>Business Name:</b> " + data.business_name);
-                        $('.s_business_add').html("<b>Business Address:</b> " + data.business_add);
+                        $('.s_business_name').html("<b>Business Name:</b> " + data.business_name);
+                        $('.s_created_at').html("<b>Date:</b> " + data.created_at);
+                        $('.s_tat_start').html("<b>TAT Start:</b> " + data.tat_start);
+                        $('.s_tat_end').html("<b>TAT End:</b> " + data.tat_end);
                         // $('.s_residence_add').html("<b>Residence Address:</b> " + data.residence_add);
                         $('.s_mobile').html("<b>Mobile:</b> " + data.mobile);
                         $('.rv_lat').html("<b>Latitude:</b> " + data.rv_lat);
@@ -194,32 +187,6 @@
                     }
                 });
             });
-
-
-            
-            $(document).on('click', '.reassign_case', function() {
-                var user_id = $(this).attr("id");
-                $.ajax({
-                    url: "<?php echo base_url(); ?>Assign_case_controller/fetch_single_reassign_case",
-                    method: "POST",
-                    data: {
-                        user_id: user_id
-                    },
-                    dataType: "json",
-                    success: function(data) {
-                        $('#reassign_case_model_mc').modal('show');
-                        $('#u_code').val(data.code);
-                        $('#u_reassign_remarks').val(data.reassign_remarks);
-                        // $('#u_residence_address').val(data.residence_address);
-
-                        $('#u_reassign_id').val(user_id);
-                        $('#update_assignee').val("edit");
-                    }
-                });
-            });
-
-
-
 
             $(document).on('click', '.edit_bv', function() {
                 var user_id = $(this).attr("id");
@@ -256,75 +223,6 @@
                 });
             });
             // update the form data if we change any
-
-
-            $(document).on('click', '#update_assignee_data', function() {
-
-var multiid = [];
-$("input:checkbox[name=assign]:checked").each(function() {
-    multiid.push($(this).val());
-});
-// alert(multiid);
-var assignfrom = $("#assignfrom").val();
-var u_reassign_id = $("#u_reassign_id").val();
-var code = $('#u_code').val();
-var remarks = $("#u_reassign_remarks").val();
-var otp = $("#otp").val();
-var store_otp = $("#store_otp").val();
-var email = $("#email").val();
-
-
-$.ajax({
-    url: "<?php echo base_url(); ?>View_mini_case_controller/reassign_case_validation_mini_case",
-    method: "POST",
-    data: {
-        r_id: u_reassign_id,
-        multi_id: multiid,
-        code: code,
-        assignfrom: assignfrom,
-        reassign_remarks: remarks,
-        otp: otp,
-        store_otp: store_otp,
-        email: email
-
-
-    },
-    dataType: "json",
-    success: function(data) {
-        if (data.success == 1) {
-            $("#otp_check").show();
-            $("#success_msg").show();
-            $("#success_msg").html(data.msg);
-        } else {
-            $("#error_msg").html(data.msg);
-
-        }
-
-    }
-});
-});
-
-
-$(document).on('click', '#generate_otp', function() {
-var user_id = $(this).attr("id");
-$.ajax({
-    url: "<?php echo base_url(); ?>Assign_case_controller/sendOTP",
-    method: "POST",
-    data: {
-
-    },
-    dataType: "json",
-    success: function(data) {
-        if (data.success == 1) {
-            $("#store_otp").val(data.otp);
-            $("#email").val(data.email);
-            $("#otp_check").show();
-            $("#success_msg").html(data.msg);
-        }
-
-    }
-});
-});
 
             // end update form data 
 
@@ -545,12 +443,24 @@ $.ajax({
     <br>
     <div class="container">
 
-    <label>From</label>
-        <input type="text" name="from" id="from" required value="<?php echo date("Y-m-d"); ?>">
-        <label>To</label>
-        <input type="text" name="to" id="to" required value="<?php echo date("Y-m-d"); ?>">
-        <button class="btn btn-warning " name="sub_btn" id="sub_btn"> GET </button>
+        <div class="row">
+            <div class="input-daterange">
+                <div class="col-md-3">
+                    <!-- <label for="start">From date:</label> -->
+                    <input type="date" name="from_date" id="from_date" class="form-control" placeholder="FROM DATE">
+                </div>
 
+                <div class="col-md-3">
+                    <!-- <label for="start">To date:</label> -->
+                    <input type="date" name="to_date" id="to_date" class="form-control" placeholder="TO DATE">
+                </div>
+
+                <div class="col-md-5">
+                    <input type="button" name="filter" id="filter" value="filter" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </div>
 
     <br>
     <div class="tab-pane container active text-dark" id="home">
@@ -563,7 +473,6 @@ $.ajax({
             <table id="fetch_mini_case_data" class="table table-bordered table-striped">
                 <thead>
                     <tr class="">
-                        <th width="2%"></th>
                         <th width="6%">ID</th>
                         <th width="10%">Bank Name</th>
                         <th width="10%">Applicant Name</th>
@@ -572,139 +481,14 @@ $.ajax({
                         <th width="10%">Ref no.</th>
                         <!-- <th width="10%">Name</th> -->
                         <th width="10%">Address</th>
+                         <th width="10%">TAT Start</th>
+                         <th width="10%">TAT End</th>
                         <th width="10%">Status</th>
                         <th width="10%">Action</th>
                     </tr>
                 </thead>
-               <tbody id="tbdy"> 
-               <?php $i = 1;  ?>
-                        <tr>
-                        <td><input type="checkbox" onclick="showassignbutton(<?php echo $i ?>)" id="assign<?php echo $i ?>" value='<?= $rows->uid; ?>' name="assign"></td>
-                        <td><?= $rows->uid; ?></td>
-                            <td><?= $rows->bank; ?></td>
-                            <td><?= $rows->name; ?></td>
-                            <td><?= $rows->fi_type; ?></td>
-                            <td><?= $rows->code; ?></td>
-                            <td><?= $rows->reference_no; ?></td>
-                            <td><?= $rows->business_add; ?></td>
-                            <td><?= $rows->status; ?></td>
-                            <td>
-
-                                 <?php
-                                if ($row->fi_type == 'BV') {
-                                    $buttons .= '<button type="button" title="View Case" name="view" id="' . $row->id . '" class="btn btn-primary btn-sm view_quick_case"><i class="fa fa-eye" ></i></button>';
-                                    $buttons .= '<button type="button" title="BV Remarks" name="view" id="' . $row->id . '" class="btn btn-success btn-sm edit_bv"><i class="fa fa-pencil" ></i></button>';
-                                    $buttons .= '<button type="button" title="Reassign Case" name="view" id="' . $row->id . '" class="btn btn-success btn-sm reassign_case"><i class="fa fa-edit" ></i></button>';
-
-                                } else {
-                                    $buttons .= '<button type="button" title="View RV Case" name="view" id="' . $row->id . '" class="btn btn-primary btn-sm view_rv_case"><i class="fa fa-eye" ></i></button>';
-                                    $buttons .= '<button type="button" title="RV Remarks" name="view" id="' . $row->id . '" class="btn btn-warning btn-sm edit_rv"><i class="fa fa-pencil" ></i></button>';
-                                    $buttons .= '<button type="button" title="Reassign Case" name="view" id="' . $row->id . '" class="btn btn-success btn-sm reassign_case"><i class="fa fa-edit" ></i></button>';
-
-                                }
-                                ?>
-                            </td>
-                        </tr>
-                        
-                    <tr></tr>
-                </tbody> 
+                <tbody></tbody>
             </table>
-        </div>
-    </div>
-
-
-
-    <div id="reassign_case_model_mc" class="modal fade ">
-        <div class="modal-dialog">
-            <!--<form method="post" id="user_form">-->
-            <div class="modal-content" style="width:800px;">
-                <?php echo form_open("Assign_case_controller/reassign_case_validation", array("id" => "update_form_reassignee", "class" => "form-horizontal")) ?>
-                <div class="card ">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Reassign Case</h4>
-                    </div>
-
-                    <div class="card-body">
-                        <style>
-                            .form-group {
-                                margin-bottom: 5px !important;
-                            }
-
-                            form,
-                            input,
-                            label {
-                                color: black;
-
-                            }
-                        </style>
-
-                        <input type="text" class="form-control" hidden id="u_reassign_id" name="r_id">
-                        <input type="hidden" class="form-control" hidden id="store_otp" name="store_otp">
-                        <input type="hidden" class="form-control" hidden id="email" name="email">
-
-                        <input type="hidden" class="form-control" hidden id="assignfrom" name="assignfrom" value="<?php echo $data ?>">
-
-
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <label for="code" class="h6">Agent</label>
-                                <select class="form-control" id="u_code" name="code">
-                                    <option value="" selected>-- SELECT AGENT --</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <br>
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <label for="reassign_remarks" class="h6">Remarks</label>
-                                <input type="text" class="form-control" id="u_reassign_remarks" placeholder="Reassign_remarks" name="Reassign remarks">
-                            </div>
-                        </div>
-                        <br>
-
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <label for="otp" class="h6">Enter OTP (OTP send to your Admin's Email ID)</label>
-                                <input type="text" class="form-control" name="otp" id="otp" required />
-                            </div>
-                        </div>
-
-                        <style>
-                            #success_msg {
-                                display: none;
-                            }
-
-                            #error_msg {
-                                display: none;
-                            }
-                        </style>
-
-                        <button type="button" id="generate_otp" class="btn btn-warning">Generate OTP<button>
-
-                                <div class="alert alert-success" id="success_msg"></div>
-                                <div class="alert alert-danger" id="error_msg"></div>
-
-
-                                <div class="modal-footer" id="otp_check">
-                                    <style>
-                                        #otp_check {
-                                            display: none;
-                                        }
-                                    </style>
-                                    <button type="button" name="update_assignee" id="update_assignee_data" class="btn btn-primary">Verify OTP and Reassign Case</button>
-
-                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-                                </div>
-                                <?php echo form_close() ?>
-
-
-
-                    </div> <!-- model content -->
-
-                </div> <!-- card body end  -->
-            </div> <!-- card end  -->
         </div>
     </div>
 
@@ -754,13 +538,39 @@ $.ajax({
                                     </h4>
                                 </div>
                                 <div class="col-sm-6">
-                                    <h4 class="s_name">
+                                    <h4 class="s_created_at">
                                     </h4>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row pt-6 ">
+                                <div class="col-sm-6">
+                                    <h4 class="s_tat_start">
+                                    </h4>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h4 class="s_tat_end">
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row pt-12 ">
+                                <div class="col-sm-12">
+                                    <h4 class="s_name">
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="row pt-12 ">
@@ -775,15 +585,12 @@ $.ajax({
 
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="row pt-6 ">
-                                <div class="col-sm-6">
+                            <div class="row pt-12 ">
+                                <div class="col-sm-12">
                                     <h4 class="s_address">
                                     </h4>
                                 </div>
-                                <div class="col-sm-6">
-                                    <h4 class="bv_pincode">
-                                    </h4>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -796,12 +603,15 @@ $.ajax({
                                     </h4>
                                 </div>
                                 <div class="col-sm-6">
-                                    <h4 class="s_agent_code">
+                                    <h4 class="bv_pincode">
                                     </h4>
                                 </div>
+                                
                             </div>
                         </div>
                     </div>
+                    
+                   
 
                     <div class="row">
                         <div class="col-sm-12">
@@ -848,6 +658,16 @@ $.ajax({
                         </div>
                     </div>
 
+ <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row pt-12">
+                               <div class="col-sm-6">
+                                    <h4 class="s_agent_code">
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                    
 
                  
@@ -911,6 +731,32 @@ $.ajax({
                                     </h4>
                                 </div>
                                 <div class="col-sm-6">
+                                    <h4 class="s_created_at">
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row pt-6 ">
+                                <div class="col-sm-6">
+                                    <h4 class="s_tat_start">
+                                    </h4>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h4 class="s_tat_end">
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row pt-12">
+                                <div class="col-sm-12">
                                     <h4 class="s_name">
                                     </h4>
                                 </div>
@@ -933,15 +779,12 @@ $.ajax({
 
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="row pt-6 ">
-                                <div class="col-sm-6">
+                            <div class="row pt-12 ">
+                                <div class="col-sm-12">
                                     <h4 class="s_address">
                                     </h4>
                                 </div>
-                                <div class="col-sm-6">
-                                    <h4 class="rv_pincode">
-                                    </h4>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -954,12 +797,15 @@ $.ajax({
                                     </h4>
                                 </div>
                                 <div class="col-sm-6">
-                                    <h4 class="s_agent_code">
+                                    <h4 class="rv_pincode">
                                     </h4>
                                 </div>
+                                
                             </div>
                         </div>
                     </div>
+                    
+                    
 
                     <div class="row">
                         <div class="col-sm-12">
@@ -998,6 +844,17 @@ $.ajax({
                                 </div>
                                 <div class="col-sm-6">
                                     <h4 class="rv_location_add">
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row pt-12 ">
+                              <div class="col-sm-6">
+                                    <h4 class="s_agent_code">
                                     </h4>
                                 </div>
                             </div>
@@ -1065,89 +922,3 @@ $.ajax({
 
         </div>
     </div>
-
-    <script>
-        $(document).ready(function() {
-            $("#from").datepicker({
-                dateFormat: "yy-mm-dd",
-            });
-
-            $("#to").datepicker({
-                dateFormat: "yy-mm-dd",
-
-            });
-        });
-    </script>
-
-<script type="text/javascript">
-                                            $(document).ready(function() {
-                                                $('#sub_btn').click(function(event) {
-                                                    event.preventDefault();
-
-                                                    var from = $('#from').val();
-                                                    var to = $('#to').val();
-                                                    var code = '<?php echo $data; ?>';
-                                                    //alert(code);
-
-                                                    var datastring = "from=" + from + "&to=" + to;
-                                                    $.ajax({
-                                                        type: "POST",
-                                                        url: "<?= base_url() ?>View_mini_case_controller/filterDatewiseMiniCase",
-                                                        // dataType:"json",
-                                                        data: datastring,
-                                                        // contentType: "application/json; charset=utf-8",
-                                                        success: function(data) {
-                                                            //alert(data);
-                                                            $('#tbdy').html(data);
-
-                                                        },
-                                                        error: function() {
-                                                            // alert("Error");
-                                                        }
-                                                    });
-
-                                                });
-
-                                            });
-
-
-                                            // function getFitype(val) {
-                                            //     var code = '<?php echo $data; ?>';
-                                            //     var datastring = "val=" + val + "&code=" + code;
-                                            //     $.ajax({
-                                            //         type: "POST",
-                                            //         url: "<?= base_url() ?>Assign_case_controller/filterfitype",
-                                            //         // dataType:"json",
-                                            //         data: datastring,
-                                            //         // contentType: "application/json; charset=utf-8",
-                                            //         success: function(data) {
-                                            //             //alert(data);
-                                            //             $('#tbdy').html(data);
-
-                                            //         },
-                                            //         error: function() {
-                                            //             // alert("Error");
-                                            //         }
-                                            //     });
-                                            // }
-
-                                            // function getCasestatus(val) {
-                                            //     var code = '<?php echo $data; ?>';
-                                            //     var datastring = "val=" + val + "&code=" + code;
-                                            //     $.ajax({
-                                            //         type: "POST",
-                                            //         url: "<?= base_url() ?>Assign_case_controller/filterStatus",
-                                            //         // dataType:"json",
-                                            //         data: datastring,
-                                            //         // contentType: "application/json; charset=utf-8",
-                                            //         success: function(data) {
-                                            //             //alert(data);
-                                            //             $('#tbdy').html(data);
-
-                                            //         },
-                                            //         error: function() {
-                                            //             // alert("Error");
-                                            //         }
-                                            //     });
-                                            // }
-                                        </script>

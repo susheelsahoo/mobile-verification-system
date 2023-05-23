@@ -898,7 +898,9 @@
                         <th width="10%">Name</th>
                         <th width="10%">Address</th>
                         <th width="10%">FI Type</th>
-                        <th width="10%">Created Date</th>
+                        <th width="10%">TAT Start</th>
+                        <th width="10%">TAT End</th>
+                        <!-- <th width="10%">Created Date</th> -->
                         <th width="9%">Status</th>
                         <!-- <th width="9%">Agent</th> -->
                         <th width="10%">Action</th>
@@ -915,7 +917,8 @@
                             <td><?= $rows->customer_name; ?></td>
                             <td><?= $rows->business_address; ?></td>
                             <td><?= $rows->fi_to_be_conducted; ?></td>
-                            <td><?= readableDateIST($rows->updated_at); ?></td>
+                            <td><?= readableDateIST($rows->tat_start); ?></td>
+                            <td><?= readableDateIST($rows->tat_end); ?></td>
                             <td><?= $rows->status; ?></td>
                             <td>
 

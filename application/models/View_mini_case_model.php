@@ -8,9 +8,9 @@ class View_mini_case_model extends CI_Model
     }
 
     public $table1 = "mini_case";
-    public $select_column1 = array("id", "bank","name", "fi_type", "code", "reference_no", "business_name", "business_add", "residence_add", "status", "created_at");
-    public $order_column1 = array("id", "bank", "name", "fi_type", "code", "reference_no", "business_name", "business_add", "residence_add", "status", "created_at");
-    public $column_search = array("id", "bank", "name",  "fi_type", "code", "reference_no", "business_name", "business_add", "residence_add", "status", "created_at");
+    public $select_column1 = array("id", "bank","name", "fi_type", "code", "reference_no", "business_name", "business_add", "residence_add", "tat_start","tat_end","status", "created_at");
+    public $order_column1 = array("id", "bank", "name", "fi_type", "code", "reference_no", "business_name", "business_add", "residence_add", "tat_start","tat_end","status", "created_at");
+    public $column_search = array("id", "bank", "name",  "fi_type", "code", "reference_no", "business_name", "business_add", "residence_add","tat_start","tat_end", "status", "created_at");
 
     public function make_query_mini_case()
     {
@@ -24,8 +24,11 @@ class View_mini_case_model extends CI_Model
                 $this->db->or_like("fi_type", $_POST["search"]["value"]);
                 $this->db->or_like("code", $_POST["search"]["value"]);
                 $this->db->or_like("address", $_POST["search"]["value"]);
+               
+                $this->db->or_like("tat_start", $_POST["search"]["value"]);
+                $this->db->or_like("tat_end", $_POST["search"]["value"]);
                 $this->db->or_like("status", $_POST["search"]["value"]);
-                $this->db->or_like("created_at", $_POST["search"]["value"]);
+                // $this->db->or_like("created_at", $_POST["search"]["value"]);
             }
 
             if (!empty($this->input->post('from_date')) && !empty($this->input->post('to_date'))) {

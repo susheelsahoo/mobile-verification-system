@@ -82,7 +82,8 @@ class Assign_case_controller extends CI_Controller
                     <td><?= $rows->customer_name; ?></td>
                     <td><?= $rows->business_address; ?></td>
                     <td><?= $rows->fi_to_be_conducted; ?></td>
-                    <td><?= $rows->updated_at; ?></td>
+                    <td><?= $rows->tat_start; ?></td>
+                    <td><?= $rows->tat_end; ?></td>
                     <td><?= $rows->status; ?></td>
                     <td>
                         <?php
@@ -135,7 +136,8 @@ class Assign_case_controller extends CI_Controller
                     <td><?= $rows->customer_name; ?></td>
                     <td><?= $rows->business_address; ?></td>
                     <td><?= $rows->fi_to_be_conducted; ?></td>
-                    <td><?= $rows->updated_at; ?></td>
+                    <td><?= $rows->tat_start; ?></td>
+                    <td><?= $rows->tat_end; ?></td>
                     <td><?= $rows->status; ?></td>
                     <td>
                         <button type="button" name="view" id="<?= $rows->uid; ?>" title="View case" class="btn btn-success btn-sm view_assigned_case"><i class="fa fa-eye"></i></button>
@@ -180,7 +182,8 @@ class Assign_case_controller extends CI_Controller
                     <td><?= $rows->customer_name; ?></td>
                     <td><?= $rows->business_address; ?></td>
                     <td><?= $rows->fi_to_be_conducted; ?></td>
-                    <td><?= $rows->updated_at; ?></td>
+                    <td><?= $rows->tat_start; ?></td>
+                    <td><?= $rows->tat_end; ?></td>
                     <td><?= $rows->status; ?></td>
                     <td>
                         <button type="button" name="view" id="<?= $rows->uid; ?>" title="View case" class="btn btn-success btn-sm view_assigned_case"><i class="fa fa-eye"></i></button>
@@ -221,7 +224,8 @@ class Assign_case_controller extends CI_Controller
                 $sub_array[] = $row->customer_name;
                 $sub_array[] = $row->business_address;
                 $sub_array[] = $row->fi_to_be_conducted;
-                $sub_array[] = $row->updated_at;
+                $sub_array[] = $row->tat_start;
+                $sub_array[] = $row->tat_end;
                 $sub_array[] = $row->status;
                 $sub_array[] = $buttons;
                 $data[] = $sub_array;
