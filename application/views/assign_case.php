@@ -898,7 +898,6 @@
                         <th width="10%">Name</th>
                         <th width="10%">Address</th>
                         <th width="10%">FI Type</th>
-
                         <th width="10%">Created Date</th>
                         <th width="9%">Status</th>
                         <!-- <th width="9%">Agent</th> -->
@@ -924,7 +923,6 @@
                                 <button type="button" name="edit" id="<?= $rows->uid; ?>" title="Edit case" class="btn btn-info btn-sm edit_assigned_case"><i class="fa fa-pencil"></i></button>
                                 <button type="button" name="reassign" id="<?= $rows->uid; ?>" title="Assign case" class="btn btn-primary btn-sm reassigned_case"><i class="fa fa-users"></i></button>
                                 <?php
-
                                 if ($rows->fi_to_be_conducted == 'BV') { ?>
                                     <button type="button" name="view" id="<?= $rows->uid; ?>" title="BV View Data" class="btn btn-info btn-sm bv_view_details"><i class="fa fa-users"></i></button>
                                     <button type="button" name="bv_edit" id="<?= $rows->uid; ?>" title="BV Edit" class="btn btn-warning btn-sm bv_edit_details"><i class="fa fa-pencil"></i></button>
