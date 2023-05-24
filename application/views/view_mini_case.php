@@ -49,7 +49,7 @@
 
                 columnDefs: [{
                     "defaultContent": "-",
-                    "targets": [1, 8],
+                    "targets": [1, 10],
                     "orderable": false
                 }],
                 "lengthMenu": [
@@ -113,6 +113,9 @@
                         $('.s_business_name').html("<b>Business Name:</b> " + data.business_name);
                         $('.s_business_add').html("<b>Business Address:</b> " + data.business_add);
                         $('.s_city').html("<b>City:</b> " + data.city);
+                        $('.s_created_at').html("<b>Date:</b> " + data.created_at);
+                        $('.s_tat_start').html("<b>TAT Start:</b> " + data.tat_start);
+                        $('.s_tat_end').html("<b>TAT End:</b> " + data.tat_end);
                         $('.s_residence_add').html("<b>City:</b> " + data.city);
                         $('.s_mobile').html("<b>Mobile:</b> " + data.mobile);
                         $('.bv_lat').html("<b>Latitude:</b> " + data.bv_lat);
@@ -156,7 +159,10 @@
                         $('.s_agent_code').html("<b>Agent code:</b> " + data.code);
                         $('.s_address').html("<b>Address:</b> " + data.business_add);
                         $('.s_business_name').html("<b>Business Name:</b> " + data.business_name);
-                        $('.s_business_add').html("<b>Business Address:</b> " + data.business_add);
+                        $('.s_business_name').html("<b>Business Name:</b> " + data.business_name);
+                        $('.s_created_at').html("<b>Date:</b> " + data.created_at);
+                        $('.s_tat_start').html("<b>TAT Start:</b> " + data.tat_start);
+                        $('.s_tat_end').html("<b>TAT End:</b> " + data.tat_end);
                         // $('.s_residence_add').html("<b>Residence Address:</b> " + data.residence_add);
                         $('.s_mobile').html("<b>Mobile:</b> " + data.mobile);
                         $('.rv_lat').html("<b>Latitude:</b> " + data.rv_lat);
@@ -475,6 +481,8 @@
                         <th width="10%">Ref no.</th>
                         <!-- <th width="10%">Name</th> -->
                         <th width="10%">Address</th>
+                         <th width="10%">TAT Start</th>
+                         <th width="10%">TAT End</th>
                         <th width="10%">Status</th>
                         <th width="10%">Action</th>
                     </tr>
@@ -530,13 +538,39 @@
                                     </h4>
                                 </div>
                                 <div class="col-sm-6">
-                                    <h4 class="s_name">
+                                    <h4 class="s_created_at">
                                     </h4>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row pt-6 ">
+                                <div class="col-sm-6">
+                                    <h4 class="s_tat_start">
+                                    </h4>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h4 class="s_tat_end">
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row pt-12 ">
+                                <div class="col-sm-12">
+                                    <h4 class="s_name">
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="row pt-12 ">
@@ -551,15 +585,12 @@
 
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="row pt-6 ">
-                                <div class="col-sm-6">
+                            <div class="row pt-12 ">
+                                <div class="col-sm-12">
                                     <h4 class="s_address">
                                     </h4>
                                 </div>
-                                <div class="col-sm-6">
-                                    <h4 class="bv_pincode">
-                                    </h4>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -572,12 +603,15 @@
                                     </h4>
                                 </div>
                                 <div class="col-sm-6">
-                                    <h4 class="s_agent_code">
+                                    <h4 class="bv_pincode">
                                     </h4>
                                 </div>
+                                
                             </div>
                         </div>
                     </div>
+                    
+                   
 
                     <div class="row">
                         <div class="col-sm-12">
@@ -624,6 +658,16 @@
                         </div>
                     </div>
 
+ <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row pt-12">
+                               <div class="col-sm-6">
+                                    <h4 class="s_agent_code">
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                    
 
                  
@@ -687,6 +731,32 @@
                                     </h4>
                                 </div>
                                 <div class="col-sm-6">
+                                    <h4 class="s_created_at">
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row pt-6 ">
+                                <div class="col-sm-6">
+                                    <h4 class="s_tat_start">
+                                    </h4>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h4 class="s_tat_end">
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row pt-12">
+                                <div class="col-sm-12">
                                     <h4 class="s_name">
                                     </h4>
                                 </div>
@@ -709,15 +779,12 @@
 
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="row pt-6 ">
-                                <div class="col-sm-6">
+                            <div class="row pt-12 ">
+                                <div class="col-sm-12">
                                     <h4 class="s_address">
                                     </h4>
                                 </div>
-                                <div class="col-sm-6">
-                                    <h4 class="rv_pincode">
-                                    </h4>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -730,12 +797,15 @@
                                     </h4>
                                 </div>
                                 <div class="col-sm-6">
-                                    <h4 class="s_agent_code">
+                                    <h4 class="rv_pincode">
                                     </h4>
                                 </div>
+                                
                             </div>
                         </div>
                     </div>
+                    
+                    
 
                     <div class="row">
                         <div class="col-sm-12">
@@ -774,6 +844,17 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <h4 class="rv_location_add">
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row pt-12 ">
+                              <div class="col-sm-6">
+                                    <h4 class="s_agent_code">
                                     </h4>
                                 </div>
                             </div>

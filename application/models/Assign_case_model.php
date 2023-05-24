@@ -8,8 +8,8 @@ class Assign_case_model extends CI_Model
 	}
 
 	var $table7 = "upload_file";
-	var $select_column7 = array("id","application_id","customer_name", "business_address", "fi_to_be_conducted", "updated_at","status");
-	var $order_column7 = array("id","application_id","customer_name", "business_address", "fi_to_be_conducted", "updated_at","status");
+	var $select_column7 = array("id","application_id","customer_name", "business_address", "fi_to_be_conducted", "tat_start","tat_end","status");
+	var $order_column7 = array("id","application_id","customer_name", "business_address", "fi_to_be_conducted", "tat_start","tat_end","status");
 
 	function make_query_assign()
 	{
@@ -22,7 +22,8 @@ class Assign_case_model extends CI_Model
 				$this->db->like("customer_name", $_POST["search"]["value"]);
 				$this->db->or_like("business_address", $_POST["search"]["value"]);
 				$this->db->or_like("fi_to_be_conducted", $_POST["search"]["value"]);
-				$this->db->or_like("updated_at", $_POST["search"]["value"]);
+				$this->db->or_like("tat_start", $_POST["search"]["value"]);
+				$this->db->or_like("tat_end", $_POST["search"]["value"]);
 				$this->db->or_like("status", $_POST["search"]["value"]);
 			}
 			if (isset($_POST["order"])) {
@@ -86,7 +87,7 @@ class Assign_case_model extends CI_Model
 	function filter_assignee($data){
 		try {
             $this->db->where("uf.code",$data);
-            $this->db->select("uf.id as uid,a.employee_unique_id AS agent_code,uf.id,uf.code, uf.application_id,uf.customer_name,uf.business_address,uf.fi_to_be_conducted,uf.updated_at,uf.status");
+            $this->db->select("uf.id as uid,a.employee_unique_id AS agent_code,uf.id,uf.code, uf.application_id,uf.customer_name,uf.business_address,uf.fi_to_be_conducted,uf.tat_start,uf.tat_end,uf.status");
             $this->db->join('login a', 'a.employee_unique_id = uf.code', 'left');
             $this->db->from('upload_file uf');
             $query = $this->db->get();
@@ -105,7 +106,7 @@ class Assign_case_model extends CI_Model
             $this->db->where("uf.code",$code);
             $this->db->where('uf.updated_at >=', $from);
             $this->db->where('uf.updated_at <=', $to);
-            $this->db->select("uf.id as uid,a.employee_unique_id AS agent_code,uf.id,uf.code, uf.application_id,uf.customer_name,uf.business_address,uf.fi_to_be_conducted,uf.updated_at,uf.status");
+            $this->db->select("uf.id as uid,a.employee_unique_id AS agent_code,uf.id,uf.code, uf.application_id,uf.customer_name,uf.business_address,uf.fi_to_be_conducted,uf.tat_start,uf.tat_end,uf.status");
             $this->db->join('login a', 'a.employee_unique_id = uf.code', 'left');
             
             $this->db->from('upload_file uf');
@@ -121,7 +122,7 @@ class Assign_case_model extends CI_Model
 	try {
            $this->db->where("uf.code",$code);
             $this->db->where('uf.fi_to_be_conducted =', $val);
-            $this->db->select("uf.id as uid,a.employee_unique_id AS agent_code,uf.id,uf.code, uf.application_id,uf.customer_name,uf.business_address,uf.fi_to_be_conducted,uf.updated_at,uf.status");
+            $this->db->select("uf.id as uid,a.employee_unique_id AS agent_code,uf.id,uf.code, uf.application_id,uf.customer_name,uf.business_address,uf.fi_to_be_conducted,uf.tat_start,uf.tat_end,uf.status");
             $this->db->join('login a', 'a.employee_unique_id = uf.code', 'left');
             
             $this->db->from('upload_file uf');
@@ -137,7 +138,7 @@ class Assign_case_model extends CI_Model
 		try {
 			   $this->db->where("uf.code",$code);
 				$this->db->where('uf.status =', $val);
-				$this->db->select("uf.id as uid,a.employee_unique_id AS agent_code,uf.id,uf.code, uf.application_id,uf.customer_name,uf.business_address,uf.fi_to_be_conducted,uf.updated_at,uf.status");
+				$this->db->select("uf.id as uid,a.employee_unique_id AS agent_code,uf.id,uf.code, uf.application_id,uf.customer_name,uf.business_address,uf.fi_to_be_conducted,uf.tat_start,uf.tat_end,uf.status");
 				$this->db->join('login a', 'a.employee_unique_id = uf.code', 'left');
 				
 				$this->db->from('upload_file uf');

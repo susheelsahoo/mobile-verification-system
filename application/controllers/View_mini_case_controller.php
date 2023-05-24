@@ -62,8 +62,10 @@ class View_mini_case_controller extends CI_Controller
                 $sub_array[] = $row->reference_no;
                 // $sub_array[] = $row->business_name;
                 $sub_array[] = $row->business_add;
+                $sub_array[] = $row->tat_start;
+                $sub_array[] = $row->tat_end;
                 $sub_array[] = $row->status;
-                // $sub_array[] = $row->remarks;
+               
                 // $i++;
                 $sub_array[] = $buttons;
                 $data[] = $sub_array;
@@ -140,6 +142,9 @@ class View_mini_case_controller extends CI_Controller
                 $output['code']             = $row->code;
                 // $output['address']          = $row->business_add;
                 $output['city']          = $row->city;
+                $output['created_at']          = $row->created_at;
+                $output['tat_start']          = $row->tat_start;
+                $output['tat_end']          = $row->tat_end;
                 $output['business_name']    = $row->business_name;
                 $output['business_add']     = $row->business_add;
                 $output['bv_lat']           = $row->bv_lat;
@@ -254,6 +259,9 @@ class View_mini_case_controller extends CI_Controller
                 $output['code'] = $row->code;
                 $output['address'] = $row->business_add;
                 $output['business_name'] = $row->business_name;
+                $output['created_at'] = $row->created_at;
+                $output['tat_start'] = $row->tat_start;
+                $output['tat_end'] = $row->tat_end;
                 $output['city'] = $row->city;
                 $output['business_add'] = $row->business_add;
                 $output['rv_lat'] = $row->rv_lat;
