@@ -242,6 +242,152 @@ class View_mini_case_controller extends CI_Controller
     }
 
 
+    private function generateOTP()
+    {
+        // Generate a random OTP using your preferred method
+        $otp = str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
+        // $otp ='1234';
+        return $otp;
+    }
+
+    public function sendOTP()
+    {
+        $response = [];
+        $email = 'Jainnupur.88@gmail.com';
+
+        // Generate and store the OTP
+        $otp = $this->generateOTP();
+        // echo $otp;die;
+        $responseArray['otp'] = $otp;
+        $responseArray['email'] = $email;
+
+        $this->sendOTPEmail($email, $otp);
+        $responseArray['msg'] = "Message";
+        $responseArray['success'] = 1;
+        echo json_encode($responseArray);
+        die();
+        // echo 'OTP has been sent to your email address.';
+    }
+
+    private function sendOTPEmail($email, $otp)
+    {
+        $this->load->library('email');
+        $this->email->from('Jainnupur.88@gmail.com', 'Yogita Sharma');
+        $this->email->to($email);
+        $this->email->subject('OTP Verification');
+        $this->email->message('Please use the following OTP for verification: ' . $otp);
+
+        if (!$this->email->send()) {
+            // Handle email sending error if necessary
+            echo $this->email->print_debugger();
+        }
+    }
+
+
+
+    public function reassign_case_validation_mini_case()
+    {
+
+        $enteredOtp = $this->input->post('otp');
+        $response = [];
+        $storedOtp = $this->input->post('store_otp');
+        // echo $enteredOtp;
+        // echo $storedOtp;die;
+        if ($enteredOtp == $storedOtp) {
+
+            $reassign_id = $_POST["r_id"];
+            $reassign_multi_id = $_POST["multi_id"];
+            $assignfrom = $_POST["assignfrom"];
+
+            $array = array(
+                'code' => $this->input->post('code'),
+                'reassign_remarks' => $this->input->post('reassign_remarks'),
+            );
+
+            $this->load->model('Assign_case_model');
+            // $this->Assign_case_model->editData();
+            $insert_id = $this->View_mini_case_model->update_assignee_mini_case($reassign_id, $assignfrom, $reassign_multi_id, $array);
+            if ($insert_id) {
+                $response = array(
+                    'success' => 1,
+                    'msg' => "Assignee updated successfully"
+                );
+            } else {
+                $response = array(
+                    'success' => 0,
+                    'msg' => "Error while saving data !!!!"
+                );
+            }
+        } else {
+            $response = array(
+                'success' => 0,
+                'msg' => "please enter valid OTP !!!!"
+            );
+        }
+        echo json_encode($response);
+        die;
+    }
+
+
+    public function filterDatewiseMiniCase()
+    {
+
+        $from = $_POST['from'];
+        $to = $_POST['to'];
+        // $code = $_POST['code'];
+        //echo $code;die();
+        $tbdy = '';
+        $fetch_data = $this->View_mini_case_model->filter_CreatedateMiniCase($from, $to);
+        $numrows = $fetch_data->num_rows();
+        //echo $numrows;die("iii");
+        if ($numrows > 0) {
+?>
+            <?php foreach ($fetch_data->result() as $key => $rows) :
+            ?>
+                <tr>
+                <tr>
+                    <td><?= $rows->uid; ?></td>
+                    <td><?= $rows->bank; ?></td>
+                    <td><?= $rows->name; ?></td>
+                    <td><?= $rows->fi_type; ?></td>
+                    <td><?= $rows->code; ?></td>
+                    <td><?= $rows->reference_no; ?></td>
+                    <td><?= $rows->business_add; ?></td>
+                    <td><?= $rows->status; ?></td>
+                    <td><?= $rows->Action; ?></td>
+
+                    <td>
+                        <?php
+
+if ($row->fi_type == 'BV') {
+    $buttons .= '<button type="button" title="View Case" name="view" id="' . $row->id . '" class="btn btn-primary btn-sm view_quick_case"><i class="fa fa-eye" ></i></button>';
+    $buttons .= '<button type="button" title="BV Remarks" name="view" id="' . $row->id . '" class="btn btn-success btn-sm edit_bv"><i class="fa fa-pencil" ></i></button>';
+    $buttons .= '<button type="button" title="Reassign Case" name="view" id="' . $row->id . '" class="btn btn-success btn-sm reassign_case"><i class="fa fa-edit" ></i></button>';
+} else {
+    $buttons .= '<button type="button" title="View RV Case" name="view" id="' . $row->id . '" class="btn btn-primary btn-sm view_rv_case"><i class="fa fa-eye" ></i></button>';
+    $buttons .= '<button type="button" title="RV Remarks" name="view" id="' . $row->id . '" class="btn btn-warning btn-sm edit_rv"><i class="fa fa-pencil" ></i></button>';
+    $buttons .= '<button type="button" title="Reassign Case" name="view" id="' . $row->id . '" class="btn btn- btn-sm reassign_case"><i class="fa fa-edit" ></i></button>';
+}
+
+                        
+                        ?>
+                        
+                    </td>
+
+                </tr>
+            <?php endforeach; ?>
+            <tr></tr>
+        <?php } else { ?>
+
+            <tr>
+                <td colspan="5">No Records Found</td>
+            </tr>
+            <tr></tr>
+
+        <?php }
+    }
+    
+
     function fetch_single_rv_mini_case()
     {
         // die("hello");
