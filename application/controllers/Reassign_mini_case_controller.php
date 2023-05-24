@@ -1,17 +1,19 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Reassign_mini_case_controller extends CI_Controller {
+class Reassign_mini_case_controller extends CI_Controller
+{
 
-	function __construct(){
-		parent::__construct();
-		error_reporting(0);
-		$this->load->helper('url');
-		$this->load->helper('form');
-		$this->load->model('Reassign_mini_case_model');
-	}
+    function __construct()
+    {
+        parent::__construct();
+        error_reporting(0);
+        $this->load->helper('url');
+        $this->load->helper('form');
+        $this->load->model('Reassign_mini_case_model');
+    }
 
-	public function index()
+    public function index()
     {
         $this->load->library('session');
         if ($this->session->userdata('user')) {
@@ -44,8 +46,8 @@ class Reassign_mini_case_controller extends CI_Controller {
             foreach ($fetch_reassign_case as $row) {
                 $sub_array = array();
 
-                
-               
+
+
                 // $sub_array[] = $i;
                 $sub_array[] = $row->id;
                 $sub_array[] = $row->reference_no;
@@ -59,7 +61,7 @@ class Reassign_mini_case_controller extends CI_Controller {
                 $sub_array[] = $row->reassign_remarks;
                 // $sub_array[] = $row->remarks;
                 // $i++;
-               
+
                 $data[] = $sub_array;
             }
             $output = array(

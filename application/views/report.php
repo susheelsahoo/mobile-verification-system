@@ -277,7 +277,7 @@
       <div class="card">
         <div class="title">
           <!-- <a href="<?php echo base_url(); ?>Reassign_mini_case_controller/reassign_case"> -->
-            <h3><b>Billing Quick Report</b></h3>
+          <h3><b>Billing Quick Report</b></h3>
         </div>
         <div class="content">
           <div class="social">
@@ -295,7 +295,7 @@
       <div class="card">
         <div class="title">
           <!-- <a href="<?php echo base_url(); ?>Reassign_mini_case_controller/reassign_case"> -->
-            <h3><b>Reassign Case Report</b></h3>
+          <h3><b>Billing Case Report</b></h3>
         </div>
         <div class="content">
           <div class="social">
