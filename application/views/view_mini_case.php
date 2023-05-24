@@ -481,8 +481,8 @@
                         <th width="10%">Ref no.</th>
                         <!-- <th width="10%">Name</th> -->
                         <th width="10%">Address</th>
-                         <th width="10%">TAT Start</th>
-                         <th width="10%">TAT End</th>
+                        <th width="10%">TAT Start</th>
+                        <th width="10%">TAT End</th>
                         <th width="10%">Status</th>
                         <th width="10%">Action</th>
                     </tr>
@@ -504,13 +504,13 @@
                 </div>
                 <div class="modal-body">
 
-                <div class="row">
+                    <div class="row">
                         <div class="col-sm-12">
                             <div class="row pt-6 ">
                                 <div class="col-sm-6">
-                                <h3 class="s_reference_no" style="color:blue;">Reference Number : </h3>
+                                    <h3 class="s_reference_no" style="color:blue;">Reference Number : </h3>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -590,7 +590,7 @@
                                     <h4 class="s_address">
                                     </h4>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -606,12 +606,12 @@
                                     <h4 class="bv_pincode">
                                     </h4>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
-                    
-                   
+
+
 
                     <div class="row">
                         <div class="col-sm-12">
@@ -658,21 +658,21 @@
                         </div>
                     </div>
 
- <div class="row">
+                    <div class="row">
                         <div class="col-sm-12">
                             <div class="row pt-12">
-                               <div class="col-sm-6">
+                                <div class="col-sm-6">
                                     <h4 class="s_agent_code">
                                     </h4>
                                 </div>
                             </div>
                         </div>
                     </div>
-                   
 
-                 
 
-                    
+
+
+
 
 
                 </div>
@@ -697,12 +697,12 @@
                 </div>
                 <div class="modal-body">
 
-                <div class="row">
+                    <div class="row">
                         <div class="col-sm-12">
                             <div class="row pt-12">
                                 <div class="col-sm-12">
-                                <h3 class="s_reference_no" style="color:blue;">Reference Number : </h3>
-                                    
+                                    <h3 class="s_reference_no" style="color:blue;">Reference Number : </h3>
+
                                 </div>
                             </div>
                         </div>
@@ -784,7 +784,7 @@
                                     <h4 class="s_address">
                                     </h4>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -800,12 +800,12 @@
                                     <h4 class="rv_pincode">
                                     </h4>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
-                    
-                    
+
+
 
                     <div class="row">
                         <div class="col-sm-12">
@@ -849,18 +849,18 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="row pt-12 ">
-                              <div class="col-sm-6">
+                                <div class="col-sm-6">
                                     <h4 class="s_agent_code">
                                     </h4>
                                 </div>
                             </div>
                         </div>
                     </div>
-                 
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
