@@ -34,7 +34,7 @@ class Create_user_controller extends CI_Controller
         }
     }
 
-    
+
     public function create_user_validation()
     {
         try {
@@ -102,9 +102,10 @@ class Create_user_controller extends CI_Controller
                 $sub_array[] = $row->id;
                 $sub_array[] = $row->role_group;
                 $sub_array[] = $row->first_name;
+                $sub_array[] = $row->employee_unique_id;
                 $sub_array[] = $row->username;
                 $sub_array[] = $row->password;
-                $sub_array[] = $row->mobile;  
+                $sub_array[] = $row->mobile;
                 $sub_array[] = $row->organization;
                 $sub_array[] = $row->status;
                 $sub_array[] = $buttons;
@@ -134,7 +135,7 @@ class Create_user_controller extends CI_Controller
         print_r($array);
     }
 
-    
+
     public function update_mobile()
     {
         try {
@@ -269,7 +270,7 @@ class Create_user_controller extends CI_Controller
                     'cnf_password' => $this->input->post('cnf_password'),
                 );
                 $this->load->model('Create_user_model');
-                $insert_user = $this->Create_user_model->update_password($pass_id,$array);
+                $insert_user = $this->Create_user_model->update_password($pass_id, $array);
                 if ($insert_user) {
                     $response = array(
                         'success' => true,
@@ -334,7 +335,7 @@ class Create_user_controller extends CI_Controller
         }
     }
 
-   
+
 
     // function delete_single_user() {
     //     try {
@@ -352,6 +353,6 @@ class Create_user_controller extends CI_Controller
     //     }
     // }
 
-    
-    
+
+
 }

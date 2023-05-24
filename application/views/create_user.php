@@ -622,13 +622,14 @@
             <table id="fetch_user_data" class="table table-bordered table-striped">
                 <thead>
                     <tr class="">
-                        <th width="6%">ID</th>
+                        <th width="5%">ID</th>
                         <th width="10%">Role Group</th>
                         <th width="10%">First name</th>
+                        <th width="10%">agent_code</th>
                         <th width="10%">User name</th>
                         <th width="10%">Password</th>
                         <th width="10%">Mobile</th>
-                        <th width="10%">Org Name</th>
+                        <th width="15%">Org Name</th>
                         <th width="10%">Status</th>
                         <th width="10%">Action</th>
                     </tr>

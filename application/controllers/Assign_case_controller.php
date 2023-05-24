@@ -25,32 +25,17 @@ class Assign_case_controller extends CI_Controller
         }
     }
 
-    // public function assign_case_function($data){
-    // // echo $data;
-    // 	$this->load->library('session');
-    // 	//restrict users to go to home if not logged in
-    // 	if($this->session->userdata('user')){
-    // 		$this->load->view('assign_case');
-    // 	}
-    // 	else{
-    // 		redirect('/');
-    // 	}
-    // }
+
 
     public function assign_case_function($data)
     {
-        // echo  test_method($data);
-        // die;
+
 
         $this->load->library('session');
-        // unset($_SESSION['data_new1']);
-        //$_SESSION['data_new1']=$data;
         if ($this->session->userdata('user')) {
             $this->load->model("Assign_case_model");
             $fetch_data['allAgent'] = $this->Assign_case_model->filter_assignee($data);
             $fetch_data['data'] = $data;
-            // echo json_encode($fetch_data);
-            //var_dump($fetch_data);die();
 
             $this->load->view('assign_case', $fetch_data);
         } else {
@@ -894,13 +879,13 @@ class Assign_case_controller extends CI_Controller
             $this->form_validation->set_rules('fi_to_be_conducted', 'fi_to_be_conducted', 'required');
             $this->form_validation->set_rules('product_name', 'product_name', 'required');
             $this->form_validation->set_rules('business_address', 'business_address', 'required');
-            $this->form_validation->set_rules('geo_limit', 'geo_limit', 'required');
-            $this->form_validation->set_rules('fi_intiation_comments', 'fi_intiation_comments', '');
-            $this->form_validation->set_rules('asset_make', 'asset_make', '');
-            $this->form_validation->set_rules('asset_model', 'asset_model', '');
-            $this->form_validation->set_rules('remarks', 'remarks', '');
+            // $this->form_validation->set_rules('geo_limit', 'geo_limit', 'required');
+            // $this->form_validation->set_rules('fi_intiation_comments', 'fi_intiation_comments', '');
+            // $this->form_validation->set_rules('asset_make', 'asset_make', '');
+            // $this->form_validation->set_rules('asset_model', 'asset_model', '');
+            // $this->form_validation->set_rules('remarks', 'remarks', '');
             $this->form_validation->set_rules('amount', 'amount', 'required');
-            $this->form_validation->set_rules('vehicle', 'vehicle', '');
+            // $this->form_validation->set_rules('vehicle', 'vehicle', '');
             $this->form_validation->set_rules('co_applicant', 'co_applicant', '');
             $this->form_validation->set_rules('guarantee_name', 'guarantee_name', '');
 
