@@ -31,14 +31,14 @@ class Upload_case_controller extends CI_Controller
 				$data['created_at'] = date('Y-m-d H:i:s');
 				// print_r($data);
 				// die;
-				// echo "<pre>";
+				//echo "<pre>";
 				if ($upload_type == 'create_case') {
 					foreach ($sheet as $key => $row) {
 						// print_r($row);
 						if ($key == 0) {
 							continue;
 						}
-						// die;
+						//die;
 						$fi_to_be_conducted 	= $row['2'];
 						$fi_to_be_conducted_array = explode(",", $fi_to_be_conducted);
 
@@ -82,8 +82,8 @@ class Upload_case_controller extends CI_Controller
 									'asset_make' 			=> $row['19'],
 									'asset_model' 			=> $row['20'],
 									'station' 				=> $row['21'],
-									'tat_start' 			=> $row['22'],
-									'tat_end' 				=> $row['23'],
+									'tat_start' 			=> readableDateUTC(formatDate($row['22'], 'Y-m-d H:i:s')),
+									'tat_end' 				=> readableDateUTC(formatDate($row['23'], 'Y-m-d H:i:s')),
 									'remarks' 				=> $row['24'],
 									'code' 					=> $agent_code,
 								);
@@ -144,8 +144,8 @@ class Upload_case_controller extends CI_Controller
 									// 'asset_make' 			=> $row['19'],
 									// 'asset_model' 			=> $row['20'],
 									// 'station' 				=> $row['21'],
-									'tat_start' 			=> $row['22'],
-									'tat_end' 				=> $row['23'],
+									'tat_start' 			=> readableDateUTC(formatDate($row['22'], 'Y-m-d H:i:s')),
+									'tat_end' 				=> readableDateUTC(formatDate($row['23'], 'Y-m-d H:i:s')),
 									'remarks' 				=> $row['24'],
 									'code' 					=> $agent_code,
 								);

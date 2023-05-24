@@ -88,7 +88,7 @@ class Assign_case_model extends CI_Model
 	{
 		try {
 			$this->db->where("uf.code", $data);
-			$this->db->select("uf.id as uid,a.employee_unique_id AS agent_code,uf.id,uf.code, uf.application_id,uf.customer_name,uf.business_address,uf.fi_to_be_conducted,uf.tat_start,uf.tat_end,uf.status");
+			$this->db->select("uf.id as uid,a.employee_unique_id AS agent_code,uf.id,uf.code,uf.bank_name, uf.application_id,uf.customer_name,uf.business_address,uf.fi_to_be_conducted,uf.tat_start,uf.tat_end,uf.status");
 			$this->db->join('login a', 'a.employee_unique_id = uf.code', 'left');
 			$this->db->from('upload_file uf');
 			$query = $this->db->get();

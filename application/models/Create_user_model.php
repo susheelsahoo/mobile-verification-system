@@ -19,8 +19,8 @@ class Create_user_model extends CI_Model
 	}
 
 	var $table7 = "login";
-	var $select_column7 = array("id","role_group","first_name", "username", "password","mobile", "organization", "status");
-	var $order_column7 = array("id","role_group","first_name", "username", "password", "mobile","organization", "status");
+	var $select_column7 = array("id", "role_group", "first_name", "employee_unique_id", "username", "password", "mobile", "organization", "status");
+	var $order_column7 = array("id", "role_group", "first_name", "employee_unique_id", "username", "password", "mobile", "organization", "status");
 
 	function make_query_user()
 	{
@@ -84,15 +84,16 @@ class Create_user_model extends CI_Model
 	}
 
 
-	function insert_status_update($data, $id) {
-        try {
-            $this->db->where("id", $id);
-            $return_data = $this->db->update("login", $data);
-            return $return_data;
-        } catch (Exception $ex) {
-            throw $ex;
-        }
-    }
+	function insert_status_update($data, $id)
+	{
+		try {
+			$this->db->where("id", $id);
+			$return_data = $this->db->update("login", $data);
+			return $return_data;
+		} catch (Exception $ex) {
+			throw $ex;
+		}
+	}
 
 	function update_password($pass_id, $data)
 	{
@@ -117,7 +118,7 @@ class Create_user_model extends CI_Model
 		}
 	}
 
-	
+
 	function fetch_single_mobile($users_id)
 	{
 		try {
@@ -151,5 +152,4 @@ class Create_user_model extends CI_Model
 			throw $ex;
 		}
 	}
-
 }
