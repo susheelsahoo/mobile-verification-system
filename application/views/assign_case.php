@@ -98,6 +98,7 @@
                     dataType: "json",
                     success: function(data) {
                         $('#case_edit_model').modal('show');
+                        $('#u_bank_name').val(data.bank_name);
                         $('#u_customer_name').val(data.customer_name);
                         $('#u_fi_to_be_conducted').val(data.fi_to_be_conducted);
                         $('#u_product_name').val(data.product_name);
@@ -1320,8 +1321,15 @@
 
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <label for="customer_name" class="h6">Customer Name</label>
-                                <input type="text" class="form-control" id="u_customer_name" placeholder="Customer name here" name="customer_name">
+                                <label for="bank_name" class="h6">Bank Name</label>
+                                <input type="text" class="form-control" id="u_bank_name" placeholder="Bank name here" name="bank_name">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="customer_name" class="h6">Applicant Name</label>
+                                <input type="text" class="form-control" id="u_customer_name" placeholder="Applicant name here" name="customer_name">
                             </div>
                         </div>
 
@@ -1354,13 +1362,6 @@
                             <div class="form-group col-md-12">
                                 <label for="source_channel" class="h6">Source Channel</label>
                                 <input type="text" class="form-control" id="u_source_channel" name="source_channel">
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <label for="fi_intiation_comments" class="h6">Fi initiation comments</label>
-                                <input type="text" class="form-control" id="u_fi_intiation_comments" placeholder="fi intiation comments here" name="fi_intiation_comments">
                             </div>
                         </div>
 

@@ -256,9 +256,6 @@ class Assign_case_controller extends CI_Controller
                 $output['fi_flag'] = $row->fi_flag;
                 $output['designation'] = $row->designation;
                 $output['loan_amount'] = $row->loan_amount;
-                $output['fi_intiation_comments'] = $row->fi_intiation_comments;
-                $output['asset_make'] = $row->asset_make;
-                $output['asset_model'] = $row->asset_model;
                 $output['station'] = $row->station;
                 $output['tat_start'] = $row->tat_start;
                 $output['tat_end'] = $row->tat_end;
@@ -616,6 +613,7 @@ class Assign_case_controller extends CI_Controller
             foreach ($data as $row) {
 
                 $output['id'] = $row->id;
+                $output['bank_name'] = $row->bank_name;
                 $output['customer_name'] = $row->customer_name;
                 $output['fi_to_be_conducted'] = $row->fi_to_be_conducted;
                 $output['product_name'] = $row->product_name;
@@ -879,6 +877,7 @@ class Assign_case_controller extends CI_Controller
     {
         try {
             $this->load->library('form_validation');
+            $this->form_validation->set_rules('bank_name', 'bank_name', 'required');
             $this->form_validation->set_rules('customer_name', 'customer_name', 'required');
             $this->form_validation->set_rules('fi_to_be_conducted', 'fi_to_be_conducted', 'required');
             $this->form_validation->set_rules('product_name', 'product_name', 'required');
@@ -901,6 +900,7 @@ class Assign_case_controller extends CI_Controller
                 $case_id = $_POST["c_id"];
                 $array = array(
 
+                    'bank_name' => $this->input->post('bank_name'),
                     'customer_name' => $this->input->post('customer_name'),
                     'fi_to_be_conducted' => $this->input->post('fi_to_be_conducted'),
                     'product_name' => $this->input->post('product_name'),
