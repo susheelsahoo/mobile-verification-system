@@ -80,7 +80,7 @@
                         $('.s_created_at').html("<b>Created At:</b> " + data.created_at);
                         $('.s_updated_at').html("<b>Updated At:</b> " + data.updated_at);
                         $('.s_status').html("<b>Status:</b> " + data.status);
-                        // $('.s_mobile').html("<b>Mobile:</b> " + data.updated_at);
+                        $('.s_created_by').html("<b>Created By:</b> ");
 
                     }
                 });
@@ -1252,6 +1252,19 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row pt-6 ">
+                                                
+                                                <div class="col-sm-6">
+                                                    <h4 class="s_created_by">
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
 
                                     
 
