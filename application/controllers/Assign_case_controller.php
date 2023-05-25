@@ -296,8 +296,16 @@ class Assign_case_controller extends CI_Controller
                 $output['customer_name'] = $row->customer_name;
                 $output['created_at'] = $row->created_at;
                 $output['fi_date'] = $row->fi_date;
+                $output['tat_start'] = $row->tat_start;
+                $output['city'] = $row->city;
+                $output['pincode'] = $row->pincode;
+                $output['business_address'] = $row->business_address;
+                $output['tat_end'] = $row->tat_end;
+                $output['amount'] = $row->amount;
+                $output['fi_to_be_conducted'] = $row->fi_to_be_conducted;
                 $output['fi_time'] = $row->fi_time;
                 $output['bank_name'] = $row->bank_name;
+                $output['code'] = $row->code;
                 $output['product_name'] = $row->product_name;
                 $output['dob'] = $row->dob;
                 $output['fi_flag'] = $row->fi_flag;
@@ -434,6 +442,15 @@ class Assign_case_controller extends CI_Controller
                 $output['customer_name'] = $row->customer_name;
                 $output['bank_name'] = $row->bank_name;
 
+                $output['fi_to_be_conducted'] = $row->fi_to_be_conducted;
+                $output['code'] = $row->code;
+                $output['city'] = $row->city;
+                $output['pincode'] = $row->pincode;
+                $output['amount'] = $row->amount;
+                $output['business_address'] = $row->business_address;
+                $output['tat_start'] = $row->tat_start;
+                $output['tat_end'] = $row->tat_end;
+                $output['business_name'] = $row->business_name;
                 $output['created_at'] = $row->created_at;
                 $output['dob'] = $row->dob;
                 $output['fi_time'] = $row->fi_time;
