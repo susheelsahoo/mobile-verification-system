@@ -54,13 +54,13 @@
                         $('.s_permanent_address').html("<b>Permanent Address:</b> " + data.permanent_address);
                         $('.s_fi_date').html("<b>FI Date:</b> " + data.fi_date);
                         $('.s_fi_time').html("<b>FI Time:</b> " + data.fi_time);
+                        $('.s_permanent_add').html("<b>Permanent Address:</b> " + data.permanent_address);
+                        $('.s_designation').html("<b>Designation:</b> " + data.designation);
                         $('.s_dob').html("<b>Date of Birth:</b> " + data.dob);
                         $('.s_channel').html("<b>Source Channel:</b> " + data.source_channel);
                         $('.s_fi_flag').html("<b>FI Flag:</b> " + data.fi_flag);
                         $('.s_bus_name').html("<b>Business Name:</b> " + data.business_name);
-                        $('.s_fi_ini_comments').html("<b>FI Initiation Comments:</b> " + data.fi_intiation_comments);
-                        $('.s_asset_make').html("<b>Asset Make:</b> " + data.asset_make);
-                        $('.s_asset_model').html("<b>Asset Model:</b> " + data.asset_model);
+                      
                         $('.s_station').html("<b>Station:</b> " + data.station);
                         $('.s_tat_start').html("<b>TAT start:</b> " + data.tat_start);
                         $('.s_tat_end').html("<b>TAT end:</b> " + data.tat_end);
@@ -68,7 +68,7 @@
                         $('.s_pincode').html("<b>Pin Code:</b> " + data.pincode);
                         $('.s_name').html("<b>Name:</b> " + data.customer_name);
                         $('.s_remarks').html("<b>Remarks:</b> " + data.remarks);
-                        $('.s_bank_name').html("<b>Bank:</b> " + data.bank_name);
+                        $('.s_bank_name').html("<b>Bank Name:</b> " + data.bank_name);
                         $('.s_agent_code').html("<b>Agent Code:</b> " + data.code);
                         $('.s_residence_address').html("<b>Address:</b> " + data.business_address);
                         $('.s_amount').html("<b>Amount:</b> " + data.amount);
@@ -966,7 +966,7 @@
                                         <div class="col-sm-12">
                                             <div class="row pt-12 ">
                                                 <div class="col-sm-12">
-                                                    <h4 class="s_application_id">
+                                                    <h4 class="s_application_id" style="color:blue;">
                                                     </h4>
                                                 </div>
                                             </div>
@@ -983,12 +983,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
 
-                                  <div class="row">
+                                    <div class="row">
                                         <div class="col-sm-12">
                                             <div class="row pt-12 ">
-                                            <div class="col-sm-6">
+                                                 <div class="col-sm-6">
                                                     <h4 class="s_product_name">
                                                     </h4>
                                                 </div>
@@ -1029,10 +1028,8 @@
 
                                     <div class="row">
                                         <div class="col-sm-12">
-
                                             <h4 class="s_bus_name">
                                             </h4>
-
                                         </div>
                                     </div>
 
@@ -1044,6 +1041,20 @@
                                                     </h4>
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h4 class="s_permanent_add">
+                                            </h4>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h4 class="s_designation">
+                                            </h4>
                                         </div>
                                     </div>
 
@@ -1151,16 +1162,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="row pt-12 ">
-                                                <div class="col-sm-12">
-                                                    <h4 class="s_fi_ini_comments">
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
 
                                     <div class="row">
                                         <div class="col-sm-12">
@@ -1354,9 +1356,6 @@
                                 <input type="text" class="form-control" id="u_source_channel" name="source_channel">
                             </div>
                         </div>
-
-
-
 
                         <div class="form-row">
                             <div class="form-group col-md-12">

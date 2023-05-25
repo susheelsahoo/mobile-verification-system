@@ -241,6 +241,8 @@ class Assign_case_controller extends CI_Controller
                 $output['customer_name'] = $row->customer_name;
                 $output['fi_to_be_conducted'] = $row->fi_to_be_conducted;
                 $output['pincode'] = $row->pincode;
+                $output['permanent_address'] = $row->permanent_address;
+                $output['designation'] = $row->designation;
                 $output['product_name'] = $row->product_name;
                 $output['residence_address'] = $row->residence_address;
                 $output['office_address'] = $row->office_address;
