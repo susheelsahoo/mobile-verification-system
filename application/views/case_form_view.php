@@ -591,7 +591,7 @@
 
         <div class="row">
             <div class="col-md-3">
-                <label for="remarks">Remarks<span class="text-danger"> *</span></label>
+                <label for="remarks">Remarks</label>
             </div>
             <div class="col-md-9">
                 <textarea class="form-control" name="remarks" id="remarks" placeholder="Remarks" type="text"></textarea>

@@ -65,7 +65,7 @@ class Case_form extends CI_Controller
 			$this->form_validation->set_rules('source_channel', 'Source Channel', '');
 			$this->form_validation->set_rules('tat_start', 'TAT Start', 'required');
 			$this->form_validation->set_rules('tat_end', 'TAT End', 'required');
-			$this->form_validation->set_rules('remarks', 'Remarks', 'required');
+			$this->form_validation->set_rules('remarks', 'Remarks', '');
 			$fi_type = $this->input->post('fi_to_be_conducted');
 			// if (!empty($fi_type[0]) && (isset($fi_type[1]) && !empty($fi_type[1]))) {
 			// 	$this->form_validation->set_rules('bv_agent', 'BV Agent', 'required');
@@ -98,7 +98,7 @@ class Case_form extends CI_Controller
 					$varification['co_applicant'] 		= $this->input->post('co_applicant');
 					$varification['guarantee_name'] 	= $this->input->post('guarantee_name');
 					$varification['geo_limit'] 			= $this->input->post('geo_limit');
-					$varification['source_channel'] 			= $this->input->post('source_channel');
+					$varification['source_channel'] 	= $this->input->post('source_channel');
 					$varification['tat_start'] 			= $this->input->post('tat_start');
 					$varification['tat_end'] 			= $this->input->post('tat_end');
 					$varification['remarks'] 			= $this->input->post('remarks');
