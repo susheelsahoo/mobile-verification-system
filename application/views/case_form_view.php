@@ -508,7 +508,7 @@
 
         <div class="row">
             <div class="col-md-3">
-                <label for="co_applicant">Co-Applicant<span class="text-danger"> *</span></label>
+                <label for="co_applicant">Co-Applicant</label>
             </div>
             <div class="col-md-9">
                 <input class="form-control" type="text" id="co_applicant" name="co_applicant" placeholder="Enter your Co - Applicant Name">
@@ -518,7 +518,7 @@
 
         <div class="row">
             <div class="col-md-3">
-                <label for="guarantee_name">Guarantee Name<span class="text-danger"> *</span></label>
+                <label for="guarantee_name">Guarantee Name</label>
             </div>
             <div class="col-md-9">
                 <input class="form-control" type="text" id="guarantee_name" name="guarantee_name" placeholder="Enter your Guarantee Name">
@@ -562,6 +562,15 @@
                     <option value="local">LOCAL</option>
                     <option value="outstation">OUTSTATION</option>
                 </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <label for="source_channel">Soucre Channel</label>
+            </div>
+            <div class="col-md-9">
+                <input class="form-control" type="text" id="source_channel" name="source_channel" placeholder="Enter your soucre channel (if any)">
             </div>
         </div>
 
