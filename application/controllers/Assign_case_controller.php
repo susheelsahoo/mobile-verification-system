@@ -247,6 +247,7 @@ class Assign_case_controller extends CI_Controller
                 $output['permanent_address'] = $row->permanent_address;
                 $output['dob'] = $row->dob;
                 $output['fi_date'] = $row->fi_date;
+                $output['source_channel'] = $row->source_channel;
                 $output['customer_name'] = $row->customer_name;
                 $output['business_address'] = $row->business_address;
                 $output['fi_time'] = $row->fi_time;
@@ -257,7 +258,9 @@ class Assign_case_controller extends CI_Controller
                 $output['asset_make'] = $row->asset_make;
                 $output['asset_model'] = $row->asset_model;
                 $output['station'] = $row->station;
-                $output['tat'] = $row->tat;
+                $output['tat_start'] = $row->tat_start;
+                $output['tat_end'] = $row->tat_end;
+                $output['business_name'] = $row->business_name;
                 $output['assigned_to'] = $row->assigned_to;
                 $output['remarks'] = $row->remarks;
 
@@ -615,10 +618,9 @@ class Assign_case_controller extends CI_Controller
                 $output['fi_to_be_conducted'] = $row->fi_to_be_conducted;
                 $output['product_name'] = $row->product_name;
                 $output['business_address'] = $row->business_address;
-
                 $output['fi_intiation_comments'] = $row->fi_intiation_comments;
-                $output['asset_make'] = $row->asset_make;
-                $output['asset_model'] = $row->asset_model;
+                $output['source_channel'] = $row->source_channel;
+               
                 $output['geo_limit'] = $row->geo_limit;
                 $output['remarks'] = $row->remarks;
                 $output['amount'] = $row->amount;
