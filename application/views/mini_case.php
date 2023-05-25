@@ -530,6 +530,15 @@
                 </select>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <label for="source_channel">Source Channel</label>
+            </div>
+            <div class="col-md-9">
+                <input class="form-control" type="text" id="source_channel" name="source_channel" placeholder="Enter Source channel">
+            </div>
+        </div>
         
         <div class="row">
             <div class="col-md-3">
