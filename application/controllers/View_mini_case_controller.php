@@ -62,8 +62,8 @@ class View_mini_case_controller extends CI_Controller
                 $sub_array[] = $row->reference_no;
                 // $sub_array[] = $row->business_name;
                 $sub_array[] = $row->business_add;
-                $sub_array[] = $row->tat_start;
-                $sub_array[] = $row->tat_end;
+                $sub_array[] = readableDateIST($row->tat_start);
+                $sub_array[] = readableDateIST($row->tat_end);
                 $sub_array[] = $row->status;
 
                 // $i++;
