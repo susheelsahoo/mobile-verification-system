@@ -151,7 +151,7 @@
                     dataType: "json",
                     success: function(data) {
                         $('#bv_type_view_modal').modal('show');
-                        $('.bv_application_id').html("<b>Application ID:</b> " + data.application_id);
+                        $('.bv_application_id').html("<b>Reference Number:</b> " + data.application_id);
                         $('.bv_customer_name').html("<b>Applicant Name:</b> " + data.customer_name);
                         $('.bv_fi_type').html("<b>FI Type:</b> " + data.fi_to_be_conducted);
                         $('.bv_tat_start').html("<b>TAT Start:</b> " + data.tat_start);
@@ -176,8 +176,8 @@
                         $('.bv_person_met').html("<b>Person Met:</b> " + data.bv_person_met);
 
 
-                        $('.bv_bank').html("<b>Bank:</b> " + data.bank_name);
-                        $('.bv_product').html("<b>Product:</b> " + data.product_name);
+                        $('.bv_bank').html("<b>Bank Name:</b> " + data.bank_name);
+                        $('.bv_product').html("<b>Product Product:</b> " + data.product_name);
                         $('.bv_nature_of_business').html("<b>Nature of Business:</b> " + data.bv_nature_of_business);
 
                         $('.bv_corporate_office').html("<b>Corporate Office:</b> " + data.bv_corporate_office);
@@ -211,15 +211,25 @@
                         $('.bv_dt_of_cpv').html("<b>DT of CPV:</b> " + data.bv_dt_of_cpv);
                         $('.bv_remarks').html("<b>Remarks:</b> " + data.bv_remarks);
                         $('.bv_status').html("<b>Status:</b> " + data.status);
-                        $('.bv_image1').attr("src", data.bv_image1);
-                        $('.bv_image2').attr("src", data.bv_image2);
-                        $('.bv_image3').attr("src", data.bv_image3);
-                        $('.bv_image4').attr("src", data.bv_image4);
-                        $('.bv_image5').attr("src", data.bv_image5);
-                        $('.bv_image6').attr("src", data.bv_image6);
-                        $('.bv_image7').attr("src", data.bv_image7);
-                        $('.bv_image8').attr("src", data.bv_image8);
-                        $('.bv_image9').attr("src", data.bv_image9);
+                        $(".case_bv_case_img").html('');
+                        $('.case_bv_case_img').append(data.bv_image1);
+                        $('.case_bv_case_img').append(data.bv_image2);
+                        $('.case_bv_case_img').append(data.bv_image3);
+                        $('.case_bv_case_img').append(data.bv_image4);
+                        $('.case_bv_case_img').append(data.bv_image5);
+                        $('.case_bv_case_img').append(data.bv_image6);
+                        $('.case_bv_case_img').append(data.bv_image7);
+                        $('.case_bv_case_img').append(data.bv_image8);
+                        $('.case_bv_case_img').append(data.bv_image9);
+                        // $('.bv_image1').attr("src", data.bv_image1);
+                        // $('.bv_image2').attr("src", data.bv_image2);
+                        // $('.bv_image3').attr("src", data.bv_image3);
+                        // $('.bv_image4').attr("src", data.bv_image4);
+                        // $('.bv_image5').attr("src", data.bv_image5);
+                        // $('.bv_image6').attr("src", data.bv_image6);
+                        // $('.bv_image7').attr("src", data.bv_image7);
+                        // $('.bv_image8').attr("src", data.bv_image8);
+                        // $('.bv_image9').attr("src", data.bv_image9);
                     }
                 });
             });
@@ -499,15 +509,15 @@
                         $('.s_customer_name').html("<b>Applicant Name:</b> " + data.customer_name);
                         $('.s_city').html("<b>City:</b> " + data.city);
                         $('.s_pincode').html("<b>Pincode:</b> " + data.pincode);
-                        $('.s_address').html("<b>Business Address:</b> " + data.business_address);
-                        $('.s_bank').html("<b>Bank:</b> " + data.bank_name);
-                        $('.s_product').html("<b>Product:</b> " + data.product_name);
+                        $('.s_address').html("<b>Address:</b> " + data.business_address);
+                        $('.s_bank').html("<b>Bank Name:</b> " + data.bank_name);
+                        $('.s_product').html("<b>Product Name:</b> " + data.product_name);
                         $('.s_geo_limit').html("<b>Geo Limit:</b> " + data.geo_limit);
                         $('.s_fi').html("<b>FI Status:</b> " + data.rv_fi_status);
                         $('.s_make_model').html("<b>Make Model:</b> " + data.rv_make_model);
                         $('.s_loan').html("<b>Amount:</b> " + data.amount);
                         $('.r_agent_code').html("<b>Agent Code:</b> " + data.code);
-                        $('.s_mobile').html("<b>Amount:</b> ");
+                        $('.s_mobile').html("<b>Mobile:</b> ");
                         $('.s_cnf_add').html("<b>Confirm Address:</b> " + data.rv_confirm_address);
                         $('.s_person_met_detail').html("<b>Person Met details:</b> " + data.rv_person_met_details);
                         $('.s_relationship').html("<b>Relation:</b> " + data.rv_relationship);
@@ -536,15 +546,27 @@
                         $('.r_remarks').html("<b>Remarks:</b> " + data.rv_remarks);
                         $('.r_add_yesno').html("<b>Address Confirmed:</b> " + data.rv_address_yes_no);
                         $('.r_vehicle').html("<b>Vehicle:</b> " + data.rv_vehicle_details);
-                        $('.rv_image1').attr("src", data.rv_image1);
-                        $('.rv_image2').attr("src", data.rv_image2);
-                        $('.rv_image3').attr("src", data.rv_image3);
-                        $('.rv_image4').attr("src", data.rv_image4);
-                        $('.rv_image5').attr("src", data.rv_image5);
-                        $('.rv_image6').attr("src", data.rv_image6);
-                        $('.rv_image7').attr("src", data.rv_image7);
-                        $('.rv_image8').attr("src", data.rv_image8);
-                        $('.rv_image9').attr("src", data.rv_image9);
+                        // case_rv_case_img
+
+                        $(".case_rv_case_img").html('');
+                        $('.case_rv_case_img').append(data.rv_image1);
+                        $('.case_rv_case_img').append(data.rv_image2);
+                        $('.case_rv_case_img').append(data.rv_image3);
+                        $('.case_rv_case_img').append(data.rv_image4);
+                        $('.case_rv_case_img').append(data.rv_image5);
+                        $('.case_rv_case_img').append(data.rv_image6);
+                        $('.case_rv_case_img').append(data.rv_image7);
+                        $('.case_rv_case_img').append(data.rv_image8);
+                        $('.case_rv_case_img').append(data.rv_image9);
+                        // $('.rv_image1').attr("src", data.rv_image1);
+                        // $('.rv_image2').attr("src", data.rv_image2);
+                        // $('.rv_image3').attr("src", data.rv_image3);
+                        // $('.rv_image4').attr("src", data.rv_image4);
+                        // $('.rv_image5').attr("src", data.rv_image5);
+                        // $('.rv_image6').attr("src", data.rv_image6);
+                        // $('.rv_image7').attr("src", data.rv_image7);
+                        // $('.rv_image8').attr("src", data.rv_image8);
+                        // $('.rv_image9').attr("src", data.rv_image9);
                     }
                 });
             });
@@ -2325,59 +2347,10 @@
                                     </div>
                                     <hr>
 
-
+                                    <div class="case_rv_case_img"></div>
                                   
 
-                                    <h3 style="color:blue;">Picture's Taken</h3>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="row pt-4">
-                                                <div class="col-sm-4">
-                                                    <img class="rv_image1" height="200" width="200">
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <img class="rv_image2" height="200" width="200">
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <img class="rv_image3" height="200" width="200">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="row pt-4">
-                                                <div class="col-sm-4">
-                                                    <img class="rv_image4" height="200" width="200">
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <img class="rv_image5" height="200" width="200">
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <img class="rv_image6" height="200" width="200">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br>
-
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="row pt-4">
-                                                <div class="col-sm-4">
-                                                    <img class="rv_image7" height="200" width="200">
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <img class="rv_image8" height="200" width="200">
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <img class="rv_image9" height="200" width="200">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br>
+                                    
 
                                     <h3 style="color:blue;">Location</h3>
 
@@ -2607,27 +2580,7 @@
                                 </div> -->
                                 <hr>
 
-                                <h3 style="color:blue;">Details of which loan is applied</h3>
-
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="row pt-4 ">
-                                            <div class="col-sm-4">
-                                                <h4 class="bv_asset_make">
-                                                </h4>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <h4 class="bv_asset_model">
-                                                </h4>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <h4 class="bv_amt">
-                                                </h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr>
+             
 
                                 <h3 style="color:blue;">Personal details</h3>
                                 <div class="row">
@@ -2863,7 +2816,9 @@
 
 
                                                                         <hr>
-                                                                        <h3 style="color:blue;">Picture's Taken</h3>
+
+                                                                        <div class="case_bv_case_img"></div>
+                                                                        <!-- <h3 style="color:blue;">Picture's Taken</h3>
                                                                         <div class="row">
                                                                             <div class="col-sm-12">
                                                                                 <div class="row pt-4">
@@ -2912,7 +2867,7 @@
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        <br>
+                                                                        <br> -->
 
                                                                         
                                                                 <h3 style="color:blue;">Location</h3>
