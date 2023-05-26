@@ -587,7 +587,7 @@
             <div class="col-md-4 col-sm-6">
                 <div class="row">
                     <div id="dvTitle" class="product_name">
-                        <h3><b>Bodvid Private Limited</b></h3>
+                        <h3><b>RealBits Coders</b></h3>
                     </div>
                 </div>
             </div>
@@ -595,7 +595,7 @@
             <div class="col-md-4 col-sm-6">
                 <div class="row">
                     <div id="dvTitle" class="veri">
-                        <h3><b>Verification System yogita(1.0.0)</b></h3>
+                        <h3><b>Verification System(1.0.0)</b></h3>
                     </div>
                 </div>
             </div>
