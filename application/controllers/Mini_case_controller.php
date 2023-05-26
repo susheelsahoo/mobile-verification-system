@@ -56,22 +56,13 @@ class Mini_case_controller extends CI_Controller
 			$this->form_validation->set_rules('product', 'product', 'required');
 			$this->form_validation->set_rules('reference_no', 'reference_no', 'required');
 			$this->form_validation->set_rules('name', 'name', '');
-				// $this->form_validation->set_rules('code', 'code', 'required');
 			$this->form_validation->set_rules('amount', 'amount', 'required');
-			// $this->form_validation->set_rules('vehicle', 'vehicle', '');
 			$this->form_validation->set_rules('mobile', 'mobile', '');
 			$this->form_validation->set_rules('geo_limit', 'geo_limit', 'required');
 			$this->form_validation->set_rules('source_channel', 'source_channel', '');
 			$this->form_validation->set_rules('tat_start', 'tat_start', 'required');
 			$this->form_validation->set_rules('tat_end', 'tat_end', 'required');
 			$fi_type = $this->input->post('fi_type');
-			// print_r($fi_type);die;
-			// if (!empty($fi_type[0]) && (isset($fi_type[1]) && !empty($fi_type[1]))) {
-			// 	$this->form_validation->set_rules('bv_agent', 'BV Agent', 'required');
-			// 	$this->form_validation->set_rules('rv_agent', 'RV Agent', 'required');
-			// } else if (isset($fi_type[0]) && !empty($fi_type[0])) {
-			// 	$this->form_validation->set_rules('bv_agent', 'BV Agent', 'required');
-			// }
 			if ($this->form_validation->run()) {
 				foreach ($fi_type as $key => $val) {
 					$varification = [];
@@ -79,10 +70,8 @@ class Mini_case_controller extends CI_Controller
 					$name 		= array_values(array_filter($this->input->post('name')));
 					$city 		= array_values(array_filter($this->input->post('city')));
 					$pincode 	= array_values(array_filter($this->input->post('pin_code')));
-					$varification['code'] = $this->input->post('bv_agent');
-					if ($key == 1) {
-						$varification['code'] = $this->input->post('rv_agent');
-					}
+					$agent_code 	= array_values(array_filter($this->input->post('agent_code')));
+
 
 					$varification['product'] 		= $this->input->post('product');
 					$varification['reference_no'] 	= $this->input->post('reference_no');
@@ -90,7 +79,6 @@ class Mini_case_controller extends CI_Controller
 					$varification['amount'] 		= $this->input->post('amount');
 					$varification['vehicle'] 		= $this->input->post('vehicle');
 					$varification['mobile'] 			= $this->input->post('mobile');
-				// 		$varification['code'] 			= $this->input->post('code');
 					$varification['geo_limit'] 			= $this->input->post('geo_limit');
 					$varification['source_channel'] 			= $this->input->post('source_channel');
 					$varification['tat_start'] 		= $this->input->post('tat_start');
@@ -100,6 +88,7 @@ class Mini_case_controller extends CI_Controller
 					$varification['business_name'] 	= $name[$key];
 					$varification['city'] 			= $city[$key];
 					$varification['pin_code'] 		= $pincode[$key];
+					$varification['code']				= $agent_code[$key];
 					$varification['bank'] 			= $this->input->post('bank');
 					//$varification['status'] 		= '1';
 					// print_r($varification);die;
