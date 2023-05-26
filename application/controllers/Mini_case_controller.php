@@ -60,6 +60,7 @@ class Mini_case_controller extends CI_Controller
 			// $this->form_validation->set_rules('vehicle', 'vehicle', '');
 			$this->form_validation->set_rules('mobile', 'mobile', '');
 			$this->form_validation->set_rules('geo_limit', 'geo_limit', 'required');
+			$this->form_validation->set_rules('source_channel', 'source_channel', '');
 			$this->form_validation->set_rules('tat_start', 'tat_start', 'required');
 			$this->form_validation->set_rules('tat_end', 'tat_end', 'required');
 			$fi_type = $this->input->post('fi_type');
@@ -89,6 +90,7 @@ class Mini_case_controller extends CI_Controller
 					$varification['vehicle'] 		= $this->input->post('vehicle');
 					$varification['mobile'] 			= $this->input->post('mobile');
 					$varification['geo_limit'] 			= $this->input->post('geo_limit');
+					$varification['source_channel'] 			= $this->input->post('source_channel');
 					$varification['tat_start'] 		= $this->input->post('tat_start');
 					$varification['tat_end'] 		= $this->input->post('tat_end');
 					$varification['fi_type'] 		= $val;

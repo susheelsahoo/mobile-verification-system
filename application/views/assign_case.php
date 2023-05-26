@@ -45,28 +45,30 @@
 
                         $('#assign_view_model').modal('show');
 
-                        $('.s_application_id').html("<b>Application ID:</b> " + data.application_id);
-                        $('.s_customer_name').html("<b>Customer Name:</b> " + data.customer_name);
+                        $('.s_application_id').html("<b>Reference Number:</b> " + data.application_id);
+                        $('.s_customer_name').html("<b>Applicant Name:</b> " + data.customer_name);
                         $('.s_fi_conducted').html("<b>Fi to be Conducted:</b> " + data.fi_to_be_conducted);
                         $('.s_product_name').html("<b>Product Name:</b> " + data.product_name);
                         $('.s_residence_address').html("<b>Residence Address:</b> " + data.residence_address);
                         $('.s_office_address').html("<b>Office Address:</b> " + data.office_address);
                         $('.s_permanent_address').html("<b>Permanent Address:</b> " + data.permanent_address);
-                        $('.s_dob').html("<b>DOB:</b> " + data.dob);
                         $('.s_fi_date').html("<b>FI Date:</b> " + data.fi_date);
                         $('.s_fi_time').html("<b>FI Time:</b> " + data.fi_time);
-                        $('.s_dob').html("<b>FI Time:</b> " + data.dob);
+                        $('.s_permanent_add').html("<b>Permanent Address:</b> " + data.permanent_address);
+                        $('.s_designation').html("<b>Designation:</b> " + data.designation);
+                        $('.s_dob').html("<b>Date of Birth:</b> " + data.dob);
+                        $('.s_channel').html("<b>Source Channel:</b> " + data.source_channel);
                         $('.s_fi_flag').html("<b>FI Flag:</b> " + data.fi_flag);
-                        $('.s_fi_ini_comments').html("<b>FI Initiation Comments:</b> " + data.fi_intiation_comments);
-                        $('.s_asset_make').html("<b>Asset Make:</b> " + data.asset_make);
-                        $('.s_asset_model').html("<b>Asset Model:</b> " + data.asset_model);
+                        $('.s_bus_name').html("<b>Business Name:</b> " + data.business_name);
+                      
                         $('.s_station').html("<b>Station:</b> " + data.station);
-                        $('.s_tat').html("<b>TAT Time:</b> " + data.tat);
+                        $('.s_tat_start').html("<b>TAT start:</b> " + data.tat_start);
+                        $('.s_tat_end').html("<b>TAT end:</b> " + data.tat_end);
                         $('.s_city').html("<b>City:</b> " + data.city);
                         $('.s_pincode').html("<b>Pin Code:</b> " + data.pincode);
                         $('.s_name').html("<b>Name:</b> " + data.customer_name);
                         $('.s_remarks').html("<b>Remarks:</b> " + data.remarks);
-                        $('.s_bank_name').html("<b>Bank:</b> " + data.bank_name);
+                        $('.s_bank_name').html("<b>Bank Name:</b> " + data.bank_name);
                         $('.s_agent_code').html("<b>Agent Code:</b> " + data.code);
                         $('.s_residence_address').html("<b>Address:</b> " + data.business_address);
                         $('.s_amount').html("<b>Amount:</b> " + data.amount);
@@ -78,7 +80,7 @@
                         $('.s_created_at').html("<b>Created At:</b> " + data.created_at);
                         $('.s_updated_at').html("<b>Updated At:</b> " + data.updated_at);
                         $('.s_status').html("<b>Status:</b> " + data.status);
-                        // $('.s_mobile').html("<b>Mobile:</b> " + data.updated_at);
+                        $('.s_created_by').html("<b>Created By:</b> ");
 
                     }
                 });
@@ -96,6 +98,7 @@
                     dataType: "json",
                     success: function(data) {
                         $('#case_edit_model').modal('show');
+                        $('#u_bank_name').val(data.bank_name);
                         $('#u_customer_name').val(data.customer_name);
                         $('#u_fi_to_be_conducted').val(data.fi_to_be_conducted);
                         $('#u_product_name').val(data.product_name);
@@ -104,6 +107,7 @@
                         $('#u_asset_make').val(data.asset_make);
                         $('#u_asset_model').val(data.asset_model);
                         $('#u_geo_limit').val(data.geo_limit);
+                        $('#u_source_channel').val(data.source_channel);
                         $('#u_remarks').val(data.remarks);
                         $('#u_amount').val(data.amount);
                         $('#u_vehicle').val(data.vehicle);
@@ -147,8 +151,18 @@
                     dataType: "json",
                     success: function(data) {
                         $('#bv_type_view_modal').modal('show');
-                        $('.bv_application_id').html("<b>Application ID:</b> " + data.application_id);
-                        $('.bv_customer_name').html("<b>Customer Name:</b> " + data.customer_name);
+                        $('.bv_application_id').html("<b>Reference Number:</b> " + data.application_id);
+                        $('.bv_customer_name').html("<b>Applicant Name:</b> " + data.customer_name);
+                        $('.bv_fi_type').html("<b>FI Type:</b> " + data.fi_to_be_conducted);
+                        $('.bv_tat_start').html("<b>TAT Start:</b> " + data.tat_start);
+                        $('.bv_tat_end').html("<b>TAT End:</b> " + data.tat_end);
+                        $('.bv_bus_name').html("<b>Business Name:</b> " + data.business_name);
+                        $('.bv_city').html("<b>City:</b> " + data.city);
+                        $('.bv_agent').html("<b>Agent Code:</b> " + data.code);
+                        $('.bv_pincode').html("<b>Pincode:</b> " + data.pincode);
+                        $('.bv_amount').html("<b>Amount:</b> " + data.amount);
+                        $('.bv_mobile').html("<b>Mobile:</b> ");
+                        $('.bv_address').html("<b>Address:</b> " + data.business_address);
                         $('.bv_created_at').html("<b>Date:</b> " + data.created_at);
                         $('.bv_fi_status').html("<b>FI Status:</b> " + data.bv_fi_status);
                         $('.bv_dob').html("<b>DOB:</b> " + data.dob);
@@ -162,8 +176,8 @@
                         $('.bv_person_met').html("<b>Person Met:</b> " + data.bv_person_met);
 
 
-                        $('.bv_bank').html("<b>Bank:</b> " + data.bank_name);
-                        $('.bv_product').html("<b>Product:</b> " + data.product_name);
+                        $('.bv_bank').html("<b>Bank Name:</b> " + data.bank_name);
+                        $('.bv_product').html("<b>Product Product:</b> " + data.product_name);
                         $('.bv_nature_of_business').html("<b>Nature of Business:</b> " + data.bv_nature_of_business);
 
                         $('.bv_corporate_office').html("<b>Corporate Office:</b> " + data.bv_corporate_office);
@@ -197,15 +211,25 @@
                         $('.bv_dt_of_cpv').html("<b>DT of CPV:</b> " + data.bv_dt_of_cpv);
                         $('.bv_remarks').html("<b>Remarks:</b> " + data.bv_remarks);
                         $('.bv_status').html("<b>Status:</b> " + data.status);
-                        $('.bv_image1').attr("src", data.bv_image1);
-                        $('.bv_image2').attr("src", data.bv_image2);
-                        $('.bv_image3').attr("src", data.bv_image3);
-                        $('.bv_image4').attr("src", data.bv_image4);
-                        $('.bv_image5').attr("src", data.bv_image5);
-                        $('.bv_image6').attr("src", data.bv_image6);
-                        $('.bv_image7').attr("src", data.bv_image7);
-                        $('.bv_image8').attr("src", data.bv_image8);
-                        $('.bv_image9').attr("src", data.bv_image9);
+                        $(".case_bv_case_img").html('');
+                        $('.case_bv_case_img').append(data.bv_image1);
+                        $('.case_bv_case_img').append(data.bv_image2);
+                        $('.case_bv_case_img').append(data.bv_image3);
+                        $('.case_bv_case_img').append(data.bv_image4);
+                        $('.case_bv_case_img').append(data.bv_image5);
+                        $('.case_bv_case_img').append(data.bv_image6);
+                        $('.case_bv_case_img').append(data.bv_image7);
+                        $('.case_bv_case_img').append(data.bv_image8);
+                        $('.case_bv_case_img').append(data.bv_image9);
+                        // $('.bv_image1').attr("src", data.bv_image1);
+                        // $('.bv_image2').attr("src", data.bv_image2);
+                        // $('.bv_image3').attr("src", data.bv_image3);
+                        // $('.bv_image4').attr("src", data.bv_image4);
+                        // $('.bv_image5').attr("src", data.bv_image5);
+                        // $('.bv_image6').attr("src", data.bv_image6);
+                        // $('.bv_image7').attr("src", data.bv_image7);
+                        // $('.bv_image8').attr("src", data.bv_image8);
+                        // $('.bv_image9').attr("src", data.bv_image9);
                     }
                 });
             });
@@ -476,16 +500,24 @@
                         $('#fi_type_view_modal').modal('show');
 
                         $('.s_application_id').html("<b>Application ID:</b> " + data.application_id);
-                        $('.s_date').html("<b>Date:</b> " + data.created_at);
+                        $('.s_date').html("<b> Created Date:</b> " + data.created_at);
+                        $('.s_fi_type').html("<b>FI Type:</b> " + data.fi_to_be_conducted);
+                        $('.s_tat_start').html("<b>TAT Start:</b> " + data.tat_start);
+                        $('.s_tat_end').html("<b>TAT End:</b> " + data.tat_end);
                         $('.s_fi_date').html("<b>FI Date:</b> " + data.fi_date);
                         $('.s_fi_time').html("<b>FI Time:</b> " + data.fi_time);
-                        $('.s_customer_name').html("<b>Customer Name:</b> " + data.customer_name);
-                        $('.s_bank').html("<b>Bank:</b> " + data.bank_name);
-                        $('.s_product').html("<b>Product:</b> " + data.product_name);
+                        $('.s_customer_name').html("<b>Applicant Name:</b> " + data.customer_name);
+                        $('.s_city').html("<b>City:</b> " + data.city);
+                        $('.s_pincode').html("<b>Pincode:</b> " + data.pincode);
+                        $('.s_address').html("<b>Address:</b> " + data.business_address);
+                        $('.s_bank').html("<b>Bank Name:</b> " + data.bank_name);
+                        $('.s_product').html("<b>Product Name:</b> " + data.product_name);
                         $('.s_geo_limit').html("<b>Geo Limit:</b> " + data.geo_limit);
                         $('.s_fi').html("<b>FI Status:</b> " + data.rv_fi_status);
                         $('.s_make_model').html("<b>Make Model:</b> " + data.rv_make_model);
-                        $('.s_loan').html("<b>Amount:</b> " + data.rv_loan_amt);
+                        $('.s_loan').html("<b>Amount:</b> " + data.amount);
+                        $('.r_agent_code').html("<b>Agent Code:</b> " + data.code);
+                        $('.s_mobile').html("<b>Mobile:</b> ");
                         $('.s_cnf_add').html("<b>Confirm Address:</b> " + data.rv_confirm_address);
                         $('.s_person_met_detail').html("<b>Person Met details:</b> " + data.rv_person_met_details);
                         $('.s_relationship').html("<b>Relation:</b> " + data.rv_relationship);
@@ -514,15 +546,27 @@
                         $('.r_remarks').html("<b>Remarks:</b> " + data.rv_remarks);
                         $('.r_add_yesno').html("<b>Address Confirmed:</b> " + data.rv_address_yes_no);
                         $('.r_vehicle').html("<b>Vehicle:</b> " + data.rv_vehicle_details);
-                        $('.rv_image1').attr("src", data.rv_image1);
-                        $('.rv_image2').attr("src", data.rv_image2);
-                        $('.rv_image3').attr("src", data.rv_image3);
-                        $('.rv_image4').attr("src", data.rv_image4);
-                        $('.rv_image5').attr("src", data.rv_image5);
-                        $('.rv_image6').attr("src", data.rv_image6);
-                        $('.rv_image7').attr("src", data.rv_image7);
-                        $('.rv_image8').attr("src", data.rv_image8);
-                        $('.rv_image9').attr("src", data.rv_image9);
+                        // case_rv_case_img
+
+                        $(".case_rv_case_img").html('');
+                        $('.case_rv_case_img').append(data.rv_image1);
+                        $('.case_rv_case_img').append(data.rv_image2);
+                        $('.case_rv_case_img').append(data.rv_image3);
+                        $('.case_rv_case_img').append(data.rv_image4);
+                        $('.case_rv_case_img').append(data.rv_image5);
+                        $('.case_rv_case_img').append(data.rv_image6);
+                        $('.case_rv_case_img').append(data.rv_image7);
+                        $('.case_rv_case_img').append(data.rv_image8);
+                        $('.case_rv_case_img').append(data.rv_image9);
+                        // $('.rv_image1').attr("src", data.rv_image1);
+                        // $('.rv_image2').attr("src", data.rv_image2);
+                        // $('.rv_image3').attr("src", data.rv_image3);
+                        // $('.rv_image4').attr("src", data.rv_image4);
+                        // $('.rv_image5').attr("src", data.rv_image5);
+                        // $('.rv_image6').attr("src", data.rv_image6);
+                        // $('.rv_image7').attr("src", data.rv_image7);
+                        // $('.rv_image8').attr("src", data.rv_image8);
+                        // $('.rv_image9').attr("src", data.rv_image9);
                     }
                 });
             });
@@ -949,9 +993,9 @@
 
     <div id="assign_view_model" class="modal fade ">
         <div class="modal-dialog bg-light">
-            <div class="modal-content" style="width:900px;">
+            <div class="modal-content" style="width:800px;">
                 <div class="card ">
-                    <header class="card-header bg-success">
+                    <header class="card-header bg-primary">
                         <h6 class="title "><b>View Case</b></h6>
                     </header>
                     <div class="card-body">
@@ -959,15 +1003,11 @@
                             <div class="col-sm-12 ">
                                 <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
 
-                                    <div class="row">
+                                <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="row pt-6 ">
-                                                <div class="col-sm-6">
-                                                    <h4 class="s_application_id">
-                                                    </h4>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <h4 class="s_customer_name">
+                                            <div class="row pt-12 ">
+                                                <div class="col-sm-12">
+                                                    <h4 class="s_application_id" style="color:blue;">
                                                     </h4>
                                                 </div>
                                             </div>
@@ -976,12 +1016,19 @@
 
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="row pt-6 ">
-                                                <div class="col-sm-6">
-                                                    <h4 class="s_fi_conducted">
+                                            <div class="row pt-12 ">
+                                                <div class="col-sm-12">
+                                                    <h4 class="s_bank_name">
                                                     </h4>
                                                 </div>
-                                                <div class="col-sm-6">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row pt-12 ">
+                                                 <div class="col-sm-6">
                                                     <h4 class="s_product_name">
                                                     </h4>
                                                 </div>
@@ -991,12 +1038,246 @@
 
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="row pt-6 ">
-                                                <div class="col-sm-6">
-                                                    <h4 class="s_name">
+                                            <div class="row pt-12 ">
+                                                <div class="col-sm-12">
+                                                    <h4 class="s_fi_conducted">
                                                     </h4>
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row pt-12">
+                                                <div class="col-sm-12">
+                                                    <h4 class="s_customer_name">
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+
+                                            <h4 class="s_updated_at">
+                                            </h4>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h4 class="s_bus_name">
+                                            </h4>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row pt-6 ">
                                                 <div class="col-sm-6">
+                                                    <h4 class="s_residence_address">
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h4 class="s_permanent_add">
+                                            </h4>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h4 class="s_designation">
+                                            </h4>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row pt-6 ">
+                                                <div class="col-sm-6">
+                                                    <h4 class="s_city">
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row pt-12 ">
+                                                <div class="col-sm-12">
+                                                    <h4 class="s_pincode">
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row pt-12 ">
+                                                <div class="col-sm-12">
+                                                    <h4 class="s_amount">
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row pt-12 ">
+                                                <div class="col-sm-12">
+                                                    <h4 class="s_vehicle">
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row pt-12 ">
+                                                <div class="col-sm-12">
+                                                    <h4 class="s_guarantee_name">
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+
+                                   
+                           
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row pt-12 ">
+                                                <div class="col-sm-12">
+                                                    <h4 class="s_co_applicant">
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row pt-12 ">
+                                                <div class="col-sm-12">
+                                                    <h4 class="s_fi_date">
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row pt-12 ">
+                                                <div class="col-sm-12">
+                                                    <h4 class="s_fi_time">
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row pt-12 ">
+                                                <div class="col-sm-12">
+                                                    <h4 class="s_fi_flag">
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row pt-12 ">
+                                                <div class="col-sm-12">
+                                                    <h4 class="s_geo_limit">
+                                                    </h4>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row pt-12 ">
+                                                <div class="col-sm-12">
+                                                    <h4 class="s_channel">
+                                                    </h4>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row pt-12 ">
+                                                <div class="col-sm-12">
+                                                    <h4 class="s_tat_start">
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row pt-12 ">
+                                                <div class="col-sm-12">
+                                                    <h4 class="s_tat_end">
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row pt-12 ">
+                                                <div class="col-sm-6">
+                                                    <h4 class="s_remarks">
+                                                    </h4>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row pt-12 ">
+                                            <div class="col-sm-6">
+                                                    <h4 class="s_dob">
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row pt-12 ">
+                                                <div class="col-sm-12">
                                                     <h4 class="s_status">
                                                     </h4>
                                                 </div>
@@ -1006,10 +1287,7 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="row pt-6 ">
-                                                <div class="col-sm-6">
-                                                    <h4 class="s_bank_name">
-                                                    </h4>
-                                                </div>
+                                                
                                                 <div class="col-sm-6">
                                                     <h4 class="s_agent_code">
                                                     </h4>
@@ -1021,61 +1299,9 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="row pt-6 ">
+                                                
                                                 <div class="col-sm-6">
-                                                    <h4 class="s_residence_address">
-                                                    </h4>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <hr>
-
-                                    <header class="card-header bg-success">
-                                        <h6 class="title "><b>Case Specific Details</b></h6>
-                                    </header>
-
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="row pt-6 ">
-                                                <div class="col-sm-6">
-                                                    <h4 class="s_remarks">
-                                                    </h4>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <h4 class="s_dob">
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="row pt-6 ">
-                                                <div class="col-sm-6">
-                                                    <h4 class="s_fi_date">
-                                                    </h4>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <h4 class="s_fi_time">
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="row pt-6 ">
-                                                <div class="col-sm-6">
-                                                    <h4 class="s_fi_flag">
-                                                    </h4>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <h4 class="s_fi_ini_comments">
+                                                    <h4 class="s_created_by">
                                                     </h4>
                                                 </div>
                                             </div>
@@ -1083,117 +1309,16 @@
                                     </div>
 
 
-
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="row pt-6 ">
-                                                <div class="col-sm-6">
-                                                    <h4 class="s_asset_make">
-                                                    </h4>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <h4 class="s_asset_model">
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="row pt-6 ">
-                                                <div class="col-sm-6">
-                                                    <h4 class="s_city">
-                                                    </h4>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <h4 class="s_tat">
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="row pt-6 ">
-                                                <div class="col-sm-6">
-                                                    <h4 class="s_pincode">
-                                                    </h4>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <h4><b>Mobile :</b></h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
 
 
 
-                                    <!-- blank fields starts -->
+                                    
 
 
-
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="row pt-6 ">
-                                                <div class="col-sm-6">
-                                                    <h4 class="s_amount">
-                                                    </h4>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <h4 class="s_vehicle">
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="row pt-6 ">
-                                                <div class="col-sm-6">
-                                                    <h4 class="s_co_applicant">
-                                                    </h4>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <h4 class="s_guarantee_name">
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="row pt-6 ">
-                                                <div class="col-sm-6">
-                                                    <h4 class="s_geo_limit">
-                                                    </h4>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <h4 class="s_created_at">
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
 
 
-
-                                    <div class="row">
-                                        <div class="col-sm-12">
-
-                                            <h4 class="s_updated_at">
-                                            </h4>
-
-                                        </div>
-                                    </div>
-
-
-
-                                    <!-- blank field end -->
                                 </div>
                             </div>
                             <div class="model-footer">
@@ -1236,8 +1361,15 @@
 
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <label for="customer_name" class="h6">Customer Name</label>
-                                <input type="text" class="form-control" id="u_customer_name" placeholder="Customer name here" name="customer_name">
+                                <label for="bank_name" class="h6">Bank Name</label>
+                                <input type="text" class="form-control" id="u_bank_name" placeholder="Bank name here" name="bank_name">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="customer_name" class="h6">Applicant Name</label>
+                                <input type="text" class="form-control" id="u_customer_name" placeholder="Applicant name here" name="customer_name">
                             </div>
                         </div>
 
@@ -1266,29 +1398,13 @@
                             </div>
                         </div>
 
-
-
-
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <label for="fi_intiation_comments" class="h6">Fi initiation comments</label>
-                                <input type="text" class="form-control" id="u_fi_intiation_comments" placeholder="fi intiation comments here" name="fi_intiation_comments">
+                                <label for="source_channel" class="h6">Source Channel</label>
+                                <input type="text" class="form-control" id="u_source_channel" name="source_channel">
                             </div>
                         </div>
 
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <label for="asset_make" class="h6">Asset make</label>
-                                <input type="text" class="form-control" id="u_asset_make" placeholder="asset make here" name="asset_make">
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <label for="asset_model" class="h6">Asset model</label>
-                                <input type="text" class="form-control" id="u_asset_model" placeholder="asset model here" name="asset model">
-                            </div>
-                        </div>
 
                         <div class="form-row">
                             <div class="form-group col-md-12">
@@ -1896,60 +2012,14 @@
                                     <div class="col-sm-12">
                                         <div class="row pt-6 ">
                                             <div class="col-sm-6">
-                                                <h4 class="s_application_id">
+                                                <h4 class="s_application_id" style="color:blue;" >
                                                 </h4>
 
                                             </div>
-                                            <div class="col-sm-6">
-                                                <h4 class="s_date">
-                                                </h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="row pt-6 ">
-                                            <div class="col-sm-6">
-                                                <h4 class="s_fi_date">
-                                                </h4>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <h4 class="s_fi_time">
-                                                </h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="row pt-6 ">
-                                            <div class="col-sm-6">
-                                                <h4 class="s_fi_flag">
-                                                </h4>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <h4 class="s_dob">
-                                                </h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="row pt-6 ">
-                                            <div class="col-sm-6">
-                                                <h4 class="s_geo_limit">
-                                                </h4>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <h4 class="s_customer_name">
-                                                </h4>
-                                            </div>
+                                                <!-- <div class="col-sm-6">
+                                                    <h4 class="s_date">
+                                                    </h4>
+                                                </div> -->
                                         </div>
                                     </div>
                                 </div>
@@ -1968,7 +2038,103 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="row pt-6 ">
+                                            <div class="col-sm-6">
+                                                <h4 class="s_fi_type">
+                                                </h4>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <h4 class="s_date">
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="row pt-6 ">
+                                            <div class="col-sm-6">
+                                                <h4 class="s_tat_start">
+                                                </h4>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <h4 class="s_tat_end">
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="row pt-6 ">
+                                            <!-- <div class="col-sm-6">
+                                                <h4 class="s_geo_limit">
+                                                </h4>
+                                            </div> -->
+                                            <div class="col-sm-6">
+                                                <h4 class="s_customer_name">
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="row pt-6 ">
+                                            <div class="col-sm-6">
+                                                <h4 class="s_address">
+                                                </h4>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="row pt-6 ">
+                                            <div class="col-sm-6">
+                                                <h4 class="s_city">
+                                                </h4>
+
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <h4 class="s_pincode">
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="row pt-6 ">
+                                            <div class="col-sm-6">
+                                                <h4 class="s_loan">
+                                                </h4>
+
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <h4 class="s_mobile">
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                               
+                                <!-- <div class="row">
                                     <div class="col-sm-12">
                                         <div class="row pt-6 ">
                                             <div class="col-sm-6">
@@ -1982,20 +2148,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
 
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="row pt-6 ">
-                                            <div class="col-sm-6">
-                                                <h4 class="s_loan">
-                                                </h4>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-
+                                
 
                                 <hr>
 
@@ -2192,92 +2347,57 @@
                                     </div>
                                     <hr>
 
+                                    <div class="case_rv_case_img"></div>
+                                  
+
+                                    
 
                                     <h3 style="color:blue;">Location</h3>
 
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="row pt-6 ">
-                                                <div class="col-sm-6">
-                                                    <h4 class="r_lat">
-                                                    </h4>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <h4 class="r_long">
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="row pt-6 ">
+            <div class="col-sm-6">
+                <h4 class="r_lat">
+                </h4>
+            </div>
+            <div class="col-sm-6">
+                <h4 class="r_long">
+                </h4>
+            </div>
+        </div>
+    </div>
+</div>
 
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="row pt-6 ">
-                                                <div class="col-sm-6">
-                                                    <h4 class="r_pincode">
-                                                    </h4>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <h4 class="r_location_add">
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="row pt-6 ">
+            <div class="col-sm-6">
+                <h4 class="r_pincode">
+                </h4>
+            </div>
+            <div class="col-sm-6">
+                <h4 class="r_location_add">
+                </h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="row pt-6 ">
+            <div class="col-sm-6">
+                <h4 class="r_agent_code">
+                </h4>
+            </div>
+            
+        </div>
+    </div>
+</div>
 
 
-                                    <hr>
-
-                                    <h3 style="color:blue;">Picture's Taken</h3>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="row pt-4">
-                                                <div class="col-sm-4">
-                                                    <img class="rv_image1" height="200" width="200">
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <img class="rv_image2" height="200" width="200">
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <img class="rv_image3" height="200" width="200">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="row pt-4">
-                                                <div class="col-sm-4">
-                                                    <img class="rv_image4" height="200" width="200">
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <img class="rv_image5" height="200" width="200">
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <img class="rv_image6" height="200" width="200">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br>
-
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="row pt-4">
-                                                <div class="col-sm-4">
-                                                    <img class="rv_image7" height="200" width="200">
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <img class="rv_image8" height="200" width="200">
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <img class="rv_image9" height="200" width="200">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br>
+<hr>
 
                                 </div>
                                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
@@ -2313,6 +2433,18 @@
                                 <h3 style="color:blue;">BUSINESS VERIFICATION REPORT
                                     (Strictly Private & Confidential)</h3>
 
+                                    <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="row pt-12 ">
+                                            <div class="col-sm-12">
+                                                <h4 class="bv_application_id" style="color:blue;">
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    
+
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="row pt-6 ">
@@ -2332,11 +2464,11 @@
                                     <div class="col-sm-12">
                                         <div class="row pt-6 ">
                                             <div class="col-sm-6">
-                                                <h4 class="bv_application_id">
+                                                <h4 class="bv_fi_type">
                                                 </h4>
                                             </div>
                                             <div class="col-sm-6">
-                                                <h4 class="bv_customer_name">
+                                                <h4 class="bv_created_at">
                                                 </h4>
                                             </div>
                                         </div>
@@ -2347,11 +2479,11 @@
                                     <div class="col-sm-12">
                                         <div class="row pt-6 ">
                                             <div class="col-sm-6">
-                                                <h4 class="bv_created_at">
+                                                <h4 class="bv_tat_start">
                                                 </h4>
                                             </div>
                                             <div class="col-sm-6">
-                                                <h4 class="bv_dob">
+                                                <h4 class="bv_tat_end">
                                                 </h4>
                                             </div>
                                         </div>
@@ -2359,6 +2491,68 @@
                                 </div>
 
                                 <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="row pt-12 ">
+                                            <div class="col-sm-12">
+                                                <h4 class="bv_customer_name">
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="row pt-12 ">
+                                            <div class="col-sm-12">
+                                                <h4 class="bv_bus_name">
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="row pt-12 ">
+                                            <div class="col-sm-12">
+                                                <h4 class="bv_address">
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="row pt-6 ">
+                                            <div class="col-sm-6">
+                                                <h4 class="bv_city">
+                                                </h4>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <h4 class="bv_pincode">
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="row pt-6 ">
+                                            <div class="col-sm-6">
+                                                <h4 class="bv_mobile">
+                                                </h4>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <h4 class="bv_amount">
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="row">
                                     <div class="col-sm-12">
                                         <div class="row pt-6 ">
                                             <div class="col-sm-6">
@@ -2371,9 +2565,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
 
-                                <div class="row">
+                                <!-- <div class="row">
                                     <div class="col-sm-12">
                                         <div class="row pt-6 ">
                                             <div class="col-sm-6">
@@ -2383,30 +2577,10 @@
 
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <hr>
 
-                                <h3 style="color:blue;">Details of which loan is applied</h3>
-
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="row pt-4 ">
-                                            <div class="col-sm-4">
-                                                <h4 class="bv_asset_make">
-                                                </h4>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <h4 class="bv_asset_model">
-                                                </h4>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <h4 class="bv_amt">
-                                                </h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr>
+             
 
                                 <h3 style="color:blue;">Personal details</h3>
                                 <div class="row">
@@ -2584,46 +2758,6 @@
                                                                 <hr>
 
 
-                                                                <h3 style="color:blue;">Location</h3>
-                                                                <div class="row">
-                                                                    <div class="col-sm-12">
-                                                                        <div class="row pt-6 ">
-                                                                            <div class="col-sm-6">
-                                                                                <h4 class="bv_lat">
-                                                                                </h4>
-                                                                            </div>
-                                                                            <div class="col-sm-6">
-                                                                                <h4 class="bv_long">
-                                                                                </h4>
-                                                                            </div>
-
-
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="row">
-                                                                        <div class="col-sm-12">
-                                                                            <div class="row pt-6 ">
-                                                                                <div class="col-sm-6">
-                                                                                    <h4 class="bv_pincode">
-                                                                                    </h4>
-                                                                                </div>
-                                                                                <div class="col-sm-6">
-                                                                                    <h4 class="bv_location_add">
-                                                                                    </h4>
-                                                                                </div>
-
-
-                                                                            </div>
-                                                                        </div>
-
-
-                                                                        <hr>
-
-
-
-
-
 
 
                                                                         <div class="row">
@@ -2682,7 +2816,9 @@
 
 
                                                                         <hr>
-                                                                        <h3 style="color:blue;">Picture's Taken</h3>
+
+                                                                        <div class="case_bv_case_img"></div>
+                                                                        <!-- <h3 style="color:blue;">Picture's Taken</h3>
                                                                         <div class="row">
                                                                             <div class="col-sm-12">
                                                                                 <div class="row pt-4">
@@ -2731,8 +2867,54 @@
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        <br>
+                                                                        <br> -->
+
+                                                                        
+                                                                <h3 style="color:blue;">Location</h3>
+                                                                <div class="row">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="row pt-6 ">
+                                                                            <div class="col-sm-6">
+                                                                                <h4 class="bv_lat">
+                                                                                </h4>
+                                                                            </div>
+                                                                            <div class="col-sm-6">
+                                                                                <h4 class="bv_long">
+                                                                                </h4>
+                                                                            </div>
+
+
+                                                                        </div>
                                                                     </div>
+
+                                                                    <div class="row">
+                                                                        <div class="col-sm-12">
+                                                                            <div class="row pt-6 ">
+                                                                                <div class="col-sm-6">
+                                                                                    <h4 class="bv_pincode">
+                                                                                    </h4>
+                                                                                </div>
+                                                                                <div class="col-sm-6">
+                                                                                    <h4 class="bv_location_add">
+                                                                                    </h4>
+                                                                                </div>
+
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row">
+                                                                            <div class="col-sm-12">
+                                                                                <div class="row pt-12">
+                                                                                    <div class="col-sm-6">
+                                                                                        <h4 class="bv_agent">
+                                                                                        </h4>
+                                                                                    </div>
+                                                                                    
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
                                                                 </div>
                                                                 <div class="model-footer">
                                                                     <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
