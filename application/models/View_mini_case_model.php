@@ -104,8 +104,10 @@ class View_mini_case_model extends CI_Model
     function fetch_single_mini_case($user_id)
     {
         try {
-            $this->db->where("id", $user_id);
-            $query = $this->db->get('mini_case');
+            $this->db->select("mc.*, l.first_name as agent_name");
+            $this->db->where("mc.id", $user_id);
+            $this->db->join('login l', 'l.employee_unique_id = mc.code', 'left');
+            $query = $this->db->get('mini_case mc');
             return $query->result();
         } catch (Exception $ex) {
             throw $ex;
