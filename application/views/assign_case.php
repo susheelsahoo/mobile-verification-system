@@ -109,6 +109,16 @@
                         $('#u_geo_limit').val(data.geo_limit);
                         $('#u_source_channel').val(data.source_channel);
                         $('#u_remarks').val(data.remarks);
+                        $('#u_permanent_address').val(data.permanent_address);
+                        $('#u_pincode').val(data.pincode);
+                        $('#u_fi_date').val(data.fi_date);
+                        $('#u_fi_flag').val(data.fi_flag);
+                        $('#u_dob').val(data.dob);
+                        $('#u_tat_start').val(data.tat_start);
+                        $('#u_tat_end').val(data.tat_end);
+                        $('#u_fi_time').val(data.fi_time);
+                        $('#u_designation').val(data.designation);
+                        $('#u_city').val(data.city);
                         $('#u_amount').val(data.amount);
                         $('#u_vehicle').val(data.vehicle);
                         $('#u_co_applicant').val(data.co_applicant);
@@ -520,20 +530,20 @@
                         $('.s_mobile').html("<b>Mobile:</b> ");
                         $('.s_cnf_add').html("<b>Confirm Address:</b> " + data.rv_confirm_address);
                         $('.s_person_met_detail').html("<b>Person Met details:</b> " + data.rv_person_met_details);
-                        $('.s_relationship').html("<b>Relation:</b> " + data.rv_relationship);
-                        $('.s_residence_ownerships').html("<b>Residence by:</b> " + data.rv_residence_ownership);
+                        $('.s_relationship').html("<b>Relationship with Applicant:</b> " + data.rv_relationship);
+                        $('.s_residence_ownerships').html("<b>Ownership of Residence:</b> " + data.rv_residence_ownership);
                         $('.r_stability').html("<b>Stability:</b> " + data.rv_stability);
                         $('.r_permanent_add').html("<b>Permanent Add:</b> " + data.rv_user_permanent_address);
                         $('.r_rent').html("<b>Rent:</b> " + data.rv_rent_per_month);
-                        $('.r_total_member').html("<b>total Members:</b> " + data.rv_total_family_member);
+                        $('.r_total_member').html("<b>total Family Members:</b> " + data.rv_total_family_member);
                         $('.r_no_of_earning_members').html("<b>No. of earning member:</b> " + data.rv_no_of_earning_members);
-                        $('.r_details_members').html("<b>Member Details:</b> " + data.rv_details_of_earning_member);
-                        $('.r_dependent').html("<b>Dependent:</b> " + data.rv_dependent);
-                        $('.r_user_office_add').html("<b>User Office Add.:</b> " + data.rv_user_office_address);
+                        $('.r_details_members').html("<b>Details of Earning Member :</b> " + data.rv_details_of_earning_member);
+                        $('.r_dependent').html("<b>Dependent Members:</b> " + data.rv_dependent);
+                        $('.r_user_office_add').html("<b>User Office Address:</b> " + data.rv_user_office_address);
                         $('.r_resi_proof').html("<b>Residence Proof:</b> " + data.rv_residence_proof);
                         $('.r_in').html("<b>Interior:</b> " + data.rv_interior_premises);
                         $('.r_ex').html("<b>Exterior:</b> " + data.rv_exterior_premises);
-                        $('.r_agri').html("<b>Agriculture Landing:</b> " + data.rv_agriculture_land);
+                        $('.r_agri').html("<b>Agriculture Lending (if any):</b> " + data.rv_agriculture_land);
                         $('.r_check1').html("<b>Check 1:</b> " + data.rv_neighbour_check1);
                         $('.r_lat').html("<b>Latitude:</b> " + data.rv_lat);
                         $('.r_long').html("<b>Longitude:</b> " + data.rv_long);
@@ -543,7 +553,7 @@
 
                         $('.r_cpv').html("<b>CPV done by:</b> " + data.rv_cpv_done_by);
                         $('.r_visit').html("<b>Visit Date:</b> " + data.rv_visit_date);
-                        $('.r_remarks').html("<b>Remarks:</b> " + data.rv_remarks);
+                        $('.r_remarks').html(data.rv_remarks);
                         $('.r_add_yesno').html("<b>Address Confirmed:</b> " + data.rv_address_yes_no);
                         $('.r_vehicle').html("<b>Vehicle:</b> " + data.rv_vehicle_details);
                         // case_rv_case_img
@@ -1405,6 +1415,75 @@
                             </div>
                         </div>
 
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="city" class="h6">City</label>
+                                <input type="text" class="form-control" id="u_city" name="city">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="pincode" class="h6">Pincode</label>
+                                <input type="text" class="form-control" id="u_pincode" name="pincode">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="permanent_address" class="h6">Permanent Address</label>
+                                <input type="text" class="form-control" id="u_permanent_address" name="permanent_address">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="designation" class="h6">Designation</label>
+                                <input type="text" class="form-control" id="u_designation" name="designation">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="fi_date" class="h6">FI Date</label>
+                                <input type="text" class="form-control" id="u_fi_date" name="fi_date">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="fi_time" class="h6">FI Time</label>
+                                <input type="text" class="form-control" id="u_fi_time" name="fi_time">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="fi_flag" class="h6">FI Flag</label>
+                                <input type="text" class="form-control" id="u_fi_flag" name="fi_flag">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="tat_start" class="h6">TAT Start</label>
+                                <input class="form-control" id="u_tat_start" name="tat_start" placeholder="yyyy-mm-dd HH:MM:SS" type="text" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="tat_end" class="h6">TAT End</label>
+                                <input class="form-control" id="u_tat_end" name="tat_end" placeholder="yyyy-mm-dd HH:MM:SS" type="text" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="dob" class="h6">Date of Birth</label>
+                                <input type="text" class="form-control" id="u_dob" name="dob">
+                            </div>
+                        </div>
 
                         <div class="form-row">
                             <div class="form-group col-md-12">
@@ -2185,7 +2264,7 @@
                                     </div>
                                     <hr>
 
-                                    <h3 style="color:blue;">Personal details</h3>
+                                    <h3 style="color:blue;">Name of Person Met</h3>
 
 
                                     <div class="row">
@@ -2300,20 +2379,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="row pt-6 ">
-                                                <div class="col-sm-6">
-                                                    <h4 class="r_cpv">
-                                                    </h4>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <h4 class="r_visit">
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                  
 
                                     <div class="row">
                                         <div class="col-sm-12">
@@ -2323,7 +2389,7 @@
                                                     </h4>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <h4 class="r_remarks">
+                                                    <h4 class="r_vehicle">
                                                     </h4>
                                                 </div>
                                             </div>
@@ -2331,6 +2397,20 @@
                                     </div>
 
 
+                                    <hr>
+
+                                    <h3 style="color:blue;">Remark</h3>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row pt-12 ">
+                                                <div class="col-sm-12">
+                                                    <h4 class="r_remarks">
+                                                    </h4>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                     <hr>
 
                                     <h3 style="color:blue;">Status</h3>
@@ -2395,6 +2475,21 @@
         </div>
     </div>
 </div>
+
+<div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row pt-6 ">
+                                                <div class="col-sm-6">
+                                                    <h4 class="r_cpv">
+                                                    </h4>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <h4 class="r_visit">
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
 
 <hr>

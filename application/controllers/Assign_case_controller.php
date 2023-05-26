@@ -621,37 +621,6 @@ class Assign_case_controller extends CI_Controller
         }
     }
 
-    function fetch_single_case()
-    {
-        try {
-            $output = array();
-            $this->load->model("Assign_case_model");
-            $data = $this->Assign_case_model->fetch_single_case($_POST["user_id"]);
-            foreach ($data as $row) {
-
-                $output['id'] = $row->id;
-                $output['bank_name'] = $row->bank_name;
-                $output['customer_name'] = $row->customer_name;
-                $output['fi_to_be_conducted'] = $row->fi_to_be_conducted;
-                $output['product_name'] = $row->product_name;
-                $output['business_address'] = $row->business_address;
-                $output['fi_intiation_comments'] = $row->fi_intiation_comments;
-                $output['source_channel'] = $row->source_channel;
-               
-                $output['geo_limit'] = $row->geo_limit;
-                $output['remarks'] = $row->remarks;
-                $output['amount'] = $row->amount;
-                $output['vehicle'] = $row->vehicle;
-                $output['co_applicant'] = $row->co_applicant;
-                $output['guarantee_name'] = $row->guarantee_name;
-            }
-            echo json_encode($output);
-        } catch (Exception $ex) {
-            $error['error'] = TRUE;
-            $error['message'] = $ex->getMessage();
-            $this->load->view('login', array('error' => $error));
-        }
-    }
 
 
     function fetch_single_rv_case()
@@ -890,6 +859,48 @@ class Assign_case_controller extends CI_Controller
     //     }
     // }
 
+    
+    function fetch_single_case()
+    {
+        try {
+            $output = array();
+            $this->load->model("Assign_case_model");
+            $data = $this->Assign_case_model->fetch_single_case($_POST["user_id"]);
+            foreach ($data as $row) {
+
+                $output['id'] = $row->id;
+                $output['bank_name'] = $row->bank_name;
+                $output['customer_name'] = $row->customer_name;
+                $output['fi_to_be_conducted'] = $row->fi_to_be_conducted;
+                $output['product_name'] = $row->product_name;
+                $output['business_address'] = $row->business_address;
+                $output['fi_intiation_comments'] = $row->fi_intiation_comments;
+                $output['source_channel'] = $row->source_channel;
+                $output['designation'] = $row->designation;
+                $output['geo_limit'] = $row->geo_limit;
+                $output['city'] = $row->city;
+                $output['fi_date'] = $row->fi_date;
+                $output['fi_time'] = $row->fi_time;
+                $output['fi_flag'] = $row->fi_flag;
+                $output['tat_start'] = $row->tat_start;
+                $output['tat_end'] = $row->tat_end;
+                $output['dob'] = $row->dob;
+                $output['pincode'] = $row->pincode;
+                $output['permanent_address'] = $row->permanent_address;
+                $output['remarks'] = $row->remarks;
+                $output['amount'] = $row->amount;
+                $output['vehicle'] = $row->vehicle;
+                $output['co_applicant'] = $row->co_applicant;
+                $output['guarantee_name'] = $row->guarantee_name;
+            }
+            echo json_encode($output);
+        } catch (Exception $ex) {
+            $error['error'] = TRUE;
+            $error['message'] = $ex->getMessage();
+            $this->load->view('login', array('error' => $error));
+        }
+    }
+
     public function update_case_validation()
     {
         try {
@@ -899,13 +910,17 @@ class Assign_case_controller extends CI_Controller
             $this->form_validation->set_rules('fi_to_be_conducted', 'fi_to_be_conducted', 'required');
             $this->form_validation->set_rules('product_name', 'product_name', 'required');
             $this->form_validation->set_rules('business_address', 'business_address', 'required');
-            // $this->form_validation->set_rules('geo_limit', 'geo_limit', 'required');
-            // $this->form_validation->set_rules('fi_intiation_comments', 'fi_intiation_comments', '');
-            // $this->form_validation->set_rules('asset_make', 'asset_make', '');
-            // $this->form_validation->set_rules('asset_model', 'asset_model', '');
-            // $this->form_validation->set_rules('remarks', 'remarks', '');
+            $this->form_validation->set_rules('fi_date', 'fi_date', '');
+            $this->form_validation->set_rules('fi_time', 'fi_time', '');
+            $this->form_validation->set_rules('fi_flag', 'fi_flag', '');
+            $this->form_validation->set_rules('tat_start', 'tat_start', '');
+            $this->form_validation->set_rules('dob', 'dob', '');
+            $this->form_validation->set_rules('tat_end', 'tat_end', '');
+            $this->form_validation->set_rules('pincode', 'pincode', '');
+            $this->form_validation->set_rules('city', 'city', '');
+            $this->form_validation->set_rules('permanent_address', 'permanent_address', '');
             $this->form_validation->set_rules('amount', 'amount', 'required');
-            // $this->form_validation->set_rules('vehicle', 'vehicle', '');
+            $this->form_validation->set_rules('designation', 'designation', '');
             $this->form_validation->set_rules('co_applicant', 'co_applicant', '');
             $this->form_validation->set_rules('guarantee_name', 'guarantee_name', '');
 
@@ -923,10 +938,18 @@ class Assign_case_controller extends CI_Controller
                     'product_name' => $this->input->post('product_name'),
                     'business_address' => $this->input->post('business_address'),
                     'geo_limit' => $this->input->post('geo_limit'),
+                    'city' => $this->input->post('city'),
+                    'fi_date' => $this->input->post('fi_date'),
+                    'tat_start' => $this->input->post('tat_start'),
+                    'tat_end' => $this->input->post('tat_end'),
+                    'dob' => $this->input->post('dob'),
+                    'fi_time' => $this->input->post('fi_time'),
+                    'fi_flag' => $this->input->post('fi_flag'),
+                    'permanent_address' => $this->input->post('permanent_address'),
+                    'pincode' => $this->input->post('pincode'),
                     'fi_intiation_comments' => $this->input->post('fi_intiation_comments'),
-                    'asset_make' => $this->input->post('asset_make'),
-                    'asset_model' => $this->input->post('asset_model'),
-
+                   
+                    'designation' => $this->input->post('designation'),
                     'remarks' => $this->input->post('remarks'),
                     'amount' => $this->input->post('amount'),
                     'vehicle' => $this->input->post('vehicle'),
