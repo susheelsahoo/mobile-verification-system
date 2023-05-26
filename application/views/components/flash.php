@@ -2,7 +2,7 @@
 $res_data = [];
 if ($this->session->flashdata('res_data')) {
     $res_data = $this->session->flashdata('res_data');
-    // unset($_SESSION['res_data']);
+    unset($_SESSION['res_data']);
 ?>
 
     <div class="alert alert-<?php echo $res_data['type'] ?> alert-dismissible" role="alert">
