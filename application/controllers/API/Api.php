@@ -355,6 +355,7 @@ public function insertrvQuickCases()
           $rv_lat = $this->input->post('rv_lat');
           $rv_pincode = $this->input->post('rv_pincode');
           $rv_location_add = $this->input->post('rv_location_add');
+            $rv_visit_date= $this->input->post('rv_visit_date');
          
             $remarks = $this->input->post('rv_remarks');
             $rv_image1 = $this->input->post('rv_image1');
@@ -376,6 +377,7 @@ public function insertrvQuickCases()
                       'rv_lat' => $rv_lat,
                        'rv_pincode' => $rv_pincode,
                         'rv_location_add' => $rv_location_add,
+                         'rv_visit_date' => $rv_visit_date,
                     'remarks' => $remarks,
                     'rv_image1' => $rv_image1,
                     'rv_image2' => $rv_image2,
@@ -432,6 +434,7 @@ public function insertrvQuickCases()
               $bv_long = $this->input->post('bv_long');
                $bv_pincode = $this->input->post('bv_pincode');
                 $bv_location_add = $this->input->post('bv_location_add');
+                $bv_visit_date = $this->input->post('bv_visit_date');
            
           
             $remarks = $this->input->post('bv_remarks');
@@ -454,6 +457,7 @@ public function insertrvQuickCases()
                   'bv_pincode' => $bv_pincode,
                    'bv_long' => $bv_long,
                     'bv_lat' => $bv_lat,
+                    'bv_visit_date' => $bv_visit_date,
                     'remarks' => $remarks,
                     'bv_image1' => $bv_image1,
                     'bv_image2' => $bv_image2,

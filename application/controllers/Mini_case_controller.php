@@ -56,6 +56,7 @@ class Mini_case_controller extends CI_Controller
 			$this->form_validation->set_rules('product', 'product', 'required');
 			$this->form_validation->set_rules('reference_no', 'reference_no', 'required');
 			$this->form_validation->set_rules('name', 'name', '');
+				// $this->form_validation->set_rules('code', 'code', 'required');
 			$this->form_validation->set_rules('amount', 'amount', 'required');
 			// $this->form_validation->set_rules('vehicle', 'vehicle', '');
 			$this->form_validation->set_rules('mobile', 'mobile', '');
@@ -89,6 +90,7 @@ class Mini_case_controller extends CI_Controller
 					$varification['amount'] 		= $this->input->post('amount');
 					$varification['vehicle'] 		= $this->input->post('vehicle');
 					$varification['mobile'] 			= $this->input->post('mobile');
+				// 		$varification['code'] 			= $this->input->post('code');
 					$varification['geo_limit'] 			= $this->input->post('geo_limit');
 					$varification['source_channel'] 			= $this->input->post('source_channel');
 					$varification['tat_start'] 		= $this->input->post('tat_start');
