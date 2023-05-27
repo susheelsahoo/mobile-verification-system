@@ -355,6 +355,7 @@ public function insertrvQuickCases()
           $rv_lat = $this->input->post('rv_lat');
           $rv_pincode = $this->input->post('rv_pincode');
           $rv_location_add = $this->input->post('rv_location_add');
+            $rv_visit_date= $this->input->post('rv_visit_date');
          
             $remarks = $this->input->post('rv_remarks');
             $rv_image1 = $this->input->post('rv_image1');
@@ -376,6 +377,7 @@ public function insertrvQuickCases()
                       'rv_lat' => $rv_lat,
                        'rv_pincode' => $rv_pincode,
                         'rv_location_add' => $rv_location_add,
+                         'rv_visit_date' => $rv_visit_date,
                     'remarks' => $remarks,
                     'rv_image1' => $rv_image1,
                     'rv_image2' => $rv_image2,
@@ -432,6 +434,7 @@ public function insertrvQuickCases()
               $bv_long = $this->input->post('bv_long');
                $bv_pincode = $this->input->post('bv_pincode');
                 $bv_location_add = $this->input->post('bv_location_add');
+                $bv_visit_date = $this->input->post('bv_visit_date');
            
           
             $remarks = $this->input->post('bv_remarks');
@@ -454,6 +457,7 @@ public function insertrvQuickCases()
                   'bv_pincode' => $bv_pincode,
                    'bv_long' => $bv_long,
                     'bv_lat' => $bv_lat,
+                    'bv_visit_date' => $bv_visit_date,
                     'remarks' => $remarks,
                     'bv_image1' => $bv_image1,
                     'bv_image2' => $bv_image2,
@@ -536,7 +540,7 @@ public function insertrvQuickCases()
             $application_id = $this->input->post('application_id');
             $fi_to_be_conducted = $this->input->post('fi_to_be_conducted');
             $rv_fi_status = $this->input->post('rv_fi_status');
-            $rv_make_model = $this->input->post('rv_make_model');
+            $rv_fi_status_reason = $this->input->post('rv_fi_status_reason');
             $rv_loan_amt = $this->input->post('rv_loan_amt');
             $rv_confirm_address = $this->input->post('rv_confirm_address');
             $rv_address_yes_no = $this->input->post('rv_address_yes_no');
@@ -582,7 +586,7 @@ public function insertrvQuickCases()
 
                 $insertcase = array(
                     'rv_fi_status' => $rv_fi_status,
-                    'rv_make_model' => $rv_make_model,
+                    'rv_fi_status_reason' => $rv_fi_status_reason,
                     'rv_loan_amt' => $rv_loan_amt,
                     'rv_confirm_address' => $rv_confirm_address,
                     'rv_address_yes_no' => $rv_address_yes_no,
@@ -678,6 +682,10 @@ public function insertrvQuickCases()
             $bv_proof = $this->input->post('bv_proof');
             $bv_vehicle = $this->input->post('bv_vehicle');
             $bv_tcp1 = $this->input->post('bv_tcp1');
+            $bv_nature_of_job = $this->input->post('bv_nature_of_job');
+            $tcp1_name = $this->input->post('tcp1_name');
+            $tcp2_name = $this->input->post('tcp2_name');
+            
             $bv_tcp2 = $this->input->post('bv_tcp2');
             $bv_verified_name = $this->input->post('bv_verified_name');
             $bv_dt_of_cpv = $this->input->post('bv_dt_of_cpv');
@@ -720,6 +728,9 @@ public function insertrvQuickCases()
                     'bv_proof' => $bv_proof,
                     'bv_vehicle' => $bv_vehicle,
                     'bv_tcp1' => $bv_tcp1,
+                    'tcp1_name' => $tcp1_name,
+                    'tcp2_name' => $tcp2_name,
+                    'bv_nature_of_job' => $bv_nature_of_job,
                     'bv_tcp2' => $bv_tcp2,
                     'bv_verified_name' => $bv_verified_name,
                     'bv_dt_of_cpv' => $bv_dt_of_cpv,

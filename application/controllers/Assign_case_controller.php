@@ -443,6 +443,8 @@ class Assign_case_controller extends CI_Controller
                 $output['bank_name'] = $row->bank_name;
 
                 $output['fi_to_be_conducted'] = $row->fi_to_be_conducted;
+                $output['tcp1_name'] = $row->tcp1_name;
+                $output['tcp2_name'] = $row->tcp2_name;
                 $output['code'] = $row->code;
                 $output['city'] = $row->city;
                 $output['pincode'] = $row->pincode;
@@ -634,7 +636,7 @@ class Assign_case_controller extends CI_Controller
                 $output['id'] = $row->id;
                 $output['bank_name'] = $row->bank_name;
                 $output['product_name'] = $row->product_name;
-                $output['rv_make_model'] = $row->rv_make_model;
+               
                 $output['rv_fi_status'] = $row->rv_fi_status;
                 $output['rv_loan_amt'] = $row->rv_loan_amt;
                 $output['rv_confirm_address'] = $row->rv_confirm_address;
@@ -659,6 +661,102 @@ class Assign_case_controller extends CI_Controller
                 $output['rv_remarks'] = $row->rv_remarks;
             }
             echo json_encode($output);
+        } catch (Exception $ex) {
+            $error['error'] = TRUE;
+            $error['message'] = $ex->getMessage();
+            $this->load->view('login', array('error' => $error));
+        }
+    }
+
+
+    public function update_rv_validation()
+    {
+        try {
+            $this->load->library('form_validation');
+            $this->form_validation->set_rules('bank_name', 'bank_name', 'required');
+            $this->form_validation->set_rules('product_name', 'product_name', 'required');
+            $this->form_validation->set_rules('rv_fi_status', 'rv_fi_status', '');
+            $this->form_validation->set_rules('rv_loan_amt', 'rv_loan_amt', '');
+            $this->form_validation->set_rules('rv_confirm_address', 'rv_confirm_address', '');
+            // $this->form_validation->set_rules('rv_address_yes_no', 'rv_address_yes_no', 'required');
+            $this->form_validation->set_rules('rv_person_met_details', 'rv_person_met_details', '');
+            $this->form_validation->set_rules('rv_relationship', 'rv_relationship', '');
+            $this->form_validation->set_rules('rv_residence_ownership', 'rv_residence_ownership', '');
+            $this->form_validation->set_rules('rv_stability', 'rv_stability', '');
+            $this->form_validation->set_rules('rv_user_permanent_address', 'rv_user_permanent_address', '');
+            $this->form_validation->set_rules('rv_rent_per_month', 'rv_rent_per_month', '');
+            $this->form_validation->set_rules('rv_total_family_member', 'rv_total_family_member', '');
+            $this->form_validation->set_rules('rv_no_of_earning_members', 'rv_no_of_earning_members', '');
+            // $this->form_validation->set_rules('rv_details_of_earning_member', 'rv_details_of_earning_member', 'required');
+            $this->form_validation->set_rules('rv_dependent', 'rv_dependent', '');
+            $this->form_validation->set_rules('rv_user_office_address', 'rv_user_office_address', '');
+            $this->form_validation->set_rules('rv_residence_proof', 'rv_residence_proof', '');
+            $this->form_validation->set_rules('rv_agriculture_land', 'rv_agriculture_land', '');
+            $this->form_validation->set_rules('rv_exterior_premises', 'rv_exterior_premises', '');
+            $this->form_validation->set_rules('rv_interior_premises', 'rv_interior_premises', '');
+            $this->form_validation->set_rules('rv_cross_verified_info', 'rv_cross_verified_info', '');
+            $this->form_validation->set_rules('rv_vehicle_details', 'rv_vehicle_details', '');
+            $this->form_validation->set_rules('rv_neighbour_check1', 'rv_neighbour_check1', '');
+            $this->form_validation->set_rules('rv_neighbour_check2', 'rv_neighbour_check2', '');
+            $this->form_validation->set_rules('rv_cpv_done_by', 'rv_cpv_done_by', '');
+            $this->form_validation->set_rules('rv_remarks', 'rv_remarks', '');
+
+            $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+            if ($this->form_validation->run()) {
+
+                $rv_cse_id = $_POST["rv_id"];
+                $array = array(
+
+                    'bank_name' => $this->input->post('bank_name'),
+                    'product_name' => $this->input->post('product_name'),
+                    'rv_fi_status' => $this->input->post('rv_fi_status'),
+                    'rv_loan_amt' => $this->input->post('rv_loan_amt'),
+                    'rv_confirm_address' => $this->input->post('rv_confirm_address'),
+                    // 'rv_address_yes_no' => $this->input->post('rv_address_yes_no'),
+                    'rv_person_met_details' => $this->input->post('rv_person_met_details'),
+                    'rv_relationship' => $this->input->post('rv_relationship'),
+                    'rv_residence_ownership' => $this->input->post('rv_residence_ownership'),
+                    'rv_stability' => $this->input->post('rv_stability'),
+                    'rv_user_permanent_address' => $this->input->post('rv_user_permanent_address'),
+                    'rv_rent_per_month' => $this->input->post('rv_rent_per_month'),
+                    'rv_total_family_member' => $this->input->post('rv_total_family_member'),
+                    'rv_no_of_earning_members' => $this->input->post('rv_no_of_earning_members'),
+                    // 'rv_details_of_earning_member' => $this->input->post('rv_details_of_earning_member'),
+                    'rv_dependent' => $this->input->post('rv_dependent'),
+                    'rv_user_office_address' => $this->input->post('rv_user_office_address'),
+                    'rv_residence_proof' => $this->input->post('rv_residence_proof'),
+                    'rv_agriculture_land' => $this->input->post('rv_agriculture_land'),
+                    'rv_exterior_premises' => $this->input->post('rv_exterior_premises'),
+                    'rv_interior_premises' => $this->input->post('rv_interior_premises'),
+                    'rv_cross_verified_info' => $this->input->post('rv_cross_verified_info'),
+                    'rv_vehicle_details' => $this->input->post('rv_vehicle_details'),
+                    'rv_neighbour_check1' => $this->input->post('rv_neighbour_check1'),
+                    'rv_neighbour_check2' => $this->input->post('rv_neighbour_check2'),
+                    'rv_cpv_done_by' => $this->input->post('rv_cpv_done_by'),
+                    'rv_remarks' => $this->input->post('rv_remarks'),
+
+                );
+
+                $this->load->model('Assign_case_model');
+                $inserts_id = $this->Assign_case_model->update_rv_data_case($rv_cse_id, $array);
+                if ($inserts_id) {
+                    $response = array(
+                        'success' => true,
+                        'message' => "RV Case updated successfully"
+                    );
+                } else {
+                    $response = array(
+                        'error' => true,
+                        'message' => "Error while saving data !!!!"
+                    );
+                }
+            } else {
+                // if error in form validation
+                foreach ($_POST as $key => $value) {
+                    $response['messages'][$key] = form_error($key);
+                }
+            }
+            echo json_encode($response);
         } catch (Exception $ex) {
             $error['error'] = TRUE;
             $error['message'] = $ex->getMessage();
@@ -985,104 +1083,7 @@ class Assign_case_controller extends CI_Controller
         }
     }
 
-    public function update_rv_validation()
-    {
-        try {
-            $this->load->library('form_validation');
-            $this->form_validation->set_rules('bank_name', 'bank_name', 'required');
-            $this->form_validation->set_rules('product_name', 'product_name', 'required');
-            $this->form_validation->set_rules('rv_make_model', 'rv_make_model', '');
-            $this->form_validation->set_rules('rv_fi_status', 'rv_fi_status', '');
-            $this->form_validation->set_rules('rv_loan_amt', 'rv_loan_amt', '');
-            $this->form_validation->set_rules('rv_confirm_address', 'rv_confirm_address', '');
-            // $this->form_validation->set_rules('rv_address_yes_no', 'rv_address_yes_no', 'required');
-            $this->form_validation->set_rules('rv_person_met_details', 'rv_person_met_details', '');
-            $this->form_validation->set_rules('rv_relationship', 'rv_relationship', '');
-            $this->form_validation->set_rules('rv_residence_ownership', 'rv_residence_ownership', '');
-            $this->form_validation->set_rules('rv_stability', 'rv_stability', '');
-            $this->form_validation->set_rules('rv_user_permanent_address', 'rv_user_permanent_address', '');
-            $this->form_validation->set_rules('rv_rent_per_month', 'rv_rent_per_month', '');
-            $this->form_validation->set_rules('rv_total_family_member', 'rv_total_family_member', '');
-            $this->form_validation->set_rules('rv_no_of_earning_members', 'rv_no_of_earning_members', '');
-            // $this->form_validation->set_rules('rv_details_of_earning_member', 'rv_details_of_earning_member', 'required');
-            $this->form_validation->set_rules('rv_dependent', 'rv_dependent', '');
-            $this->form_validation->set_rules('rv_user_office_address', 'rv_user_office_address', '');
-            $this->form_validation->set_rules('rv_residence_proof', 'rv_residence_proof', '');
-            $this->form_validation->set_rules('rv_agriculture_land', 'rv_agriculture_land', '');
-            $this->form_validation->set_rules('rv_exterior_premises', 'rv_exterior_premises', '');
-            $this->form_validation->set_rules('rv_interior_premises', 'rv_interior_premises', '');
-            $this->form_validation->set_rules('rv_cross_verified_info', 'rv_cross_verified_info', '');
-            $this->form_validation->set_rules('rv_vehicle_details', 'rv_vehicle_details', '');
-            $this->form_validation->set_rules('rv_neighbour_check1', 'rv_neighbour_check1', '');
-            $this->form_validation->set_rules('rv_neighbour_check2', 'rv_neighbour_check2', '');
-            $this->form_validation->set_rules('rv_cpv_done_by', 'rv_cpv_done_by', '');
-            $this->form_validation->set_rules('rv_remarks', 'rv_remarks', '');
-
-            $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
-            if ($this->form_validation->run()) {
-
-                $rv_cse_id = $_POST["rv_id"];
-                $array = array(
-
-                    'bank_name' => $this->input->post('bank_name'),
-                    'product_name' => $this->input->post('product_name'),
-
-                    'rv_make_model' => $this->input->post('rv_make_model'),
-                    'rv_fi_status' => $this->input->post('rv_fi_status'),
-                    'rv_loan_amt' => $this->input->post('rv_loan_amt'),
-                    'rv_confirm_address' => $this->input->post('rv_confirm_address'),
-                    // 'rv_address_yes_no' => $this->input->post('rv_address_yes_no'),
-                    'rv_person_met_details' => $this->input->post('rv_person_met_details'),
-                    'rv_relationship' => $this->input->post('rv_relationship'),
-                    'rv_residence_ownership' => $this->input->post('rv_residence_ownership'),
-                    'rv_stability' => $this->input->post('rv_stability'),
-                    'rv_user_permanent_address' => $this->input->post('rv_user_permanent_address'),
-                    'rv_rent_per_month' => $this->input->post('rv_rent_per_month'),
-                    'rv_total_family_member' => $this->input->post('rv_total_family_member'),
-                    'rv_no_of_earning_members' => $this->input->post('rv_no_of_earning_members'),
-                    // 'rv_details_of_earning_member' => $this->input->post('rv_details_of_earning_member'),
-                    'rv_dependent' => $this->input->post('rv_dependent'),
-                    'rv_user_office_address' => $this->input->post('rv_user_office_address'),
-                    'rv_residence_proof' => $this->input->post('rv_residence_proof'),
-                    'rv_agriculture_land' => $this->input->post('rv_agriculture_land'),
-                    'rv_exterior_premises' => $this->input->post('rv_exterior_premises'),
-                    'rv_interior_premises' => $this->input->post('rv_interior_premises'),
-                    'rv_cross_verified_info' => $this->input->post('rv_cross_verified_info'),
-                    'rv_vehicle_details' => $this->input->post('rv_vehicle_details'),
-                    'rv_neighbour_check1' => $this->input->post('rv_neighbour_check1'),
-                    'rv_neighbour_check2' => $this->input->post('rv_neighbour_check2'),
-                    'rv_cpv_done_by' => $this->input->post('rv_cpv_done_by'),
-                    'rv_remarks' => $this->input->post('rv_remarks'),
-
-                );
-
-                $this->load->model('Assign_case_model');
-                $inserts_id = $this->Assign_case_model->update_rv_data_case($rv_cse_id, $array);
-                if ($inserts_id) {
-                    $response = array(
-                        'success' => true,
-                        'message' => "RV Case updated successfully"
-                    );
-                } else {
-                    $response = array(
-                        'error' => true,
-                        'message' => "Error while saving data !!!!"
-                    );
-                }
-            } else {
-                // if error in form validation
-                foreach ($_POST as $key => $value) {
-                    $response['messages'][$key] = form_error($key);
-                }
-            }
-            echo json_encode($response);
-        } catch (Exception $ex) {
-            $error['error'] = TRUE;
-            $error['message'] = $ex->getMessage();
-            $this->load->view('login', array('error' => $error));
-        }
-    }
-
+    
 
 
     public function update_bv_validation()
