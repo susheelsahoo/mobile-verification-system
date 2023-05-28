@@ -464,19 +464,64 @@
                   <div class="overSelect"></div>
                 </div>
                 <div id="downloadfieldcheckboxes" name="checkboxes">
-                    <label for="one"> <input type="checkbox" id="select_alldownload">Check All</label>
-                  <!--<label for="one">-->
-                     
-                  <!--  <input type="checkbox" id="one" name="download[]" value="residence_address"/>residence_address</label>-->
+                    <label for="one"> <input type="checkbox" id="select_alldownload"> Check All</label>
+                    <label for="one">
+                   <input type="checkbox" id="one" name="download[]" value="bank_name"/> Bank</label> 
+                   <label for="one">
+                   <input type="checkbox" id="one" name="download[]" value="customer_name"/> Applicant name</label> 
+                   <label for="one">
+                   <input type="checkbox" id="one" name="download[]" value="fi_to_be_conducted"/> FI Type</label> 
+                   <label for="one">
+                   <input type="checkbox" id="one" name="download[]" value="product_name"/> Product</label> 
+                   <label for="one">
+                   <input type="checkbox" id="one" name="download[]" value="business_address"/> Address</label> 
+                   <!-- <label for="one">-->
+                   <!--<input type="checkbox" id="one" name="download[]" value="business_address"/> Residence Address</label> -->
                     <label for="one">   
-                    <input type="checkbox" id="one" name="download[]" value="city"/>city </label>
+                    <input type="checkbox" id="one" name="download[]" value="city"/> City </label>
                     <label for="one">   
-                    <input type="checkbox" id="one" name="download[]" value="pincode"/>res pincode</label>
+                    <input type="checkbox" id="one" name="download[]" value="pincode"/> Res pincode</label>
                     <label for="one">   
-                    <input type="checkbox" id="one" name="download[]" value="business_name"/>business_name</label>
-                    <label for="one">   
-                    <input type="checkbox" id="one" name="download[]" value="business_address"/>business_address</label>
+                    <input type="checkbox" id="one" name="download[]" value="business_name"/> Business name</label>
+                    <label for="one">
+                   <input type="checkbox" id="one" name="download[]" value="rv_fi_status"/> RV FI Status</label> 
+                   <label for="one">
+                   <input type="checkbox" id="one" name="download[]" value="amount"/> Amount</label> 
                    
+                   <label for="one">
+                   <input type="checkbox" id="one" name="download[]" value="code"/> Agent Name</label> 
+                    <label for="one">
+                   <input type="checkbox" id="one" name="download[]" value="source_channel"/> Source Channel</label> 
+                   
+                    <label for="one">
+                   <input type="checkbox" id="one" name="download[]" value="rv_lat"/> RV Latitude</label> 
+                    <label for="one">
+                   <input type="checkbox" id="one" name="download[]" value="rv_long"/> RV Longitude</label> 
+                    <label for="one">
+                   <input type="checkbox" id="one" name="download[]" value="rv_pincode"/> RV Pincode</label> 
+                    <label for="one">
+                   <input type="checkbox" id="one" name="download[]" value="rv_location_add"/> RV Location</label> 
+                   
+                    <label for="one">
+                   <input type="checkbox" id="one" name="download[]" value="bv_lat"/> BV Latitude</label> 
+                    <label for="one">
+                   <input type="checkbox" id="one" name="download[]" value="bv_long"/> BV Longitude</label> 
+                    <label for="one">
+                   <input type="checkbox" id="one" name="download[]" value="bv_pincode"/> BV Pincode</label> 
+                    <label for="one">
+                   <input type="checkbox" id="one" name="download[]" value="bv_location_add"/> BV Location</label> 
+                   
+                     <label for="one">
+                   <input type="checkbox" id="one" name="download[]" value="rv_visit_date"/> RV Visit Date</label> 
+                   
+                     <label for="one">
+                   <input type="checkbox" id="one" name="download[]" value="bv_dt_of_cpv"/> BV Visit Date</label> 
+                   
+                     <label for="one">
+                   <input type="checkbox" id="one" name="download[]" value="created_at"/> Created AT</label> 
+                   
+                   
+
                     
                 </div>
               </div>
