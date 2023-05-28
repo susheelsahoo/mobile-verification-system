@@ -143,7 +143,7 @@
             $(document).on('click', '.view_rv_case', function() {
                 var user_id = $(this).attr("id");
                 $.ajax({
-                    url: "<?php echo base_url(); ?>View_mini_case_controller/fetch_single_rv_mini_case",
+                    url: "<?php echo base_url(); ?>View_mini_case_controller/fetch_single_mini_case",
                     method: "POST",
                     data: {
                         user_id: user_id
@@ -157,6 +157,7 @@
                         $('.s_reference_no').html("<b>Reference no :</b> " + data.reference_no);
                         $('.s_name').html("<b>Name:</b> " + data.name);
                         $('.s_agent_code').html("<b>Agent code:</b> " + data.code);
+                        $('.s_agent_name').html("<b>Agent code:</b> " + data.agent_name);
                         $('.s_address').html("<b>Address:</b> " + data.business_add);
                         $('.s_business_name').html("<b>Business Name:</b> " + data.business_name);
                         $('.s_business_name').html("<b>Business Name:</b> " + data.business_name);
@@ -665,6 +666,10 @@
                                     <h4 class="s_agent_code">
                                     </h4>
                                 </div>
+                                <div class="col-sm-6">
+                                    <h4 class="s_agent_name">
+                                    </h4>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -855,6 +860,10 @@
                             <div class="row pt-12 ">
                                 <div class="col-sm-6">
                                     <h4 class="s_agent_code">
+                                    </h4>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h4 class="s_agent_name">
                                     </h4>
                                 </div>
                             </div>

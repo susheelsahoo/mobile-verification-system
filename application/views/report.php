@@ -176,7 +176,7 @@
         <div class="row">
           <div id="dvTitle" class="product_name">
             <!-- <img src="/images/mobileforce.jpg" alt="logo" width="500" height="600"> -->
-            <h3><b>Bodvid Private Limited</b></h3>
+            <h3><b>RealBits Coders</b></h3>
           </div>
         </div>
       </div>

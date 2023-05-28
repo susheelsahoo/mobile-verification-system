@@ -46,13 +46,13 @@ class Upload_case_controller extends CI_Controller
 							foreach ($fi_to_be_conducted_array as $fi_type) {
 								$fi_type = trim($fi_type);
 								if ($fi_type == 'RV') {
-									$agent_code 	= $row['26'];
+									$agent_code 	= $row['25'];
 									$address 		= $row['4'];
 									$name 			= NULL;
 									$city 			= $row['5'];
 									$pincode 		= $row['6'];
 								} elseif ($fi_type == 'BV') {
-									$agent_code 	= $row['25'];
+									$agent_code 	= $row['24'];
 									$address 		= $row['7'];
 									$name 			= $row['8'];
 									$city 			= $row['9'];
@@ -71,20 +71,19 @@ class Upload_case_controller extends CI_Controller
 									'business_name' 		=> $name,
 									'city' 					=> $city,
 									'pincode' 				=> $pincode,
-									'permanent_address' 	=> $row['11'],
-									'fi_date' 				=> $row['12'],
-									'fi_time' 				=> $row['13'],
-									'fi_flag' 				=> $row['14'],
-									'dob' 					=> $row['15'],
-									'designation' 			=> $row['16'],
-									'loan_amount' 			=> $row['17'],
-									'fi_intiation_comments' => $row['18'],
-									'asset_make' 			=> $row['19'],
-									'asset_model' 			=> $row['20'],
-									'station' 				=> $row['21'],
-									'tat_start' 			=> $row['22'],
-									'tat_end' 				=> $row['23'],
-									'remarks' 				=> $row['24'],
+									'mobile' 				=> $row['11'],
+									'permanent_address' 	=> $row['12'],
+									'fi_date' 				=> $row['13'],
+									'fi_time' 				=> $row['14'],
+									'fi_flag' 				=> $row['15'],
+									'dob' 					=> $row['16'],
+									'designation' 			=> $row['17'],
+									'loan_amount' 			=> $row['18'],
+									'vehicle' 				=> $row['19'],
+									'station' 				=> $row['20'],
+									'tat_start' 			=> readableDateUTC(formatDate($row['21'], 'Y-m-d H:i:s')),
+									'tat_end' 				=> readableDateUTC(formatDate($row['22'], 'Y-m-d H:i:s')),
+									'remarks' 				=> $row['23'],
 									'code' 					=> $agent_code,
 								);
 								// echo "<pre>";
@@ -95,12 +94,13 @@ class Upload_case_controller extends CI_Controller
 						}
 					}
 				} else {
+					// echo "<pre>";
 					foreach ($sheet as $key => $row) {
-
+						// print_r($row);
 						if ($key == 0) {
 							continue;
 						}
-
+						// die;
 						$fi_to_be_conducted 	= $row['2'];
 						$fi_to_be_conducted_array = explode(",", $fi_to_be_conducted);
 
@@ -108,13 +108,13 @@ class Upload_case_controller extends CI_Controller
 							foreach ($fi_to_be_conducted_array as $fi_type) {
 								$fi_type = trim($fi_type);
 								if ($fi_type == 'RV') {
-									$agent_code 	= $row['26'];
+									$agent_code 	= $row['25'];
 									$address 		= $row['4'];
 									$name 			= NULL;
 									$city 			= $row['5'];
 									$pincode 		= $row['6'];
 								} elseif ($fi_type == 'BV') {
-									$agent_code 	= $row['25'];
+									$agent_code 	= $row['24'];
 									$address 		= $row['7'];
 									$name 			= $row['8'];
 									$city 			= $row['9'];
@@ -131,22 +131,22 @@ class Upload_case_controller extends CI_Controller
 									'product' 				=> $row['3'],
 									'address' 				=> $address,
 									'business_name' 		=> $name,
-									'business_add' 			=> $city,
-									'residence_add'			=> $pincode,
-									// 'permanent_address' 	=> $row['11'],
-									'fi_date' 				=> $row['12'],
-									'fi_time' 				=> $row['13'],
-									'fi_flag' 				=> $row['14'],
-									'dob' 					=> $row['15'],
+									'city' 					=> $city,
+									'pin_code'				=> $pincode,
+									'mobile' 				=> $row['11'],
+									// 'fi_date' 				=> $row['12'],
+									'fi_date' 				=> $row['13'],
+									'fi_time' 				=> $row['14'],
+									'fi_flag' 				=> $row['15'],
+									'dob' 					=> $row['16'],
 									// 'designation' 			=> $row['16'],
-									'amount' 			=> $row['17'],
-									// 'fi_intiation_comments' => $row['18'],
-									// 'asset_make' 			=> $row['19'],
+									'amount' 				=> $row['18'],
+									'vehicle' 				=> $row['19'],
 									// 'asset_model' 			=> $row['20'],
 									// 'station' 				=> $row['21'],
-									'tat_start' 			=> $row['22'],
-									'tat_end' 				=> $row['23'],
-									'remarks' 				=> $row['24'],
+									'tat_start' 			=> readableDateUTC(formatDate($row['21'], 'Y-m-d H:i:s')),
+									'tat_end' 				=> readableDateUTC(formatDate($row['22'], 'Y-m-d H:i:s')),
+									'remarks' 				=> $row['23'],
 									'code' 					=> $agent_code,
 								);
 								// echo "<pre>";
@@ -159,10 +159,10 @@ class Upload_case_controller extends CI_Controller
 				}
 
 				$response = array('type' => 'success', 'massege' => 'Excel Data Imported Successfully');
-				$this->session->mark_as_flash('res_data', $response);
+				$this->session->set_flashdata('res_data', $response);
 			} else {
 				$response = array('type' => 'error', 'massege' => 'File is not uploaded');
-				$this->session->mark_as_flash('res_data', $response);
+				$this->session->set_flashdata('res_data', $response);
 			}
 			redirect(base_url("/Create_cse/create_c"));
 		} else {

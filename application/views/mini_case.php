@@ -539,7 +539,16 @@
                 <input class="form-control" type="text" id="source_channel" name="source_channel" placeholder="Enter Source channel">
             </div>
         </div>
-        
+
+        <div class="row">
+            <div class="col-md-3">
+                <label for="source_channel">Source Channel</label>
+            </div>
+            <div class="col-md-9">
+                <input class="form-control" type="text" id="source_channel" name="source_channel" placeholder="Enter Source channel">
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-3">
                 <label for="tat">TAT Start<span class="text-danger"> *</span></label>
@@ -560,7 +569,7 @@
                 <label for="code"> BV Agent <span class="text-danger"> *</span></label>
             </div>
             <div class="col-md-9">
-                <select class="form-control code" id="bv_agent" name="bv_agent">
+                <select class="form-control code" id="bv_agent" name="agent_code[]">
                     <option value="" selected>-- SELECT AGENT CODE --</option>
                     <?php foreach ($agent_code as $agent) { ?>
                         <option value="<?= $agent['employee_unique_id']; ?>"><?= $agent['first_name'] . ' - ' . $agent['employee_unique_id']; ?></option>
@@ -573,7 +582,7 @@
                 <label for="code">RV Agent <span class="text-danger"> *</span></label>
             </div>
             <div class="col-md-9">
-                <select class="form-control code" id="rv_agent" name="rv_agent">
+                <select class="form-control code" id="rv_agent" name="agent_code[]">
                     <option value="" selected>-- SELECT AGENT CODE --</option>
                     <?php foreach ($agent_code as $agent) { ?>
                         <option value="<?= $agent['employee_unique_id']; ?>"><?= $agent['first_name'] . ' - ' . $agent['employee_unique_id']; ?></option>
