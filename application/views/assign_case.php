@@ -543,12 +543,19 @@
                         $('.r_in').html("<b>Interior:</b> " + data.rv_interior_premises);
                         $('.r_ex').html("<b>Exterior:</b> " + data.rv_exterior_premises);
                         $('.r_agri').html("<b>Agriculture Lending (if any):</b> " + data.rv_agriculture_land);
-                        $('.r_check1').html("<b>Check 1:</b> " + data.rv_neighbour_check1);
+                        $('.r_check1').html("<b>Neighbour 1:</b> " + data.neighbour_name1);
+                        $('.r_house1').html("<b>House Details:</b> " + data.neighbour_house_no_1);
+                        $('.r_house2').html("<b>House Details:</b> " + data.neighbour_house_no_1);
+                        $('.r_contact1').html("<b>Neighbour 1 Contact:</b> " + data.neighbour_contact1);
+                        $('.r_contact2').html("<b>Neighbour 2 Contact:</b> " + data.neighbour_contact1);
+                        $('.r_contact2').html("<b>Neighbour 2 Contact:</b> " + data.neighbour_contact1);
+                        $('.r_contact2').html("<b>Neighbour 2 Contact:</b> " + data.neighbour_contact1);
+
                         $('.r_lat').html("<b>Latitude:</b> " + data.rv_lat);
                         $('.r_long').html("<b>Longitude:</b> " + data.rv_long);
                         $('.r_pincode').html("<b>Pincode:</b> " + data.rv_pincode);
                         $('.r_location_add').html("<b>Location Address:</b> " + data.rv_location_add);
-                        $('.r_check2').html("<b>Check 2:</b> " + data.rv_neighbour_check2);
+                        $('.r_check2').html("<b>Neighbour 2:</b> " + data.neighbour_name2);
 
                         $('.r_cpv').html("<b>CPV done by:</b> " + data.rv_cpv_done_by);
                         $('.r_visit').html("<b>Visit Date:</b> " + data.rv_visit_date);
@@ -2334,6 +2341,51 @@
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <h4 class="r_check2">
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row pt-6">
+                                                <div class="col-sm-6">
+                                                    <h4 class="r_house1">
+                                                    </h4>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <h4 class="r_house2">
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row pt-6">
+                                                <div class="col-sm-6">
+                                                    <h4 class="r_contact1">
+                                                    </h4>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <h4 class="r_contact2">
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row pt-6">
+                                                <div class="col-sm-6">
+                                                    <h4 class="r_feedback1">
+                                                    </h4>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <h4 class="r_feedback2">
                                                     </h4>
                                                 </div>
                                             </div>
