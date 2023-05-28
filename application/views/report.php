@@ -241,7 +241,7 @@
       <div class="card">
         <div class="title">
           <a href="<?php echo base_url(); ?>Reassign_report_controller/reassign_page">
-            <h3><b>Reassign Create Case</b></h3>
+            <h3><b>Reassign Case</b></h3>
         </div>
         <div class="content">
           <div class="social">
@@ -256,33 +256,17 @@
         <div class="circle"></div>
       </div>
 
-      <div class="card">
-        <div class="title">
-          <a href="<?php echo base_url(); ?>Reassign_mini_case_controller/reassign_case">
-            <h3><b>Reassign quick Case</b></h3>
-        </div>
-        <div class="content">
-          <div class="social">
-            <i class="fab fa-codepen"></i>
-            <h4 style="color:#525251;">History of Quick Cases</h4>
-          </div>
-          <div class="social">
-            <i class="fab fa-linkedin"></i>
-            <h4 style="color:#525251;">Reallocate Cases</h4>
-          </div>
-        </div>
-        <div class="circle"></div>
-      </div>
+      
 
       <div class="card">
         <div class="title">
           <a href="<?php echo base_url(); ?>Billing_quick_controller/billing_quick">
-            <h3><b>Billing Quick Report</b></h3>
+            <h3><b>Billing Report</b></h3>
         </div>
         <div class="content">
           <div class="social">
             <i class="fab fa-codepen"></i>
-            <h4 style="color:#525251;">Report of Quick Cases</h4>
+            <h4 style="color:#525251;">Report of Cases</h4>
           </div>
           <div class="social">
             <i class="fab fa-linkedin"></i>
@@ -292,24 +276,7 @@
         <div class="circle"></div>
       </div>
 
-      <div class="card">
-        <div class="title">
-          <!-- <a href="<?php echo base_url(); ?>Reassign_mini_case_controller/reassign_case"> -->
-            <h3><b>Billing Case Report</b></h3>
-        </div>
-        <div class="content">
-          <div class="social">
-            <i class="fab fa-codepen"></i>
-            <h4 style="color:#525251;">History of Create Cases</h4>
-          </div>
-          <div class="social">
-            <i class="fab fa-linkedin"></i>
-            <h4 style="color:#525251;">Reallocate Cases</h4>
-          </div>
-        </div>
-        <div class="circle"></div>
-      </div>
-
+    
 
     </figcaption>
   </figure>
