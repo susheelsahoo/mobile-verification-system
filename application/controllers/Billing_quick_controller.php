@@ -1,17 +1,19 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Billing_quick_controller extends CI_Controller {
+class Billing_quick_controller extends CI_Controller
+{
 
-	function __construct(){
-		parent::__construct();
-		error_reporting(0);
-		$this->load->helper('url');
-		$this->load->helper('form');
-		$this->load->model('Billing_quick_model');
-	}
+    function __construct()
+    {
+        parent::__construct();
+        error_reporting(0);
+        $this->load->helper('url');
+        $this->load->helper('form');
+        $this->load->model('Billing_quick_model');
+    }
 
-	public function index()
+    public function index()
     {
         $this->load->library('session');
         if ($this->session->userdata('user')) {
@@ -33,7 +35,7 @@ class Billing_quick_controller extends CI_Controller {
         }
     }
 
-	public function fetch_all_transferedMiniCases()
+    public function fetch_all_transferedMiniCases()
     {
         try {
             $this->load->model("Reassign_mini_case_model");
@@ -76,113 +78,102 @@ class Billing_quick_controller extends CI_Controller {
             // $this->load->view('login_page', array('error' => $error));
         }
     }
-    
-    
-      Public function downloadReport()
-       {
-           $bankname=array();
-           $from_date=$_POST['from_date'].' 00:00:01'; 
-          $to_date=$_POST['to_date'].' 23:59:59'; 
-         //  $bankname="'" . implode ( ",", isset($_POST['bankname'] )) . "'";
-         $bankname=isset($_POST['bankname'] )?"'" . implode ( "', '", $_POST['bankname'] ) . "'":'';
+
+
+    public function downloadReport()
+    {
+        $bankname = array();
+        $from_date = $_POST['from_date'] . ' 00:00:01';
+        $to_date = $_POST['to_date'] . ' 23:59:59';
+        //  $bankname="'" . implode ( ",", isset($_POST['bankname'] )) . "'";
+        $bankname = isset($_POST['bankname']) ? "'" . implode("', '", $_POST['bankname']) . "'" : '';
         //   echo '<pre>';  print_r ($bankname);die("tets");
         //   $product= "'" . implode ( "', '", isset($_POST['product'] )) . "'";
         // $product12 = isset($_POST['product']) && is_array($_POST['product']) ? $_POST['product'] : [];
         //  $product= "'" . implode ( "', '", isset($product12)) . "'";
-// $vpn1 =implode(',', $vpn_network);
-          
+        // $vpn1 =implode(',', $vpn_network);
+
         //   implode( '`, `', $dataColumns)
         // $agent= "'" . implode ( "', '", $_POST['agent'] ) . "'";
-         $agent=isset($_POST['agent'] )?"'" . implode ( "', '", $_POST['agent'] ) . "'":'';
-         $product= isset($_POST['product'] )?"'" . implode ( "', '", $_POST['product'] ) . "'":'';
-         $FItype= isset($_POST['FItype'] )?"'" . implode ( "', '", $_POST['FItype'] ) . "'":'';
-         $download =isset($_POST['download'] )? '"'.implode('","', $_POST['download']).'"':'';
-        $downloadquery =isset($_POST['download'] )? implode ( ",", $_POST['download'] ):'';
-       //   echo '<pre>';  print_r ($product);die("tets");
-          
-          
-          if(empty($_POST['download']) ){
-              $this->session->set_flashdata("msg","Please Select the Field to be downloaded");
-            redirect("Billing_quick_controller/billing_quick","location");
-            }
-          if(!empty($_POST['bankname']) ){
-              $str='and bank_name IN ('.$bankname.')';
-          }
-          else $str='';
-          
-          if(!empty($_POST['from_date']) && !empty($_POST['to_date'])){
-              $strdate='created_at between '. "'".$from_date. "'".' and '."'" .$to_date. "'";
-          }
-          else{
-             
-              $from_date1=date('2001-m-d H:i:s');
-              $to_date1=date('Y-m-d H:i:s');;
-              $strdate='created_at between '. "'".$from_date1. "'".' and '."'" .$to_date1. "'";}
-          
-          if(!empty($_POST['product'])){
-              $strproduct="and product_name IN ("."$product".")";
-          }
-          else $strproduct='';
-          
-          if(!empty($_POST['agent']) ){
-              $stragent='and code IN ('.$agent.')';
-          }
-          else $stragent='';
-          
-          if(!empty($_POST['FItype'])){
-              $strFItype="and fi_to_be_conducted IN ("."$FItype".")";
-          }
-          else $strFItype='';
-          
-         // echo "Select $downloadquery from upload_file where $strdate $str $strproduct $strFItype";die();
-          $this->val1 =$this->db->query("Select $downloadquery from upload_file where $strdate $str $stragent $strproduct $strFItype");
-          $this->num1 = $this->val1->num_rows();
-          $count=count($_POST['download']);
-         //echo $count;die();
-          $delimiter = chr(9);
-          ob_clean();
-          $filename1="Reports.xls";
-          //echo $filename;die();
-          $filename=trim($filename1);
-           header("Content-type: application/octet-stream");
-           header("Content-Disposition: attachment; filename=$filename");
-           header("Pragma: no-cache");
-           header("Expires: 0");
-           //$colarray=implode($delimiter, array("ID","Application ID","Code","Bank","FI Type","Updated Date","Case Created Date","Remark"));
-          for ($i = 0; $i < $count; $i++) {
-            echo $_POST['download'][$i] . "\t";
-            }
-            print("\n");  
-           if($this->num1>0){
-          foreach($this->val1->result_array() as $row){ 
-            //  echo '<pre>';print_r($row);
-            $schema_insert = "";
-              // for($j=0; $j<$count;$j++)
-             foreach ($_POST['download'] as $val)
-            {  //echo $val;die();
-                if(!isset($row[$val]))
-                    $schema_insert .= "NULL".$sep;
-                elseif ($row[$val] != "")
-                    $schema_insert .= "$row[$val]".$sep;
-                else
-                    $schema_insert .= "".$sep;
-           
-            $schema_insert = str_replace($sep."$", "", $schema_insert);
-            $schema_insert = preg_replace("/\r\n|\n\r|\n|\r/", " ", $schema_insert);
-            $schema_insert .= "\t";
-           
-             } print(trim($schema_insert));
-            print "\n";  
-            
-            }
-           }
-        else {
-            $this->session->set_flashdata("msg","No Record Found");
-            redirect("Billing_quick_controller/billing_quick","location");
+        $agent = isset($_POST['agent']) ? "'" . implode("', '", $_POST['agent']) . "'" : '';
+        $product = isset($_POST['product']) ? "'" . implode("', '", $_POST['product']) . "'" : '';
+        $FItype = isset($_POST['FItype']) ? "'" . implode("', '", $_POST['FItype']) . "'" : '';
+        $download = isset($_POST['download']) ? '"' . implode('","', $_POST['download']) . '"' : '';
+        $downloadquery = isset($_POST['download']) ? implode(",", $_POST['download']) : '';
+        //   echo '<pre>';  print_r ($product);die("tets");
 
-               }
-       }
-       
-       
-     
+
+        if (empty($_POST['download'])) {
+            $this->session->set_flashdata("msg", "Please Select the Field to be downloaded");
+            redirect("Billing_quick_controller/billing_quick", "location");
+        }
+        if (!empty($_POST['bankname'])) {
+            $str = 'and bank_name IN (' . $bankname . ')';
+        } else $str = '';
+
+        if (!empty($_POST['from_date']) && !empty($_POST['to_date'])) {
+            $strdate = 'created_at between ' . "'" . $from_date . "'" . ' and ' . "'" . $to_date . "'";
+        } else {
+
+            $from_date1 = date('2001-m-d H:i:s');
+            $to_date1 = date('Y-m-d H:i:s');;
+            $strdate = 'created_at between ' . "'" . $from_date1 . "'" . ' and ' . "'" . $to_date1 . "'";
+        }
+
+        if (!empty($_POST['product'])) {
+            $strproduct = "and product_name IN (" . "$product" . ")";
+        } else $strproduct = '';
+
+        if (!empty($_POST['agent'])) {
+            $stragent = 'and code IN (' . $agent . ')';
+        } else $stragent = '';
+
+        if (!empty($_POST['FItype'])) {
+            $strFItype = "and fi_to_be_conducted IN (" . "$FItype" . ")";
+        } else $strFItype = '';
+
+        // echo "Select $downloadquery from upload_file where $strdate $str $strproduct $strFItype";die();
+        $this->val1 = $this->db->query("Select $downloadquery from upload_file where $strdate $str $stragent $strproduct $strFItype");
+        $this->num1 = $this->val1->num_rows();
+        $count = count($_POST['download']);
+        //echo $count;die();
+        $delimiter = chr(9);
+        ob_clean();
+        $filename1 = "Reports.xls";
+        //echo $filename;die();
+        $filename = trim($filename1);
+        header("Content-type: application/octet-stream");
+        header("Content-Disposition: attachment; filename=$filename");
+        header("Pragma: no-cache");
+        header("Expires: 0");
+        //$colarray=implode($delimiter, array("ID","Application ID","Code","Bank","FI Type","Updated Date","Case Created Date","Remark"));
+        for ($i = 0; $i < $count; $i++) {
+            echo $_POST['download'][$i] . "\t";
+        }
+        print("\n");
+        if ($this->num1 > 0) {
+            foreach ($this->val1->result_array() as $row) {
+                //  echo '<pre>';print_r($row);
+                $schema_insert = "";
+                // for($j=0; $j<$count;$j++)
+                foreach ($_POST['download'] as $val) {  //echo $val;die();
+                    if (!isset($row[$val]))
+                        $schema_insert .= "NULL" . $sep;
+                    elseif ($row[$val] != "")
+                        $schema_insert .= "$row[$val]" . $sep;
+                    else
+                        $schema_insert .= "" . $sep;
+
+                    $schema_insert = str_replace($sep . "$", "", $schema_insert);
+                    $schema_insert = preg_replace("/\r\n|\n\r|\n|\r/", " ", $schema_insert);
+                    $schema_insert .= "\t";
+                }
+                print(trim($schema_insert));
+                print "\n";
+            }
+        } else {
+            $this->session->set_flashdata("msg", "No Record Found");
+            redirect("Billing_quick_controller/billing_quick", "location");
+        }
+    }
 }

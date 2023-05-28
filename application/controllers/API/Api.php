@@ -141,8 +141,8 @@ class Api extends CI_Controller
         try {
             if ($this->input->method() == "post") {
                 $agent_code = $this->input->post('agent_code');
-                 $fi_type = $this->input->post('fi_type');
-                  $bank = $this->input->post('bank');
+                $fi_type = $this->input->post('fi_type');
+                $bank = $this->input->post('bank');
                 // $fi_type = $this->input->post('fi_type');
                 // $sql = 'SELECT * FROM mini_case WHERE code = "' . $agent_code . '"';
                 $sql = 'SELECT * FROM mini_case WHERE fi_type = "' . $fi_type . '" AND code = "' . $agent_code . '" AND bank = "' . $bank . '"';
@@ -159,7 +159,6 @@ class Api extends CI_Controller
                     'message' => "Input method should be in post",
                 ];
             }
-
         } catch (Exception $ex) {
             $response = [
                 'status' => "failure",
@@ -228,7 +227,6 @@ class Api extends CI_Controller
                     'message' => "Reference number not match",
                 ];
             }
-
         } catch (Exception $ex) {
             $response = [
                 'status' => "failed",
@@ -279,7 +277,7 @@ class Api extends CI_Controller
                 // $fi_type = $this->input->post('fi_type');
                 // $sql = 'SELECT id,fi_to_be_conducted,product_name,residence_address,application_id,customer_name,created_at FROM upload_file WHERE code = "' . $code . '"';
                 // $sql = 'SELECT * FROM upload_file WHERE code = "' . $code . '"';
-                 $sql = 'SELECT * FROM upload_file WHERE fi_to_be_conducted = "' . $fi_type . '" AND code = "' . $code . '" AND bank_name = "' . $bank . '"';
+                $sql = 'SELECT * FROM upload_file WHERE fi_to_be_conducted = "' . $fi_type . '" AND code = "' . $code . '" AND bank_name = "' . $bank . '"';
                 $query = $this->db->query($sql);
                 $data = $query->result_array();
                 $response = [
@@ -334,7 +332,6 @@ class Api extends CI_Controller
                     'message' => "Reference number not match",
                 ];
             }
-
         } catch (Exception $ex) {
             $response = [
                 'status' => "failed",
@@ -343,20 +340,20 @@ class Api extends CI_Controller
         }
         echo json_encode($response);
     }
-    
-public function insertrvQuickCases()
+
+    public function insertrvQuickCases()
     {
         $response = array();
         try {
             // if ($this->input->method() == "post") {
             $reference_no = $this->input->post('reference_no');
             $fi_type = $this->input->post('fi_type');
-          $rv_long = $this->input->post('rv_long');
-          $rv_lat = $this->input->post('rv_lat');
-          $rv_pincode = $this->input->post('rv_pincode');
-          $rv_location_add = $this->input->post('rv_location_add');
-            $rv_visit_date= $this->input->post('rv_visit_date');
-         
+            $rv_long = $this->input->post('rv_long');
+            $rv_lat = $this->input->post('rv_lat');
+            $rv_pincode = $this->input->post('rv_pincode');
+            $rv_location_add = $this->input->post('rv_location_add');
+            $rv_visit_date = $this->input->post('rv_visit_date');
+
             $remarks = $this->input->post('rv_remarks');
             $rv_image1 = $this->input->post('rv_image1');
             $rv_image2 = $this->input->post('rv_image2');
@@ -367,17 +364,17 @@ public function insertrvQuickCases()
             $rv_image7 = $this->input->post('rv_image7');
             $rv_image8 = $this->input->post('rv_image8');
             $rv_image9 = $this->input->post('rv_image9');
-           
+
             // print_r($data);die;
             if (!empty($reference_no)) {
 
                 $insertQuickcase = array(
-                    
-                     'rv_long' => $rv_long,
-                      'rv_lat' => $rv_lat,
-                       'rv_pincode' => $rv_pincode,
-                        'rv_location_add' => $rv_location_add,
-                         'rv_visit_date' => $rv_visit_date,
+
+                    'rv_long' => $rv_long,
+                    'rv_lat' => $rv_lat,
+                    'rv_pincode' => $rv_pincode,
+                    'rv_location_add' => $rv_location_add,
+                    'rv_visit_date' => $rv_visit_date,
                     'remarks' => $remarks,
                     'rv_image1' => $rv_image1,
                     'rv_image2' => $rv_image2,
@@ -390,9 +387,9 @@ public function insertrvQuickCases()
                     'rv_image9' => $rv_image9,
                     'status' => "Resolved",
                 );
-               
-                  $this->db->where('reference_no', $reference_no);
-                   $this->db->where('fi_type', $fi_type);
+
+                $this->db->where('reference_no', $reference_no);
+                $this->db->where('fi_type', $fi_type);
                 $this->db->update('mini_case', $insertQuickcase);
 
                 if ($this->db->affected_rows() > 0) {
@@ -412,7 +409,6 @@ public function insertrvQuickCases()
                     'message' => "Reference number not match",
                 ];
             }
-
         } catch (Exception $ex) {
             $response = [
                 'status' => "failed",
@@ -430,13 +426,13 @@ public function insertrvQuickCases()
             // if ($this->input->method() == "post") {
             $reference_no = $this->input->post('reference_no');
             $fi_type = $this->input->post('fi_type');
-             $bv_lat = $this->input->post('bv_lat');
-              $bv_long = $this->input->post('bv_long');
-               $bv_pincode = $this->input->post('bv_pincode');
-                $bv_location_add = $this->input->post('bv_location_add');
-                $bv_visit_date = $this->input->post('bv_visit_date');
-           
-          
+            $bv_lat = $this->input->post('bv_lat');
+            $bv_long = $this->input->post('bv_long');
+            $bv_pincode = $this->input->post('bv_pincode');
+            $bv_location_add = $this->input->post('bv_location_add');
+            $bv_visit_date = $this->input->post('bv_visit_date');
+
+
             $remarks = $this->input->post('bv_remarks');
             $bv_image1 = $this->input->post('bv_image1');
             $bv_image2 = $this->input->post('bv_image2');
@@ -447,15 +443,15 @@ public function insertrvQuickCases()
             $bv_image7 = $this->input->post('bv_image7');
             $bv_image8 = $this->input->post('bv_image8');
             $bv_image9 = $this->input->post('bv_image9');
-           
+
             // print_r($data);die;
             if (!empty($reference_no)) {
 
                 $insertQuickcase = array(
-                   
-                 'bv_location_add' => $bv_location_add,
-                  'bv_pincode' => $bv_pincode,
-                   'bv_long' => $bv_long,
+
+                    'bv_location_add' => $bv_location_add,
+                    'bv_pincode' => $bv_pincode,
+                    'bv_long' => $bv_long,
                     'bv_lat' => $bv_lat,
                     'bv_visit_date' => $bv_visit_date,
                     'remarks' => $remarks,
@@ -471,7 +467,7 @@ public function insertrvQuickCases()
                     'status' => "Resolved",
                 );
                 $this->db->where('reference_no', $reference_no);
-                 $this->db->where('fi_type', $fi_type);
+                $this->db->where('fi_type', $fi_type);
                 $this->db->update('mini_case', $insertQuickcase);
 
                 if ($this->db->affected_rows() > 0) {
@@ -491,7 +487,6 @@ public function insertrvQuickCases()
                     'message' => "Reference number not match",
                 ];
             }
-
         } catch (Exception $ex) {
             $response = [
                 'status' => "failed",
@@ -572,25 +567,25 @@ public function insertrvQuickCases()
             $neighbour2_neg_feedback = $this->input->post('neighbour2_neg_feedback');
             $neighbour_contact1 = $this->input->post('neighbour_contact1');
             $neighbour_contact2 = $this->input->post('neighbour_contact2');
-            
+
             $consolidated_remark = $this->input->post('consolidated_remark');
             $res_proof_number = $this->input->post('res_proof_number');
-            
+
             $how_much_land = $this->input->post('how_much_land');
             $rv_vehicle_type = $this->input->post('rv_vehicle_type');
             $rv_loan_existing = $this->input->post('rv_loan_existing');
             $rv_loan_bankname = $this->input->post('rv_loan_bankname');
             $rv_loan_emi = $this->input->post('rv_loan_emi');
-          
+
 
             $rv_cpv_done_by = $this->input->post('rv_cpv_done_by');
             $rv_visit_date = $this->input->post('rv_visit_date');
             $rv_remarks = $this->input->post('rv_remarks');
-              $rv_lat = $this->input->post('rv_lat');
-               $rv_long = $this->input->post('rv_long');
-                $rv_pincode = $this->input->post('rv_pincode');
-                 $rv_location_add = $this->input->post('rv_location_add');
-              
+            $rv_lat = $this->input->post('rv_lat');
+            $rv_long = $this->input->post('rv_long');
+            $rv_pincode = $this->input->post('rv_pincode');
+            $rv_location_add = $this->input->post('rv_location_add');
+
             $rv_image1 = $this->input->post('rv_image1');
             $rv_image2 = $this->input->post('rv_image2');
             $rv_image3 = $this->input->post('rv_image3');
@@ -600,7 +595,7 @@ public function insertrvQuickCases()
             $rv_image7 = $this->input->post('rv_image7');
             $rv_image8 = $this->input->post('rv_image8');
             $rv_image9 = $this->input->post('rv_image9');
-           
+
             // print_r($data);die;
             if (!empty($application_id)) {
 
@@ -620,10 +615,10 @@ public function insertrvQuickCases()
                     'rv_no_of_earning_members' => $rv_no_of_earning_members,
                     'rv_details_of_earning_member' => $rv_details_of_earning_member,
                     'rv_dependent' => $rv_dependent,
-                     'rv_lat' => $rv_lat,
-                      'rv_long' => $rv_long,
-                       'rv_pincode' => $rv_pincode,
-                        'rv_location_add' => $rv_location_add,
+                    'rv_lat' => $rv_lat,
+                    'rv_long' => $rv_long,
+                    'rv_pincode' => $rv_pincode,
+                    'rv_location_add' => $rv_location_add,
                     'rv_user_office_address' => $rv_user_office_address,
                     'rv_residence_proof' => $rv_residence_proof,
                     'rv_agriculture_land' => $rv_agriculture_land,
@@ -639,7 +634,7 @@ public function insertrvQuickCases()
                     'neighbour2_neg_feedback' => $neighbour2_neg_feedback,
                     'neighbour_contact1' => $neighbour_contact1,
                     'neighbour_contact2' => $neighbour_contact2,
-                   
+
                     'consolidated_remark' => $consolidated_remark,
                     'res_proof_number' => $res_proof_number,
                     'how_much_land' => $how_much_land,
@@ -662,7 +657,7 @@ public function insertrvQuickCases()
                     'status' => "Resolved",
                 );
                 $this->db->where('application_id', $application_id);
-                 $this->db->where('fi_to_be_conducted', $fi_to_be_conducted);
+                $this->db->where('fi_to_be_conducted', $fi_to_be_conducted);
                 $this->db->update('upload_file', $insertcase);
 
                 if ($this->db->affected_rows() > 0) {
@@ -682,7 +677,6 @@ public function insertrvQuickCases()
                     'message' => "Application number not match",
                 ];
             }
-
         } catch (Exception $ex) {
             $response = [
                 'status' => "failed",
@@ -719,15 +713,15 @@ public function insertrvQuickCases()
             $bv_nature_of_job = $this->input->post('bv_nature_of_job');
             $tcp1_name = $this->input->post('tcp1_name');
             $tcp2_name = $this->input->post('tcp2_name');
-            
+
             $bv_tcp2 = $this->input->post('bv_tcp2');
             $bv_verified_name = $this->input->post('bv_verified_name');
             $bv_dt_of_cpv = $this->input->post('bv_dt_of_cpv');
             $bv_remarks = $this->input->post('bv_remarks');
-             $bv_lat = $this->input->post('bv_lat');
-              $bv_long = $this->input->post('bv_long');
-               $bv_pincode = $this->input->post('bv_pincode');
-                $bv_location_add = $this->input->post('bv_location_add');
+            $bv_lat = $this->input->post('bv_lat');
+            $bv_long = $this->input->post('bv_long');
+            $bv_pincode = $this->input->post('bv_pincode');
+            $bv_location_add = $this->input->post('bv_location_add');
             $bv_image1 = $this->input->post('bv_image1');
             $bv_image2 = $this->input->post('bv_image2');
             $bv_image3 = $this->input->post('bv_image3');
@@ -737,7 +731,7 @@ public function insertrvQuickCases()
             $bv_image7 = $this->input->post('bv_image7');
             $bv_image8 = $this->input->post('bv_image8');
             $bv_image9 = $this->input->post('bv_image9');
-           
+
             // print_r($data);die;
             if (!empty($application_id)) {
 
@@ -751,10 +745,10 @@ public function insertrvQuickCases()
                     'bv_business_type' => $bv_business_type,
                     'bv_no_employee' => $bv_no_employee,
                     'bv_stocks' => $bv_stocks,
-                     'bv_lat' => $bv_lat,
-                      'bv_long' => $bv_long,
-                       'bv_pincode' => $bv_pincode,
-                        'bv_location_add' => $bv_location_add,
+                    'bv_lat' => $bv_lat,
+                    'bv_long' => $bv_long,
+                    'bv_pincode' => $bv_pincode,
+                    'bv_location_add' => $bv_location_add,
                     'bv_business_activity' => $bv_business_activity,
                     'bv_stability' => $bv_stability,
                     'bv_ownership' => $bv_ownership,
@@ -801,7 +795,6 @@ public function insertrvQuickCases()
                     'message' => "Application number not match",
                 ];
             }
-
         } catch (Exception $ex) {
             $response = [
                 'status' => "failed",
@@ -814,7 +807,7 @@ public function insertrvQuickCases()
 
     public function mainBankCaseType()
     {
-       
+
         $response = [];
         try {
             $data_json = [];
@@ -867,16 +860,16 @@ public function insertrvQuickCases()
     }
 
 
- public function miniCaseBankType()
+    public function miniCaseBankType()
     {
-       
+
         $response = [];
         try {
             $data_json = [];
 
             if ($this->input->method() == "post") {
                 $agent_code = $this->input->post('code');
-              
+
                 // $sql = 'SELECT application_id,fi_to_be_conducted, COUNT(1) count, bank_name,code FROM `upload_file` 
                 // WHERE agent_code = "' . $agent_code . '  GROUP BY bank"';
                 $sql =  'SELECT fi_type, COUNT(1) total, bank FROM `mini_case` 
@@ -922,62 +915,62 @@ public function insertrvQuickCases()
         }
     }
 
-//  public function miniCaseBankType()
-//     {
-       
-//         $response = [];
-//         try {
-//             $data_json = [];
+    //  public function miniCaseBankType()
+    //     {
 
-//             if ($this->input->method() == "post") {
-//                 $agent_code = $this->input->post('code');
-//                 $fi_type = $this->input->post('fi_type');
-//                 $bank = $this->input->post('bank');
-//                 // $sql = 'SELECT application_id,fi_to_be_conducted, COUNT(1) count, bank_name,code FROM `upload_file` 
-//                 // WHERE agent_code = "' . $agent_code . '  GROUP BY bank"';
-//                 $sql =  'SELECT fi_type, COUNT(1) total, bank FROM `mini_case` 
-                  
-//                 where code = "' . $agent_code . '" and status = "inactive" GROUP BY bank, fi_type
-//                 ORDER BY `mini_case`.`bank` DESC';
-//                 // print_r($sql);die;
-//                 // echo "<br/>";
-//                 // die;
-//                 $query = $this->db->query($sql);
-//                 $data = $query->result_array();
-//                 if ($data) {
-//                     foreach ($data as $key => $val) {
-//                         $res_data = [];
-//                         $bank_name = $val['bank'];
-//                         $fi_type = $val['fi_type'];
-//                         $selectsql =  'SELECT id,fi_type, bank,code FROM `mini_case` 
-//                         where code = "' . $agent_code . '" and bank = "' . $bank . '" and fi_type = "' . $fi_type . '" and status = "inactive"';
-//                         // print_r($selectsql);die;
-//                         // echo "<br/>";
-//                         $query = $this->db->query($selectsql);
-//                         $res_data = $query->result_array();
-//                         $val['res_data'] = $res_data;
-//                         array_push($data_json, $val);
-//                     }
-//                 }
-//                 $response = [
-//                     'status' => "success",
-//                     'data' => $data_json,
-//                 ];
-//                 // $response = $data;
-//             } else {
-//                 $response = [
-//                     'status' => "failure",
-//                     'message' => "Input method should be in post",
-//                 ];
-//             }
-//             echo json_encode($response);
-//         } catch (Exception $ex) {
-//             $response = [
-//                 'status' => "failure",
-//                 'message' => $ex->getMessage(),
-//             ];
-//         }
-//     }
+    //         $response = [];
+    //         try {
+    //             $data_json = [];
+
+    //             if ($this->input->method() == "post") {
+    //                 $agent_code = $this->input->post('code');
+    //                 $fi_type = $this->input->post('fi_type');
+    //                 $bank = $this->input->post('bank');
+    //                 // $sql = 'SELECT application_id,fi_to_be_conducted, COUNT(1) count, bank_name,code FROM `upload_file` 
+    //                 // WHERE agent_code = "' . $agent_code . '  GROUP BY bank"';
+    //                 $sql =  'SELECT fi_type, COUNT(1) total, bank FROM `mini_case` 
+
+    //                 where code = "' . $agent_code . '" and status = "inactive" GROUP BY bank, fi_type
+    //                 ORDER BY `mini_case`.`bank` DESC';
+    //                 // print_r($sql);die;
+    //                 // echo "<br/>";
+    //                 // die;
+    //                 $query = $this->db->query($sql);
+    //                 $data = $query->result_array();
+    //                 if ($data) {
+    //                     foreach ($data as $key => $val) {
+    //                         $res_data = [];
+    //                         $bank_name = $val['bank'];
+    //                         $fi_type = $val['fi_type'];
+    //                         $selectsql =  'SELECT id,fi_type, bank,code FROM `mini_case` 
+    //                         where code = "' . $agent_code . '" and bank = "' . $bank . '" and fi_type = "' . $fi_type . '" and status = "inactive"';
+    //                         // print_r($selectsql);die;
+    //                         // echo "<br/>";
+    //                         $query = $this->db->query($selectsql);
+    //                         $res_data = $query->result_array();
+    //                         $val['res_data'] = $res_data;
+    //                         array_push($data_json, $val);
+    //                     }
+    //                 }
+    //                 $response = [
+    //                     'status' => "success",
+    //                     'data' => $data_json,
+    //                 ];
+    //                 // $response = $data;
+    //             } else {
+    //                 $response = [
+    //                     'status' => "failure",
+    //                     'message' => "Input method should be in post",
+    //                 ];
+    //             }
+    //             echo json_encode($response);
+    //         } catch (Exception $ex) {
+    //             $response = [
+    //                 'status' => "failure",
+    //                 'message' => $ex->getMessage(),
+    //             ];
+    //         }
+    //     }
 
     // public function insertMainCases()
     // {
@@ -1013,7 +1006,7 @@ public function insertrvQuickCases()
     //         $image7 = $this->input->post('image7');
     //         $image8 = $this->input->post('image8');
     //         $image9 = $this->input->post('image9');
-           
+
     //         // print_r($data);die;
     //         if (!empty($application_id)) {
 

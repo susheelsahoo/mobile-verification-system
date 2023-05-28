@@ -256,7 +256,7 @@
         <div class="circle"></div>
       </div>
 
-    
+
 
       <div class="card">
         <div class="title">
@@ -266,7 +266,7 @@
         <div class="content">
           <div class="social">
             <i class="fab fa-codepen"></i>
-            <h4 style="color:#525251;">Report of Quick Cases</h4>
+            <h4 style="color:#525251;">Report of Cases</h4>
           </div>
           <div class="social">
             <i class="fab fa-linkedin"></i>
@@ -276,7 +276,7 @@
         <div class="circle"></div>
       </div>
 
-    
+
 
     </figcaption>
   </figure>

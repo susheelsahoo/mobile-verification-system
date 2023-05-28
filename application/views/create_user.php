@@ -12,13 +12,13 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/select/1.6.2/css/select.dataTables.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 
-    
+
 
     <script type="text/javascript">
         BASE_URL = "<?php echo base_url(); ?>"
     </script>
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
@@ -27,7 +27,7 @@
     <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
 
-    
+
     <script src="https://cdn.datatables.net/select/1.6.2/js/dataTables.select.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.js"></script>
@@ -91,7 +91,7 @@
                 ],
                 createdRow: function(row, data, rowIndex) {
                     $.each($('td', row), function(colIndex) {
-                        if (colIndex == 8) {
+                        if (colIndex == 7) {
                             $(this).attr('data-name', 'status');
                             $(this).attr('class', 'status');
                             $(this).attr('data-type', 'select');
@@ -642,7 +642,6 @@
                         <th width="6%">ID</th>
                         <th width="10%">Role Group</th>
                         <th width="10%">First name</th>
-                        <th width="10%">Agent Code</th>
                         <th width="10%">User name</th>
                         <th width="10%">Password</th>
                         <th width="10%">Mobile</th>

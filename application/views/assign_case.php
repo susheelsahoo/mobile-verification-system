@@ -70,7 +70,6 @@
                         $('.s_remarks').html("<b>Remarks:</b> " + data.remarks);
                         $('.s_bank_name').html("<b>Bank Name:</b> " + data.bank_name);
                         $('.s_agent_code').html("<b>Agent Code:</b> " + data.code);
-                        $('.s_agent_name').html("<b>Agent Name:</b> " + data.agent_name);
                         $('.s_residence_address').html("<b>Address:</b> " + data.business_address);
                         $('.s_amount').html("<b>Amount:</b> " + data.amount);
                         $('.s_vehicle').html("<b>Vehicle:</b> " + data.vehicle);
@@ -1071,7 +1070,7 @@
                                     <div class="row">
                                         <div class="col-sm-12">
 
-                                            <h4 class="s_created_at">
+                                            <h4 class="s_updated_at">
                                             </h4>
 
                                         </div>
@@ -1300,10 +1299,6 @@
 
                                                 <div class="col-sm-6">
                                                     <h4 class="s_agent_code">
-                                                    </h4>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <h4 class="s_agent_name">
                                                     </h4>
                                                 </div>
                                             </div>
