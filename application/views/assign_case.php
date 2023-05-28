@@ -60,7 +60,7 @@
                         $('.s_channel').html("<b>Source Channel:</b> " + data.source_channel);
                         $('.s_fi_flag').html("<b>FI Flag:</b> " + data.fi_flag);
                         $('.s_bus_name').html("<b>Business Name:</b> " + data.business_name);
-                      
+
                         $('.s_station').html("<b>Station:</b> " + data.station);
                         $('.s_tat_start').html("<b>TAT start:</b> " + data.tat_start);
                         $('.s_tat_end').html("<b>TAT end:</b> " + data.tat_end);
@@ -70,6 +70,7 @@
                         $('.s_remarks').html("<b>Remarks:</b> " + data.remarks);
                         $('.s_bank_name').html("<b>Bank Name:</b> " + data.bank_name);
                         $('.s_agent_code').html("<b>Agent Code:</b> " + data.code);
+                        $('.s_agent_name').html("<b>Agent Name:</b> " + data.agent_name);
                         $('.s_residence_address').html("<b>Address:</b> " + data.business_address);
                         $('.s_amount').html("<b>Amount:</b> " + data.amount);
                         $('.s_vehicle').html("<b>Vehicle:</b> " + data.vehicle);
@@ -184,7 +185,7 @@
                         $('.bv_amt').html("<b>Loan Amt:</b> " + data.amount);
                         $('.bv_company_name').html("<b>Company Name:</b> " + data.bv_company_name);
                         $('.bv_person_met').html("<b>Person Met:</b> " + data.bv_person_met);
-                        
+
                         $('.bv_tcp2_name').html("<b>TCP 1 Name:</b> " + data.tcp1_name);
                         $('.bv_tcp1_name').html("<b>TCP 2 Name:</b> " + data.tcp2_name);
                         $('.bv_bank').html("<b>Bank Name:</b> " + data.bank_name);
@@ -1012,7 +1013,7 @@
                             <div class="col-sm-12 ">
                                 <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
 
-                                <div class="row">
+                                    <div class="row">
                                         <div class="col-sm-12">
                                             <div class="row pt-12 ">
                                                 <div class="col-sm-12">
@@ -1037,7 +1038,7 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="row pt-12 ">
-                                                 <div class="col-sm-6">
+                                                <div class="col-sm-6">
                                                     <h4 class="s_product_name">
                                                     </h4>
                                                 </div>
@@ -1070,7 +1071,7 @@
                                     <div class="row">
                                         <div class="col-sm-12">
 
-                                            <h4 class="s_updated_at">
+                                            <h4 class="s_created_at">
                                             </h4>
 
                                         </div>
@@ -1142,7 +1143,7 @@
                                     </div>
 
 
-                                    
+
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="row pt-12 ">
@@ -1164,10 +1165,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                   
 
-                                   
-                           
+
+
+
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="row pt-12 ">
@@ -1212,7 +1213,7 @@
                                         </div>
                                     </div>
 
-                                    
+
 
                                     <div class="row">
                                         <div class="col-sm-12">
@@ -1221,7 +1222,7 @@
                                                     <h4 class="s_geo_limit">
                                                     </h4>
                                                 </div>
-                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -1233,7 +1234,7 @@
                                                     <h4 class="s_channel">
                                                     </h4>
                                                 </div>
-                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -1267,7 +1268,7 @@
                                                     <h4 class="s_remarks">
                                                     </h4>
                                                 </div>
-                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -1275,7 +1276,7 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="row pt-12 ">
-                                            <div class="col-sm-6">
+                                                <div class="col-sm-6">
                                                     <h4 class="s_dob">
                                                     </h4>
                                                 </div>
@@ -1296,9 +1297,13 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="row pt-6 ">
-                                                
+
                                                 <div class="col-sm-6">
                                                     <h4 class="s_agent_code">
+                                                    </h4>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <h4 class="s_agent_name">
                                                     </h4>
                                                 </div>
                                             </div>
@@ -1308,7 +1313,7 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="row pt-6 ">
-                                                
+
                                                 <div class="col-sm-6">
                                                     <h4 class="s_created_by">
                                                     </h4>
@@ -1318,14 +1323,14 @@
                                     </div>
 
 
-                                    
 
 
 
-                                    
 
 
-                                    
+
+
+
 
 
                                 </div>
@@ -1785,7 +1790,7 @@
                                 <input type="text" class="form-control" id="p_product_name" placeholder="Product name here" name="product_name">
                             </div>
                         </div>
-                       
+
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="rv_fi_status" class="h6">FI Type</label>
@@ -2084,11 +2089,11 @@
                                     <div class="col-sm-12">
                                         <div class="row pt-6 ">
                                             <div class="col-sm-6">
-                                                <h4 class="s_application_id" style="color:blue;" >
+                                                <h4 class="s_application_id" style="color:blue;">
                                                 </h4>
 
                                             </div>
-                                                <!-- <div class="col-sm-6">
+                                            <!-- <div class="col-sm-6">
                                                     <h4 class="s_date">
                                                     </h4>
                                                 </div> -->
@@ -2141,7 +2146,7 @@
                                     </div>
                                 </div>
 
-                                
+
 
 
                                 <div class="row">
@@ -2205,7 +2210,7 @@
                                     </div>
                                 </div>
 
-                               
+
                                 <!-- <div class="row">
                                     <div class="col-sm-12">
                                         <div class="row pt-6 ">
@@ -2222,7 +2227,7 @@
                                     </div>
                                 </div> -->
 
-                                
+
 
                                 <hr>
 
@@ -2372,7 +2377,7 @@
                                         </div>
                                     </div>
 
-                                  
+
 
                                     <div class="row">
                                         <div class="col-sm-12">
@@ -2421,55 +2426,55 @@
                                     <hr>
 
                                     <div class="case_rv_case_img"></div>
-                                  
 
-                                    
+
+
 
                                     <h3 style="color:blue;">Location</h3>
 
-<div class="row">
-    <div class="col-sm-12">
-        <div class="row pt-6 ">
-            <div class="col-sm-6">
-                <h4 class="r_lat">
-                </h4>
-            </div>
-            <div class="col-sm-6">
-                <h4 class="r_long">
-                </h4>
-            </div>
-        </div>
-    </div>
-</div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row pt-6 ">
+                                                <div class="col-sm-6">
+                                                    <h4 class="r_lat">
+                                                    </h4>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <h4 class="r_long">
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-<div class="row">
-    <div class="col-sm-12">
-        <div class="row pt-6 ">
-            <div class="col-sm-6">
-                <h4 class="r_pincode">
-                </h4>
-            </div>
-            <div class="col-sm-6">
-                <h4 class="r_location_add">
-                </h4>
-            </div>
-        </div>
-    </div>
-</div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row pt-6 ">
+                                                <div class="col-sm-6">
+                                                    <h4 class="r_pincode">
+                                                    </h4>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <h4 class="r_location_add">
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-<div class="row">
-    <div class="col-sm-12">
-        <div class="row pt-6 ">
-            <div class="col-sm-6">
-                <h4 class="r_agent_code">
-                </h4>
-            </div>
-            
-        </div>
-    </div>
-</div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row pt-6 ">
+                                                <div class="col-sm-6">
+                                                    <h4 class="r_agent_code">
+                                                    </h4>
+                                                </div>
 
-<div class="row">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
                                         <div class="col-sm-12">
                                             <div class="row pt-6 ">
                                                 <div class="col-sm-6">
@@ -2485,7 +2490,7 @@
                                     </div>
 
 
-<hr>
+                                    <hr>
 
                                 </div>
                                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
@@ -2521,7 +2526,7 @@
                                 <h3 style="color:blue;">BUSINESS VERIFICATION REPORT
                                     (Strictly Private & Confidential)</h3>
 
-                                    <div class="row">
+                                <div class="row">
                                     <div class="col-sm-12">
                                         <div class="row pt-12 ">
                                             <div class="col-sm-12">
@@ -2531,7 +2536,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                    
+
 
                                 <div class="row">
                                     <div class="col-sm-12">
@@ -2668,7 +2673,7 @@
                                 </div> -->
                                 <hr>
 
-             
+
 
                                 <h3 style="color:blue;">Personal details</h3>
                                 <div class="row">
@@ -2702,7 +2707,7 @@
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="row pt-12 ">
-                                                   
+
                                                     <div class="col-sm-12">
                                                         <h4 class="bv_applicant_designation">
                                                         </h4>
@@ -2831,38 +2836,38 @@
                                                             <hr>
 
                                                             <h3 style="color:blue;">TCP Information</h3>
-                                                                        <div class="row">
-                                                                            <div class="col-sm-12">
-                                                                                <div class="row pt-6">
-                                                                                    
-                                                                                    <div class="col-sm-6">
-                                                                                        <h4 class="bv_tcp1_name">
-                                                                                        </h4>
-                                                                                    </div>
-                                                                                    <div class="col-sm-6">
-                                                                                        <h4 class="bv_tcp1">
-                                                                                        </h4>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-12">
+                                                                    <div class="row pt-6">
 
-                                                                        <div class="row">
-                                                                            <div class="col-sm-12">
-                                                                                <div class="row pt-6">
-                                                                                   
-                                                                                    <div class="col-sm-6">
-                                                                                        <h4 class="bv_tcp2_name">
-                                                                                        </h4>
-                                                                                    </div>
-                                                                                    <div class="col-sm-6">
-                                                                                        <h4 class="bv_tcp2">
-                                                                                        </h4>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
+                                                                        <div class="col-sm-6">
+                                                                            <h4 class="bv_tcp1_name">
+                                                                            </h4>
                                                                         </div>
-                                                                        <hr>
+                                                                        <div class="col-sm-6">
+                                                                            <h4 class="bv_tcp1">
+                                                                            </h4>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-sm-12">
+                                                                    <div class="row pt-6">
+
+                                                                        <div class="col-sm-6">
+                                                                            <h4 class="bv_tcp2_name">
+                                                                            </h4>
+                                                                        </div>
+                                                                        <div class="col-sm-6">
+                                                                            <h4 class="bv_tcp2">
+                                                                            </h4>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <hr>
                                                             <h3 style="color:blue;">Status</h3>
                                                             <div class="row">
                                                                 <div class="col-sm-12">
@@ -2872,9 +2877,9 @@
                                                                             </h4>
                                                                         </div>
                                                                         <div class="col-sm-6">
-                                                                                        <h4 class="bv_status">
-                                                                                        </h4>
-                                                                                    </div>
+                                                                            <h4 class="bv_status">
+                                                                            </h4>
+                                                                        </div>
 
                                                                     </div>
                                                                 </div>
@@ -2883,23 +2888,23 @@
                                                                 <hr>
                                                                 <h3 style="color:blue;">Remark</h3>
                                                                 <div class="row">
-                                                                            <div class="col-sm-12">
-                                                                                <div class="row pt-6 ">
-                                                                                    
-                                                                                    <div class="col-sm-6">
-                                                                                        <h4 class="bv_remarks">
-                                                                                        </h4>
-                                                                                    </div>
+                                                                    <div class="col-sm-12">
+                                                                        <div class="row pt-6 ">
 
-                                                                                   
-                                                                                </div>
+                                                                            <div class="col-sm-6">
+                                                                                <h4 class="bv_remarks">
+                                                                                </h4>
                                                                             </div>
+
+
                                                                         </div>
+                                                                    </div>
+                                                                </div>
 
 
 
 
-                                                                        <!-- <div class="row">
+                                                                <!-- <div class="row">
                                                                             <div class="col-sm-12">
                                                                                 <div class="row pt-6 ">
                                                                                     <div class="col-sm-6">
@@ -2913,17 +2918,17 @@
                                                                                 </div>
                                                                             </div>
                                                                         </div> -->
-                                                                        <hr>
-                                                                      
+                                                                <hr>
 
 
-                                                                        <!-- <h3 style="color:blue;">Other Information</h3> -->
-                                                                     
 
-                                                                    
+                                                                <!-- <h3 style="color:blue;">Other Information</h3> -->
 
-                                                                        <div class="case_bv_case_img"></div>
-                                                                        <!-- <h3 style="color:blue;">Picture's Taken</h3>
+
+
+
+                                                                <div class="case_bv_case_img"></div>
+                                                                <!-- <h3 style="color:blue;">Picture's Taken</h3>
                                                                         <div class="row">
                                                                             <div class="col-sm-12">
                                                                                 <div class="row pt-4">
@@ -2974,7 +2979,7 @@
                                                                         </div>
                                                                         <br> -->
 
-                                                                        
+
                                                                 <h3 style="color:blue;">Location</h3>
                                                                 <div class="row">
                                                                     <div class="col-sm-12">
@@ -3010,30 +3015,30 @@
                                                                     </div>
 
                                                                     <div class="row">
-                                                                            <div class="col-sm-12">
-                                                                                <div class="row pt-12">
-                                                                                    <div class="col-sm-6">
-                                                                                        <h4 class="bv_agent">
-                                                                                        </h4>
-                                                                                    </div>
-                                                                                    
+                                                                        <div class="col-sm-12">
+                                                                            <div class="row pt-12">
+                                                                                <div class="col-sm-6">
+                                                                                    <h4 class="bv_agent">
+                                                                                    </h4>
                                                                                 </div>
+
                                                                             </div>
                                                                         </div>
+                                                                    </div>
 
-                                                                        <div class="row">
-                                                                            <div class="col-sm-12">
-                                                                                <div class="row pt-6 ">
-                                                                                    <div class="col-sm-6">
-                                                                                        <h4 class="bv_dt_of_cpv">
-                                                                                        </h4>
-                                                                                    </div>
-                                                                                   
-
-                                                                                   
+                                                                    <div class="row">
+                                                                        <div class="col-sm-12">
+                                                                            <div class="row pt-6 ">
+                                                                                <div class="col-sm-6">
+                                                                                    <h4 class="bv_dt_of_cpv">
+                                                                                    </h4>
                                                                                 </div>
+
+
+
                                                                             </div>
                                                                         </div>
+                                                                    </div>
 
                                                                 </div>
                                                                 <div class="model-footer">

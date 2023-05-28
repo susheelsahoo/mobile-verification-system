@@ -129,7 +129,7 @@ class Upload_case_controller extends CI_Controller
 									'name' 					=> $row['1'],
 									'fi_type' 				=> $fi_type,
 									'product' 				=> $row['3'],
-									'address' 				=> $address,
+									'business_add' 			=> $address,
 									'business_name' 		=> $name,
 									'city' 					=> $city,
 									'pin_code'				=> $pincode,

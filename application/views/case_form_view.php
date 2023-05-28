@@ -524,6 +524,14 @@
                 <input class="form-control" type="text" id="guarantee_name" name="guarantee_name" placeholder="Enter your Guarantee Name">
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-3">
+                <label for="mobile">Mobile</label>
+            </div>
+            <div class="col-md-9">
+                <input class="form-control" type="number" id="mobile" name="mobile" placeholder="Enter Mobile Number">
+            </div>
+        </div>
         <div class="row hide" id="BV_agent">
             <div class="col-md-3">
                 <label for="code"> BV Agent <span class="text-danger"> *</span></label>
@@ -591,7 +599,7 @@
 
         <div class="row">
             <div class="col-md-3">
-                <label for="remarks">Remarks</label>
+                <label for="remarks">Special Instruction</label>
             </div>
             <div class="col-md-9">
                 <textarea class="form-control" name="remarks" id="remarks" placeholder="Remarks" type="text"></textarea>

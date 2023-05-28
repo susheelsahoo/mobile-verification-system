@@ -84,6 +84,7 @@ class Case_form extends CI_Controller
 					$varification['dob'] 				= $this->input->post('dob');
 					$varification['amount'] 			= $this->input->post('amount');
 					$varification['vehicle'] 			= $this->input->post('vehicle');
+					$varification['mobile'] 			= $this->input->post('mobile');
 					$varification['co_applicant'] 		= $this->input->post('co_applicant');
 					$varification['guarantee_name'] 	= $this->input->post('guarantee_name');
 					$varification['geo_limit'] 			= $this->input->post('geo_limit');

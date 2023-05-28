@@ -120,7 +120,7 @@
                         $('.s_mobile').html("<b>Mobile:</b> " + data.mobile);
                         $('.bv_lat').html("<b>Latitude:</b> " + data.bv_lat);
                         $('.bv_long').html("<b>Longitude:</b> " + data.bv_long);
-                        $('.bv_pincode').html("<b>Pincode:</b> " + data.bv_pincode);
+                        $('.bv_pincode').html("<b>Pincode:</b> " + data.pin_code);
                         $('.bv_location_add').html("<b>location:</b> " + data.bv_location_add);
                         $('.remarks').html("<b>Remarks:</b> " + data.remarks);
                         $(".mini_bv_case_img").html('');
@@ -157,7 +157,7 @@
                         $('.s_reference_no').html("<b>Reference no :</b> " + data.reference_no);
                         $('.s_name').html("<b>Name:</b> " + data.name);
                         $('.s_agent_code').html("<b>Agent code:</b> " + data.code);
-                        $('.s_agent_name').html("<b>Agent code:</b> " + data.agent_name);
+                        $('.s_agent_name').html("<b>Agent Name:</b> " + data.agent_name);
                         $('.s_address').html("<b>Address:</b> " + data.business_add);
                         $('.s_business_name').html("<b>Business Name:</b> " + data.business_name);
                         $('.s_business_name').html("<b>Business Name:</b> " + data.business_name);
@@ -168,7 +168,7 @@
                         $('.s_mobile').html("<b>Mobile:</b> " + data.mobile);
                         $('.rv_lat').html("<b>Latitude:</b> " + data.rv_lat);
                         $('.rv_long').html("<b>Longitude:</b> " + data.rv_long);
-                        $('.rv_pincode').html("<b>Pincode:</b> " + data.rv_pincode);
+                        $('.rv_pincode').html("<b>Pincode:</b> " + data.pin_code);
                         $('.rv_location_add').html("<b>location:</b> " + data.rv_location_add);
                         $('.remarks').html("<b>Remarks:</b> " + data.remarks);
                         $('.rv_city').html("<b>City:</b> " + data.city);

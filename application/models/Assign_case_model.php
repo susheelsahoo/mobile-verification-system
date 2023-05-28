@@ -75,12 +75,22 @@ class Assign_case_model extends CI_Model
 	function fetch_single_assignee($user_id)
 	{
 		try {
-			$this->db->where("id", $user_id);
-			$query = $this->db->get('upload_file');
+			$this->db->select("uf.*, l.first_name as agent_name");
+			$this->db->where("uf.id", $user_id);
+			$this->db->join('login l', 'l.employee_unique_id = uf.code', 'left');
+			$query = $this->db->get('upload_file uf');
 			return $query->result();
 		} catch (Exception $ex) {
 			throw $ex;
 		}
+
+		// try {
+		// 	$this->db->where("id", $user_id);
+		// 	$query = $this->db->get('upload_file');
+		// 	return $query->result();
+		// } catch (Exception $ex) {
+		// 	throw $ex;
+		// }
 	}
 
 

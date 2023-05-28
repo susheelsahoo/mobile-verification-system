@@ -131,7 +131,9 @@ class View_mini_case_controller extends CI_Controller
             $output = array();
             $this->load->model("View_mini_case_model");
             $data = $this->View_mini_case_model->fetch_single_mini_case($_POST["user_id"]);
-
+            // echo "<pre>";
+            // print_r($data);
+            // die;
             foreach ($data as $row) {
                 $output['bank']             = $row->bank;
                 $output['product']          = $row->product;
@@ -141,7 +143,7 @@ class View_mini_case_controller extends CI_Controller
                 $output['code']             = $row->code;
                 $output['agent_name']       = $row->agent_name;
                 $output['city']             = $row->city;
-                $output['created_at']       = $row->created_at;
+                $output['created_at']       = readableDateIST($row->created_at);
                 $output['tat_start']        = readableDateIST($row->tat_start);
                 $output['tat_end']          = readableDateIST($row->tat_end);
                 $output['business_name']    = $row->business_name;
@@ -150,7 +152,7 @@ class View_mini_case_controller extends CI_Controller
                 $output['bv_long']          = $row->bv_long;
                 // $output['bv_pincode']       = $row->pin_code;
                 // $output['bv_location_add']  = $row->city;
-                $output['bv_pincode']       = $row->bv_pincode;
+                $output['pin_code']       = $row->pin_code;
                 $output['bv_location_add']  = $row->bv_location_add;
                 $output['remarks']       = $row->remarks;
                 $output['city']       = $row->city;

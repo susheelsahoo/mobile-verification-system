@@ -247,7 +247,7 @@ class Assign_case_controller extends CI_Controller
                 $output['residence_address'] = $row->residence_address;
                 $output['office_address'] = $row->office_address;
                 $output['permanent_address'] = $row->permanent_address;
-                $output['dob'] = $row->dob;
+                $output['dob']          = formatDate($row->dob, 'd-m-Y');
                 $output['fi_date'] = $row->fi_date;
                 $output['source_channel'] = $row->source_channel;
                 $output['customer_name'] = $row->customer_name;
@@ -257,8 +257,7 @@ class Assign_case_controller extends CI_Controller
                 $output['designation'] = $row->designation;
                 $output['loan_amount'] = $row->loan_amount;
                 $output['station'] = $row->station;
-                $output['tat_start'] = $row->tat_start;
-                $output['tat_end'] = $row->tat_end;
+
                 $output['business_name'] = $row->business_name;
                 $output['assigned_to'] = $row->assigned_to;
                 $output['remarks'] = $row->remarks;
@@ -267,15 +266,18 @@ class Assign_case_controller extends CI_Controller
                 $output['city'] = $row->city;
                 $output['status'] = $row->status;
                 $output['code'] = $row->code;
+                $output['agent_name'] = $row->agent_name;
                 $output['amount'] = $row->amount;
                 $output['vehicle'] = $row->vehicle;
                 $output['co_applicant'] = $row->co_applicant;
                 $output['guarantee_name'] = $row->guarantee_name;
                 $output['single_agent'] = $row->single_agent;
                 $output['geo_limit'] = $row->geo_limit;
-
-                $output['created_at'] = $row->created_at;
-                $output['updated_at'] = $row->updated_at;
+                $output['dob']          = formatDate($row->dob, 'd-m-Y');
+                $output['tat_start']    = readableDateIST($row->tat_start);
+                $output['tat_end']      = readableDateIST($row->tat_end);
+                $output['created_at']   = readableDateIST($row->created_at);
+                $output['updated_at']   = readableDateIST($row->updated_at);
             }
             echo json_encode($output);
         } catch (Exception $ex) {
@@ -296,19 +298,21 @@ class Assign_case_controller extends CI_Controller
                 $output['customer_name'] = $row->customer_name;
                 $output['created_at'] = $row->created_at;
                 $output['fi_date'] = $row->fi_date;
-                $output['tat_start'] = $row->tat_start;
+
                 $output['city'] = $row->city;
                 $output['pincode'] = $row->pincode;
                 $output['business_address'] = $row->business_address;
-                $output['tat_end'] = $row->tat_end;
+                $output['tat_start'] = readableDateIST($row->tat_start);
+                $output['tat_end'] = readableDateIST($row->tat_end);
                 $output['amount'] = $row->amount;
                 $output['fi_to_be_conducted'] = $row->fi_to_be_conducted;
                 $output['fi_time'] = $row->fi_time;
                 $output['bank_name'] = $row->bank_name;
-                $output['code'] = $row->code;
-                $output['product_name'] = $row->product_name;
-                $output['dob'] = $row->dob;
-                $output['fi_flag'] = $row->fi_flag;
+                $output['code']             = $row->code;
+                $output['agent_name']       = $row->agent_name;
+                $output['product_name']     = $row->product_name;
+                $output['dob']              = formatDate($row->dob, 'd-m-Y');
+                $output['fi_flag']          = $row->fi_flag;
 
                 $output['geo_limit'] = $row->geo_limit;
 
@@ -382,7 +386,7 @@ class Assign_case_controller extends CI_Controller
                 } else {
                     $output['rv_image4'] = '<input type="hidden" name="hidden_user_image" value="" />';
                 }
-                
+
                 if (!empty($row->rv_image5)) {
                     $replace_space5_rv = str_replace(' ', '+', $temp_rv_image5);
                     $output['rv_image5'] = '<img class="rv_image5" src="' . $replace_space5_rv . '" height="250" width="250">';
@@ -396,7 +400,7 @@ class Assign_case_controller extends CI_Controller
                 } else {
                     $output['rv_image6'] = '<input type="hidden" name="hidden_user_image" value="" />';
                 }
-                
+
                 if (!empty($row->rv_image7)) {
                     $replace_space7_rv = str_replace(' ', '+', $temp_rv_image7);
                     $output['rv_image7'] = '<img class="rv_image7" src="' . $replace_space7_rv . '" height="250" width="250">';
@@ -417,8 +421,6 @@ class Assign_case_controller extends CI_Controller
                 } else {
                     $output['rv_image9'] = '<input type="hidden" name="hidden_user_image" value="" />';
                 }
-                
-
             }
             echo json_encode($output);
         } catch (Exception $ex) {
@@ -454,7 +456,7 @@ class Assign_case_controller extends CI_Controller
                 $output['tat_end'] = $row->tat_end;
                 $output['business_name'] = $row->business_name;
                 $output['created_at'] = $row->created_at;
-                $output['dob'] = $row->dob;
+                $output['dob']          = formatDate($row->dob, 'd-m-Y');
                 $output['fi_time'] = $row->fi_time;
                 $output['fi_date'] = $row->fi_date;
                 $output['bv_working_since'] = $row->bv_working_since;
@@ -510,7 +512,7 @@ class Assign_case_controller extends CI_Controller
                 $temp_bv_image9 = $row->bv_image9;
 
 
-               
+
 
                 if (!empty($row->bv_image1)) {
                     $replace_space = str_replace(' ', '+', $temp_bv_image1);
@@ -573,7 +575,6 @@ class Assign_case_controller extends CI_Controller
                 } else {
                     $output['bv_image9'] = '<input type="hidden" name="hidden_user_image" value="" />';
                 }
-               
             }
             echo json_encode($output);
         } catch (Exception $ex) {
@@ -636,7 +637,7 @@ class Assign_case_controller extends CI_Controller
                 $output['id'] = $row->id;
                 $output['bank_name'] = $row->bank_name;
                 $output['product_name'] = $row->product_name;
-               
+
                 $output['rv_fi_status'] = $row->rv_fi_status;
                 $output['rv_loan_amt'] = $row->rv_loan_amt;
                 $output['rv_confirm_address'] = $row->rv_confirm_address;
@@ -957,7 +958,7 @@ class Assign_case_controller extends CI_Controller
     //     }
     // }
 
-    
+
     function fetch_single_case()
     {
         try {
@@ -982,7 +983,7 @@ class Assign_case_controller extends CI_Controller
                 $output['fi_flag'] = $row->fi_flag;
                 $output['tat_start'] = $row->tat_start;
                 $output['tat_end'] = $row->tat_end;
-                $output['dob'] = $row->dob;
+                $output['dob']          = formatDate($row->dob, 'd-m-Y');
                 $output['pincode'] = $row->pincode;
                 $output['permanent_address'] = $row->permanent_address;
                 $output['remarks'] = $row->remarks;
@@ -1046,7 +1047,7 @@ class Assign_case_controller extends CI_Controller
                     'permanent_address' => $this->input->post('permanent_address'),
                     'pincode' => $this->input->post('pincode'),
                     'fi_intiation_comments' => $this->input->post('fi_intiation_comments'),
-                   
+
                     'designation' => $this->input->post('designation'),
                     'remarks' => $this->input->post('remarks'),
                     'amount' => $this->input->post('amount'),
@@ -1083,7 +1084,7 @@ class Assign_case_controller extends CI_Controller
         }
     }
 
-    
+
 
 
     public function update_bv_validation()
