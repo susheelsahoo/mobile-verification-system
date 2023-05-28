@@ -561,8 +561,28 @@ public function insertrvQuickCases()
             $rv_interior_premises = $this->input->post('rv_interior_premises');
             $rv_cross_verified_info = $this->input->post('rv_cross_verified_info');
             $rv_vehicle_details = $this->input->post('rv_vehicle_details');
-            $rv_neighbour_check1 = $this->input->post('rv_neighbour_check1');
-            $rv_neighbour_check2 = $this->input->post('rv_neighbour_check2');
+
+            $neighbour_name1 = $this->input->post('neighbour_name1');
+            $neighbour_name2 = $this->input->post('neighbour_name2');
+            $neighbour_house_no_1 = $this->input->post('neighbour_house_no_1');
+            $neighbour_house_no_2 = $this->input->post('neighbour_house_no_2');
+            $neighbour_feedback1 = $this->input->post('neighbour_feedback1');
+            $neighbour_feedback2 = $this->input->post('neighbour_feedback2');
+            $neighbour1_neg_feedback = $this->input->post('neighbour1_neg_feedback');
+            $neighbour2_neg_feedback = $this->input->post('neighbour2_neg_feedback');
+            $neighbour_contact1 = $this->input->post('neighbour_contact1');
+            $neighbour_contact2 = $this->input->post('neighbour_contact2');
+            
+            $consolidated_remark = $this->input->post('consolidated_remark');
+            $res_proof_number = $this->input->post('res_proof_number');
+            
+            $how_much_land = $this->input->post('how_much_land');
+            $rv_vehicle_type = $this->input->post('rv_vehicle_type');
+            $rv_loan_existing = $this->input->post('rv_loan_existing');
+            $rv_loan_bankname = $this->input->post('rv_loan_bankname');
+            $rv_loan_emi = $this->input->post('rv_loan_emi');
+          
+
             $rv_cpv_done_by = $this->input->post('rv_cpv_done_by');
             $rv_visit_date = $this->input->post('rv_visit_date');
             $rv_remarks = $this->input->post('rv_remarks');
@@ -611,8 +631,22 @@ public function insertrvQuickCases()
                     'rv_interior_premises' => $rv_interior_premises,
                     'rv_cross_verified_info' => $rv_cross_verified_info,
                     'rv_vehicle_details' => $rv_vehicle_details,
-                    'rv_neighbour_check1' => $rv_neighbour_check1,
-                    'rv_neighbour_check2' => $rv_neighbour_check2,
+                    'neighbour_name1' => $neighbour_name1,
+                    'neighbour_name2' => $neighbour_name2,
+                    'neighbour_feedback1' => $neighbour_feedback1,
+                    'neighbour_feedback2' => $neighbour_feedback2,
+                    'neighbour1_neg_feedback' => $neighbour1_neg_feedback,
+                    'neighbour2_neg_feedback' => $neighbour2_neg_feedback,
+                    'neighbour_contact1' => $neighbour_contact1,
+                    'neighbour_contact2' => $neighbour_contact2,
+                   
+                    'consolidated_remark' => $consolidated_remark,
+                    'res_proof_number' => $res_proof_number,
+                    'how_much_land' => $how_much_land,
+                    'rv_vehicle_type' => $rv_vehicle_type,
+                    'rv_loan_existing' => $rv_loan_existing,
+                    'rv_loan_bankname' => $rv_loan_bankname,
+                    'rv_loan_emi' => $rv_loan_emi,
                     'rv_cpv_done_by' => $rv_cpv_done_by,
                     'rv_visit_date' => $rv_visit_date,
                     'rv_remarks' => $rv_remarks,

@@ -306,7 +306,18 @@
   background-color: #1e90ff;
 } 
 
+#agentcheckboxes {
+  display: none;
+  border: 1px #dadada solid;
+}
 
+#agentcheckboxes label {
+  display: block;
+}
+
+#agentcheckboxes label:hover {
+  background-color: #1e90ff;
+} 
     </style>
 
     <div class="container">
@@ -351,7 +362,7 @@
    
      <div class="container">
         <div class="row">
-            <form method="post"  id="filterform"  action="<?= base_url() ?>Reassign_mini_case_controller/downloadReport">
+            <form method="post"  id="filterform"  action="<?= base_url() ?>Billing_quick_controller/downloadReport">
             <div class="input-daterange">
                 <div class="col-md-3">
                     <!-- <label for="start">From date:</label> -->
@@ -362,7 +373,6 @@
                     <!-- <label for="start">To date:</label> -->
                     <input type="date" name="to_date" id="to_date" class="form-control" placeholder="TO DATE">
                 </div>
-
                 <div class="col-md-3">
                 <div class="multiselect">
                 <div class="selectBox" onclick="showCheckboxes('Bankname')">
@@ -402,9 +412,29 @@
               </div>
                </div>
                 
-
+                
+                
+                 <div class="col-md-3">
+                <div class="multiselect">
+                <div class="selectBox" onclick="showCheckboxes('Agent')">
+                  <select>
+                    <option>Select Agent</option>
+                  </select>
+                  <div class="overSelect"></div>
+                </div>
+                <div id="agentcheckboxes" name="checkboxes">
+                   <label for="one"> <input type="checkbox" id="select_allagent">Check All</label>
+                    <?php $this->val =$this->db->query("Select * from login "); 
+                    foreach($this->val->result_array() as $row){ ?>
+                  <label for="one">
+                      <input type="checkbox" id="one" name="agent[]" value="<?php echo $row['employee_unique_id']?>"/><?php echo $row['first_name']?></label>
+                    <?php } ?>
+                </div>
+              </div>
+               </div>
+                
+                
                 <div class="col-md-3">
-                <!-- <div class="form-control"> -->
                 <div class="multiselect">
                 <div class="selectBox" onclick="showCheckboxes('FItype')">
                   <select>
@@ -415,13 +445,13 @@
                 <div id="fitypecheckboxes" name="checkboxes">
                    <label for="one"> <input type="checkbox" id="select_allfitype">Check All</label> 
                   <label for="one">
-                      <input type="checkbox" id="one" name="FItype[]" value="RV"/> RV</label>
-                    <label for="one">   <input type="checkbox" id="one" name="FItype[]" value="BV"/> BV</label>
+                      <input type="checkbox" id="one" name="FItype[]" value="RV"/>RV</label>
+                    <label for="one">   <input type="checkbox" id="one" name="FItype[]" value="BV"/>BV</label>
                    
                 </div>
               </div>
-                    <!-- </div> -->
                </div>
+                
                 
                 
                 
@@ -434,38 +464,18 @@
                   <div class="overSelect"></div>
                 </div>
                 <div id="downloadfieldcheckboxes" name="checkboxes">
-                    <label for="one"> <input type="checkbox" id="select_alldownload"> Check All</label>
-                  <label for="one">
-                    <input type="checkbox" id="one" name="download[]" value="reference no"/>  Reference no</label>
+                    <label for="one"> <input type="checkbox" id="select_alldownload">Check All</label>
+                  <!--<label for="one">-->
+                     
+                  <!--  <input type="checkbox" id="one" name="download[]" value="residence_address"/>residence_address</label>-->
                     <label for="one">   
-                    <input type="checkbox" id="one" name="download[]" value="residence_address"/> Residence address</label>
+                    <input type="checkbox" id="one" name="download[]" value="city"/>city </label>
                     <label for="one">   
-                    <input type="checkbox" id="one" name="download[]" value="city"/> City </label>
+                    <input type="checkbox" id="one" name="download[]" value="pincode"/>res pincode</label>
                     <label for="one">   
-                    <input type="checkbox" id="one" name="download[]" value="pincode"/> Residence pincode</label>
+                    <input type="checkbox" id="one" name="download[]" value="business_name"/>business_name</label>
                     <label for="one">   
-                    <input type="checkbox" id="one" name="download[]" value="business_name"/> Business name</label>
-                    <label for="one">   
-                    <input type="checkbox" id="one" name="download[]" value="business_address"/> Business Address</label>
-                    <label for="one">   
-                    <input type="checkbox" id="one" name="download[]" value="business_address"/> Residence pincode</label>
-                    <label for="one">   
-                    <input type="checkbox" id="one" name="download[]" value="business_address"/> Source channel</label>
-                    <label for="one">   
-                    <input type="checkbox" id="one" name="download[]" value="business_address"/> Amount</label>
-                    <label for="one">   
-                    <input type="checkbox" id="one" name="download[]" value="business_address"/> fi status</label>
-                    <label for="one">   
-                    <input type="checkbox" id="one" name="download[]" value="business_address"/> fi status reason</label>
-                    <label for="one">   
-                    <input type="checkbox" id="one" name="download[]" value="business_address"/> RV latitude</label>
-                    <label for="one">   
-                    <input type="checkbox" id="one" name="download[]" value="business_address"/> RV longitude</label>
-                    
-                     <label for="one">   
-                    <input type="checkbox" id="one" name="download[]" value="business_address"/> BV latitude</label>
-                    <label for="one">   
-                    <input type="checkbox" id="one" name="download[]" value="business_address"/> BV longitude</label>
+                    <input type="checkbox" id="one" name="download[]" value="business_address"/>business_address</label>
                    
                     
                 </div>
@@ -508,6 +518,9 @@ function showCheckboxes(val) {
     if(val=='downloadfield'){
         var field="downloadfieldcheckboxes";
     }
+    if(val=='Agent'){
+        var field="agentcheckboxes";
+    }
         
 
     
@@ -538,5 +551,9 @@ function showCheckboxes(val) {
 
  $("#select_alldownload").click(function () {
      $("input[name='download[]']").not(this).prop('checked', this.checked);
+});
+
+ $("#select_allagent").click(function () {
+     $("input[name='agent[]']").not(this).prop('checked', this.checked);
 }); 
  </script>
