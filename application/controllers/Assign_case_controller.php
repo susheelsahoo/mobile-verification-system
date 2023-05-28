@@ -29,8 +29,6 @@ class Assign_case_controller extends CI_Controller
 
     public function assign_case_function($data)
     {
-
-
         $this->load->library('session');
         if ($this->session->userdata('user')) {
             $this->load->model("Assign_case_model");
