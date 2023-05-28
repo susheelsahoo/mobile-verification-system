@@ -7,16 +7,27 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>bootstrap/css/bootstrap.min.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/select/1.6.2/css/select.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/select/1.6.2/css/select.dataTables.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 
+    
 
     <script type="text/javascript">
         BASE_URL = "<?php echo base_url(); ?>"
     </script>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
+
+    
     <script src="https://cdn.datatables.net/select/1.6.2/js/dataTables.select.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.js"></script>
@@ -62,6 +73,10 @@
                 "processing": true,
                 "serverSide": true,
                 "order": [],
+                dom: 'Blfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ],
                 "ajax": {
                     url: "<?php echo base_url() . 'Create_user_controller/fetch_all_user'; ?>",
                     type: "POST",
@@ -71,12 +86,12 @@
                     "orderable": false
                 }],
                 "lengthMenu": [
-                    [10, 20, 50, -1],
-                    [10, 20, 50, "All"]
+                    [100, 200, 500, -1],
+                    [100, 200, 500, "All"]
                 ],
                 createdRow: function(row, data, rowIndex) {
                     $.each($('td', row), function(colIndex) {
-                        if (colIndex == 7) {
+                        if (colIndex == 8) {
                             $(this).attr('data-name', 'status');
                             $(this).attr('class', 'status');
                             $(this).attr('data-type', 'select');
@@ -147,6 +162,8 @@
                     success: function(response) {
                         // alert("User Generated Successfully!");
                         if (response.success == true) {
+                            alert("User Generated Successfully!");
+                            location.reload();
                             $('.form-group').removeClass('has-error')
                                 .removeClass('has-success');
                             $('.text-danger').remove();
@@ -570,7 +587,7 @@
             <div class="col-md-4 col-sm-6">
                 <div class="row">
                     <div id="dvTitle" class="product_name">
-                        <h3><b>Bodvid Private Limited</b></h3>
+                        <h3><b>RealBits Coders</b></h3>
                     </div>
                 </div>
             </div>
@@ -578,7 +595,7 @@
             <div class="col-md-4 col-sm-6">
                 <div class="row">
                     <div id="dvTitle" class="veri">
-                        <h3><b>Verification System yogita(1.0.0)</b></h3>
+                        <h3><b>Verification System(1.0.0)</b></h3>
                     </div>
                 </div>
             </div>
@@ -622,14 +639,14 @@
             <table id="fetch_user_data" class="table table-bordered table-striped">
                 <thead>
                     <tr class="">
-                        <th width="5%">ID</th>
+                        <th width="6%">ID</th>
                         <th width="10%">Role Group</th>
                         <th width="10%">First name</th>
-                        <th width="10%">agent_code</th>
+                        <th width="10%">Agent Code</th>
                         <th width="10%">User name</th>
                         <th width="10%">Password</th>
                         <th width="10%">Mobile</th>
-                        <th width="15%">Org Name</th>
+                        <th width="10%">Org Name</th>
                         <th width="10%">Status</th>
                         <th width="10%">Action</th>
                     </tr>

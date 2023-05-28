@@ -540,7 +540,7 @@ public function insertrvQuickCases()
             $application_id = $this->input->post('application_id');
             $fi_to_be_conducted = $this->input->post('fi_to_be_conducted');
             $rv_fi_status = $this->input->post('rv_fi_status');
-            $rv_make_model = $this->input->post('rv_make_model');
+            $rv_fi_status_reason = $this->input->post('rv_fi_status_reason');
             $rv_loan_amt = $this->input->post('rv_loan_amt');
             $rv_confirm_address = $this->input->post('rv_confirm_address');
             $rv_address_yes_no = $this->input->post('rv_address_yes_no');
@@ -561,8 +561,28 @@ public function insertrvQuickCases()
             $rv_interior_premises = $this->input->post('rv_interior_premises');
             $rv_cross_verified_info = $this->input->post('rv_cross_verified_info');
             $rv_vehicle_details = $this->input->post('rv_vehicle_details');
-            $rv_neighbour_check1 = $this->input->post('rv_neighbour_check1');
-            $rv_neighbour_check2 = $this->input->post('rv_neighbour_check2');
+
+            $neighbour_name1 = $this->input->post('neighbour_name1');
+            $neighbour_name2 = $this->input->post('neighbour_name2');
+            $neighbour_house_no_1 = $this->input->post('neighbour_house_no_1');
+            $neighbour_house_no_2 = $this->input->post('neighbour_house_no_2');
+            $neighbour_feedback1 = $this->input->post('neighbour_feedback1');
+            $neighbour_feedback2 = $this->input->post('neighbour_feedback2');
+            $neighbour1_neg_feedback = $this->input->post('neighbour1_neg_feedback');
+            $neighbour2_neg_feedback = $this->input->post('neighbour2_neg_feedback');
+            $neighbour_contact1 = $this->input->post('neighbour_contact1');
+            $neighbour_contact2 = $this->input->post('neighbour_contact2');
+            
+            $consolidated_remark = $this->input->post('consolidated_remark');
+            $res_proof_number = $this->input->post('res_proof_number');
+            
+            $how_much_land = $this->input->post('how_much_land');
+            $rv_vehicle_type = $this->input->post('rv_vehicle_type');
+            $rv_loan_existing = $this->input->post('rv_loan_existing');
+            $rv_loan_bankname = $this->input->post('rv_loan_bankname');
+            $rv_loan_emi = $this->input->post('rv_loan_emi');
+          
+
             $rv_cpv_done_by = $this->input->post('rv_cpv_done_by');
             $rv_visit_date = $this->input->post('rv_visit_date');
             $rv_remarks = $this->input->post('rv_remarks');
@@ -586,7 +606,7 @@ public function insertrvQuickCases()
 
                 $insertcase = array(
                     'rv_fi_status' => $rv_fi_status,
-                    'rv_make_model' => $rv_make_model,
+                    'rv_fi_status_reason' => $rv_fi_status_reason,
                     'rv_loan_amt' => $rv_loan_amt,
                     'rv_confirm_address' => $rv_confirm_address,
                     'rv_address_yes_no' => $rv_address_yes_no,
@@ -611,8 +631,22 @@ public function insertrvQuickCases()
                     'rv_interior_premises' => $rv_interior_premises,
                     'rv_cross_verified_info' => $rv_cross_verified_info,
                     'rv_vehicle_details' => $rv_vehicle_details,
-                    'rv_neighbour_check1' => $rv_neighbour_check1,
-                    'rv_neighbour_check2' => $rv_neighbour_check2,
+                    'neighbour_name1' => $neighbour_name1,
+                    'neighbour_name2' => $neighbour_name2,
+                    'neighbour_feedback1' => $neighbour_feedback1,
+                    'neighbour_feedback2' => $neighbour_feedback2,
+                    'neighbour1_neg_feedback' => $neighbour1_neg_feedback,
+                    'neighbour2_neg_feedback' => $neighbour2_neg_feedback,
+                    'neighbour_contact1' => $neighbour_contact1,
+                    'neighbour_contact2' => $neighbour_contact2,
+                   
+                    'consolidated_remark' => $consolidated_remark,
+                    'res_proof_number' => $res_proof_number,
+                    'how_much_land' => $how_much_land,
+                    'rv_vehicle_type' => $rv_vehicle_type,
+                    'rv_loan_existing' => $rv_loan_existing,
+                    'rv_loan_bankname' => $rv_loan_bankname,
+                    'rv_loan_emi' => $rv_loan_emi,
                     'rv_cpv_done_by' => $rv_cpv_done_by,
                     'rv_visit_date' => $rv_visit_date,
                     'rv_remarks' => $rv_remarks,
@@ -682,6 +716,10 @@ public function insertrvQuickCases()
             $bv_proof = $this->input->post('bv_proof');
             $bv_vehicle = $this->input->post('bv_vehicle');
             $bv_tcp1 = $this->input->post('bv_tcp1');
+            $bv_nature_of_job = $this->input->post('bv_nature_of_job');
+            $tcp1_name = $this->input->post('tcp1_name');
+            $tcp2_name = $this->input->post('tcp2_name');
+            
             $bv_tcp2 = $this->input->post('bv_tcp2');
             $bv_verified_name = $this->input->post('bv_verified_name');
             $bv_dt_of_cpv = $this->input->post('bv_dt_of_cpv');
@@ -724,6 +762,9 @@ public function insertrvQuickCases()
                     'bv_proof' => $bv_proof,
                     'bv_vehicle' => $bv_vehicle,
                     'bv_tcp1' => $bv_tcp1,
+                    'tcp1_name' => $tcp1_name,
+                    'tcp2_name' => $tcp2_name,
+                    'bv_nature_of_job' => $bv_nature_of_job,
                     'bv_tcp2' => $bv_tcp2,
                     'bv_verified_name' => $bv_verified_name,
                     'bv_dt_of_cpv' => $bv_dt_of_cpv,
