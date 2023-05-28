@@ -464,19 +464,30 @@
                   <div class="overSelect"></div>
                 </div>
                 <div id="downloadfieldcheckboxes" name="checkboxes">
-                    <label for="one"> <input type="checkbox" id="select_alldownload">Check All</label>
-                  <!--<label for="one">-->
-                     
-                  <!--  <input type="checkbox" id="one" name="download[]" value="residence_address"/>residence_address</label>-->
+                    <label for="one"> <input type="checkbox" id="select_alldownload"> Check All</label>
+                    <label for="one">
+                   <input type="checkbox" id="one" name="download[]" value="bank_name"/> Bank</label> 
+                   <label for="one">
+                   <input type="checkbox" id="one" name="download[]" value="customer_name"/> Applicant name</label> 
+                   <label for="one">
+                   <input type="checkbox" id="one" name="download[]" value="product_name"/> Product</label> 
+                   <label for="one">
+                   <input type="checkbox" id="one" name="download[]" value="business_address"/> Business Address</label> 
                     <label for="one">   
-                    <input type="checkbox" id="one" name="download[]" value="city"/>city </label>
+                    <input type="checkbox" id="one" name="download[]" value="city"/> City </label>
                     <label for="one">   
-                    <input type="checkbox" id="one" name="download[]" value="pincode"/>res pincode</label>
+                    <input type="checkbox" id="one" name="download[]" value="pincode"/> Res pincode</label>
                     <label for="one">   
-                    <input type="checkbox" id="one" name="download[]" value="business_name"/>business_name</label>
-                    <label for="one">   
-                    <input type="checkbox" id="one" name="download[]" value="business_address"/>business_address</label>
-                   
+                    <input type="checkbox" id="one" name="download[]" value="business_name"/> Business name</label>
+                    <label for="one">
+                   <input type="checkbox" id="one" name="download[]" value="rv_fi_status"/> RV FI Status</label> 
+                   <label for="one">
+                   <input type="checkbox" id="one" name="download[]" value="amount"/> Amount</label> 
+
+                   <label for="one">
+                   <input type="checkbox" id="one" name="download[]" value="code"/> Agent</label> 
+                    <label for="one">
+                   <input type="checkbox" id="one" name="download[]" value="source_channel"/> Source Channel</label> 
                     
                 </div>
               </div>
