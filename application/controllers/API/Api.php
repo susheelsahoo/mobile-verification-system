@@ -76,6 +76,264 @@ class Api extends CI_Controller
         }
     }
 
+    public function insertTokenid()
+    {
+        $response = array();
+        try {
+            // if ($this->input->method() == "post") {
+            $mobile = $this->input->post('mobile');
+            $token_id = $this->input->post('token_id');
+
+
+            // print_r($data);die;
+            if (!empty($mobile)) {
+
+                $inserttoken = array(
+
+                    'token_id' => $token_id,
+
+                );
+                $this->db->where('mobile', $mobile);
+                $this->db->update('login', $inserttoken);
+
+                if ($this->db->affected_rows() > 0) {
+                    $response = [
+                        'status' => "success",
+                        'message' => "token inserted successfully",
+                    ];
+                } else {
+                    $response = [
+                        'status' => "failure",
+                        'message' => "Data insertion failed",
+                    ];
+                }
+            } else {
+                $response = [
+                    'status' => "failure",
+                    'message' => "mobile number not match",
+                ];
+            }
+        } catch (Exception $ex) {
+            $response = [
+                'status' => "failed",
+                'message' => $ex->getMessage(),
+            ];
+        }
+        echo json_encode($response);
+    }
+
+    public function sendTatNotificationAlert()
+    {
+        $response = [];
+        try {
+            $data_json = [];
+            define('API_ACCESS_KEY', 'AAAAWdAq5LA:APA91bGfu2jlR0FpwGEfm-w-WeYx-fsceFV3ARRvEWMkWi96d8LxFrGGLIhnOExg6uCP7z2tn-9XlxVEheArQJoSHVQpAm9fz5XnGNbN40v4KHCj5izxBog3Apqz9HRXsZptTC7fpWzG');
+            $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
+
+            $agent_code = $this->input->post('code');
+            $sql =  'SELECT log.token_id, log.employee_unique_id, uf.id, uf.bank_name, uf.product_name, uf.application_id, TIME_FORMAT(Time(uf.tat_start),"%H:%i") as tat_start, TIME_FORMAT(Time(uf.tat_end),"%H:%i") as tat_end,	STR_TO_DATE(uf.tat_end,"%Y-%m-%d %H:%i") as str_tat_end, STR_TO_DATE((NOW() + INTERVAL 360 MINUTE),"%Y-%m-%d %H:%i") as now_datetime FROM login as log join upload_file as uf on log.employee_unique_id=uf.code where STR_TO_DATE(uf.tat_end,"%Y-%m-%d %H:%i") = STR_TO_DATE((NOW() + INTERVAL 360 MINUTE),"%Y-%m-%d %H:%i")';
+
+            $query = $this->db->query($sql);
+            $data = $query->result_array();
+
+            if ($data) {
+                foreach ($data as $key => $val) {
+                    // APP token id to whom notification send//
+                    //echo "<pre>";print_r($val);
+                    //$token='cUcmZwNHT1GuWyuTlU5iVZ:APA91bEIf52mc9SizfjBg_zKfPxic78zlJfPHou6W3-64V9gdo9zCtUvSFwJX74W-vYWzpny1cRYSWvai830iqIv4qewDi4VIxbjeU8PsNy39wpznGaeBAPnRxWMCB3SxhUE5vydXn4B';
+                    $token = $val['token_id'];
+                    // Notification msg //
+                    $notification = [
+                        'title' => 'Tat expiry main case notification',
+                        'body' => "We would like to inform you that the Tat Start Time for your Product-(" . $val['bank_name'] . ") Bank (" . $val['product_name'] . ")with reference number (" . $val['application_id'] . ") is (" . $val['tat_start'] . "), and the Tat End Time is (" . $val['tat_end'] . ") will expired in half an hour.",
+                        //'icon' =>'myIcon',
+                        //'sound' => 'mySound'
+                    ];
+
+                    $extraNotificationData = ["message" => $notification, "moredata" => 'dd'];
+
+                    $fcmNotification = [
+                        //'registration_ids' => $tokenList, //multple token array
+                        'to'        => $token, //single token
+                        'notification' => $notification,
+                        'data' => $extraNotificationData
+                    ];
+
+                    $headers = [
+                        'Authorization: key=' . API_ACCESS_KEY,
+                        'Content-Type: application/json'
+                    ];
+
+
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_URL, $fcmUrl);
+                    curl_setopt($ch, CURLOPT_POST, true);
+                    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fcmNotification));
+                    $result = curl_exec($ch);
+                    curl_close($ch);
+                    //echo $result;
+                    $result_array = json_decode($result, true);
+                    $save_notification = 'N';
+                    if ($result_array['success'] == 1) {
+                        $insertdata = array(
+                            'case_id' => $val['id'],
+                            'application_id' => $val['application_id'],
+                            'employee_code' => $val['employee_unique_id'],
+                            'push_notification' => $notification['body'],
+                            'created_date' => date('Y-m-d H:i:s')
+                        );
+                        $this->db->insert('main_case_push_notification', $insertdata);
+
+                        if ($this->db->affected_rows() > 0) {
+                            $save_notification = 'Y';
+                        }
+                        if ($save_notification == 'Y') {
+                            $response = [
+                                'status' => "Success",
+                                'message' => "Push Notification sent successfully",
+                                'db_insert' => "Success",
+                            ];
+                        } else {
+                            $response = [
+                                'status' => "Success",
+                                'message' => "Push Notification sent successfully",
+                                'db_insert' => "Failure",
+                            ];
+                        }
+                    } else {
+                        $response = [
+                            'status' => "Failure",
+                            'message' => "Push Notification failed",
+                        ];
+                    }
+                }
+            } else {
+                $response = "No Data Found";
+            }
+            $response = [
+                'status' => "success",
+                'data' => $response,
+            ];
+            // $response = $data;
+
+            echo json_encode($response);
+        } catch (Exception $ex) {
+            $response = [
+                'status' => "failure",
+                'message' => $ex->getMessage(),
+            ];
+        }
+    }
+
+    public function sendQuickTatNotificationAlert()
+    {
+        $response = [];
+        try {
+            $data_json = [];
+            define('API_ACCESS_KEY', 'AAAAWdAq5LA:APA91bGfu2jlR0FpwGEfm-w-WeYx-fsceFV3ARRvEWMkWi96d8LxFrGGLIhnOExg6uCP7z2tn-9XlxVEheArQJoSHVQpAm9fz5XnGNbN40v4KHCj5izxBog3Apqz9HRXsZptTC7fpWzG');
+            $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
+
+            $agent_code = $this->input->post('code');
+            $sql =  'SELECT log.token_id, log.employee_unique_id, mc.id, mc.bank, mc.product, mc.reference_no, TIME_FORMAT(Time(mc.tat_start),"%H:%i") as tat_start, TIME_FORMAT(Time(mc.tat_end),"%H:%i") as tat_end, STR_TO_DATE(mc.tat_end,"%Y-%m-%d %H:%i") as str_tat_end, STR_TO_DATE((NOW() + INTERVAL 360 MINUTE),"%Y-%m-%d %H:%i") as now_datetime FROM login as log join mini_case as mc on log.employee_unique_id=mc.code where STR_TO_DATE(mc.tat_end,"%Y-%m-%d %H:%i") = STR_TO_DATE((NOW() + INTERVAL 360 MINUTE),"%Y-%m-%d %H:%i")';
+
+            $query = $this->db->query($sql);
+            $data = $query->result_array();
+
+            if ($data) {
+                foreach ($data as $key => $val) {
+                    // APP token id to whom notification send//
+                    //echo "<pre>";print_r($val);
+                    //$token='cUcmZwNHT1GuWyuTlU5iVZ:APA91bEIf52mc9SizfjBg_zKfPxic78zlJfPHou6W3-64V9gdo9zCtUvSFwJX74W-vYWzpny1cRYSWvai830iqIv4qewDi4VIxbjeU8PsNy39wpznGaeBAPnRxWMCB3SxhUE5vydXn4B';
+                    $token = $val['token_id'];
+                    // Notification msg //
+                    $notification = [
+                        'title' => 'Tat expiry quick case notification',
+                        'body' => "We would like to inform you that the Tat Start Time for your Product-(" . $val['bank'] . ") Bank (" . $val['product'] . ")with reference number (" . $val['reference_no'] . ") is (" . $val['tat_start'] . "), and the Tat End Time is (" . $val['tat_end'] . ") will expired in half an hour.",
+                        //'icon' =>'myIcon',
+                        //'sound' => 'mySound'
+                    ];
+
+                    $extraNotificationData = ["message" => $notification, "moredata" => 'dd'];
+
+                    $fcmNotification = [
+                        //'registration_ids' => $tokenList, //multple token array
+                        'to'        => $token, //single token
+                        'notification' => $notification,
+                        'data' => $extraNotificationData
+                    ];
+
+                    $headers = [
+                        'Authorization: key=' . API_ACCESS_KEY,
+                        'Content-Type: application/json'
+                    ];
+
+
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_URL, $fcmUrl);
+                    curl_setopt($ch, CURLOPT_POST, true);
+                    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fcmNotification));
+                    $result = curl_exec($ch);
+                    curl_close($ch);
+                    //echo $result;
+                    $result_array = json_decode($result, true);
+                    $save_notification = 'N';
+                    if ($result_array['success'] == 1) {
+                        $insertdata = array(
+                            'case_id' => $val['id'],
+                            'reference_no' => $val['reference_no'],
+                            'employee_code' => $val['employee_unique_id'],
+                            'push_notification' => $notification['body'],
+                            'created_date' => date('Y-m-d H:i:s'),
+                        );
+                        $this->db->insert('mini_case_push_notification', $insertdata);
+
+                        if ($this->db->affected_rows() > 0) {
+                            $save_notification = 'Y';
+                        }
+                        if ($save_notification == 'Y') {
+                            $response = [
+                                'status' => "Success",
+                                'message' => "Push Notification sent successfully",
+                                'db_insert' => "Success",
+                            ];
+                        } else {
+                            $response = [
+                                'status' => "Success",
+                                'message' => "Push Notification sent successfully",
+                                'db_insert' => "Failure",
+                            ];
+                        }
+                    } else {
+                        $response = [
+                            'status' => "Failure",
+                            'message' => "Push Notification failed",
+                        ];
+                    }
+                }
+            } else {
+                $response = "No Data Found";
+            }
+            $response = [
+                'status' => "success",
+                'data' => $response,
+            ];
+            // $response = $data;
+
+            echo json_encode($response);
+        } catch (Exception $ex) {
+            $response = [
+                'status' => "failure",
+                'message' => $ex->getMessage(),
+            ];
+        }
+    }
+
     // public function getMiniCasesType()
     // {
     //     $response = [];
@@ -134,6 +392,39 @@ class Api extends CI_Controller
             ];
         }
     }
+
+
+    public function caseCount()
+    {
+        $response = [];
+        try {
+            if ($this->input->method() == "post") {
+
+                $employee_unique_id = $this->input->post('employee_unique_id');
+                $sql = 'SELECT id,day_wise_case,monthly_resolved,out_of_tat_daily_count FROM login WHERE employee_unique_id = "' . $employee_unique_id . '"';
+                $query = $this->db->query($sql);
+                $data = $query->result_array();
+                $response = [
+                    'status' => "success",
+                    'data' => $data,
+                ];
+                // $response = $data;
+            } else {
+                $response = [
+                    'status' => "failure",
+                    'message' => "Input method should be in post",
+                ];
+            }
+            echo json_encode($response);
+        } catch (Exception $ex) {
+            $response = [
+                'status' => "failure",
+                'message' => $ex->getMessage(),
+            ];
+        }
+    }
+
+
 
     public function getMiniCaseLists()
     {
@@ -243,7 +534,9 @@ class Api extends CI_Controller
             if ($this->input->method() == "post") {
                 $application_id = $this->input->post('application_id');
                 $code = $this->input->post('code');
-                $sql = 'SELECT * FROM upload_file WHERE application_id = "' . $application_id . '" AND code = "' . $code . '"';
+                $sql = 'SELECT id,application_id,customer_name,bank_name,product_name,fi_to_be_conducted,source_channel,application_id,co_applicant,guarantee_name,business_address,city,pincode,vehicle,tat_start,tat_end,remarks,status,geo_limit,fi_date,created_at,business_name,random_no,office_address,dob,code,mobile,designation,amount FROM upload_file WHERE application_id = "' . $application_id . '" AND code = "' . $code . '"';
+
+
                 $query = $this->db->query($sql);
                 $data = $query->result_array();
                 $response = [
@@ -266,18 +559,84 @@ class Api extends CI_Controller
         }
     }
 
+
+    public function getCasesNew()
+    {
+        $response = [];
+        try {
+            if ($this->input->method() == "post") {
+                $application_id = $this->input->post('application_id');
+                $code = $this->input->post('code');
+                $sql = 'SELECT application_id, customer_name, random_no,created_at,business_address,city FROM upload_file WHERE application_id = "' . $application_id . '" AND code = "' . $code . '"';
+                $query = $this->db->query($sql);
+                $data = $query->result_array();
+                $response = [
+                    'status' => "success",
+                    'data' => $data,
+                ];
+                // $response = $data;
+            } else {
+                $response = [
+                    'status' => "failure",
+                    'message' => "Input method should be in post",
+                ];
+            }
+            echo json_encode($response);
+        } catch (Exception $ex) {
+            $response = [
+                'status' => "failure",
+                'message' => $ex->getMessage(),
+            ];
+        }
+    }
+
+    // public function getCasesLists()
+    // {
+    //     $response = [];
+    //     try {
+    //         if ($this->input->method() == "post") {
+    //             $code = $this->input->post('agent_code');
+    //             $fi_type = $this->input->post('fi_type');
+    //             $bank = $this->input->post('bank');
+    //             // $fi_type = $this->input->post('fi_type');
+    //             // $sql = 'SELECT id,fi_to_be_conducted,product_name,residence_address,application_id,customer_name,created_at FROM upload_file WHERE code = "' . $code . '"';
+    //             // $sql = 'SELECT * FROM upload_file WHERE code = "' . $code . '"';
+    //             $sql = 'SELECT * FROM upload_file WHERE fi_to_be_conducted = "' . $fi_type . '" AND code = "' . $code . '" AND bank_name = "' . $bank . '"';
+    //             $query = $this->db->query($sql);
+    //             $data = $query->result_array();
+    //             $response = [
+    //                 'status' => "success",
+    //                 'data' => $data,
+    //             ];
+    //             // $response = $data;
+    //         } else {
+    //             $response = [
+    //                 'status' => "failure",
+    //                 'message' => "Input method should be in post",
+    //             ];
+    //         }
+    //         echo json_encode($response);
+    //     } catch (Exception $ex) {
+    //         $response = [
+    //             'status' => "failure",
+    //             'message' => $ex->getMessage(),
+    //         ];
+    //     }
+    // }
+
     public function getCasesLists()
     {
         $response = [];
         try {
             if ($this->input->method() == "post") {
                 $code = $this->input->post('agent_code');
-                $fi_type = $this->input->post('fi_type');
+                $fi_to_be_conducted = $this->input->post('fi_to_be_conducted');
                 $bank = $this->input->post('bank');
                 // $fi_type = $this->input->post('fi_type');
                 // $sql = 'SELECT id,fi_to_be_conducted,product_name,residence_address,application_id,customer_name,created_at FROM upload_file WHERE code = "' . $code . '"';
                 // $sql = 'SELECT * FROM upload_file WHERE code = "' . $code . '"';
-                $sql = 'SELECT * FROM upload_file WHERE fi_to_be_conducted = "' . $fi_type . '" AND code = "' . $code . '" AND bank_name = "' . $bank . '"';
+                //  $sql = 'SELECT application_id,customer_name,random_no,created_at,business_address,city FROM upload_file WHERE application_id = "' . $application_id . '" AND code = "' . $code . '"';
+                $sql = 'SELECT id,application_id,customer_name,random_no,created_at,business_address,city,fi_to_be_conducted,status FROM upload_file WHERE fi_to_be_conducted = "' . $fi_to_be_conducted . '" AND code = "' . $code . '" AND bank_name = "' . $bank . '"';
                 $query = $this->db->query($sql);
                 $data = $query->result_array();
                 $response = [
@@ -533,6 +892,7 @@ class Api extends CI_Controller
         try {
             // if ($this->input->method() == "post") {
             $application_id = $this->input->post('application_id');
+            $random_no = $this->input->post('random_no');
             $fi_to_be_conducted = $this->input->post('fi_to_be_conducted');
             $rv_fi_status = $this->input->post('rv_fi_status');
             $rv_fi_status_reason = $this->input->post('rv_fi_status_reason');
@@ -579,7 +939,16 @@ class Api extends CI_Controller
 
 
             $rv_cpv_done_by = $this->input->post('rv_cpv_done_by');
+
+            // $rv_visit_date = $this->input->post('rv_visit_date');
+
             $rv_visit_date = $this->input->post('rv_visit_date');
+            // $rv_visit_date = date('Y-m-d H:i:s', strtotime($rv_visit_date));
+            $formatted_rv_visit_date = date('Y-m-d H:i:s', strtotime($rv_visit_date));
+
+            //      $rv_visit_date = DateTime::createFromFormat('Y-m-d H:i:s', $rv_visit_date);
+            // $formatted_rv_visit_date = $rv_visit_date->format('Y-m-d H:i:s');
+
             $rv_remarks = $this->input->post('rv_remarks');
             $rv_lat = $this->input->post('rv_lat');
             $rv_long = $this->input->post('rv_long');
@@ -643,7 +1012,10 @@ class Api extends CI_Controller
                     'rv_loan_bankname' => $rv_loan_bankname,
                     'rv_loan_emi' => $rv_loan_emi,
                     'rv_cpv_done_by' => $rv_cpv_done_by,
-                    'rv_visit_date' => $rv_visit_date,
+
+                    // 'rv_visit_date' => $rv_visit_date,
+                    'rv_visit_date' => $formatted_rv_visit_date,
+
                     'rv_remarks' => $rv_remarks,
                     'rv_image1' => $rv_image1,
                     'rv_image2' => $rv_image2,
@@ -657,6 +1029,7 @@ class Api extends CI_Controller
                     'status' => "Resolved",
                 );
                 $this->db->where('application_id', $application_id);
+                $this->db->where('random_no', $random_no);
                 $this->db->where('fi_to_be_conducted', $fi_to_be_conducted);
                 $this->db->update('upload_file', $insertcase);
 
@@ -687,18 +1060,29 @@ class Api extends CI_Controller
     }
 
 
+
     public function insertBvMainCases()
     {
         $response = array();
         try {
             // if ($this->input->method() == "post") {
             $application_id = $this->input->post('application_id');
+            $random_no = $this->input->post('random_no');
             $fi_to_be_conducted = $this->input->post('fi_to_be_conducted');
             $bv_corporate_office = $this->input->post('bv_corporate_office');
+            $bv_type_of_profile = $this->input->post('bv_type_of_profile');
+            $bv_company_name = $this->input->post('bv_company_name');
+            $bv_person_met = $this->input->post('bv_person_met');
             $bv_person_designation = $this->input->post('bv_person_designation');
+            $bv_signboard_name = $this->input->post('bv_signboard_name');
             $bv_address_confirmed = $this->input->post('bv_address_confirmed');
             $bv_applicant_designation = $this->input->post('bv_applicant_designation');
             $bv_income = $this->input->post('bv_income');
+            $bv_approx_sale = $this->input->post('bv_approx_sale');
+            $bv_approx_gross_salary = $this->input->post('bv_approx_gross_salary');
+            $bv_approx_net_salary = $this->input->post('bv_approx_net_salary');
+            $bv_working_since = $this->input->post('bv_working_since');
+
             $bv_residence_address = $this->input->post('bv_residence_address');
             $bv_business_type = $this->input->post('bv_business_type');
             $bv_no_employee = $this->input->post('bv_no_employee');
@@ -706,36 +1090,109 @@ class Api extends CI_Controller
             $bv_business_activity = $this->input->post('bv_business_activity');
             $bv_stability = $this->input->post('bv_stability');
             $bv_ownership = $this->input->post('bv_ownership');
+            $bv_ownership_other = $this->input->post('bv_ownership_other');
             $bv_nature_of_business = $this->input->post('bv_nature_of_business');
             $bv_proof = $this->input->post('bv_proof');
+            $bv_previous_bus_details = $this->input->post('bv_previous_bus_details');
+            $bv_office_proof = $this->input->post('bv_office_proof');
+
             $bv_vehicle = $this->input->post('bv_vehicle');
+            $rv_vehicle_details = $this->input->post('rv_vehicle_details');
             $bv_tcp1 = $this->input->post('bv_tcp1');
+            $bv_tcp2 = $this->input->post('bv_tcp2');
             $bv_nature_of_job = $this->input->post('bv_nature_of_job');
+            $bv_office_setup = $this->input->post('bv_office_setup');
+            $bv_office_setup_desc = $this->input->post('bv_office_setup_desc');
+
             $tcp1_name = $this->input->post('tcp1_name');
             $tcp2_name = $this->input->post('tcp2_name');
+            $bv_tcp1_address = $this->input->post('bv_tcp1_address');
+            $bv_tcp2_address = $this->input->post('bv_tcp2_address');
+            // $bv_tcp1_designation = $this->input->post('bv_tcp1_designation');
+            // $bv_tcp2_designation = $this->input->post('bv_tcp2_designation');
+            $bv_tcp1_contact = $this->input->post('bv_tcp1_contact');
+            $bv_tcp2_contact = $this->input->post('bv_tcp2_contact');
+            $bv_negative1 = $this->input->post('bv_negative1');
+            $bv_negative2 = $this->input->post('bv_negative2');
 
-            $bv_tcp2 = $this->input->post('bv_tcp2');
             $bv_verified_name = $this->input->post('bv_verified_name');
-            $bv_dt_of_cpv = $this->input->post('bv_dt_of_cpv');
+
+            $rv_visit_date = $this->input->post('rv_visit_date');
+            $formatted_bv_visit_date = date('Y-m-d H:i:s', strtotime($rv_visit_date));
+
+
             $bv_remarks = $this->input->post('bv_remarks');
             $bv_lat = $this->input->post('bv_lat');
             $bv_long = $this->input->post('bv_long');
             $bv_pincode = $this->input->post('bv_pincode');
             $bv_location_add = $this->input->post('bv_location_add');
-            $bv_image1 = $this->input->post('bv_image1');
-            $bv_image2 = $this->input->post('bv_image2');
-            $bv_image3 = $this->input->post('bv_image3');
-            $bv_image4 = $this->input->post('bv_image4');
-            $bv_image5 = $this->input->post('bv_image5');
-            $bv_image6 = $this->input->post('bv_image6');
-            $bv_image7 = $this->input->post('bv_image7');
-            $bv_image8 = $this->input->post('bv_image8');
-            $bv_image9 = $this->input->post('bv_image9');
+
+
+            $rv_fi_status = $this->input->post('rv_fi_status');
+            $rv_fi_status_reason = $this->input->post('rv_fi_status_reason');
+            $rv_loan_amt = $this->input->post('rv_loan_amt');
+            $rv_loan_existing = $this->input->post('rv_loan_existing');
+            $rv_loan_bankname = $this->input->post('rv_loan_bankname');
+            $rv_loan_emi = $this->input->post('rv_loan_emi');
+            $consolidated_remark = $this->input->post('consolidated_remark');
+
+            // $bv_image1 = $this->input->post('bv_image1');
+            // $bv_image2 = $this->input->post('bv_image2');
+            // $bv_image3 = $this->input->post('bv_image3');
+            // $bv_image4 = $this->input->post('bv_image4');
+            // $bv_image5 = $this->input->post('bv_image5');
+            // $bv_image6 = $this->input->post('bv_image6');
+            // $bv_image7 = $this->input->post('bv_image7');
+            // $bv_image8 = $this->input->post('bv_image8');
+            // $bv_image9 = $this->input->post('bv_image9');
+
+            $rv_image1 = $this->input->post('rv_image1');
+            $rv_image2 = $this->input->post('rv_image2');
+            $rv_image3 = $this->input->post('rv_image3');
+            $rv_image4 = $this->input->post('rv_image4');
+            $rv_image5 = $this->input->post('rv_image5');
+            $rv_image6 = $this->input->post('rv_image6');
+            $rv_image7 = $this->input->post('rv_image7');
+            $rv_image8 = $this->input->post('rv_image8');
+            $rv_image9 = $this->input->post('rv_image9');
 
             // print_r($data);die;
             if (!empty($application_id)) {
 
                 $insertcase = array(
+
+
+                    'consolidated_remark' => $consolidated_remark,
+                    'rv_loan_emi' => $rv_loan_emi,
+                    'rv_loan_bankname' => $rv_loan_bankname,
+                    'rv_loan_existing' => $rv_loan_existing,
+                    'rv_loan_amt' => $rv_loan_amt,
+                    'rv_fi_status_reason' => $rv_fi_status_reason,
+                    'rv_fi_status' => $rv_fi_status,
+                    'bv_negative2' => $bv_negative2,
+                    'bv_negative1' => $bv_negative1,
+                    'bv_tcp2_contact' => $bv_tcp2_contact,
+                    'bv_tcp1_contact' => $bv_tcp1_contact,
+                    //   'bv_tcp2_designation' => $bv_tcp2_designation,
+                    //   'bv_tcp1_designation' => $bv_tcp1_designation,
+                    'bv_tcp2_address' => $bv_tcp2_address,
+                    'bv_tcp1_address' => $bv_tcp1_address,
+                    'tcp2_name' => $tcp2_name,
+                    'tcp1_name' => $tcp1_name,
+                    'bv_office_setup_desc' => $bv_office_setup_desc,
+                    'bv_office_setup' => $bv_office_setup,
+                    'rv_vehicle_details' => $rv_vehicle_details,
+                    'bv_office_proof' => $bv_office_proof,
+                    'bv_previous_bus_details' => $bv_previous_bus_details,
+                    'bv_working_since' => $bv_working_since,
+                    'bv_approx_net_salary' => $bv_approx_net_salary,
+                    'bv_approx_gross_salary' => $bv_approx_gross_salary,
+                    'bv_approx_sale' => $bv_approx_sale,
+                    'bv_signboard_name' => $bv_signboard_name,
+                    'bv_person_met' => $bv_person_met,
+                    'bv_company_name' => $bv_company_name,
+                    'bv_type_of_profile' => $bv_type_of_profile,
+
                     'bv_corporate_office' => $bv_corporate_office,
                     'bv_person_designation' => $bv_person_designation,
                     'bv_address_confirmed' => $bv_address_confirmed,
@@ -752,6 +1209,7 @@ class Api extends CI_Controller
                     'bv_business_activity' => $bv_business_activity,
                     'bv_stability' => $bv_stability,
                     'bv_ownership' => $bv_ownership,
+                    'bv_ownership_other' => $bv_ownership_other,
                     'bv_nature_of_business' => $bv_nature_of_business,
                     'bv_proof' => $bv_proof,
                     'bv_vehicle' => $bv_vehicle,
@@ -761,20 +1219,32 @@ class Api extends CI_Controller
                     'bv_nature_of_job' => $bv_nature_of_job,
                     'bv_tcp2' => $bv_tcp2,
                     'bv_verified_name' => $bv_verified_name,
-                    'bv_dt_of_cpv' => $bv_dt_of_cpv,
+                    'rv_visit_date' => $formatted_bv_visit_date,
                     'bv_remarks' => $bv_remarks,
-                    'bv_image1' => $bv_image1,
-                    'bv_image2' => $bv_image2,
-                    'bv_image3' => $bv_image3,
-                    'bv_image4' => $bv_image4,
-                    'bv_image5' => $bv_image5,
-                    'bv_image6' => $bv_image6,
-                    'bv_image7' => $bv_image7,
-                    'bv_image8' => $bv_image8,
-                    'bv_image9' => $bv_image9,
+                    // 'bv_image1' => $bv_image1,
+                    // 'bv_image2' => $bv_image2,
+                    // 'bv_image3' => $bv_image3,
+                    // 'bv_image4' => $bv_image4,
+                    // 'bv_image5' => $bv_image5,
+                    // 'bv_image6' => $bv_image6,
+                    // 'bv_image7' => $bv_image7,
+                    // 'bv_image8' => $bv_image8,
+                    // 'bv_image9' => $bv_image9,
+
+
+                    'rv_image1' => $rv_image1,
+                    'rv_image2' => $rv_image2,
+                    'rv_image3' => $rv_image3,
+                    'rv_image4' => $rv_image4,
+                    'rv_image5' => $rv_image5,
+                    'rv_image6' => $rv_image6,
+                    'rv_image7' => $rv_image7,
+                    'rv_image8' => $rv_image8,
+                    'rv_image9' => $rv_image9,
                     'status' => "Resolved",
                 );
                 $this->db->where('application_id', $application_id);
+                $this->db->where('random_no', $random_no);
                 $this->db->where('fi_to_be_conducted', $fi_to_be_conducted);
                 $this->db->update('upload_file', $insertcase);
 
@@ -803,6 +1273,8 @@ class Api extends CI_Controller
         }
         echo json_encode($response);
     }
+
+
 
 
     public function mainBankCaseType()
@@ -914,6 +1386,252 @@ class Api extends CI_Controller
             ];
         }
     }
+
+
+
+
+    public function getMainCaseNotification()
+    {
+        $response = [];
+        try {
+            if ($this->input->method() == "post") {
+                // $application_id = $this->input->post('application_id');
+                $employee_code = $this->input->post('employee_code');
+                $sql = 'SELECT * FROM main_case_push_notification WHERE employee_code = "' . $employee_code . '" and status = "unseen"';
+                $query = $this->db->query($sql);
+                $data = $query->result_array();
+                $response = [
+                    'status' => "success",
+                    'data' => $data,
+                ];
+                // $response = $data;
+            } else {
+                $response = [
+                    'status' => "failure",
+                    'message' => "Input method should be in post",
+                ];
+            }
+            echo json_encode($response);
+        } catch (Exception $ex) {
+            $response = [
+                'status' => "failure",
+                'message' => $ex->getMessage(),
+            ];
+        }
+    }
+
+    public function getQuickCaseNotification()
+    {
+        $response = [];
+        try {
+            if ($this->input->method() == "post") {
+                // $application_id = $this->input->post('application_id');
+                $employee_code = $this->input->post('employee_code');
+                $sql = 'SELECT * FROM mini_case_push_notification WHERE employee_code = "' . $employee_code . '" and status = "unseen"';
+                $query = $this->db->query($sql);
+                $data = $query->result_array();
+                $response = [
+                    'status' => "success",
+                    'data' => $data,
+                ];
+                // $response = $data;
+            } else {
+                $response = [
+                    'status' => "failure",
+                    'message' => "Input method should be in post",
+                ];
+            }
+            echo json_encode($response);
+        } catch (Exception $ex) {
+            $response = [
+                'status' => "failure",
+                'message' => $ex->getMessage(),
+            ];
+        }
+    }
+
+
+    public function insertQuickCaseNotification()
+    {
+        $response = array();
+        try {
+            // if ($this->input->method() == "post") {
+            $reference_no = $this->input->post('reference_no');
+            $case_id = $this->input->post('case_id');
+
+
+            // print_r($data);die;
+            if (!empty($reference_no)) {
+
+                $insertQuick = array(
+                    'status' => "seen",
+                );
+                $this->db->where('reference_no', $reference_no);
+                $this->db->where('case_id', $case_id);
+                $this->db->update('mini_case_push_notification', $insertQuick);
+
+                if ($this->db->affected_rows() > 0) {
+                    $response = [
+                        'status' => "success",
+                        'message' => "Quick Case Notification Status inserted successfully",
+                    ];
+                } else {
+                    $response = [
+                        'status' => "failure",
+                        'message' => "Data insertion failed",
+                    ];
+                }
+            } else {
+                $response = [
+                    'status' => "failure",
+                    'message' => "Reference number not match",
+                ];
+            }
+        } catch (Exception $ex) {
+            $response = [
+                'status' => "failed",
+                'message' => $ex->getMessage(),
+            ];
+        }
+        echo json_encode($response);
+    }
+
+
+    public function insertMainCaseNotification()
+    {
+        $response = array();
+        try {
+            // if ($this->input->method() == "post") {
+            $application_id = $this->input->post('application_id');
+            $case_id = $this->input->post('case_id');
+
+            // print_r($data);die;
+            if (!empty($application_id)) {
+
+                $insertMain = array(
+                    'status' => "seen",
+                );
+                $this->db->where('application_id', $application_id);
+                $this->db->where('case_id', $case_id);
+                $this->db->update('main_case_push_notification', $insertMain);
+
+                if ($this->db->affected_rows() > 0) {
+                    $response = [
+                        'status' => "success",
+                        'message' => "Main Case Notification Status inserted successfully",
+                    ];
+                } else {
+                    $response = [
+                        'status' => "failure",
+                        'message' => "Data insertion failed",
+                    ];
+                }
+            } else {
+                $response = [
+                    'status' => "failure",
+                    'message' => "Application Id not match",
+                ];
+            }
+        } catch (Exception $ex) {
+            $response = [
+                'status' => "failed",
+                'message' => $ex->getMessage(),
+            ];
+        }
+        echo json_encode($response);
+    }
+
+
+
+    //  public function getUploadFileCount(){
+    // try {
+    //      if ($this->input->method() == "post") {
+    //           $agent_code = $this->input->post('code');
+
+    //              $this->db->select('COUNT(id) as outoftat_total, code');
+    //         $this->db->from('upload_file');
+    //         $this->db->where("code", $agent_code); // Add the condition here
+    //         $this->db->group_start();
+    //         $this->db->where('DATE(rv_visit_date)', date('Y-m-d'));
+    //         $this->db->where('rv_visit_date >', 'tat_end', false);
+    //         $this->db->or_where('DATE(bv_dt_of_cpv)', date('Y-m-d'));
+    //         $this->db->where('bv_dt_of_cpv >', 'tat_end', false);
+    //         $this->db->group_end();
+    //         $query = $this->db->get();
+    //         $result = $query->result_array();
+
+    //         $response = array('outoftat_total' => $result[0]['outoftat_total'], 'code' => $result[0]['code']);
+    //         $this->output
+    //             ->set_content_type('application/json')
+    //             ->set_output(json_encode($response));
+    //      } else {
+    //                 $response = [
+    //                     'status' => "failure",
+    //                     'message' => "Input method should be in post",
+    //                 ];
+    //             }
+    //             // echo json_encode($response);
+    //         } catch (Exception $ex) {
+    //             throw $ex;
+    //         }
+    // }
+
+    public function getUploadFileCount()
+    {
+        try {
+            if ($this->input->method() == "post") {
+                $agent_code = $this->input->post('code');
+
+                $this->db->select('COUNT(id) as count');
+                $this->db->from('upload_file');
+                $this->db->where("code", $agent_code);
+                $this->db->group_start();
+                $this->db->where('DATE(rv_visit_date)', date('Y-m-d'));
+                $this->db->where('rv_visit_date >', 'tat_end', false);
+                $this->db->or_where('DATE(bv_dt_of_cpv)', date('Y-m-d'));
+                $this->db->where('bv_dt_of_cpv >', 'tat_end', false);
+                $this->db->group_end();
+                $query = $this->db->get();
+                $result = $query->row_array();
+
+                $count = $result['count'];
+            } else {
+                $count = 0; // Default count if the request method is not POST
+            }
+        } catch (Exception $ex) {
+            $count = 0; // Default count if there's an exception
+        }
+
+        echo $count;
+    }
+
+    public function getCaseCountByAgent()
+    {
+        try {
+            if ($this->input->method() == "post") {
+                $agent_code = $this->input->post('code');
+
+                $this->db->select('COUNT(id) as case_count');
+                $this->db->from('upload_file');
+                $this->db->where('code', $agent_code);
+                // $this->db->where('DATE(created_at)', date('Y-m-d'));
+                // $this->db->where('status', 'Resolved');
+                $query = $this->db->get();
+                $result = $query->row_array();
+
+                $case_count = $result['case_count'];
+                // print_r($case_count);die;
+            } else {
+                $case_count = 1; // Default case count if the request method is not POST
+            }
+        } catch (Exception $ex) {
+            $case_count = 2; // Default case count if there's an exception
+        }
+
+        echo $case_count;
+    }
+
+
 
     //  public function miniCaseBankType()
     //     {

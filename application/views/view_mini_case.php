@@ -17,11 +17,11 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>-->
+    <!--<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>-->
+    <!--<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>-->
 
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -33,9 +33,20 @@
                 "serverSide": true,
                 "order": [],
                 dom: 'Blfrtip',
-                buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
-                ],
+    //              buttons: [
+    //   {
+    //     extend: 'excel',
+    //     text: 'Download Excel',
+    //     exportOptions: {
+    //       modifier: {
+    //         search: 'none'
+    //       }
+    //     }
+    //   }
+    // ],
+                // buttons: [
+                //     'copy', 'csv', 'excel', 'pdf', 'print' 
+                // ],
                 "ajax": {
                     url: "<?php echo base_url() . 'View_mini_case_controller/fetch_all_mini_case'; ?>",
                     type: "POST",
@@ -44,6 +55,7 @@
                         // custom filter data
                         data.from_date = $('#from_date').val();
                         data.to_date = $('#to_date').val();
+                         data.employee_unique_id = $('#agent_filter').val();
                     }
                 },
 
@@ -53,8 +65,8 @@
                     "orderable": false
                 }],
                 "lengthMenu": [
-                    [15, 25, 50, -1],
-                    [15, 25, 50, "All"]
+                    [150, 250, 500, -1],
+                    [150, 250, 500, "All"]
                 ],
                 // createdRow: function(row, data, rowIndex) {
                 //     $.each($('td', row), function(colIndex) {
@@ -73,24 +85,88 @@
 
 
 
+              $('#agent_filter').change(function () {
+              jQuery('#fetch_mini_case_data').DataTable().ajax.reload();
+                   });
+
+
+
             $('#filter').click(function() {
                 jQuery('#fetch_mini_case_data').DataTable().ajax.reload();
             });
 
-            // $('#fetch_mini_case_data').editable({
-            //     mode: 'inline',
-            //     container: 'body',
-            //     selector: 'td.remarks',
-            //     url: '<?php echo base_url() . 'View_mini_case_controller/get_remark'; ?>',
-            //     title: 'Remarks',
-            //     type: 'POST',
-            //     validate: function(value) {
-            //         //			if($.trim(value) == '')
-            //         //			{
-            //         //				return 'This field is required';
-            //         //			}
-            //     }
-            // });
+
+            $("#agent_filter").focus(function () {
+//                                alert("hi");
+                            $.ajax({
+                                url: '<?= base_url() ?>View_mini_case_controller/getAllAgentCode',
+                                method: 'post',
+                                dataType: 'json',
+                                success: function (response) {
+//                console.log(response.data);
+                                    // Remove options 
+                                    $('#agent_filter').find('option').not(':first').remove();
+//                                        $('#sel_depart').find('option').not(':first').remove();
+                                    // Add options
+                                    $.each(response.data, function (index, data) {
+                                        $('#agent_filter').append('<option value="' + data['employee_unique_id'] + '">' + data['employee_unique_id'] + '</option>');
+                                    });
+                                    $("select :nth-child(1)").attr("selected", "selected");
+                                }
+
+                            });
+
+                        });
+
+           
+    var datatable = $('#fetch_mini_case_data').DataTable();
+    
+         $(document).on('click', '.download_image_quick', function(e) {
+            alert("hello world!");
+            e.preventDefault();
+             var user_id = $(this).attr("id");
+            var imageList = [];
+            // var rowData = $(this).attr("id");
+    // console.log(user_id);
+
+            // Collect image data from each row
+            datatable.rows().every(function() {
+                var rowData = this.data();
+                console.log(user_id);
+                // var rowData = $(this).attr("id");
+                // var user_id = $(this).attr("id");
+                var base64Data1 = user_id.rv_image1;
+                var base64Data2 = user_id.rv_image2;
+                var filename1 = "rv_image1_" + user_id + ".jpeg"; // Generate filename for image1 based on image ID
+                var filename2 = "rv_image2_" + user_id + ".jpeg"; // Generate filename for image2 based on image ID
+
+                imageList.push({ base64Data: base64Data1, filename: filename1 });
+                imageList.push({ base64Data: base64Data2, filename: filename2 });
+            });
+
+            downloadImages(imageList);
+        });
+
+        function downloadImages(imageList) {
+            $.ajax({
+                type: 'POST',
+                // url: 'Students/download_images',
+                url: "<?php echo base_url(); ?>View_mini_case_controller/download_images_quick",
+                data: { imageList: imageList },
+                success: function(response) {
+                    // Trigger file download
+                    var link = document.createElement('a');
+                    link.href = response;
+                    link.download = 'images.zip';
+                    link.click();
+                },
+                error: function(xhr, status, error) {
+                    // Handle errors
+                }
+            });
+        }
+            
+            
 
             $(document).on('click', '.view_quick_case', function() {
                 var user_id = $(this).attr("id");
@@ -143,7 +219,7 @@
             $(document).on('click', '.view_rv_case', function() {
                 var user_id = $(this).attr("id");
                 $.ajax({
-                    url: "<?php echo base_url(); ?>View_mini_case_controller/fetch_single_mini_case",
+                    url: "<?php echo base_url(); ?>View_mini_case_controller/fetch_single_rv_mini_case",
                     method: "POST",
                     data: {
                         user_id: user_id
@@ -226,6 +302,28 @@
             // update the form data if we change any
 
             // end update form data 
+            
+            $('#download-btn').click(function() {
+                            $.ajax({
+                                url: '<?php echo base_url("View_mini_case_controller/downloadExcel"); ?>',
+                                method: 'GET',
+                                xhrFields: {
+                                    responseType: 'blob'
+                                },
+                                success: function(response) {
+                                    // Create a temporary anchor element to initiate the download
+                                    var a = document.createElement('a');
+                                    var url = window.URL.createObjectURL(response);
+                                    a.href = url;
+                                    a.download = 'report.csv'; // Provide the desired file name
+                                    a.click();
+
+                                    // Clean up the temporary anchor element and URL
+                                    $(a).remove();
+                                    window.URL.revokeObjectURL(url);
+                                }
+                            });
+                        });
 
 
 
@@ -382,6 +480,11 @@
             clear: both;
         }
 
+.mybtn-left {
+            text-align: left;
+            padding-right: 180px;
+            clear: both;
+        }
         .veri {
             text-align: center;
         }
@@ -408,7 +511,7 @@
             <div class="col-md-4 col-sm-6">
                 <div class="row">
                     <div id="dvTitle" class="product_name">
-                        <h3><b>Bodvid Private Limited</b></h3>
+                        <h3><b>RealBits Coders</b></h3>
                     </div>
                 </div>
             </div>
@@ -438,32 +541,50 @@
     <div class="mybtn-right">
         <a href="<?php echo base_url(); ?>home" class="btn btn-info" class="btn btn-info">Dashboard</a>
         <a href="<?php echo base_url(); ?>Create_cse/create_c" class="btn btn-info">Case</a>
-        <a href="<?php echo base_url(); ?>Report_controller/report_page_open" class="btn btn-info">Report</a>
-        <a href="<?php echo base_url(); ?>Admin_dashboard_controller/admin_dashboard" class="btn btn-info">Admin</a>
+        <a href="<?php echo base_url(); ?>Report_controller/report_page_open" class="btn btn-info">Report</a>    <?php
+$sessionData = $this->session->userdata('user');
+
+if ($sessionData['user_status'] === 'banned') {
+    $cardDisplay = 'none';
+} else {
+    $cardDisplay = 'inline-block';
+}
+?>
+    <a href="<?php echo base_url(); ?>Admin_dashboard_controller/admin_dashboard" class="btn btn-info"  style="display: <?php echo $cardDisplay; ?>">Admin</a>
     </div>
     <br>
-    <div class="container">
+     
+     <div class="container">
 
-        <div class="row">
-            <div class="input-daterange">
-                <div class="col-md-3">
-                    <!-- <label for="start">From date:</label> -->
-                    <input type="date" name="from_date" id="from_date" class="form-control" placeholder="FROM DATE">
-                </div>
+    <div class="row">
+                                                                  <!--<div class="col-md-3">-->
+                                                                  <!--   <input type="date" name="from_date" id="from_date" class="form-control" placeholder="FROM DATE" >-->
+                                                                  <!-- </div>-->
+                                                                  
+                                                                  <!--<div class="col-md-3">-->
+                                                                  <!--        <input type="date" name="to_date" id="to_date" class="form-control" placeholder="TO DATE">-->
+                                                                  <!--</div>-->
+                                                                  
+                                                                  <!--<div class="col-md-3">-->
+                                                                  <!-- <input type="button" name="filter" id="filter" value="filter" class="btn btn-primary"/>-->
+                                                                  <!--</div>-->
 
-                <div class="col-md-3">
-                    <!-- <label for="start">To date:</label> -->
-                    <input type="date" name="to_date" id="to_date" class="form-control" placeholder="TO DATE">
-                </div>
-
-                <div class="col-md-5">
-                    <input type="button" name="filter" id="filter" value="filter" class="btn btn-primary" />
-                </div>
-            </div>
-        </div>
+                                                        <!--          <div class="col-md-3">-->
+                                                        <!-- city -->
+                                                        <!--<select id='agent_filter' class="form-control">-->
+                                                        <!--    <option value=''>Select Agent</option>      -->
+                                                        <!--</select>-->
+                                                                  
+                                                        <!--      </div>-->
+                                                              
+                                                          </div>
     </div>
 
+
     <br>
+    
+     <div class="container"><div class="mybtn-left"> <button class="btn btn-primary" id="download-btn">Download Quick Cases Report</button></div></div>
+     <!--<br>-->
     <div class="tab-pane container active text-dark" id="home">
         <div class="table-responsive text-dark ">
             <br>
@@ -484,6 +605,7 @@
                         <th width="10%">Address</th>
                         <th width="10%">TAT Start</th>
                         <th width="10%">TAT End</th>
+                         <!--<th width="10%">Remark</th>-->
                         <th width="10%">Status</th>
                         <th width="10%">Action</th>
                     </tr>

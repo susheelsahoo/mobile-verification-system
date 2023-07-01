@@ -176,7 +176,7 @@
         <div class="row">
           <div id="dvTitle" class="product_name">
             <!-- <img src="/images/mobileforce.jpg" alt="logo" width="500" height="600"> -->
-            <h3><b>Bodvid Private Limited</b></h3>
+            <h3><b>RealBits Coders</b></h3>
           </div>
         </div>
       </div>
@@ -208,7 +208,16 @@
     <a href="<?php echo base_url(); ?>home" class="btn btn-info" class="btn btn-info">Dashboard</a>
     <a href="<?php echo base_url(); ?>Create_cse/create_c" class="btn btn-info">Case</a>
     <a href="<?php echo base_url(); ?>Report_controller/report_page_open" class="btn btn-info">Report</a>
-    <a href="<?php echo base_url(); ?>Admin_dashboard_controller/admin_dashboard" class="btn btn-info">Admin</a>
+        <?php
+$sessionData = $this->session->userdata('user');
+
+if ($sessionData['user_status'] === 'banned') {
+    $cardDisplay = 'none';
+} else {
+    $cardDisplay = 'inline-block';
+}
+?>
+    <a href="<?php echo base_url(); ?>Admin_dashboard_controller/admin_dashboard" class="btn btn-info"  style="display: <?php echo $cardDisplay; ?>">Admin</a>
   </div>
   <br>
 

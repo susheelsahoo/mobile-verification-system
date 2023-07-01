@@ -80,100 +80,276 @@ class Billing_quick_controller extends CI_Controller
     }
 
 
-    public function downloadReport()
-    {
-        $bankname = array();
-        $from_date = $_POST['from_date'] . ' 00:00:01';
-        $to_date = $_POST['to_date'] . ' 23:59:59';
-        //  $bankname="'" . implode ( ",", isset($_POST['bankname'] )) . "'";
-        $bankname = isset($_POST['bankname']) ? "'" . implode("', '", $_POST['bankname']) . "'" : '';
-        //   echo '<pre>';  print_r ($bankname);die("tets");
-        //   $product= "'" . implode ( "', '", isset($_POST['product'] )) . "'";
-        // $product12 = isset($_POST['product']) && is_array($_POST['product']) ? $_POST['product'] : [];
-        //  $product= "'" . implode ( "', '", isset($product12)) . "'";
-        // $vpn1 =implode(',', $vpn_network);
+    // public function downloadReport()
+    // {
+    //     $bankname = array();
+    //     $from_date = $_POST['from_date'] . ' 00:00:01';
+    //     $to_date = $_POST['to_date'] . ' 23:59:59';
+    //     //  $bankname="'" . implode ( ",", isset($_POST['bankname'] )) . "'";
+    //     $bankname = isset($_POST['bankname']) ? "'" . implode("', '", $_POST['bankname']) . "'" : '';
+    //     //   echo '<pre>';  print_r ($bankname);die("tets");
+    //     //   $product= "'" . implode ( "', '", isset($_POST['product'] )) . "'";
+    //     // $product12 = isset($_POST['product']) && is_array($_POST['product']) ? $_POST['product'] : [];
+    //     //  $product= "'" . implode ( "', '", isset($product12)) . "'";
+    //     // $vpn1 =implode(',', $vpn_network);
 
-        //   implode( '`, `', $dataColumns)
-        // $agent= "'" . implode ( "', '", $_POST['agent'] ) . "'";
-        $agent = isset($_POST['agent']) ? "'" . implode("', '", $_POST['agent']) . "'" : '';
-        $product = isset($_POST['product']) ? "'" . implode("', '", $_POST['product']) . "'" : '';
-        $FItype = isset($_POST['FItype']) ? "'" . implode("', '", $_POST['FItype']) . "'" : '';
-        $download = isset($_POST['download']) ? '"' . implode('","', $_POST['download']) . '"' : '';
-        $downloadquery = isset($_POST['download']) ? implode(",", $_POST['download']) : '';
-        //   echo '<pre>';  print_r ($product);die("tets");
+    //     //   implode( '`, `', $dataColumns)
+    //     // $agent= "'" . implode ( "', '", $_POST['agent'] ) . "'";
+    //     $agent = isset($_POST['agent']) ? "'" . implode("', '", $_POST['agent']) . "'" : '';
+    //     //  $created_by = isset($_POST['agent']) ? "'" . implode("', '", $_POST['createdby']) . "'" : '';
+    //     $product = isset($_POST['product']) ? "'" . implode("', '", $_POST['product']) . "'" : '';
+    //     $FItype = isset($_POST['FItype']) ? "'" . implode("', '", $_POST['FItype']) . "'" : '';
+    //     $download = isset($_POST['download']) ? '"' . implode('","', $_POST['download']) . '"' : '';
+    //     $downloadquery = isset($_POST['download']) ? implode(",", $_POST['download']) : '';
+    //     //   echo '<pre>';  print_r ($product);die("tets");
 
 
-        if (empty($_POST['download'])) {
-            $this->session->set_flashdata("msg", "Please Select the Field to be downloaded");
-            redirect("Billing_quick_controller/billing_quick", "location");
-        }
-        if (!empty($_POST['bankname'])) {
-            $str = 'and bank_name IN (' . $bankname . ')';
-        } else $str = '';
+    //     if (empty($_POST['download'])) {
+    //         $this->session->set_flashdata("msg", "Please Select the Field to be downloaded");
+    //         redirect("Billing_quick_controller/billing_quick", "location");
+    //     }
+       
+    //     if (!empty($_POST['from_date']) && !empty($_POST['to_date'])) {
+    //         $strdate = 'created_at between ' . "'" . $from_date . "'" . ' and ' . "'" . $to_date . "'";
+    //     } else {
 
-        if (!empty($_POST['from_date']) && !empty($_POST['to_date'])) {
-            $strdate = 'created_at between ' . "'" . $from_date . "'" . ' and ' . "'" . $to_date . "'";
-        } else {
+    //         $from_date1 = date('2001-m-d H:i:s');
+    //         $to_date1 = date('Y-m-d H:i:s');;
+    //         $strdate = 'created_at between ' . "'" . $from_date1 . "'" . ' and ' . "'" . $to_date1 . "'";
+    //     }
+        
+    //      if (!empty($_POST['bankname'])) {
+    //         $str = 'and bank_name IN (' . $bankname . ')';
+    //     } else $str = '';
 
-            $from_date1 = date('2001-m-d H:i:s');
-            $to_date1 = date('Y-m-d H:i:s');;
-            $strdate = 'created_at between ' . "'" . $from_date1 . "'" . ' and ' . "'" . $to_date1 . "'";
-        }
 
-        if (!empty($_POST['product'])) {
-            $strproduct = "and product_name IN (" . "$product" . ")";
-        } else $strproduct = '';
+    //     if (!empty($_POST['product'])) {
+    //         $strproduct = "and product_name IN (" . "$product" . ")";
+    //     } else $strproduct = '';
+        
+    //     // if (!empty($_POST['createdby'])) {
+    //     //     $strcreatedby = "and created_by IN (" . "$createdby" . ")";
+    //     // } else $strcreatedby = '';
 
-        if (!empty($_POST['agent'])) {
-            $stragent = 'and code IN (' . $agent . ')';
-        } else $stragent = '';
+    //     if (!empty($_POST['agent'])) {
+    //         $stragent = 'and code IN (' . $agent . ')';
+    //     } else $stragent = '';
 
-        if (!empty($_POST['FItype'])) {
-            $strFItype = "and fi_to_be_conducted IN (" . "$FItype" . ")";
-        } else $strFItype = '';
+    //     if (!empty($_POST['FItype'])) {
+    //         $strFItype = "and fi_to_be_conducted IN (" . "$FItype" . ")";
+    //     } else $strFItype = '';
 
-        // echo "Select $downloadquery from upload_file where $strdate $str $strproduct $strFItype";die();
-        $this->val1 = $this->db->query("Select $downloadquery from upload_file where $strdate $str $stragent $strproduct $strFItype");
-        $this->num1 = $this->val1->num_rows();
-        $count = count($_POST['download']);
-        //echo $count;die();
-        $delimiter = chr(9);
-        ob_clean();
-        $filename1 = "Reports.xls";
-        //echo $filename;die();
-        $filename = trim($filename1);
-        header("Content-type: application/octet-stream");
-        header("Content-Disposition: attachment; filename=$filename");
-        header("Pragma: no-cache");
-        header("Expires: 0");
-        //$colarray=implode($delimiter, array("ID","Application ID","Code","Bank","FI Type","Updated Date","Case Created Date","Remark"));
-        for ($i = 0; $i < $count; $i++) {
-            echo $_POST['download'][$i] . "\t";
-        }
-        print("\n");
-        if ($this->num1 > 0) {
-            foreach ($this->val1->result_array() as $row) {
-                //  echo '<pre>';print_r($row);
-                $schema_insert = "";
-                // for($j=0; $j<$count;$j++)
-                foreach ($_POST['download'] as $val) {  //echo $val;die();
-                    if (!isset($row[$val]))
-                        $schema_insert .= "NULL" . $sep;
-                    elseif ($row[$val] != "")
-                        $schema_insert .= "$row[$val]" . $sep;
-                    else
-                        $schema_insert .= "" . $sep;
+    //     // echo "Select $downloadquery from upload_file where $strdate $str $strproduct $strFItype";die();
+    //     $this->val1 = $this->db->query("Select $downloadquery from upload_file where $strdate $str $stragent $strproduct $strFItype");
+    //     $this->num1 = $this->val1->num_rows();
+    //     $count = count($_POST['download']);
+    //     //echo $count;die();
+    //     $delimiter = chr(9);
+    //     ob_clean();
+    //     $filename1 = "Reports.xls";
+    //     //echo $filename;die();
+    //     $filename = trim($filename1);
+    //     header("Content-type: application/octet-stream");
+    //     header("Content-Disposition: attachment; filename=$filename");
+    //     header("Pragma: no-cache");
+    //     header("Expires: 0");
+    //     //$colarray=implode($delimiter, array("ID","Application ID","Code","Bank","FI Type","Updated Date","Case Created Date","Remark"));
+    //     for ($i = 0; $i < $count; $i++) {
+    //         echo $_POST['download'][$i] . "\t";
+    //     }
+    //     print("\n");
+    //     if ($this->num1 > 0) {
+    //         foreach ($this->val1->result_array() as $row) {
+    //             //  echo '<pre>';print_r($row);
+    //             $schema_insert = "";
+    //             // for($j=0; $j<$count;$j++)
+    //             foreach ($_POST['download'] as $val) {  //echo $val;die();
+    //                 if (!isset($row[$val]))
+    //                     $schema_insert .= "NULL" . $sep;
+    //                 elseif ($row[$val] != "")
+    //                     $schema_insert .= "$row[$val]" . $sep;
+    //                 else
+    //                     $schema_insert .= "" . $sep;
 
-                    $schema_insert = str_replace($sep . "$", "", $schema_insert);
-                    $schema_insert = preg_replace("/\r\n|\n\r|\n|\r/", " ", $schema_insert);
-                    $schema_insert .= "\t";
-                }
-                print(trim($schema_insert));
-                print "\n";
-            }
-        } else {
-            $this->session->set_flashdata("msg", "No Record Found");
-            redirect("Billing_quick_controller/billing_quick", "location");
-        }
+    //                 $schema_insert = str_replace($sep . "$", "", $schema_insert);
+    //                 $schema_insert = preg_replace("/\r\n|\n\r|\n|\r/", " ", $schema_insert);
+    //                 $schema_insert .= "\t";
+    //             }
+    //             print(trim($schema_insert));
+    //             print "\n";
+    //         }
+    //     } else {
+    //         $this->session->set_flashdata("msg", "No Record Found");
+    //         redirect("Billing_quick_controller/billing_quick", "location");
+    //     }
+    // }
+    
+
+
+
+// public function downloadReport()
+// {
+//     $from_date = $_POST['from_date'] . ' 00:00:01';
+//     $to_date = $_POST['to_date'] . ' 23:59:59';
+//     $bankname = isset($_POST['bankname']) ? "'" . implode("', '", $_POST['bankname']) . "'" : '';
+//     $agent = isset($_POST['agent']) ? "'" . implode("', '", $_POST['agent']) . "'" : '';
+//     $product = isset($_POST['product']) ? "'" . implode("', '", $_POST['product']) . "'" : '';
+//     $FItype = isset($_POST['FItype']) ? "'" . implode("', '", $_POST['FItype']) . "'" : '';
+//     $download = isset($_POST['download']) ? $_POST['download'] : array();
+
+//     if (empty($download)) {
+//         $this->session->set_flashdata("msg", "Please select the fields to be downloaded.");
+//         redirect("Billing_quick_controller/billing_quick");
+//     }
+
+//     $whereClause = "created_at BETWEEN '{$from_date}' AND '{$to_date}'";
+
+//     if (!empty($bankname)) {
+//         $whereClause .= " AND bank_name IN ({$bankname})";
+//     }
+
+//     if (!empty($agent)) {
+//         $whereClause .= " AND code IN ({$agent})";
+//     }
+
+//     if (!empty($product)) {
+//         $whereClause .= " AND product_name IN ({$product})";
+//     }
+
+//     if (!empty($FItype)) {
+//         $whereClause .= " AND fi_to_be_conducted IN ({$FItype})";
+//     }
+
+//     $query = $this->db->select(implode(",", $download))
+//         ->from("upload_file")
+//         ->where($whereClause)
+//         ->get();
+
+//     $result = $query->result_array();
+//     $count = count($download);
+
+//     // Start generating the CSV file
+//     ob_clean();
+//     header("Content-type: text/csv");
+//     header("Content-Disposition: attachment; filename=Reports.csv");
+//     header("Pragma: no-cache");
+//     header("Expires: 0");
+
+//     // Create a file handle for writing the CSV data
+//     $file = fopen('php://output', 'w');
+
+//     // Print column headers
+//     fputcsv($file, $_POST['download']);
+
+//     // Print data rows
+//     if ($query->num_rows() > 0) {
+//         foreach ($result as $row) {
+//             $rowData = array();
+//             foreach ($_POST['download'] as $column) {
+//                 if ($column == 'application_id') {
+//                     // Wrap application_id value in double quotes
+//                     $rowData[] = isset($row[$column]) ? '"' . $row[$column] . '"' : '';
+//                 } else {
+//                     $rowData[] = isset($row[$column]) ? $row[$column] : '';
+//                 }
+//             }
+//             fputcsv($file, $rowData);
+//         }
+//     } else {
+//         $this->session->set_flashdata("msg", "No Record Found");
+//         redirect("Billing_quick_controller/billing_quick", "location");
+//     }
+
+//     // Close the file handle
+//     fclose($file);
+// }
+
+public function downloadReport()
+{
+    $from_date = $_POST['from_date'] . ' 00:00:01';
+    $to_date = $_POST['to_date'] . ' 23:59:59';
+    $bankname = isset($_POST['bankname']) ? "'" . implode("', '", $_POST['bankname']) . "'" : '';
+    $agent = isset($_POST['agent']) ? "'" . implode("', '", $_POST['agent']) . "'" : '';
+    $product = isset($_POST['product']) ? "'" . implode("', '", $_POST['product']) . "'" : '';
+    $FItype = isset($_POST['FItype']) ? "'" . implode("', '", $_POST['FItype']) . "'" : '';
+    $download = isset($_POST['download']) ? $_POST['download'] : array();
+
+    if (empty($download)) {
+        $this->session->set_flashdata("msg", "Please select the fields to be downloaded.");
+        redirect("Billing_quick_controller/billing_quick");
     }
+
+    $whereClause = "created_at BETWEEN '{$from_date}' AND '{$to_date}'";
+
+    if (!empty($bankname)) {
+        $whereClause .= " AND bank_name IN ({$bankname})";
+    }
+
+    if (!empty($agent)) {
+        $whereClause .= " AND code IN ({$agent})";
+    }
+
+    if (!empty($product)) {
+        $whereClause .= " AND product_name IN ({$product})";
+    }
+
+    if (!empty($FItype)) {
+        $whereClause .= " AND fi_to_be_conducted IN ({$FItype})";
+    }
+
+    $query = $this->db->select(implode(",", $download))
+        ->from("upload_file")
+        ->where($whereClause)
+        ->get();
+
+    $result = $query->result_array();
+    $count = count($download);
+
+    header("Content-Type: application/vnd.ms-excel");
+    header("Content-Disposition: attachment; filename=Reports.xls");
+    header("Pragma: no-cache");
+    header("Expires: 0");
+
+    $file = fopen('php://output', 'w');
+
+    // Print column headers
+    fputcsv($file, $download, "\t");
+
+    // Print data rows
+    if ($query->num_rows() > 0) {
+        foreach ($result as $row) {
+            $rowData = array();
+            foreach ($download as $column) {
+                if ($column == 'application_id') {
+                    // Add a tab character before the value to treat it as text
+                    $rowData[] = "\t" . (isset($row[$column]) ? $row[$column] : '');
+                } elseif ($column == 'rv_visit_date' || $column == 'rv_visit_date' ) {
+                    // Handle date formatting for date_column
+                    $dateValue = isset($row[$column]) ? $row[$column] : '';
+                    if (empty($dateValue) || $dateValue == '0000-00-00 00:00:00') {
+                        $rowData[] = '';
+                    } else {
+                        $formattedDate = date('Y-m-d H:i:s', strtotime($dateValue));
+                        $rowData[] = "\t" . $formattedDate;
+                    }
+                } else {
+                    $rowData[] = isset($row[$column]) ? $row[$column] : '';
+                }
+            }
+            fputcsv($file, $rowData, "\t");
+        }
+    } else {
+        $this->session->set_flashdata("msg", "No Record Found");
+        redirect("Billing_quick_controller/billing_quick", "location");
+    }
+
+    fclose($file);
+}
+
+
+
+
+
+
+
 }

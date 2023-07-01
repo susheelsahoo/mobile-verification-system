@@ -82,7 +82,7 @@
                     type: "POST",
                 },
                 "columnDefs": [{
-                    "targets": [8],
+                    "targets": [9],
                     "orderable": false
                 }],
                 "lengthMenu": [
@@ -91,7 +91,7 @@
                 ],
                 createdRow: function(row, data, rowIndex) {
                     $.each($('td', row), function(colIndex) {
-                        if (colIndex == 7) {
+                        if (colIndex == 8) {
                             $(this).attr('data-name', 'status');
                             $(this).attr('class', 'status');
                             $(this).attr('data-type', 'select');
@@ -621,10 +621,11 @@
         <a href="<?php echo base_url(); ?>Admin_dashboard_controller/admin_dashboard" class="btn btn-info">Admin</a>
     </div>
     <br>
+     <div class="container"><div class="mybtn-left"><button type="button" class="btn btn-primary btn-md" data-toggle="modal" id="add_button" data-target="#create_user_model">Create User</button></div></div>
 
-    <div class="mybtn-left">
-        <button type="button" class="btn btn-primary btn-md" data-toggle="modal" id="add_button" data-target="#create_user_model">Create User</button>
-    </div>
+    <!--<div class="mybtn-left">-->
+    <!--    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" id="add_button" data-target="#create_user_model">Create User</button>-->
+    <!--</div>-->
     <div class="tab-pane container active text-dark" id="home">
         <div class="table-responsive text-dark ">
             <br>
@@ -642,10 +643,11 @@
                         <th width="6%">ID</th>
                         <th width="10%">Role Group</th>
                         <th width="10%">First name</th>
+                          <th width="10%">Agent Code</th>
                         <th width="10%">User name</th>
                         <th width="10%">Password</th>
                         <th width="10%">Mobile</th>
-                        <th width="10%">Org Name</th>
+                        <th width="10%">Email</th>
                         <th width="10%">Status</th>
                         <th width="10%">Action</th>
                     </tr>

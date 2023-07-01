@@ -21,7 +21,21 @@ class Mini_case_model extends CI_Model
 	{
 		try {
 			$status = 'active';
-			$this->db->select('id,bank_name');
+			$this->db->select('id,bank');
+			$this->db->where('status', $status);
+			$this->db->order_by("id", "ASC");
+			$query = $this->db->get('dropdown_bank_add');
+			return $query->result_array();
+		} catch (Exception $ex) {
+			throw $ex;
+		}
+	}
+	
+	public function getSourceChannel()
+	{
+		try {
+			$status = 'active';
+			$this->db->select('id,source');
 			$this->db->where('status', $status);
 			$this->db->order_by("id", "ASC");
 			$query = $this->db->get('add_bank');

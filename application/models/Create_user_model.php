@@ -19,8 +19,8 @@ class Create_user_model extends CI_Model
 	}
 
 	var $table7 = "login";
-	var $select_column7 = array("id", "role_group", "first_name", "employee_unique_id", "username", "password", "mobile", "organization", "status");
-	var $order_column7 = array("id", "role_group", "first_name", "employee_unique_id", "username", "password", "mobile", "organization", "status");
+	var $select_column7 = array("id", "role_group", "first_name", "employee_unique_id", "username", "password", "mobile", "email", "status");
+	var $order_column7 = array("id", "role_group", "first_name", "employee_unique_id", "username", "password", "mobile", "email", "status");
 
 	function make_query_user()
 	{
@@ -34,7 +34,7 @@ class Create_user_model extends CI_Model
 				$this->db->like("username", $_POST["search"]["value"]);
 				$this->db->or_like("password", $_POST["search"]["value"]);
 				$this->db->or_like("mobile", $_POST["search"]["value"]);
-				$this->db->or_like("organization", $_POST["search"]["value"]);
+				$this->db->or_like("email", $_POST["search"]["value"]);
 				$this->db->or_like("status", $_POST["search"]["value"]);
 			}
 			if (isset($_POST["order"])) {

@@ -314,6 +314,18 @@
     #agentcheckboxes label:hover {
       background-color: #1e90ff;
     }
+     #createdbycheckboxes {
+      display: none;
+      border: 1px #dadada solid;
+    }
+
+    #createdbycheckboxes label {
+      display: block;
+    }
+
+    #createdbycheckboxes label:hover {
+      background-color: #1e90ff;
+    }
   </style>
 
   <div class="container">
@@ -378,11 +390,11 @@
                 <div class="overSelect"></div>
               </div>
               <div id="banknamecheckboxes" name="checkboxes">
-                <label for="one"> <input type="checkbox" id="select_allbank" value="">Check ALL</label>
-                <?php $this->val1 = $this->db->query("Select * from add_bank ");
+                <label for="one"> <input type="checkbox" id="select_allbank" value=""> Select ALL</label>
+                <?php $this->val1 = $this->db->query("Select * from dropdown_bank_add");
                 foreach ($this->val1->result_array() as $rows) { ?>
                   <label for="one">
-                    <input type="checkbox" id="one" name="bankname[]" value="<?php echo $rows['bank_name'] ?>" /><?php echo $rows['bank_name'] ?></label>
+                    <input type="checkbox" id="one" name="bankname[]" value="<?php echo $rows['bank'] ?>" /> <?php echo $rows['bank'] ?></label>
                 <?php } ?>
               </div>
             </div>
@@ -398,17 +410,36 @@
                 <div class="overSelect"></div>
               </div>
               <div id="productcheckboxes" name="checkboxes">
-                <label for="one"> <input type="checkbox" id="select_allproduct">Check All</label>
+                <label for="one"> <input type="checkbox" id="select_allproduct"> Select All</label>
                 <?php $this->val = $this->db->query("Select * from add_product ");
                 foreach ($this->val->result_array() as $row) { ?>
                   <label for="one">
-                    <input type="checkbox" id="one" name="product[]" value="<?php echo $row['product'] ?>" /><?php echo $row['product'] ?></label>
+                    <input type="checkbox" id="one" name="product[]" value="<?php echo $row['product'] ?>" /> <?php echo $row['product'] ?></label>
                 <?php } ?>
               </div>
             </div>
           </div>
 
 
+
+<div class="col-md-3">
+            <div class="multiselect">
+              <div class="selectBox" onclick="showCheckboxes('CreatedBy')">
+                <select>
+                  <option>Select Created by</option>
+                </select>
+                <div class="overSelect"></div>
+              </div>
+              <div id="createdbycheckboxes" name="checkboxes">
+                <label for="one"> <input type="checkbox" id="select_allcreatedby"> Select All</label>
+                <?php $this->val = $this->db->query("Select * from login WHERE role_group = 'SA'");
+                foreach ($this->val->result_array() as $row) { ?>
+                  <label for="one">
+                    <input type="checkbox" id="one" name="createdby[]" value="<?php echo $row['created_by'] ?>" /> <?php echo $row['first_name'] ?></label>
+                <?php } ?>
+              </div>
+            </div>
+          </div>
 
           <div class="col-md-3">
             <div class="multiselect">
@@ -419,15 +450,17 @@
                 <div class="overSelect"></div>
               </div>
               <div id="agentcheckboxes" name="checkboxes">
-                <label for="one"> <input type="checkbox" id="select_allagent">Check All</label>
-                <?php $this->val = $this->db->query("Select * from login ");
+                <label for="one"> <input type="checkbox" id="select_allagent"> Select All</label>
+                <?php $this->val = $this->db->query("Select * from login WHERE role_group = 'FA'");
                 foreach ($this->val->result_array() as $row) { ?>
                   <label for="one">
-                    <input type="checkbox" id="one" name="agent[]" value="<?php echo $row['employee_unique_id'] ?>" /><?php echo $row['first_name'] ?></label>
+                    <input type="checkbox" id="one" name="agent[]" value="<?php echo $row['employee_unique_id'] ?>" /> <?php echo $row['first_name'] ?></label>
                 <?php } ?>
               </div>
             </div>
           </div>
+          
+          
 
 
           <div class="col-md-3">
@@ -439,10 +472,10 @@
                 <div class="overSelect"></div>
               </div>
               <div id="fitypecheckboxes" name="checkboxes">
-                <label for="one"> <input type="checkbox" id="select_allfitype">Check All</label>
+                <label for="one"> <input type="checkbox" id="select_allfitype"> Select All</label>
                 <label for="one">
-                  <input type="checkbox" id="one" name="FItype[]" value="RV" />RV</label>
-                <label for="one"> <input type="checkbox" id="one" name="FItype[]" value="BV" />BV</label>
+                  <input type="checkbox" id="one" name="FItype[]" value="RV" /> RV</label>
+                <label for="one"> <input type="checkbox" id="one" name="FItype[]" value="BV" /> BV</label>
 
               </div>
             </div>
@@ -460,34 +493,65 @@
                 <div class="overSelect"></div>
               </div>
               <div id="downloadfieldcheckboxes" name="checkboxes">
-                <label for="one"> <input type="checkbox" id="select_alldownload"> Check All</label>
-                <label for="one">
+                <label for="one"> <input type="checkbox" id="select_alldownload"> Select All</label>
+                 <label for="one">
+                  <input type="checkbox" id="one" name="download[]" value="id" /> ID</label>
+                 <label for="one">
                   <input type="checkbox" id="one" name="download[]" value="bank_name" /> Bank</label>
+                   <label for="one">
+                  <input type="checkbox" id="one" name="download[]" value="product_name" /> Product</label>
+                  
+                   <label for="one">
+                  <input type="checkbox" id="one" name="download[]" value="source_channel" /> Source Channel</label>
+                 <label for="one">
+                  <input type="checkbox" id="one" name="download[]" value="application_id" /> Reference Number</label>
+               
                 <label for="one">
                   <input type="checkbox" id="one" name="download[]" value="customer_name" /> Applicant name</label>
+                  
+                  <!-- <label for="one">-->
+                  <!--<input type="checkbox" id="one" name="download[]" value="created_at" /> Created Date</label>-->
                 <label for="one">
                   <input type="checkbox" id="one" name="download[]" value="fi_to_be_conducted" /> FI Type</label>
-                <label for="one">
-                  <input type="checkbox" id="one" name="download[]" value="product_name" /> Product</label>
+               
                 <label for="one">
                   <input type="checkbox" id="one" name="download[]" value="business_address" /> Address</label>
-                <!-- <label for="one">-->
-                <!--<input type="checkbox" id="one" name="download[]" value="business_address"/> Residence Address</label> -->
+                  
+                  <label for="one">
+                  <input type="checkbox" id="one" name="download[]" value="code" /> Agent</label>
+                  
+                   <label for="one">
+                  <input type="checkbox" id="one" name="download[]" value="geo_limit" /> Geo Limit</label>
+                  
+                   <label for="one">
+                  <input type="checkbox" id="one" name="download[]" value="rv_fi_status" /> FI Status</label>
+                  
+                   <label for="one">
+                  <input type="checkbox" id="one" name="download[]" value="rv_fi_status_reason" /> FI Status Reason</label>
+                  
+                    <label for="one">
+                  <input type="checkbox" id="one" name="download[]" value="rv_loan_amt" /> Loan Amount</label>
+                  
+                    <label for="one">
+                  <input type="checkbox" id="one" name="download[]" value="rv_vehicle_type" /> Vehicle</label>
+                  
+                   
+                  
+                    <label for="one">
+                  <input type="checkbox" id="one" name="download[]" value="add_final_status" /> Final Status</label>
+               
                 <label for="one">
                   <input type="checkbox" id="one" name="download[]" value="city" /> City </label>
                 <label for="one">
-                  <input type="checkbox" id="one" name="download[]" value="pincode" /> Res pincode</label>
+                  <input type="checkbox" id="one" name="download[]" value="pincode" /> Pincode</label>
                 <label for="one">
                   <input type="checkbox" id="one" name="download[]" value="business_name" /> Business name</label>
-                <label for="one">
-                  <input type="checkbox" id="one" name="download[]" value="rv_fi_status" /> RV FI Status</label>
-                <label for="one">
-                  <input type="checkbox" id="one" name="download[]" value="amount" /> Amount</label>
+               
+              
 
-                <label for="one">
-                  <input type="checkbox" id="one" name="download[]" value="code" /> Agent Name</label>
-                <label for="one">
-                  <input type="checkbox" id="one" name="download[]" value="source_channel" /> Source Channel</label>
+                <!--<label for="one">-->
+                <!--  <input type="checkbox" id="one" name="download[]" value="code" /> Agent Name</label>-->
+               
 
                 <label for="one">
                   <input type="checkbox" id="one" name="download[]" value="rv_lat" /> RV Latitude</label>
@@ -510,11 +574,22 @@
                 <label for="one">
                   <input type="checkbox" id="one" name="download[]" value="rv_visit_date" /> RV Visit Date</label>
 
-                <label for="one">
-                  <input type="checkbox" id="one" name="download[]" value="bv_dt_of_cpv" /> BV Visit Date</label>
-
-                <label for="one">
+                <!--<label for="one">-->
+                <!--  <input type="checkbox" id="one" name="download[]" value="bv_dt_of_cpv" /> BV Visit Date</label>-->
+                  
+                   <label for="one">
+                  <input type="checkbox" id="one" name="download[]" value="code" /> Verified By</label>
+                   <label for="one">
+                  <input type="checkbox" id="one" name="download[]" value="created_by" /> Created by</label>
+                  
+                  
+                   <label for="one">
                   <input type="checkbox" id="one" name="download[]" value="created_at" /> Created AT</label>
+                  
+                   <label for="one">
+                  <input type="checkbox" id="one" name="download[]" value="consolidated_remark" /> Consolidated Remark</label>
+
+               
 
 
 
@@ -562,6 +637,9 @@
       if (val == 'Agent') {
         var field = "agentcheckboxes";
       }
+       if (val == 'CreatedBy') {
+        var field = "createdbycheckboxes";
+      }
 
 
 
@@ -596,5 +674,8 @@
 
     $("#select_allagent").click(function() {
       $("input[name='agent[]']").not(this).prop('checked', this.checked);
+    });
+    $("#select_allcreatedby").click(function() {
+      $("input[name='createdby[]']").not(this).prop('checked', this.checked);
     });
   </script>

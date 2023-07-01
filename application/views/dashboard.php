@@ -37,8 +37,56 @@
                     [15, 25, 50, "All"]
                 ],
             });
+            
+            $('#sub_btn').click(function(event) {
+                event.preventDefault();
 
+                var from = $('#from').val();
+                var to = $('#to').val();
+                var datastring = "from=" + from + "&to=" + to;
+                $.ajax({
+                    type: "POST",
+                    url: "<?= base_url() ?>Dashboard_controller/fetch_all_agentfilterwise",
+                    // dataType:"json",
+                    data: datastring,
+                    // contentType: "application/json; charset=utf-8",
+                    success: function(data) {
+                        //alert(data);
+                        $('#fetch_agent_data_body').html(data);
 
+                    },
+                    error: function() {
+                        // alert("Error");
+                    }
+                });
+
+            });
+            
+            //   $('#agent_filter').click(function(event) {
+            //     event.preventDefault();
+
+               
+            //      var datastring = "val=" + val;
+            //     $.ajax({
+            //         type: "POST",
+            //          url: "<?= base_url() ?>Dashboard_controller/agentFilterDashboard",
+            //         // dataType:"json",
+            //         data: datastring,
+            //         // contentType: "application/json; charset=utf-8",
+            //         success: function(data) {
+            //             //alert(data);
+            //             $('#fetch_agent_data_body').html(data);
+
+            //         },
+            //         error: function() {
+            //             // alert("Error");
+            //         }
+            //     });
+
+            // });
+            
+                                    
+   
         });
     </script>
 </head>
@@ -96,7 +144,7 @@
             <div class="col-md-4 col-sm-6">
                 <div class="row">
                     <div id="dvTitle" class="product_name">
-                        <h3><b>Bodvid Private Limited</b></h3>
+                        <h3><b>RealBits Coders</b></h3>
                     </div>
                 </div>
             </div>
@@ -134,20 +182,39 @@
         <a href="<?php echo base_url(); ?>home" class="btn btn-info" class="btn btn-info">Dashboard</a>
         <a href="<?php echo base_url(); ?>Create_cse/create_c" class="btn btn-info">Case</a>
         <a href="<?php echo base_url(); ?>Report_controller/report_page_open" class="btn btn-info">Report</a>
-        <a href="<?php echo base_url(); ?>Admin_dashboard_controller/admin_dashboard" class="btn btn-info">Admin</a>
+            <?php
+$sessionData = $this->session->userdata('user');
+
+if ($sessionData['user_status'] === 'banned') {
+    $cardDisplay = 'none';
+} else {
+    $cardDisplay = 'inline-block';
+}
+?>
+    <a href="<?php echo base_url(); ?>Admin_dashboard_controller/admin_dashboard" class="btn btn-info" style="display:<?php echo $cardDisplay; ?>">Admin</a>
     </div>
     <br>
 
 
 
     <?php
-    //                         
     if (isset($data) & !empty($data)) { //check $data is set or not if not set return false and skip action else return true and perform action.
         $data1 = $data['countTotal']; //here we set the $data value in $active_menu  ($data <-- data comes from controller 
         $countTotal = $data1['countTotal']; //here we set the $data value in $active_menu  ($data <-- data comes from controller 
     }
     ?>
-
+    
+    <label>From</label>
+    <input type="date" name="from" id="from" required ">
+    <label>To</label>
+    <input type="date" name="to" id="to" required ">
+    <button class="btn btn-warning " name="sub_btn" id="sub_btn"> GET </button>
+    
+        
+    
+    
+    
+    
     <div class="tab-pane container active text-dark" id="home">
         <div class="table-responsive text-dark ">
             <br />
@@ -155,20 +222,61 @@
                 <thead>
                     <tr class="">
                         <th width="6%">Agent</th>
-                        <!-- <th width="6%"><a href="<?php echo base_url(); ?>Assign_case_controller/assign_case_function" id="' . $row->id . '">Agent</a></th> -->
+                         <!--<th width="6%"><a href="<?php echo base_url(); ?>Assign_case_controller/assign_case_function" id="' . $row->id . '">Agent</a></th> -->
                         <th width="10%">Total</th>
                         <th width="10%">InProgress</th>
+                        <th width="10%">Pending</th>
+                        <th width="10%">Visit</th>
                         <th width="10%">Out of TAT</th>
                         <th width="10%">Positive resolved</th>
                         <th width="10%">Negative resolved</th>
-                        <!--<th width="10%">Postive Verified</th>-->
-                        <!--<th width="10%">Negative Verified</th>-->
+                        <!--<th width="10%">First Visit</th>-->
+                        <!--<th width="10%">Last Visit</th>-->
                     </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody id="fetch_agent_data_body"></tbody>
+        <!--<tr>-->
+        <!--    <td></td>-->
+        <!--    <td></td>-->
+        <!--    <td></td>-->
+        <!--    <td></td>-->
+        <!--    <td></td>-->
+        <!--    <td></td>-->
+        <!--    <td></td>-->
+        <!--    <td></td>-->
+        <!--    <td><?php echo $agentVisitDates->first_visit_date; ?></td>-->
+        <!--    <td><?php echo $agentVisitDates->last_visit_date; ?></td>-->
+        <!--</tr>-->
             </table>
         </div>
     </div>
+    
+    
+                                        <script type="text/javascript">
+                                            
+                                                
+                                                  function getAgentData(val) {
+                                               
+                                              var datastring = "val=" + val;
+                                                // alert(datastring);
+                                                $.ajax({
+                                                    type: "POST",
+                                                    url: "<?= base_url() ?>Dashboard_controller/agentFilterDashboard",
+                                                    // dataType:"json",
+                                                    data: datastring,
+                                                    // contentType: "application/json; charset=utf-8",
+                                                    success: function(data) {
+                                                        //alert(data);
+                                                        $('#fetch_agent_data_body').html(data);
+
+                                                    },
+                                                    error: function() {
+                                                        // alert("Error");
+                                                    }
+                                                });
+                                            }
+                                            
+    </script>
 </body>
 
 </html>

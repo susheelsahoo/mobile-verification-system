@@ -111,5 +111,21 @@ class Add_product_controller extends CI_Controller {
         $this->Add_product_model->insert_status_update_product($array, $this->input->post('pk'));
         print_r($array);
     }
+    
+      function get_description() {
+        $array = array(
+              'description'=> $this->input->post('value'));
+                $this->load->model('Add_product_model');
+                $this->Add_product_model->insert_descriptions($array,$this->input->post('pk'));
+            print_r($array);
+    }
+    
+    function get_product() {
+        $array = array(
+              'product'=> $this->input->post('value'));
+                $this->load->model('Add_product_model');
+                $this->Add_product_model->insert_products($array,$this->input->post('pk'));
+            print_r($array);
+    }
 
 }

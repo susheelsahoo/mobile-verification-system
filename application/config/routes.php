@@ -57,6 +57,7 @@ $route['translate_uri_dashes'] = FALSE;
 // ---------------API Calling-------------------
 $route['getMiniCases'] = 'API/Api/getMiniCases';
 $route['getUserLogin'] = 'API/Api/getUserLogin';
+$route['insertTokenid'] = 'API/Api/insertTokenid';
 
 $route['getMiniCasesType'] = 'API/Api/getMiniCasesType';
 $route['insertMiniCases'] = 'API/Api/insertMiniCases';
@@ -70,10 +71,25 @@ $route['insertrvMainCases'] = 'API/Api/insertrvMainCases';
 $route['insertBvMainCases'] = 'API/Api/insertBvMainCases';
 $route['miniCaseBankType'] = 'API/Api/miniCaseBankType';
 $route['mainBankCaseType'] = 'API/Api/mainBankCaseType';
+$route['getUploadFileCount'] = 'API/Api/getUploadFileCount';
+$route['caseCount'] = 'API/Api/caseCount';
 
 // insert quick case api
 $route['insertrvQuickCases'] = 'API/Api/insertrvQuickCases';
 $route['insertBvQuickCases'] = 'API/Api/insertBvQuickCases';
+// Send Tat notification 30 min before
+$route['sendTatNotificationAlert'] = 'API/Api/sendTatNotificationAlert';
+$route['sendQuickTatNotificationAlert'] = 'API/Api/sendQuickTatNotificationAlert';
+
+$route['getMainCaseNotification'] = 'API/Api/getMainCaseNotification';
+$route['getQuickCaseNotification'] = 'API/Api/getQuickCaseNotification';
 
 
+$route['insertQuickCaseNotification'] = 'API/Api/insertQuickCaseNotification';
+$route['insertMainCaseNotification'] = 'API/Api/insertMainCaseNotification';
+
+
+
+
+$route['getCasesNew'] = 'API/Api/getCasesNew';
 

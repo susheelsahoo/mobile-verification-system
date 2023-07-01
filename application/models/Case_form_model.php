@@ -16,4 +16,18 @@ class Case_form_model extends CI_Model
 			throw $ex;
 		}
 	}
+	
+	  public function getEmailByCode($code)
+    {
+        $this->db->select('email');
+        $this->db->where('employee_unique_id', $code);
+        $query = $this->db->get('login');
+
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            return $row->email;
+        } else {
+            return null;
+        }
+    }
 }

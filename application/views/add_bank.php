@@ -8,6 +8,8 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/select/1.6.2/css/select.dataTables.min.css">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
+ 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 
 
@@ -26,7 +28,36 @@
 <body>
 
     <script>
+      function openTab(evt, tabName) {
+      var i, tabcontent, tablinks;
+      
+      // Hide all tab content
+      tabcontent = document.getElementsByClassName("tab-content");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      
+      // Remove 'active' class from all tab links
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      
+      // Show the selected tab content
+      document.getElementById(tabName).style.display = "block";
+      
+      // Add 'active' class to the clicked tab link
+      evt.currentTarget.className += " active";
+    }
+    
+    // Set default active tab here
+    // For example, to set 'tab2' as the default active tab:
+    document.getElementById("tab2").style.display = "block";
+    </script>
+
+    <script>
         $(document).ready(function() {
+
 
 
             var dataTable = $('#fetch_bank_data').DataTable({
@@ -34,23 +65,50 @@
                 "serverSide": true,
                 "order": [],
                 "ajax": {
-                    url: "<?php echo base_url() . 'Add_bank_controller/fetch_all_bank'; ?>",
+                    url: "<?php echo base_url() . 'Add_bank_controller/fetch_all_source'; ?>",
                     type: "POST",
                 },
                 "columnDefs": [{
-                    "targets": [3],
+                    "targets": [4],
                     "orderable": false
                 }],
                 "lengthMenu": [
-                    [10, 20, 50, -1],
-                    [10, 20, 50, "All"]
+                    [30, 50, 100, -1],
+                    [30, 50, 100, "All"]
                 ],
                 createdRow: function(row, data, rowIndex) {
                     $.each($('td', row), function(colIndex) {
-                        if (colIndex == 3) {
+                        if (colIndex == 4) {
                             $(this).attr('data-name', 'status');
                             $(this).attr('class', 'status');
                             $(this).attr('data-type', 'select');
+                            $(this).attr('data-pk', data[0]);
+                        }
+                    });
+                    
+                    $.each($('td', row), function(colIndex) {
+                        if (colIndex == 3) {
+                            $(this).attr('data-name', 'description');
+                            $(this).attr('class', 'description');
+                            $(this).attr('data-type', 'text');
+                            $(this).attr('data-pk', data[0]);
+                        }
+                    });
+                    
+                    $.each($('td', row), function(colIndex) {
+                        if (colIndex == 2) {
+                            $(this).attr('data-name', 'source');
+                            $(this).attr('class', 'source');
+                            $(this).attr('data-type', 'text');
+                            $(this).attr('data-pk', data[0]);
+                        }
+                    });
+                    
+                    $.each($('td', row), function(colIndex) {
+                        if (colIndex == 1) {
+                            $(this).attr('data-name', 'bank_name');
+                            $(this).attr('class', 'bank_name');
+                            $(this).attr('data-type', 'text');
                             $(this).attr('data-pk', data[0]);
                         }
                     });
@@ -78,8 +136,103 @@
                     }
                 }
             });
+            
 
-            $('#form_add_bank').submit(function(e) {
+            var dataTable = $('#fetch_bank_data_dropdown').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "order": [],
+                "ajax": {
+                    url: "<?php echo base_url() . 'Add_bank_controller/fetch_all_bank'; ?>",
+                    type: "POST",
+                },
+                "columnDefs": [{
+                    "targets": [3],
+                    "orderable": false
+                }],
+                "lengthMenu": [
+                    [30, 50, 100, -1],
+                    [30, 50, 100, "All"]
+                ],
+                // createdRow: function(row, data, rowIndex) {
+                //     $.each($('td', row), function(colIndex) {
+                //         if (colIndex == 4) {
+                //             $(this).attr('data-name', 'status');
+                //             $(this).attr('class', 'status');
+                //             $(this).attr('data-type', 'select');
+                //             $(this).attr('data-pk', data[0]);
+                //         }
+                //     });
+                    
+                //     $.each($('td', row), function(colIndex) {
+                //         if (colIndex == 3) {
+                //             $(this).attr('data-name', 'description');
+                //             $(this).attr('class', 'description');
+                //             $(this).attr('data-type', 'text');
+                //             $(this).attr('data-pk', data[0]);
+                //         }
+                //     });
+                    
+                //     $.each($('td', row), function(colIndex) {
+                //         if (colIndex == 2) {
+                //             $(this).attr('data-name', 'source');
+                //             $(this).attr('class', 'source');
+                //             $(this).attr('data-type', 'text');
+                //             $(this).attr('data-pk', data[0]);
+                //         }
+                //     });
+                    
+                //     $.each($('td', row), function(colIndex) {
+                //         if (colIndex == 1) {
+                //             $(this).attr('data-name', 'bank_name');
+                //             $(this).attr('class', 'bank_name');
+                //             $(this).attr('data-type', 'text');
+                //             $(this).attr('data-pk', data[0]);
+                //         }
+                //     });
+                // }
+            });
+            
+             $('#fetch_bank_data').editable({
+                    mode: 'inline',
+                    container: 'body',
+                    selector: 'td.description',
+                    url: '<?php echo base_url() . 'Add_bank_controller/get_description'; ?>',
+                    title: 'description',
+                    type: 'POST',
+                    validate: function (value) {
+                        
+                    }
+                });
+                
+                 $('#fetch_bank_data').editable({
+                    mode: 'inline',
+                    container: 'body',
+                    selector: 'td.source',
+                    url: '<?php echo base_url() . 'Add_bank_controller/get_source'; ?>',
+                    title: 'source',
+                    type: 'POST',
+                    validate: function (value) {
+                        
+                    }
+                });
+                
+                 $('#fetch_bank_data').editable({
+                    mode: 'inline',
+                    container: 'body',
+                    selector: 'td.bank_name',
+                    url: '<?php echo base_url() . 'Add_bank_controller/get_bank_name'; ?>',
+                    title: 'bank_name',
+                    type: 'POST',
+                    validate: function (value) {
+                        
+                    }
+                });
+
+          
+          
+          
+                $('#form_add_bank').submit(function(e) {
                 e.preventDefault();
                 var me = $(this);
                 // perform ajax
@@ -98,6 +251,65 @@
                                 .removeClass('has-success');
                             $('.text-danger').remove();
                             $('#add_bank_model').modal('hide');
+                            alert("Source Generated Successfully!");
+                            swal.fire({
+                                title: "Added",
+                                text: "bank has been Added",
+                                icon: 'success',
+                                type: "success",
+                                timer: 3000
+                            });
+                            $('#fetch_bank_data').DataTable().ajax.reload();
+                            // reset the form
+                            me[0].reset();
+                            alert("Source add Successfully!");
+                        } else {
+                            alert("Please fill the details correctly!");
+                            // prepare error
+                            $.each(response.messages, function(key, value) {
+                                var element = $('#' + key);
+                                element.closest('div.form-group')
+                                    .removeClass('has-error')
+                                    .addClass(value.length > 0 ? 'has-error' : 'has-success')
+                                    .find('.text-danger')
+                                    .remove();
+                                element.after(value);
+                            });
+                        }
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        //   swal.fire("Error deleting!", "Please try again later !!!", "error");
+                        $('#add_bank_model').modal('hide');
+                        swal.fire({
+                            title: "Error saving...",
+                            text: "Please try again later !!!",
+                            icon: 'error',
+                            type: "error",
+                            timer: 3000
+                        });
+                    }
+                });
+            });
+
+            $('#form_add_bank_dropdwon').submit(function(e) {
+                e.preventDefault();
+                var me = $(this);
+                // perform ajax
+                $.ajax({
+                    url: me.attr('action'),
+                    type: 'POST',
+                    data: new FormData(this),
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    dataType: 'json',
+                    success: function(response) {
+                        // alert("bank Generated Successfully!");
+                        if (response.success == true) {
+                            $('.form-group').removeClass('has-error')
+                                .removeClass('has-success');
+                            $('.text-danger').remove();
+                            $('#add_bank_model_dropdown').modal('hide');
                             alert("bank Generated Successfully!");
                             swal.fire({
                                 title: "Added",
@@ -126,7 +338,7 @@
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
                         //   swal.fire("Error deleting!", "Please try again later !!!", "error");
-                        $('#add_bank_model').modal('hide');
+                        $('#add_bank_model_dropdown').modal('hide');
                         swal.fire({
                             title: "Error saving...",
                             text: "Please try again later !!!",
@@ -322,7 +534,7 @@
             <div class="col-md-4 col-sm-6">
                 <div class="row">
                     <div id="dvTitle" class="product_name">
-                        <h3><b>Bodvid Private Limited</b></h3>
+                        <h3><b>RealBits Coders</b></h3>
                     </div>
                 </div>
             </div>
@@ -357,33 +569,97 @@
         <a href="<?php echo base_url(); ?>Admin_dashboard_controller/admin_dashboard" class="btn btn-info">Admin</a>
     </div>
     <br>
-    <div class="mybtn-left">
-        <button type="button" class="btn btn-primary btn-md" data-toggle="modal" id="add_button" data-target="#add_bank_model">Add Bank</button>
-    </div>
+    
 
-    <div class="tab-pane container active text-dark" id="home">
-        <div class="table-responsive text-dark ">
-            <br>
-            <table id="fetch_bank_data" class="table table-bordered table-striped">
-                <thead>
-                    <tr class="">
-                        <th width="6%">ID</th>
-                        <th width="10%">Bank</th>
-                        <th width="10%">Description</th>
-                        <th width="10%">Status</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </div>
+    <style>
+    .tab-content {
+      display: none;
+    }
+    
+    .active {
+      display: block;
+    }
+    .tab {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .tab button {
+        width: 550px;
+      margin-right: 10px;
+    }
+  </style>
+
+
+  
+ 
+  <div class="card-body">
+    <div class="tab">
+    <button type="button" class="tablinks active btn btn-primary btn-lg" onclick="openTab(event, 'tab1')">Add Source Channel</button>
+    <button type="button" class="tablinks btn btn-primary btn-lg" onclick="openTab(event, 'tab2')">Add Bank</button>
+  </div>
+</div>
+
+  <div class="col-md-12">
+      
+
+
+  <div class="tab-content  active text-dark" id="tab1">
+    <!-- Content for Tab 1 goes here -->
+    <div class="mybtn-left">
+        <button type="button" class="btn btn-primary btn-md" data-toggle="modal" id="add_button" data-target="#add_bank_model">Add Source Channel</button>
     </div>
+    <div class="table-responsive text-dark">
+        <br>
+        <table id="fetch_bank_data" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th width="6%">ID</th>
+                    <th width="10%">Bank</th>
+                    <th width="10%">Source Channel</th>
+                    <th width="10%">Description</th>
+                    <th width="10%">Status</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+</div>
+
+<div class="col-md-12">
+        <div class="tab-content text-dark" id="tab2">
+          
+       <div class="mybtn-left">
+        <button type="button" class="btn btn-primary btn-md" data-toggle="modal" id="add_bank" data-target="#add_bank_model_dropdown">Add Bank</button>
+    </div>
+    <div class="table-responsive text-dark">
+        <br>
+        <table id="fetch_bank_data_dropdown" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th width="6%">ID</th>
+                    <th width="10%">Bank</th>
+                    <th width="10%">Description</th>
+                    <th width="10%">Status</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+        </div>
+</div>
+    
+
+
 
     <div id="add_bank_model" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Add New Bank</h4>
+                    <h4 class="modal-title">Add New Source Channel</h4>
                 </div>
                 <?php echo form_open('Add_bank_controller/add_bank_validation', array('id' => 'form_add_bank')) ?>
                 <div class="form-row">
@@ -392,15 +668,53 @@
                         <input type="text" class="form-control" id="bank_name" name="bank_name">
                     </div>
                 </div>
+                 <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="source" class="h5">Source Channel</label>
+                        <input type="text" class="form-control" id="source" name="source">
+                    </div>
+                </div>
                 <div class="form-row">
                     <div class="form-group col-md-12">
-                        <label for="description" class="h5">Description</label>
+                        <label for="description" class="h5">Bank Description</label>
                         <textarea type="text" class="form-control" id="description" name="description" rows="3"></textarea>
                     </div>
                 </div>
 
                 <div class="modal-footer">
                     <input type="submit" name="add_bank" id="add_bank_data" class="btn btn-primary" value="Add">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+                <?php echo form_close() ?>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="add_bank_model_dropdown" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add New Bank</h4>
+                </div>
+                <?php echo form_open('Add_bank_controller/bank_validation', array('id' => 'form_add_bank_dropdwon')) ?>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="bank" class="h5">Bank</label>
+                        <input type="text" class="form-control" id="bank" name="bank">
+                    </div>
+                </div>
+               
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="details" class="h5">Description (if any)</label>
+                        <textarea type="text" class="form-control" id="details" name="details" rows="3"></textarea>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <input type="submit" name="add_bank_dropdown" id="add_bank_data_dropdown" class="btn btn-success" value="Add">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                 </div>
                 <?php echo form_close() ?>

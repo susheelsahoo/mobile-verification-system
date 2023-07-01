@@ -33,6 +33,192 @@ class View_mini_case_controller extends CI_Controller
         }
     }
 
+// public function download_images_quick()
+// {
+//     // Retrieve the imageList data from the POST request
+//     $imageList = $this->input->post('imageList');
+
+//     // Create a temporary directory to store the images
+//     $tempDir = 'temp_images';
+//     if (!is_dir($tempDir)) {
+//         mkdir($tempDir, 0777, true);
+//     }
+
+//     // Loop through the imageList and save the images
+//     foreach ($imageList as $image) {
+//         $base64Data = $image['base64Data'];
+//         $filename = $image['filename'];
+//         $filepath = $tempDir . '/' . $filename;
+
+//         // Decode the base64 data and save it to the file
+//         $fileData = base64_decode($base64Data);
+//         file_put_contents($filepath, $fileData);
+//     }
+
+//     // Generate the ZIP file
+//     $zipFile = 'images.zip';
+//     $zip = new ZipArchive();
+//     if ($zip->open($zipFile, ZipArchive::CREATE | ZipArchive::OVERWRITE) === true) {
+//         // Add all the files from the temporary directory to the ZIP archive
+//         $files = glob($tempDir . '/*');
+//         foreach ($files as $file) {
+//             $zip->addFile($file, basename($file));
+//         }
+//         $zip->close();
+
+//         // Remove the temporary directory and its files
+//         array_map('unlink', glob($tempDir . '/*'));
+//         rmdir($tempDir);
+
+//         // Set the proper headers for file download
+//         header('Content-Type: application/zip');
+//         header('Content-Disposition: attachment; filename="' . $zipFile . '"');
+//         header('Content-Length: ' . filesize($zipFile));
+
+//         // Read the ZIP file and output it to the response
+//         readfile($zipFile);
+
+//         // Delete the ZIP file after it has been downloaded
+//         unlink($zipFile);
+//     } else {
+//         // Handle the case when the ZIP file could not be created
+//         echo 'Failed to create ZIP file.';
+//     }
+// }
+
+
+public function download_images_quick()
+{
+    // Retrieve the imageList data from the POST request
+    $imageList = $this->input->post('imageList');
+
+    // Create a temporary directory to store the images
+    $tempDir = 'temp_images';
+    if (!is_dir($tempDir)) {
+        mkdir($tempDir, 0777, true);
+    }
+
+    // Loop through the imageList and save the images
+    foreach ($imageList as $image) {
+        $base64Data = $image['base64Data'];
+        $filename = $image['filename'];
+        $filepath = $tempDir . '/' . $filename;
+
+        // Decode the base64 data and save it to the file
+        $fileData = base64_decode($base64Data);
+        file_put_contents($filepath, $fileData);
+    }
+
+    // Generate the ZIP file
+    $zipFile = 'images.zip';
+    $zip = new ZipArchive();
+    if ($zip->open($zipFile, ZipArchive::CREATE | ZipArchive::OVERWRITE) === true) {
+        // Add all the files from the temporary directory to the ZIP archive
+        $files = glob($tempDir . '/*');
+        foreach ($files as $file) {
+            $zip->addFile($file, basename($file));
+        }
+        $zip->close();
+
+        // Remove the temporary directory and its files
+        array_map('unlink', glob($tempDir . '/*'));
+        rmdir($tempDir);
+
+        // Return the download link
+        $downloadLink = base_url($zipFile);
+        echo json_encode(['downloadLink' => $downloadLink]);
+    } else {
+        // Handle the case when the ZIP file could not be created
+        echo json_encode(['error' => 'Failed to create ZIP file.']);
+    }
+}
+
+
+
+//   public function download_images_quick()
+//     {
+//         // Retrieve the imageList data from the POST request
+//         $imageList = $this->input->post('imageList');
+
+//         // Create a temporary directory to store the images
+//         $tempDir = 'temp_images';
+//         if (!is_dir($tempDir)) {
+//             mkdir($tempDir, 0777, true);
+//         }
+
+//         // Loop through the imageList and save the images
+//         foreach ($imageList as $image) {
+//             $base64Data = $image['base64Data'];
+//             $filename = $image['filename'];
+//             $filepath = $tempDir . '/' . $filename;
+
+//             // Decode the base64 data and save it to the file
+//             $fileData = base64_decode($base64Data);
+//             file_put_contents($filepath, $fileData);
+//         }
+
+//         // Generate the ZIP file
+//         $zipFile = 'images.zip';
+//         $zip = new ZipArchive();
+//         if ($zip->open($zipFile, ZipArchive::CREATE | ZipArchive::OVERWRITE) === true) {
+//             // Add all the files from the temporary directory to the ZIP archive
+//             $files = glob($tempDir . '/*');
+//             foreach ($files as $file) {
+//                 $zip->addFile($file, basename($file));
+//             }
+//             $zip->close();
+
+//             // Remove the temporary directory and its files
+//             array_map('unlink', glob($tempDir . '/*'));
+//             rmdir($tempDir);
+
+//             // Set the proper headers for file download
+//             header('Content-Type: application/zip');
+//             header('Content-Disposition: attachment; filename="' . $zipFile . '"');
+//             header('Content-Length: ' . filesize($zipFile));
+
+//             // Read the ZIP file and output it to the response
+//             readfile($zipFile);
+
+//             // Delete the ZIP file after it has been downloaded
+//             unlink($zipFile);
+//         } else {
+//             // Handle the case when the ZIP file could not be created
+//             echo 'Failed to create ZIP file.';
+//         }
+//     }
+
+//     public function createZipArchive($files, $zipFilename)
+//     {
+//         // Create a new ZipArchive instance
+//         $zip = new ZipArchive();
+
+//         // Open the ZIP file for writing
+//         if ($zip->open($zipFilename, ZipArchive::CREATE | ZipArchive::OVERWRITE) === true) {
+//             // Add each file to the ZIP archive
+//             foreach ($files as $file) {
+//                 // Specify the path of the file to add to the ZIP archive
+//                 $filePath = $file['path'];
+
+//                 // Specify the name under which the file will be stored in the ZIP archive
+//                 $zipFilename = $file['zipFilename'];
+
+//                 // Add the file to the ZIP archive
+//                 $zip->addFile($filePath, $zipFilename);
+//             }
+
+//             // Close the ZIP archive
+//             $zip->close();
+
+//             // Return the ZIP filename
+//             return $zipFilename;
+//         } else {
+//             // Failed to create the ZIP archive
+//             return false;
+//         }
+//     }
+
+
     public function fetch_all_mini_case()
     {
         try {
@@ -44,12 +230,16 @@ class View_mini_case_controller extends CI_Controller
             foreach ($fetch_mini_case as $row) {
                 $sub_array = array();
                 $buttons = '';
+                
                 if ($row->fi_type == 'BV') {
                     $buttons .= '<button type="button" title="View Case" name="view" id="' . $row->id . '" class="btn btn-primary btn-sm view_quick_case"><i class="fa fa-eye" ></i></button>';
                     $buttons .= '<button type="button" title="BV Remarks" name="view" id="' . $row->id . '" class="btn btn-success btn-sm edit_bv"><i class="fa fa-pencil" ></i></button>';
+                    
                 } else {
                     $buttons .= '<button type="button" title="View RV Case" name="view" id="' . $row->id . '" class="btn btn-primary btn-sm view_rv_case"><i class="fa fa-eye" ></i></button>';
                     $buttons .= '<button type="button" title="RV Remarks" name="view" id="' . $row->id . '" class="btn btn-warning btn-sm edit_rv"><i class="fa fa-pencil" ></i></button>';
+                        //  $buttons .= '<button type="button" title="Download Images" name="download" id="' . $row->id . '" class="btn btn-success btn-sm download_image_quick"><i class="fa fa-download" ></i></button>';
+                    
                 }
 
 
@@ -62,8 +252,9 @@ class View_mini_case_controller extends CI_Controller
                 $sub_array[] = $row->reference_no;
                 // $sub_array[] = $row->business_name;
                 $sub_array[] = $row->business_add;
-                $sub_array[] = readableDateIST($row->tat_start);
-                $sub_array[] = readableDateIST($row->tat_end);
+                $sub_array[] = formatdate($row->tat_start,'d-m-Y h:i A');
+                $sub_array[] = formatdate($row->tat_end,'d-m-Y h:i A');
+                //  $sub_array[] = $row->remarks;
                 $sub_array[] = $row->status;
 
                 // $i++;
@@ -83,6 +274,120 @@ class View_mini_case_controller extends CI_Controller
             $this->load->view('login_page', array('error' => $error));
         }
     }
+   
+
+    
+    public function downloadExcel()
+{
+    $this->load->database();
+    $this->load->helper('myexceldownload_helper');
+
+    // Define the columns you want to export
+    $columns = array('id', 'name','bank', 'product', 'reference_no','fi_type','tat_start','tat_end','status','remarks','created_at');
+
+    $this->db->select($columns);
+    $query = $this->db->get('mini_case');
+    $data = $query->result_array();
+
+    // Generate the CSV content
+    $csvData = implode(",", $columns) . "\r\n"; // Column headers
+
+    foreach ($data as $row) {
+        $rowData = array();
+        foreach ($columns as $column) {
+            $rowData[] = $row[$column];
+        }
+        $csvData .= implode(",", $rowData) . "\r\n"; // Data rows
+    }
+
+    // Set output filename
+    $filename = 'report.csv';
+
+    // Set headers for file download
+    header('Content-Type: text/csv');
+    header('Content-Disposition: attachment; filename="' . $filename . '"');
+    header('Cache-Control: max-age=0');
+
+    // Output the CSV content
+    echo "\xEF\xBB\xBF"; // UTF-8 BOM for proper encoding
+    echo $csvData;
+    exit();
+}
+
+    
+//     public function downloadExcel()
+// {
+//     $this->load->database();
+//     $this->load->helper('myexceldownload_helper');
+
+//     // Define the columns you want to export
+//     $columns = array('id', 'bank', 'product','remarks');
+
+//     $this->db->select($columns);
+//     $query = $this->db->get('mini_case');
+//     $data = $query->result_array();
+
+//     // Generate the tab-separated values (TSV) content
+//     $tsvData = implode("\t", $columns) . "\r\n"; // Column headers
+
+//     foreach ($data as $row) {
+//         $rowData = array();
+//         foreach ($columns as $column) {
+//             $rowData[] = $row[$column];
+//         }
+//         $tsvData .= implode("\t", $rowData) . "\r\n"; // Data rows
+//     }
+
+//     // Set output filename
+//     $filename = 'report.xls'; // Use .xls extension for TSV
+
+//     // Set headers for file download
+//     header('Content-Type: application/vnd.ms-excel');
+//     header('Content-Disposition: attachment;filename="' . $filename . '"');
+//     header('Cache-Control: max-age=0');
+
+//     // Output the TSV content
+//     echo "\xEF\xBB\xBF"; // UTF-8 BOM for proper encoding
+//     echo $tsvData;
+//     exit();
+// }
+
+
+//   public function downloadExcel()
+//     {
+//         $this->load->database();
+//         $this->load->helper('myexceldownload_helper');
+//         // Define the columns you want to export
+//         $columns = array('id', 'bank', 'product','remarks');
+
+//         $this->db->select($columns);
+//         $query = $this->db->get('mini_case');
+//         $data = $query->result_array();
+
+//         $csvData = fopen('php://temp', 'w');
+//         fputcsv($csvData, $columns); // Write the column headers
+
+//         foreach ($data as $row) {
+//             $rowData = array();
+//             foreach ($columns as $column) {
+//                 $rowData[] = $row[$column];
+//             }
+//             fputcsv($csvData, $rowData);
+//         }
+
+//         header('Content-Type: application/vnd.ms-excel');
+//         header('Content-Disposition: attachment;filename="report.csv"');
+//         header('Cache-Control: max-age=0');
+
+//         rewind($csvData);
+//         $csvContent = stream_get_contents($csvData);
+//         fclose($csvData);
+
+//         // $filename = 'database.xlsx';
+//         // force_download($filename, $csvContent);
+//         // myexceldownload_helper.php
+//         force_download('report.csv', $csvContent);
+//     }
 
 
     function fetch_remarks()
@@ -143,9 +448,9 @@ class View_mini_case_controller extends CI_Controller
                 $output['code']             = $row->code;
                 $output['agent_name']       = $row->agent_name;
                 $output['city']             = $row->city;
-                $output['created_at']       = readableDateIST($row->created_at);
-                $output['tat_start']        = readableDateIST($row->tat_start);
-                $output['tat_end']          = readableDateIST($row->tat_end);
+                $output['created_at']       = formatdate($row->created_at,'d-m-Y h:i A');
+                $output['tat_start']        = formatdate($row->tat_start,'d-m-Y h:i A');
+                $output['tat_end']          = formatdate($row->tat_end,'d-m-Y h:i A');
                 $output['business_name']    = $row->business_name;
                 $output['business_add']     = $row->business_add;
                 $output['bv_lat']           = $row->bv_lat;
@@ -436,6 +741,24 @@ class View_mini_case_controller extends CI_Controller
         $this->session->set_flashdata('res_data', $response);
         redirect(base_url("/View_mini_case_controller/view_mini_case_open"));
     }
+    
+     public function getAllAgentCode()
+	{
+		$response = [];
+		try {
+            // $sql = "SELECT employee_unique_id FROM `login`";
+            $sql = "SELECT employee_unique_id FROM `login` WHERE role_group = 'FA'";
+				$query = $this->db->query($sql);
+				$data['data'] = $query->result_array();
+			$response = $data;
+		} catch (Exception $ex) {
+			$response = [
+				'status' => "failure",
+				'message' => $ex->getMessage(),
+			];
+		}
+		echo json_encode($response);
+	}
 
 
     //   public function update_rv_remarks_validation()

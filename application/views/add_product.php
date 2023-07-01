@@ -54,8 +54,50 @@
                             $(this).attr('data-pk', data[0]);
                         }
                     });
+                    
+                    $.each($('td', row), function(colIndex) {
+                        if (colIndex == 2) {
+                            $(this).attr('data-name', 'description');
+                            $(this).attr('class', 'description');
+                            $(this).attr('data-type', 'text');
+                            $(this).attr('data-pk', data[0]);
+                        }
+                    });
+                    
+                    $.each($('td', row), function(colIndex) {
+                        if (colIndex == 1) {
+                            $(this).attr('data-name', 'product');
+                            $(this).attr('class', 'product');
+                            $(this).attr('data-type', 'text');
+                            $(this).attr('data-pk', data[0]);
+                        }
+                    });
                 }
             });
+            
+            $('#fetch_product_data').editable({
+                    mode: 'inline',
+                    container: 'body',
+                    selector: 'td.description',
+                    url: '<?php echo base_url() . 'Add_product_controller/get_description'; ?>',
+                    title: 'description',
+                    type: 'POST',
+                    validate: function (value) {
+                        
+                    }
+                });
+                
+                 $('#fetch_product_data').editable({
+                    mode: 'inline',
+                    container: 'body',
+                    selector: 'td.product',
+                    url: '<?php echo base_url() . 'Add_product_controller/get_product'; ?>',
+                    title: 'product',
+                    type: 'POST',
+                    validate: function (value) {
+                        
+                    }
+                });
 
             $('#fetch_product_data').editable({
                 mode: 'inline',
@@ -322,7 +364,7 @@
             <div class="col-md-4 col-sm-6">
                 <div class="row">
                     <div id="dvTitle" class="product_name">
-                        <h3><b>Bodvid Private Limited</b></h3>
+                        <h3><b>RealBits Coders</b></h3>
                     </div>
                 </div>
             </div>

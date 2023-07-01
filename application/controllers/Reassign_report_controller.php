@@ -60,8 +60,8 @@ class Reassign_report_controller extends CI_Controller {
                 $sub_array[] = $row->fi_to_be_conducted;
                 $sub_array[] = $row->assign_from;
                 $sub_array[] = $row->assign_to;
-                $sub_array[] = $row->transfer_date;
-                $sub_array[] = $row->created_at;
+                $sub_array[] = formatdate($row->transfer_date,'d-m-Y h:i A');
+                $sub_array[] = formatdate($row->created_at,'d-m-Y h:i A');
                 $sub_array[] = $row->reassign_remarks;
                 // $sub_array[] = $row->remarks;
                 // $i++;

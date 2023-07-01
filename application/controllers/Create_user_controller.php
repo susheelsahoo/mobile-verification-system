@@ -40,7 +40,7 @@ class Create_user_controller extends CI_Controller
         try {
             $this->load->library('form_validation');
             $this->form_validation->set_rules('first_name', 'first_name', 'required');
-            $this->form_validation->set_rules('last_name', 'last_name', 'required');
+            $this->form_validation->set_rules('last_name', 'last_name', '');
             $this->form_validation->set_rules('username', 'username', '');
             $this->form_validation->set_rules('password', 'password', '');
             $this->form_validation->set_rules('mobile', 'mobile', 'required');
@@ -48,7 +48,7 @@ class Create_user_controller extends CI_Controller
             $this->form_validation->set_rules('employee_unique_id', 'employee_unique_id', 'required');
             $this->form_validation->set_rules('role_group', 'role_group', 'required');
             $this->form_validation->set_rules('organization', 'organization', 'required');
-            $this->form_validation->set_rules('lead_name', 'lead_name', 'required');
+            $this->form_validation->set_rules('lead_name', 'lead_name', '');
             $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
             if ($this->form_validation->run()) {
                 $array = array(
@@ -106,7 +106,7 @@ class Create_user_controller extends CI_Controller
                 $sub_array[] = $row->username;
                 $sub_array[] = $row->password;
                 $sub_array[] = $row->mobile;
-                $sub_array[] = $row->organization;
+                $sub_array[] = $row->email;
                 $sub_array[] = $row->status;
                 $sub_array[] = $buttons;
                 $data[] = $sub_array;

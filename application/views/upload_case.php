@@ -157,7 +157,7 @@
         }
 
         .mybtn-right {
-            text-align: right;
+            text-align: left;
             padding-right: 180px;
             clear: both;
         }
@@ -188,7 +188,7 @@
             <div class="col-md-4 col-sm-6">
                 <div class="row">
                     <div id="dvTitle" class="product_name">
-                        <h3><b>Bodvid Private Limited</b></h3>
+                        <h3><b>RealBits Coders</b></h3>
                     </div>
                 </div>
             </div>
@@ -219,7 +219,17 @@
         <a href="<?php echo base_url(); ?>home" class="btn btn-info" class="btn btn-info">Dashboard</a>
         <a href="<?php echo base_url(); ?>Create_cse/create_c" class="btn btn-info">Case</a>
         <a href="<?php echo base_url(); ?>Report_controller/report_page_open" class="btn btn-info">Report</a>
-        <a href="" class="btn btn-info">Admin</a>
+         <?php
+$sessionData = $this->session->userdata('user');
+
+if ($sessionData['user_status'] === 'banned') {
+    $cardDisplay = 'none';
+} else {
+    $cardDisplay = 'inline-block';
+}
+?>
+    <a href="<?php echo base_url(); ?>Admin_dashboard_controller/admin_dashboard" class="btn btn-info"  style="display: <?php echo $cardDisplay; ?>">Admin</a>
+    
     </div>
     <br>
     <figure data-title="UPLOAD FILE" style="color:#0e88c5;">
@@ -233,12 +243,14 @@
                             </label>
                         </div>
                         <div class="col-sm-8">
+                          
+                            
                             <select class="form-control" id="bank" name="bank">
-                                <option value="" selected>-- SELECT BANK --</option>
-                                <?php foreach ($bank_names as $bank) { ?>
-                                    <option value="<?= $bank['bank_name']; ?>"><?= $bank['bank_name']; ?></option>
-                                <?php } ?>
-                            </select>
+                    <option value="" selected>-- SELECT BANK --</option>
+                    <?php foreach ($bank_names as $bank) { ?>
+                        <option value="<?= $bank['bank']; ?>"><?= $bank['bank']; ?></option>
+                    <?php } ?>
+                </select>
                         </div>
                     </div>
                     <br>

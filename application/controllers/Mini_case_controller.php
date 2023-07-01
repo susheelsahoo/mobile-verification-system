@@ -30,10 +30,12 @@ class Mini_case_controller extends CI_Controller
 		$this->load->model("Mini_case_model");
 		$bank_data = $this->Mini_case_model->getBank();
 		$product_data = $this->Mini_case_model->getProduct();
+			$source_data = $this->Mini_case_model->getSourceChannel();
 		$agent_code = $this->Mini_case_model->getAgentCode();
 		// print_r($agent_code);die;
 		$data['bank_names'] = $bank_data;
 		$data['product_data'] = $product_data;
+			$data['source_data'] = $source_data;
 		$data['agent_code'] = $agent_code;
 		if ($this->session->userdata('user')) {
 			$this->load->view('mini_case', $data);
@@ -63,6 +65,7 @@ class Mini_case_controller extends CI_Controller
 			$this->form_validation->set_rules('tat_start', 'tat_start', 'required');
 			$this->form_validation->set_rules('tat_end', 'tat_end', 'required');
 			$fi_type = $this->input->post('fi_type');
+			$session_user = $this->session->userdata('user');
 			if ($this->form_validation->run()) {
 				foreach ($fi_type as $key => $val) {
 					$varification = [];
@@ -81,8 +84,8 @@ class Mini_case_controller extends CI_Controller
 					$varification['mobile'] 			= $this->input->post('mobile');
 					$varification['geo_limit'] 			= $this->input->post('geo_limit');
 					$varification['source_channel'] 			= $this->input->post('source_channel');
-					$varification['tat_start'] 		= $this->input->post('tat_start');
-					$varification['tat_end'] 		= $this->input->post('tat_end');
+					$varification['tat_start'] 		= formatDate($this->input->post('tat_start'), 'Y-m-d H:i:s');
+					$varification['tat_end'] 		= formatDate($this->input->post('tat_end'), 'Y-m-d H:i:s');
 					$varification['fi_type'] 		= $val;
 					$varification['business_add'] 	= $address[$key];
 					$varification['business_name'] 	= $name[$key];
@@ -90,6 +93,9 @@ class Mini_case_controller extends CI_Controller
 					$varification['pin_code'] 		= $pincode[$key];
 					$varification['code']				= $agent_code[$key];
 					$varification['bank'] 			= $this->input->post('bank');
+					$varification['created_by'] 	= $session_user['id'];
+					$varification['created_at']     = date('Y-m-d H:i:s');
+					$varification['updated_at']     = date('Y-m-d H:i:s');
 					//$varification['status'] 		= '1';
 					// print_r($varification);die;
 

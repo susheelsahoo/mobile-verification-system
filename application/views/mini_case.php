@@ -325,7 +325,7 @@
             <div class="col-md-4 col-sm-6">
                 <div class="row">
                     <div id="dvTitle" class="product_name">
-                        <h3><b>Bodvid Private Limited</b></h3>
+                        <h3><b>RealBits Coders</b></h3>
                     </div>
                 </div>
             </div>
@@ -355,8 +355,16 @@
     <div class="mybtn-right">
         <a href="<?php echo base_url(); ?>home" class="btn btn-info">Dashboard</a>
         <a href="<?php echo base_url(); ?>Create_cse/create_c" class="btn btn-info">Case</a>
-        <a href="<?php echo base_url(); ?>Report_controller/report_page_open" class="btn btn-info">Report</a>
-        <a href="<?php echo base_url(); ?>Admin_dashboard_controller/admin_dashboard" class="btn btn-info">Admin</a>
+        <a href="<?php echo base_url(); ?>Report_controller/report_page_open" class="btn btn-info">Report</a>    <?php
+$sessionData = $this->session->userdata('user');
+
+if ($sessionData['user_status'] === 'banned') {
+    $cardDisplay = 'none';
+} else {
+    $cardDisplay = 'inline-block';
+}
+?>
+    <a href="<?php echo base_url(); ?>Admin_dashboard_controller/admin_dashboard" class="btn btn-info"  style="display: <?php echo $cardDisplay; ?>">Admin</a>
     </div>
     <br>
 
@@ -364,18 +372,21 @@
         <header>
             <h4>Create Quick Case</h4>
         </header>
+        <br>
         <?php echo form_open('Mini_case_controller/create_Quick_case_form_submit', array("id" => "form_Quick_bank", "class" => "form-horizontal")); ?>
-        <div class="row">
+        
+        
+         <div class="row">
             <div class="col-md-3">
-                <label for="bank">
+                <label for="bank_name">
                     Bank<span class="text-danger"> *</span>
                 </label>
             </div>
             <div class="col-md-9">
-                <select class="form-control" id="bank" name="bank">
+                <select class="form-control" id="bank_name" name="bank_name">
                     <option value="" selected>-- SELECT BANK --</option>
                     <?php foreach ($bank_names as $bank) { ?>
-                        <option value="<?= $bank['bank_name']; ?>"><?= $bank['bank_name']; ?></option>
+                        <option value="<?= $bank['bank']; ?>"><?= $bank['bank']; ?></option>
                     <?php } ?>
                 </select>
 
@@ -394,6 +405,23 @@
                     <?php } ?>
                 </select>
             </div>
+        </div>
+        
+         <div class="row">
+            <div class="col-md-3">
+                <label for="source_channel">Soucre Channel</label>
+            </div>
+             <div class="col-md-9">
+                <select class="form-control" id="source_channel" name="source_channel">
+                    <option value="" selected>-- SELECT SOURCE CHANNEL --</option>
+                    <?php foreach ($source_data as $source) { ?>
+                        <option value="<?= $source['source']; ?>"><?= $source['source']; ?></option>
+                    <?php } ?>
+                </select>
+            </div>
+            <!--<div class="col-md-9">-->
+            <!--    <input class="form-control" type="text" id="source_channel" name="source_channel" placeholder="Enter your soucre channel (if any)">-->
+            <!--</div>-->
         </div>
 
         <div class="row">
@@ -532,14 +560,14 @@
         </div>
 
 
-        <div class="row">
-            <div class="col-md-3">
-                <label for="source_channel">Source Channel</label>
-            </div>
-            <div class="col-md-9">
-                <input class="form-control" type="text" id="source_channel" name="source_channel" placeholder="Enter Source channel">
-            </div>
-        </div>
+        <!--<div class="row">-->
+        <!--    <div class="col-md-3">-->
+        <!--        <label for="source_channel">Source Channel</label>-->
+        <!--    </div>-->
+        <!--    <div class="col-md-9">-->
+        <!--        <input class="form-control" type="text" id="source_channel" name="source_channel" placeholder="Enter Source channel">-->
+        <!--    </div>-->
+        <!--</div>-->
 
         <div class="row">
             <div class="col-md-3">

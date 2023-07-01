@@ -61,7 +61,7 @@ $autoload['packages'] = array('database', 'session');
 // $autoload['libraries'] = array('database', 'session');
 
 $autoload['libraries'] = array('session');
-
+// $autoload['libraries'] = array('intervention\src\intervention\Image\ImageManager');
 /*
 | -------------------------------------------------------------------
 |  Auto-load Drivers

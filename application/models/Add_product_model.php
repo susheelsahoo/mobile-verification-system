@@ -88,5 +88,25 @@ class Add_product_model extends CI_Model
             throw $ex;
         }
     }
+    
+         function insert_descriptions($data, $id) {
+        try {
+            $this->db->where("id", $id);
+            $return_data = $this->db->update("add_product", $data);
+            return $return_data;
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+    }
+    
+    function insert_products($data, $id) {
+        try {
+            $this->db->where("id", $id);
+            $return_data = $this->db->update("add_product", $data);
+            return $return_data;
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+    }
 
 }
